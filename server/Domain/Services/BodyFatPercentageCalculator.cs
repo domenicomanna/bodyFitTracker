@@ -21,7 +21,8 @@ namespace Domain.Services
             }
 
             // Calculation for female
-            double femaleBodyFatPercentage = 163.205 * Math.Log10(bodyMeasurement.WaistCircumference + bodyMeasurement.HipCircumference -
+            double hipCircumference = bodyMeasurement.HipCircumference ?? 0;
+            double femaleBodyFatPercentage = 163.205 * Math.Log10(bodyMeasurement.WaistCircumference + hipCircumference -
                 bodyMeasurement.NeckCircumference) - (97.684 * Math.Log10(appUser.Height)) - 78.387; ;
 
             return femaleBodyFatPercentage;
