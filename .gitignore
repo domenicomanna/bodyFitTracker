@@ -32,4 +32,4 @@ msbuild.wrn
 .vs/
 
 # Sqlite Database
-*.db
+*.db*
