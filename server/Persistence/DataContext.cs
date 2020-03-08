@@ -27,8 +27,9 @@ namespace Persistence
                 .IsRequired()
                 .HasConversion<string>();
             modelBuilder.Entity<AppUser>()
-                .HasMany(a => a.BodyMeasurements)
+                .HasMany(b => b.BodyMeasurements)
                 .WithOne(a => a.AppUser)
+                .HasForeignKey(a => a.AppUserEmail)
                 .IsRequired();
 
             modelBuilder.Entity<BodyMeasurement>()
@@ -36,6 +37,8 @@ namespace Persistence
             modelBuilder.Entity<BodyMeasurement>()
                 .Property(b => b.BodyMeasurementId)
                 .ValueGeneratedOnAdd();
+            
+            modelBuilder.Seed();
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Domain.Models
 {
     public class BodyMeasurement
     {
-        public AppUser AppUser { get; set; }
         public int BodyMeasurementId { get; set; }
 
         public double NeckCircumference { get; set; }
@@ -14,5 +13,9 @@ namespace Domain.Models
         public double? HipCircumference { get; set; }
 
         public double Weight { get; set; }
+
+        public string AppUserEmail { get; set; }
+        
+        public AppUser AppUser { get; set; }
     }
 }
