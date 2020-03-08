@@ -1,6 +1,7 @@
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Persistence.Configurations;
 
 namespace Persistence
 {
@@ -13,31 +14,9 @@ namespace Persistence
         public DbSet<BodyMeasurement> BodyMeasurements { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {      
-            modelBuilder.Entity<AppUser>()
-                .HasKey(a => a.Email);
-            modelBuilder.Entity<AppUser>()
-                .Property(a => a.HashedPassword)
-                .IsRequired();
-            modelBuilder.Entity<AppUser>()
-                .Property(a => a.Salt).
-                IsRequired();
-            modelBuilder.Entity<AppUser>()
-                .Property(a => a.Gender)
-                .IsRequired()
-                .HasConversion<string>();
-            modelBuilder.Entity<AppUser>()
-                .HasMany(b => b.BodyMeasurements)
-                .WithOne(a => a.AppUser)
-                .HasForeignKey(a => a.AppUserEmail)
-                .IsRequired();
-
-            modelBuilder.Entity<BodyMeasurement>()
-                .HasKey(b => b.BodyMeasurementId);
-            modelBuilder.Entity<BodyMeasurement>()
-                .Property(b => b.BodyMeasurementId)
-                .ValueGeneratedOnAdd();
-            
+        {    
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new BodyMeasurementConfiguration());
             modelBuilder.Seed();
         }
     }
