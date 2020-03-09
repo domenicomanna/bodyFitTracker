@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Api.ApplicationLogic.BodyMeasurements.Queries;
 using Domain.Models;
-using MediatR;
 using Persistence;
 
-namespace Api.ApplicationLogic.BodyMeasurements.Handlers
+namespace Api.ApplicationLogic.BodyMeasurements.QueryHandlers
 {
-
-    public class GetAllBodyMeasurementsHandler : IRequestHandler<GetAllBodyMeasurementsQuery, IEnumerable<BodyMeasurement>>
+    public class GetAllBodyMeasurementsHandler
     {
         private readonly DataContext _dataContext;
         public GetAllBodyMeasurementsHandler(DataContext dataContext)
@@ -18,11 +13,11 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             _dataContext = dataContext;
 
         }
-        public Task<IEnumerable<BodyMeasurement>> Handle(GetAllBodyMeasurementsQuery request, CancellationToken cancellationToken)
+        public IEnumerable<BodyMeasurement> Handle()
         {
             string currentUser = "abc@gmail.com";
             IEnumerable<BodyMeasurement> measurements = _dataContext.BodyMeasurements.Where(b => b.AppUserEmail == currentUser);
-            return Task.FromResult(measurements);
+            return measurements;
         }
     }
 }

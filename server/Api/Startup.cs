@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using MediatR;
+using Api.ApplicationLogic.BodyMeasurements.QueryHandlers;
 
 namespace Api
 {
@@ -32,7 +25,7 @@ namespace Api
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddMediatR(typeof(Startup)); 
+            services.AddScoped<GetAllBodyMeasurementsHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

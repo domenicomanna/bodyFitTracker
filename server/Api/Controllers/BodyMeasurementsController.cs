@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Api.ApplicationLogic.BodyMeasurements.Queries;
+using Api.ApplicationLogic.BodyMeasurements.QueryHandlers;
 using Domain.Models;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -13,17 +10,17 @@ namespace Api.Controllers
 
     public class BodyMeasurementsController
     {
-        private readonly IMediator _mediator;
-        public BodyMeasurementsController(IMediator mediator)
+        private readonly GetAllBodyMeasurementsHandler _getAllBodyMeasurementsHandler;
+
+        public BodyMeasurementsController(GetAllBodyMeasurementsHandler getAllBodyMeasurementsHandler)
         {
-            _mediator = mediator;
+            _getAllBodyMeasurementsHandler = getAllBodyMeasurementsHandler;
         }
-        
+
         [HttpGet]
-        public async Task<IEnumerable<BodyMeasurement>> Get()
+        public IEnumerable<BodyMeasurement> Get()
         {
-            GetAllBodyMeasurementsQuery query = new GetAllBodyMeasurementsQuery();
-            return await _mediator.Send(query);
+            return _getAllBodyMeasurementsHandler.Handle();
         }
     }
 }
