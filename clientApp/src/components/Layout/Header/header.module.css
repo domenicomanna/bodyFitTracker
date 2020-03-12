@@ -1,0 +1,58 @@
+.header{
+    background: #ccc;
+}
+
+.nav{
+    text-align: right;
+}
+
+.navListItems{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+}
+
+.showHamburgerLinks{
+    display: block;
+}
+
+.navListItem{
+    width: 100%;
+    text-align: center;
+}
+
+.navListItem a{
+    display: inline-block;
+    padding: .5rem 0;
+    width: 100%;
+}
+
+.navListItem a:hover{
+    background: grey;
+}
+
+@media(min-width: 600px){
+    .nav{
+        display: flex;
+        justify-content: space-between;
+        text-align: initial;
+    }
+
+    .hamburger{
+        display: none;
+    }
+
+    .navListItems{
+        display: flex;
+    }
+
+    .navListItem{
+        width: auto;
+    }
+
+    .navListItem a{
+        padding: .5rem .5rem;
+        width: auto;
+    }
+}
