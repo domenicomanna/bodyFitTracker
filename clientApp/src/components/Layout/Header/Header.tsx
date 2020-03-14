@@ -19,7 +19,7 @@ const Header = () => {
               toggleHamburgerLinks(prevHamburgerLinksShouldShow => !prevHamburgerLinksShouldShow)
             }
           >
-            Hamburger icon
+            &#9776; {/* html code for hamburger icon */}
           </span>
 
           <ul className={navListClasses}>
