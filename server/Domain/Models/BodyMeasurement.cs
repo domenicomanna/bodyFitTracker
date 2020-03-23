@@ -13,6 +13,7 @@ namespace Domain.Models
         public double? HipCircumference { get; set; }
 
         public double Weight { get; set; }
+        public double BodyFatPercentage { get; set;}
 
         public string AppUserEmail { get; set; }
         
