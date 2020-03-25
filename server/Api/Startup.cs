@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Api.ApplicationLogic.BodyMeasurements.QueryHandlers;
+using AutoMapper;
 
 namespace Api
 {
@@ -23,6 +24,9 @@ namespace Api
         {
             services.AddControllers()
                     .AddNewtonsoftJson();
+            
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
