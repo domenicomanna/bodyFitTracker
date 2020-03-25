@@ -16,6 +16,7 @@ namespace Persistence
                         Weight = 120,
                         Height = 60,
                         Gender = GenderType.Male,
+                        MeasurementSystemPreference = MeasurementSystem.Imperial
                     }
                 );
             

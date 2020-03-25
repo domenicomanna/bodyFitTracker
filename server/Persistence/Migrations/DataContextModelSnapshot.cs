@@ -32,6 +32,10 @@ namespace Persistence.Migrations
                     b.Property<double>("Height")
                         .HasColumnType("REAL");
 
+                    b.Property<string>("MeasurementSystemPreference")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Salt")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -50,6 +54,7 @@ namespace Persistence.Migrations
                             Gender = "Male",
                             HashedPassword = "abc",
                             Height = 60.0,
+                            MeasurementSystemPreference = "Imperial",
                             Salt = "abc",
                             Weight = 120.0
                         });

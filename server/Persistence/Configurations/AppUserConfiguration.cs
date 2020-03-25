@@ -21,6 +21,10 @@ namespace Persistence.Configurations
                 .IsRequired()
                 .HasConversion<string>();
             builder
+                .Property(a => a.MeasurementSystemPreference)
+                .IsRequired()
+                .HasConversion<string>();
+            builder
                 .HasMany(b => b.BodyMeasurements)
                 .WithOne(a => a.AppUser)
                 .HasForeignKey(a => a.AppUserEmail)
