@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Models;
 using Persistence;
 
-namespace Api.ApplicationLogic.BodyMeasurements.QueryHandlers
+namespace Api.ApplicationLogic.BodyMeasurements.Handlers
 {
     public class GetAllBodyMeasurementsHandler
     {

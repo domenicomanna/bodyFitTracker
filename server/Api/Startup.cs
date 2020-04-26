@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-using Api.ApplicationLogic.BodyMeasurements.QueryHandlers;
 using AutoMapper;
+using Api.ApplicationLogic.BodyMeasurements.Handlers;
 
 namespace Api
 {

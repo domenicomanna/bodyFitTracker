@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
-using Api.ApplicationLogic.BodyMeasurements.QueryHandlers;
+using Api.ApplicationLogic.BodyMeasurements.Handlers;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
