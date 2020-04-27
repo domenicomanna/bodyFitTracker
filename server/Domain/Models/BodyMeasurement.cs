@@ -1,22 +1,43 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Models
 {
     public class BodyMeasurement
     {
-        public int BodyMeasurementId { get; set; }
+        public int BodyMeasurementId { get; private set; }
 
-        public double NeckCircumference { get; set; }
+        public string AppUserEmail { get; private set; }
 
-        public double WaistCircumference { get; set; }
+        public AppUser AppUser { get; private set; }
 
-        public double? HipCircumference { get; set; }
+        public double NeckCircumference { get; private set; }
 
-        public double Weight { get; set; }
-        public double BodyFatPercentage { get; set;}
+        public double WaistCircumference { get; private set; }
 
-        public string AppUserEmail { get; set; }
-        
-        public AppUser AppUser { get; set; }
+        public double? HipCircumference { get; private set; }
+
+        public double Weight { get; private set; }
+
+        public double BodyFatPercentage { get; set; }
+
+        protected BodyMeasurement() { }
+
+        public BodyMeasurement(AppUser appUser, double neckCircumference, double waistCircumference, double? hipCircumference)
+        {
+            if (appUser == null) throw new ArgumentNullException(nameof(appUser));
+
+            if (appUser.Gender == GenderType.Female && hipCircumference == null)
+            {
+                throw new ArgumentNullException($"{nameof(hipCircumference)} can't be null for {nameof(GenderType.Female)}");
+            }
+
+            AppUser = appUser;
+            NeckCircumference = neckCircumference;
+            WaistCircumference = waistCircumference;
+            AppUserEmail = appUser.Email;
+            Weight = appUser.Weight;
+            HipCircumference = appUser.Gender == GenderType.Female ? hipCircumference : null;
+        }
     }
 }
