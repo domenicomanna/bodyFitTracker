@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200325005132_InitialCreate")]
+    [Migration("20200427222002_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,16 +98,16 @@ namespace Persistence.Migrations
                         {
                             BodyMeasurementId = 1,
                             AppUserEmail = "abc@gmail.com",
-                            BodyFatPercentage = 0.0,
+                            BodyFatPercentage = 10.0,
                             NeckCircumference = 12.0,
-                            WaistCircumference = 30.0,
-                            Weight = 130.0
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
                         },
                         new
                         {
                             BodyMeasurementId = 2,
                             AppUserEmail = "abc@gmail.com",
-                            BodyFatPercentage = 0.0,
+                            BodyFatPercentage = 10.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -116,10 +116,10 @@ namespace Persistence.Migrations
                         {
                             BodyMeasurementId = 3,
                             AppUserEmail = "abc@gmail.com",
-                            BodyFatPercentage = 0.0,
+                            BodyFatPercentage = 10.0,
                             NeckCircumference = 12.0,
-                            WaistCircumference = 26.0,
-                            Weight = 120.0
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
                         });
                 });
 

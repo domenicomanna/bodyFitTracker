@@ -29,12 +29,12 @@ namespace Persistence.Migrations
                 {
                     BodyMeasurementId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    AppUserEmail = table.Column<string>(nullable: false),
                     NeckCircumference = table.Column<double>(nullable: false),
                     WaistCircumference = table.Column<double>(nullable: false),
                     HipCircumference = table.Column<double>(nullable: true),
                     Weight = table.Column<double>(nullable: false),
-                    BodyFatPercentage = table.Column<double>(nullable: false),
-                    AppUserEmail = table.Column<string>(nullable: false)
+                    BodyFatPercentage = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,17 +55,17 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserEmail", "BodyFatPercentage", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 1, "abc@gmail.com", 0.0, null, 12.0, 30.0, 130.0 });
+                values: new object[] { 1, "abc@gmail.com", 10.0, null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserEmail", "BodyFatPercentage", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 2, "abc@gmail.com", 0.0, null, 12.0, 28.0, 125.0 });
+                values: new object[] { 2, "abc@gmail.com", 10.0, null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserEmail", "BodyFatPercentage", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 3, "abc@gmail.com", 0.0, null, 12.0, 26.0, 120.0 });
+                values: new object[] { 3, "abc@gmail.com", 10.0, null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BodyMeasurements_AppUserEmail",

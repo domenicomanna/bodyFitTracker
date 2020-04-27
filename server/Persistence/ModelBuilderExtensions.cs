@@ -9,7 +9,8 @@ namespace Persistence
         {
             modelBuilder.Entity<AppUser>()
                 .HasData(
-                    new AppUser{
+                    new AppUser
+                    {
                         Email = "abc@gmail.com",
                         HashedPassword = "abc",
                         Salt = "abc",
@@ -19,36 +20,33 @@ namespace Persistence
                         MeasurementSystemPreference = MeasurementSystem.Imperial
                     }
                 );
-            
+
             modelBuilder.Entity<BodyMeasurement>()
                 .HasData(
-                    new BodyMeasurement{
+                    new
+                    {
                         BodyMeasurementId = 1,
-                        NeckCircumference = 12,
-                        WaistCircumference = 30,
-                        Weight = 130,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
                         AppUserEmail = "abc@gmail.com",
-                    }
-                );
-
-            modelBuilder.Entity<BodyMeasurement>()
-                .HasData(
-                    new BodyMeasurement{
+                    },
+                    new
+                    {
                         BodyMeasurementId = 2,
-                        NeckCircumference = 12,
-                        WaistCircumference = 28,
-                        Weight = 125,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
                         AppUserEmail = "abc@gmail.com",
-                    }
-                );
-
-            modelBuilder.Entity<BodyMeasurement>()
-                .HasData(
-                    new BodyMeasurement{
+                    },
+                    new {
                         BodyMeasurementId = 3,
-                        NeckCircumference = 12,
-                        WaistCircumference = 26,
-                        Weight = 120,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
                         AppUserEmail = "abc@gmail.com",
                     }
                 );
