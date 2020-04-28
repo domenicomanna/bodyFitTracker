@@ -14,20 +14,20 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
         public Measurement Length {
             get {
                 if (MeasurementSystem == MeasurementSystem.Imperial) {
-                    return new Measurement { Name = "Inches", Abbreviation = "in" };
+                    return new Measurement("Inches", "in");
                 }
-                // MeasurementSystem must be imperial
-                else return new Measurement { Name = "Centimeters", Abbreviation = "cm" };
+                // MeasurementSystem must be metric
+                else return new Measurement("Centimeters", "cm");
             }
         }
 
         public Measurement Weight {
             get {
                 if (MeasurementSystem == MeasurementSystem.Imperial){
-                    return new Measurement { Name = "Pounds", Abbreviation = "lb" };
+                    return new Measurement("Pounds", "lb");
                 }
-                // MeasurementSystem must be imperial
-                else return new Measurement { Name = "Kilograms", Abbreviation = "kg" };
+                // MeasurementSystem must be metric
+                else return new Measurement("Kilograms", "kg");
             }
         }
 
