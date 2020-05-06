@@ -9,7 +9,11 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
         [JsonIgnore]
         public MeasurementSystem MeasurementSystem { get; private set; }
 
+        [JsonIgnore]
+        public GenderType GenderType { get; private set; }
+
         public string MeasurementSystemName { get; private set;}
+        public string GenderTypeName { get; private set; }
 
         public Measurement Length {
             get {
@@ -34,10 +38,12 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
 
         public IEnumerable<BodyMeasurementDTO> BodyMeasurements { get; private set; }
 
-        public BodyMeasurementCollection(MeasurementSystem measurementSystem, IEnumerable<BodyMeasurementDTO> bodyMeasurements)
+        public BodyMeasurementCollection(MeasurementSystem measurementSystem, GenderType genderType, IEnumerable<BodyMeasurementDTO> bodyMeasurements)
         {
             MeasurementSystem = measurementSystem;
+            GenderType = genderType;
             MeasurementSystemName = measurementSystem.ToString();
+            GenderTypeName = genderType.ToString();
             BodyMeasurements = bodyMeasurements;
         }
     }

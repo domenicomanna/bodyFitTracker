@@ -3,8 +3,8 @@ import {get, post, put, destroy} from './baseConfiguration';
 
 const getAllMeasurements = () => get('bodyMeasurements').then(response => response.data);
 
-const BodyMeasurements = {
+const bodyMeasurementsClient = {
     getAllMeasurements
 }
 
-export default BodyMeasurements;
+export default bodyMeasurementsClient;

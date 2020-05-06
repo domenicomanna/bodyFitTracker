@@ -73,6 +73,9 @@ namespace Persistence.Migrations
                     b.Property<double>("BodyFatPercentage")
                         .HasColumnType("REAL");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("TEXT");
+
                     b.Property<double?>("HipCircumference")
                         .HasColumnType("REAL");
 
@@ -97,6 +100,7 @@ namespace Persistence.Migrations
                             BodyMeasurementId = 1,
                             AppUserEmail = "abc@gmail.com",
                             BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 5, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -106,6 +110,7 @@ namespace Persistence.Migrations
                             BodyMeasurementId = 2,
                             AppUserEmail = "abc@gmail.com",
                             BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 5, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -115,6 +120,7 @@ namespace Persistence.Migrations
                             BodyMeasurementId = 3,
                             AppUserEmail = "abc@gmail.com",
                             BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 5, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0

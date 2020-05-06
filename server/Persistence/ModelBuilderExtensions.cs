@@ -1,3 +1,4 @@
+using System;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,7 @@ namespace Persistence
                         Weight = 125.0,
                         BodyFatPercentage = 10.0,
                         AppUserEmail = "abc@gmail.com",
+                        DateAdded = DateTime.Today
                     },
                     new
                     {
@@ -40,6 +42,7 @@ namespace Persistence
                         Weight = 125.0,
                         BodyFatPercentage = 10.0,
                         AppUserEmail = "abc@gmail.com",
+                        DateAdded = DateTime.Today.AddDays(1)
                     },
                     new {
                         BodyMeasurementId = 3,
@@ -48,6 +51,7 @@ namespace Persistence
                         Weight = 125.0,
                         BodyFatPercentage = 10.0,
                         AppUserEmail = "abc@gmail.com",
+                        DateAdded = DateTime.Today.AddDays(2)
                     }
                 );
         }

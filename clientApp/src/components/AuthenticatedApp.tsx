@@ -1,9 +1,9 @@
 import React from 'react';
 import { Layout } from './Layout/Layout';
 
-import BodyMeasurements from '../api/BodyMeasurements';
+import bodyMeasurementsClient from '../api/bodyMeasurementsClient';
 
-BodyMeasurements.getAllMeasurements().then(res => console.log(res));
+bodyMeasurementsClient.getAllMeasurements().then(res => console.log(res));
 
 const AuthenticatedApp = () => {
   return (

@@ -23,7 +23,9 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                    .AddNewtonsoftJson();
+                    .AddNewtonsoftJson(options => {
+                        options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+                    });
             
             services.AddAutoMapper(typeof(Startup));
 

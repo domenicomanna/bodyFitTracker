@@ -19,11 +19,13 @@ namespace Domain.Models
 
         public double Weight { get; private set; }
 
+        public DateTime DateAdded { get; private set; }
+
         public double BodyFatPercentage { get; set; }
 
         protected BodyMeasurement() { }
 
-        public BodyMeasurement(AppUser appUser, double neckCircumference, double waistCircumference, double? hipCircumference)
+        public BodyMeasurement(AppUser appUser, double neckCircumference, double waistCircumference, double? hipCircumference, DateTime dateAdded)
         {
             if (appUser == null) throw new ArgumentNullException(nameof(appUser));
 
@@ -37,6 +39,7 @@ namespace Domain.Models
             WaistCircumference = waistCircumference;
             AppUserEmail = appUser.Email;
             Weight = appUser.Weight;
+            DateAdded = dateAdded;
             HipCircumference = appUser.Gender == GenderType.Female ? hipCircumference : null;
         }
     }

@@ -33,3 +33,6 @@ msbuild.wrn
 
 # Sqlite Database
 *.db*
+
+# Other
+migrations.txt

@@ -12,14 +12,14 @@ namespace DomainTests.Models
         public void IfAppUserIsNullAnArgumentNullExceptionShouldBeThrown()
         {
             AppUser appUser = null;
-            Assert.ThrowsException<ArgumentNullException>( () => new BodyMeasurement(appUser, 10, 30, null));
+            Assert.ThrowsException<ArgumentNullException>( () => new BodyMeasurement(appUser, 10, 30, null, DateTime.Today));
         }
 
         [TestMethod]
         public void IfAppUserIsFemaleAndHipCircumferenceIsNullAnArgumentNullExceptionShouldBeThrown()
         {
             AppUser appUser = new AppUser { Gender = GenderType.Female };
-            Assert.ThrowsException<ArgumentNullException>( () => new BodyMeasurement(appUser, 10, 30, null));
+            Assert.ThrowsException<ArgumentNullException>( () => new BodyMeasurement(appUser, 10, 30, null, DateTime.Today));
         }
     }
 }

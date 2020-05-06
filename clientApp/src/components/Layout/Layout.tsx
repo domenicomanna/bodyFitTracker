@@ -7,10 +7,10 @@ export const Layout: FunctionComponent = ({ children }) => {
     <>
       <Header />
       <main>
-        <Container>main</Container>
+        <Container>{children}</Container>
       </main>
 
-      <footer style={{marginTop: "5rem"}}>
+      <footer style={{ marginTop: '5rem' }}>
         <Container>footer...</Container>
       </footer>
     </>
