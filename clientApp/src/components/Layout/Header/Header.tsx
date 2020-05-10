@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Container from '../../Container/Container';
+import Container from '../../container/Container';
 import styles from './header.module.css';
 
 const Header = () => {
