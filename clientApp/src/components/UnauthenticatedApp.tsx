@@ -3,7 +3,7 @@ import React from 'react';
 const UnauthenticatedApp = () => {
   return (
     <div>
-      You are not authenticated...................................................
+      Login
     </div>
   );
 };

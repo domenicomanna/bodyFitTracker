@@ -1,11 +1,11 @@
 import React, { createContext, useState, FunctionComponent } from 'react';
 
-interface IUserContext {
+export type UserContextModel = {
   token: string;
   isAuthenticated: () => boolean;
 }
 
-export const UserContext = createContext({} as IUserContext);
+export const UserContext = createContext({} as UserContextModel);
 
 const UserContextProvider:FunctionComponent = ({ children }) => {
   const [token, setToken] = useState('');
