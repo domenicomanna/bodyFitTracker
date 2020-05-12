@@ -8,10 +8,11 @@ type Props = {
 
 const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollection }) => {
   const { length, weight } = bodyMeasurementCollection;
-  const hipCircumferenceRow =
-    bodyMeasurementCollection.genderTypeName.toLowerCase() === 'female' ? (
-      <th>Hip Circumference ({length.abbreviation})</th>
-    ) : null;
+  const hipCircumferenceDataShouldBeRendered: boolean =
+    bodyMeasurementCollection.genderTypeName.toLowerCase() === 'female';
+  const hipCircumferenceRow = hipCircumferenceDataShouldBeRendered ? (
+    <th>Hip Circumference ({length.abbreviation})</th>
+  ) : null;
 
   let contentToRender = (
     <table>
@@ -25,10 +26,10 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollecti
           <th>Body fat (%)</th>
         </tr>
       </thead>
-      <tbody data-testid="measurements">
+      <tbody data-testid='measurements'>
         {transformBodyMeasurements(
           bodyMeasurementCollection.bodyMeasurements,
-          bodyMeasurementCollection.genderTypeName.toLowerCase() === 'female'
+          hipCircumferenceDataShouldBeRendered
         )}
       </tbody>
     </table>
