@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import bodyMeasurementsClient from '../api/bodyMeasurementsClient';
-import BodyMeasurementList from '../components/bodyMeasurementList/BodyMeasurementList';
-import { BodyMeasurementCollectionModel } from '../models/bodyMeasurementModels';
-import { UserContext } from '../contexts/UserContext';
-import UnauthenticatedApp from '../components/UnauthenticatedApp';
+import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
+import BodyMeasurementList from '../../components/bodyMeasurementList/BodyMeasurementList';
+import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
+import { UserContext } from '../../contexts/UserContext';
+import UnauthenticatedApp from '../../components/UnauthenticatedApp';
 
 const BodyMeasurementsPage = () => {
   const userContext = useContext(UserContext);
@@ -24,7 +24,6 @@ const BodyMeasurementsPage = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return <BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection!} />;
-
 };
 
 export default BodyMeasurementsPage;
