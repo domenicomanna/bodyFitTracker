@@ -25,7 +25,7 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollecti
           <th>Body fat (%)</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody data-testid="measurements">
         {transformBodyMeasurements(
           bodyMeasurementCollection.bodyMeasurements,
           bodyMeasurementCollection.genderTypeName.toLowerCase() === 'female'
