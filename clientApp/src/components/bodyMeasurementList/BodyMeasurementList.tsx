@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
+import { Gender } from '../../models/gender';
 
 type Props = {
   bodyMeasurementCollection: BodyMeasurementCollectionModel;
@@ -8,8 +9,7 @@ type Props = {
 
 const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollection }) => {
   const { length, weight } = bodyMeasurementCollection;
-  const hipCircumferenceDataShouldBeRendered: boolean =
-    bodyMeasurementCollection.genderTypeName.toLowerCase() === 'female';
+  const hipCircumferenceDataShouldBeRendered: boolean = bodyMeasurementCollection.genderTypeName == Gender.Female;
   const hipCircumferenceRow = hipCircumferenceDataShouldBeRendered ? (
     <th>Hip Circumference ({length.abbreviation})</th>
   ) : null;
@@ -27,10 +27,7 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollecti
         </tr>
       </thead>
       <tbody data-testid='measurements'>
-        {transformBodyMeasurements(
-          bodyMeasurementCollection.bodyMeasurements,
-          hipCircumferenceDataShouldBeRendered
-        )}
+        {transformBodyMeasurements(bodyMeasurementCollection.bodyMeasurements, hipCircumferenceDataShouldBeRendered)}
       </tbody>
     </table>
   );

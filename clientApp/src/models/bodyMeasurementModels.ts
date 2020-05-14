@@ -1,3 +1,5 @@
+import { Gender } from "./gender"
+
 export type BodyMeasurementModel = {
     bodyMeasurementId: number,
     neckCircumference: number,
@@ -15,7 +17,7 @@ export type MeasurementModel = {
 
 export type BodyMeasurementCollectionModel = {
     measurementSystemName: string,
-    genderTypeName: string,
+    genderTypeName: Gender,
     length: MeasurementModel,
     weight: MeasurementModel,
     bodyMeasurements: BodyMeasurementModel[]

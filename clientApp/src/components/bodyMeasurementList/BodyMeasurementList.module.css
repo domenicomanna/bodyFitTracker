@@ -1,0 +1,17 @@
+.measurements{
+    width: 100%;
+    border-spacing: 0;
+    position: relative;
+}
+
+.measurements th{
+    text-align: left;
+    background: orange;
+    position: sticky;
+    top: 65px;
+    padding: 1rem;
+}
+
+.measurements td{
+    padding: 1rem;
+}

@@ -2,13 +2,14 @@ import React from 'react';
 import { render, screen, getByTestId } from '@testing-library/react';
 import BodyMeasurementList from './BodyMeasurementList';
 import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { Gender } from '../../models/gender';
 
 let bodyMeasurementCollection: BodyMeasurementCollectionModel;
 
 beforeEach(() => {
   bodyMeasurementCollection = {
     measurementSystemName: '',
-    genderTypeName: '',
+    genderTypeName: Gender.Male,
     length: {
       name: '',
       abbreviation: '',
@@ -48,14 +49,14 @@ describe('Component when measurements are provided', () => {
   });
 
   it('should render hip circumference if gender type is female', () => {
-    bodyMeasurementCollection.genderTypeName = 'Female';
+    bodyMeasurementCollection.genderTypeName = Gender.Female;
     render(<BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection} />);
     const hipCircumferenceElement = screen.getByText(/hip circumference/i);
     expect(hipCircumferenceElement).toBeTruthy();
   });
 
   it('should not render hip circumference if gender type is male', () => {
-    bodyMeasurementCollection.genderTypeName = 'male';
+    bodyMeasurementCollection.genderTypeName = Gender.Male;
     render(<BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection} />);
     const hipCircumferenceElement = screen.queryByText(/hip circumference/i);
     expect(hipCircumferenceElement).toBeFalsy();
