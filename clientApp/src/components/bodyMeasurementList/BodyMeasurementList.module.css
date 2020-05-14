@@ -1,17 +1,34 @@
-.measurements{
-    width: 100%;
-    border-spacing: 0;
-    position: relative;
+.measurementsWrapper {
+  max-height: 750px;
+  border-radius: 5px;
+  margin: auto;
+  overflow: auto;
 }
 
-.measurements th{
-    text-align: left;
-    background: orange;
-    position: sticky;
-    top: 65px;
-    padding: 1rem;
+.measurements {
+  width: 100%;
+  border-spacing: 0;
+  position: relative;
 }
 
-.measurements td{
-    padding: 1rem;
+.measurements th {
+  font-weight: normal;
+  text-align: left;
+  background: #7952b3;
+  color: #fff;
+  position: sticky;
+  top: 0px;
+  padding: 1rem;
+}
+
+.measurements td {
+  padding: 1rem;
+}
+
+.measurements tr:nth-child(even) {
+  background: #fff;
+}
+
+.measurements tr:nth-child(odd) {
+  background: #f4f4f4;
 }

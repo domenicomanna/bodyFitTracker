@@ -3,3 +3,14 @@ body{
     font-family: 'Roboto', sans-serif;
     font-size: 1.10rem;
 }
+
+#root{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1;
+}
+

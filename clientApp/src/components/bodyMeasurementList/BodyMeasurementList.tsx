@@ -1,7 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
 import { Gender } from '../../models/gender';
+import styles from './BodyMeasurementList.module.css';
+import PageTitle from '../PageTitle/PageTitle';
 
 type Props = {
   bodyMeasurementCollection: BodyMeasurementCollectionModel;
@@ -15,21 +17,29 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollecti
   ) : null;
 
   let contentToRender = (
-    <table>
-      <thead>
-        <tr>
-          <th>Date Added</th>
-          <th>Neck Circumference ({length.abbreviation})</th>
-          <th>Waist Circumference ({length.abbreviation})</th>
-          {hipCircumferenceRow}
-          <th>Weight ({weight.abbreviation})</th>
-          <th>Body fat (%)</th>
-        </tr>
-      </thead>
-      <tbody data-testid='measurements'>
-        {transformBodyMeasurements(bodyMeasurementCollection.bodyMeasurements, hipCircumferenceDataShouldBeRendered)}
-      </tbody>
-    </table>
+    <>
+      <PageTitle>Measurements</PageTitle>
+      <div className={styles.measurementsWrapper}>
+        <table className={styles.measurements}>
+          <thead>
+            <tr>
+              <th>Date Added</th>
+              <th>Neck Circumference ({length.abbreviation})</th>
+              <th>Waist Circumference ({length.abbreviation})</th>
+              {hipCircumferenceRow}
+              <th>Weight ({weight.abbreviation})</th>
+              <th>Body fat (%)</th>
+            </tr>
+          </thead>
+          <tbody data-testid='measurements'>
+            {transformBodyMeasurements(
+              bodyMeasurementCollection.bodyMeasurements,
+              hipCircumferenceDataShouldBeRendered
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 
   if (bodyMeasurementCollection.bodyMeasurements.length === 0) {

@@ -10,8 +10,8 @@ const Layout: FunctionComponent = ({ children }) => {
         <Container>{children}</Container>
       </main>
 
-      <footer style={{ marginTop: '5rem' }}>
-        <Container>footer...</Container>
+      <footer style={{ padding: '1rem 0' }}>
+        <Container>&copy; {new Date().getFullYear()} BodyFitTracker</Container>
       </footer>
     </>
   );
