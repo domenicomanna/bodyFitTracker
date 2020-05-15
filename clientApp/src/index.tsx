@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './global.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
 import UserContextProvider from './contexts/UserContext';
 
 const app = (
   <UserContextProvider>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </UserContextProvider>
 );
 
