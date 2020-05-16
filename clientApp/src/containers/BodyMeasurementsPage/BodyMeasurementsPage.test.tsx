@@ -5,6 +5,8 @@ import { UserContext, UserContextModel } from '../../contexts/UserContext';
 import BodyMeasurementsPage from './BodyMeasurementsPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
+import { Gender } from '../../models/gender';
+
 jest.mock('../../api/bodyMeasurementsClient');
 
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
@@ -18,7 +20,7 @@ beforeEach(() => {
   };
   bodyMeasurementCollection = {
     measurementSystemName: '',
-    genderTypeName: '',
+    genderTypeName: Gender.Female,
     length: {
       name: '',
       abbreviation: '',
@@ -51,43 +53,28 @@ beforeEach(() => {
   mockedBodyMeasurementsClient.getAllMeasurements.mockReset();
 });
 
-describe('Component when the user is not authenticated', () => {
-  it('should render a login message', () => {
-    userContextModel.isAuthenticated = () => false;
-    render(
-      <UserContext.Provider value={userContextModel}>
-        <BodyMeasurementsPage />
-      </UserContext.Provider>
-    );
-    const loginElement = screen.getByText(/login/i);
-    expect(loginElement).toBeTruthy();
-  });
+it('should render a loading message when the measurements are being loaded', async () => {
+  userContextModel.isAuthenticated = () => true;
+  mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
+  render(
+    <UserContext.Provider value={userContextModel}>
+      <BodyMeasurementsPage />
+    </UserContext.Provider>
+  );
+  const loadingElement = screen.getByText(/loading/i);
+  expect(loadingElement).toBeTruthy();
+  await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 });
 
-describe('Component when the user is authenticated', () => {
-  it('should render a loading message when the measurements are being loaded', async () => {
-    userContextModel.isAuthenticated = () => true;
-    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
-    render(
-      <UserContext.Provider value={userContextModel}>
-        <BodyMeasurementsPage />
-      </UserContext.Provider>
-    );
-    const loadingElement = screen.getByText(/loading/i);
-    expect(loadingElement).toBeTruthy();
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
-  });
-
-  it('should remove the loading message after the measurements have loaded', async () => {
-    userContextModel.isAuthenticated = () => true;
-    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
-    render(
-      <UserContext.Provider value={userContextModel}>
-        <BodyMeasurementsPage />
-      </UserContext.Provider>
-    );
-    await waitFor(() => expect(mockedBodyMeasurementsClient.getAllMeasurements).toHaveBeenCalledTimes(1));
-    const loadingElement = screen.queryByText(/Loading/i);
-    expect(loadingElement).toBeFalsy();
-  });
+it('should remove the loading message after the measurements have loaded', async () => {
+  userContextModel.isAuthenticated = () => true;
+  mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
+  render(
+    <UserContext.Provider value={userContextModel}>
+      <BodyMeasurementsPage />
+    </UserContext.Provider>
+  );
+  await waitFor(() => expect(mockedBodyMeasurementsClient.getAllMeasurements).toHaveBeenCalledTimes(1));
+  const loadingElement = screen.queryByText(/Loading/i);
+  expect(loadingElement).toBeFalsy();
 });

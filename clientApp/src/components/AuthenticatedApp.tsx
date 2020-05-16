@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import Layout from './layout/Layout';
-import { Switch, Route } from "react-router-dom";
 
 import bodyMeasurementsClient from '../api/bodyMeasurementsClient';
 import BodyMeasurementsPage from '../containers/BodyMeasurementsPage/BodyMeasurementsPage';
-import About from './About';
-
 
 bodyMeasurementsClient.getAllMeasurements().then((res) => console.log(res));
 
 const AuthenticatedApp = () => {
-
   return (
-    <Layout> 
+    <Layout>
       <Switch>
-        <Route path='/' exact component={BodyMeasurementsPage}/>
-        <Route path='/about' component={About}/>
+        <ProtectedRoute path='/' exact component={BodyMeasurementsPage} />
       </Switch>
     </Layout>
   );
