@@ -7,14 +7,27 @@ import PageTitle from '../PageTitle/PageTitle';
 
 type Props = {
   bodyMeasurementCollection: BodyMeasurementCollectionModel;
+  deleteMeasurement: (bodyMeasurementId: number) => void;
 };
 
-const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollection }) => {
+const BodyMeasurementList: FunctionComponent<Props> = ({
+  bodyMeasurementCollection,
+  deleteMeasurement
+}) => {
   const { length, weight } = bodyMeasurementCollection;
   const hipCircumferenceDataShouldBeRendered: boolean = bodyMeasurementCollection.genderTypeName == Gender.Female;
   const hipCircumferenceRow = hipCircumferenceDataShouldBeRendered ? (
     <th>Hip Circumference ({length.abbreviation})</th>
   ) : null;
+
+  const transformedBodyMeasurements = bodyMeasurementCollection.bodyMeasurements.map((bodyMeasurement) => (
+    <BodyMeasurement
+      key={bodyMeasurement.bodyMeasurementId}
+      measurement={bodyMeasurement}
+      hipCircumferenceDataShouldBeRendered={hipCircumferenceDataShouldBeRendered}
+      deleteMeasurement={deleteMeasurement}
+    />
+  ));
 
   let contentToRender = (
     <>
@@ -29,14 +42,10 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollecti
               {hipCircumferenceRow}
               <th>Weight ({weight.abbreviation})</th>
               <th>Body fat (%)</th>
+              <th></th>
             </tr>
           </thead>
-          <tbody data-testid='measurements'>
-            {transformBodyMeasurements(
-              bodyMeasurementCollection.bodyMeasurements,
-              hipCircumferenceDataShouldBeRendered
-            )}
-          </tbody>
+          <tbody data-testid='measurements'>{transformedBodyMeasurements}</tbody>
         </table>
       </div>
     </>
@@ -47,19 +56,6 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurementCollecti
   }
 
   return contentToRender;
-};
-
-const transformBodyMeasurements = (
-  bodyMeasurements: BodyMeasurementModel[],
-  hipCircumferenceDataShouldBeRendered: boolean
-) => {
-  return bodyMeasurements.map((bodyMeasurement) => (
-    <BodyMeasurement
-      key={bodyMeasurement.bodyMeasurementId}
-      measurement={bodyMeasurement}
-      hipCircumferenceDataShouldBeRendered={hipCircumferenceDataShouldBeRendered}
-    />
-  ));
 };
 
 export default BodyMeasurementList;
