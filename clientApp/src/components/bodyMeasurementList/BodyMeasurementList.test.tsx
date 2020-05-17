@@ -4,10 +4,10 @@ import BodyMeasurementList from './BodyMeasurementList';
 import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import { Gender } from '../../models/gender';
 
-let bodyMeasurementCollection: BodyMeasurementCollectionModel;
+let bodyMeasurementListProps: React.ComponentProps<typeof BodyMeasurementList>;
 
 beforeEach(() => {
-  bodyMeasurementCollection = {
+  const bodyMeasurementCollection = {
     measurementSystemName: '',
     genderTypeName: Gender.Male,
     length: {
@@ -30,12 +30,16 @@ beforeEach(() => {
       },
     ],
   };
+  bodyMeasurementListProps = {
+    bodyMeasurementCollection : bodyMeasurementCollection,
+    deleteMeasurement:  () => { }
+  }
 });
 
 describe('Component when measurements are not provided', () => {
-  it('should render a message indicating the user has no body measurements if no body measurements are provided', () => {
-    bodyMeasurementCollection.bodyMeasurements = [];
-    render(<BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection} />);
+  it('should render a message indicating the user has no body measurements', () => {
+    bodyMeasurementListProps.bodyMeasurementCollection.bodyMeasurements = [];
+    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
     const messageElement = screen.getByText(/You do not have any body measurements/i);
     expect(messageElement).toBeTruthy;
   });
@@ -43,21 +47,21 @@ describe('Component when measurements are not provided', () => {
 
 describe('Component when measurements are provided', () => {
   it("should render the user's body measurements", () => {
-    render(<BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection} />);
+    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
     const measurementsElement = screen.getByTestId(/measurements/i);
     expect(measurementsElement).toBeTruthy;
   });
 
   it('should render hip circumference if gender type is female', () => {
-    bodyMeasurementCollection.genderTypeName = Gender.Female;
-    render(<BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection} />);
+    bodyMeasurementListProps.bodyMeasurementCollection.genderTypeName = Gender.Female;
+    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
     const hipCircumferenceElement = screen.getByText(/hip circumference/i);
     expect(hipCircumferenceElement).toBeTruthy();
   });
 
   it('should not render hip circumference if gender type is male', () => {
-    bodyMeasurementCollection.genderTypeName = Gender.Male;
-    render(<BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection} />);
+    bodyMeasurementListProps.bodyMeasurementCollection.genderTypeName = Gender.Male;
+    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
     const hipCircumferenceElement = screen.queryByText(/hip circumference/i);
     expect(hipCircumferenceElement).toBeFalsy();
   });

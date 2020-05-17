@@ -7,6 +7,8 @@ let bodyMeasurementModel: BodyMeasurementModel;
 let tableWithBody: HTMLElement;
 const hipCircumference = 23.23432334324; // make it very precise so we don't accidentally retrieve another value when querying for this
 
+let bodyMeasurementProps: React.ComponentProps<typeof BodyMeasurement>;
+
 beforeEach(() => {
   bodyMeasurementModel = {
     bodyMeasurementId: 1,
@@ -20,10 +22,17 @@ beforeEach(() => {
   const table = document.createElement('table');
   const tableBody = document.createElement('tbody');
   tableWithBody = table.appendChild(tableBody);
+
+  bodyMeasurementProps = {
+    measurement : bodyMeasurementModel,
+    hipCircumferenceDataShouldBeRendered: false,
+    deleteMeasurement : () => {}
+  }
 });
 
 it('should not render hip circumference if the hip circumference render property is false', () => {
-  render(<BodyMeasurement measurement={bodyMeasurementModel} hipCircumferenceDataShouldBeRendered={false} />, {
+  bodyMeasurementProps.hipCircumferenceDataShouldBeRendered = false;
+  render(<BodyMeasurement {...bodyMeasurementProps} />, {
     container: document.body.appendChild(tableWithBody),
   });
   const hipCircumferenceElement = screen.queryByText(hipCircumference.toString());
@@ -31,7 +40,8 @@ it('should not render hip circumference if the hip circumference render property
 });
 
 it('should render hip circumference if the hip circumference render property is true', () => {
-  render(<BodyMeasurement measurement={bodyMeasurementModel} hipCircumferenceDataShouldBeRendered />, {
+  bodyMeasurementProps.hipCircumferenceDataShouldBeRendered = true;
+  render(<BodyMeasurement {...bodyMeasurementProps}/>, {
     container: document.body.appendChild(tableWithBody),
   });
   const hipCircumferenceElement = screen.getByText(hipCircumference.toString());
