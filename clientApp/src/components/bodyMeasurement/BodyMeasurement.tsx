@@ -22,7 +22,7 @@ const BodyMeasurement: FunctionComponent<Props> = ({
       {hipCircumferenceData}
       <td>{measurement.weight}</td>
       <td>{measurement.bodyFatPercentage}</td>
-      <td data-testid='delete' onClick={() => deleteMeasurement(measurement.bodyMeasurementId)}>
+      <td data-testid='delete-measurement' onClick={() => deleteMeasurement(measurement.bodyMeasurementId)}>
         Delete
       </td>
     </tr>
