@@ -1,10 +1,11 @@
 using System;
 using System.Security.Cryptography;
+using Api.ApplicationLogic.Interfaces;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Infrastructure.PasswordHashing
 {
-    public class PasswordHasher
+    public class PasswordHasher : IPasswordHasher
     {
         const KeyDerivationPrf psuedoRandomFunction = KeyDerivationPrf.HMACSHA1; // default for Rfc2898DeriveBytes
         const int iterationCount = 1000; // default for Rfc2898DeriveBytes
