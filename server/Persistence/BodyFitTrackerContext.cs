@@ -5,9 +5,9 @@ using Persistence.Configurations;
 
 namespace Persistence
 {
-    public class DataContext : DbContext
+    public class BodyFitTrackerContext : DbContext
     {
-        public DataContext(DbContextOptions options) : base(options)
+        public BodyFitTrackerContext(DbContextOptions options) : base(options)
         {
         }
         public DbSet<AppUser> AppUsers { get; set; }

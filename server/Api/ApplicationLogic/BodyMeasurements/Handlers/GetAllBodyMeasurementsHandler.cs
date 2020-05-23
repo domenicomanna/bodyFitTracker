@@ -9,10 +9,10 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
 {
     public class GetAllBodyMeasurementsHandler
     {
-        private readonly DataContext _dataContext;
+        private readonly BodyFitTrackerContext _dataContext;
         private readonly IMapper _mapper;
 
-        public GetAllBodyMeasurementsHandler(DataContext dataContext, IMapper mapper)
+        public GetAllBodyMeasurementsHandler(BodyFitTrackerContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;

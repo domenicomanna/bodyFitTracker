@@ -10,16 +10,15 @@ namespace Persistence
         {
             modelBuilder.Entity<AppUser>()
                 .HasData(
-                    new AppUser
-                    {
-                        Email = "abc@gmail.com",
-                        HashedPassword = "abc",
-                        Salt = "abc",
-                        Weight = 120,
-                        Height = 60,
-                        Gender = GenderType.Male,
-                        MeasurementSystemPreference = MeasurementSystem.Imperial
-                    }
+                    new AppUser(
+                        "abc@gmail.com",
+                        "abc",
+                        "abc",
+                        120,
+                        60,
+                        GenderType.Male,
+                        MeasurementSystem.Imperial
+                    )
                 );
 
             modelBuilder.Entity<BodyMeasurement>()

@@ -29,7 +29,7 @@ namespace Api
             
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<DataContext>(options => {
+            services.AddDbContext<BodyFitTrackerContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddCors(options => {

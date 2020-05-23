@@ -8,7 +8,7 @@ using Persistence;
 
 namespace Persistence.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(BodyFitTrackerContext))]
     [Migration("20200505235854_initialCreate")]
     partial class initialCreate
     {

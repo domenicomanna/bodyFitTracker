@@ -18,7 +18,7 @@ namespace DomainTests.Models
         [TestMethod]
         public void IfAppUserIsFemaleAndHipCircumferenceIsNullAnArgumentNullExceptionShouldBeThrown()
         {
-            AppUser appUser = new AppUser { Gender = GenderType.Female };
+            AppUser appUser = new AppUser("", "", "", 60, 90, GenderType.Female, MeasurementSystem.Imperial);
             Assert.ThrowsException<ArgumentNullException>( () => new BodyMeasurement(appUser, 10, 30, null, DateTime.Today));
         }
     }
