@@ -1,4 +1,5 @@
 using Api.Domain.Models;
+using FluentValidation;
 
 namespace Api.ApplicationLogic.Users.Requests
 {
@@ -12,4 +13,12 @@ namespace Api.ApplicationLogic.Users.Requests
         public GenderType Gender { get; set; }
         public MeasurementSystem MeasurementPreference { get; set; }
     }
+
+    public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest> {
+        public CreateUserRequestValidator()
+        {
+            RuleFor(x => x.Email).EmailAddress();
+        }
+    }
+
 }

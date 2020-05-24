@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
+using Api.ApplicationLogic.Users.Handlers;
+using Api.ApplicationLogic.Users.Requests;
+using Api.Infrastructure.PasswordHashing;
 using Api.Persistence;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,7 +39,8 @@ namespace Api
             services.AddControllers()
                     .AddNewtonsoftJson(options => {
                         options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-                    });
+                    })
+                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
                     
             services.AddAutoMapper(typeof(Startup));
 
@@ -53,6 +58,9 @@ namespace Api
             });
             
             services.AddScoped<GetAllBodyMeasurementsHandler>();
+
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<CreateUserHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
