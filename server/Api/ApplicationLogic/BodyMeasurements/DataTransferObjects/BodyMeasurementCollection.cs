@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using Domain.Models;
-using Newtonsoft.Json;
+using Api.Domain.Models;
 
 namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
 {
     public class BodyMeasurementCollection
     {
-        public string MeasurementSystemName { get; private set;}
+        public string MeasurementSystemName { get; private set; }
         public string GenderTypeName { get; private set; }
         public Measurement Length { get; private set; }
         public Measurement Weight { get; private set; }
@@ -17,12 +16,14 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
             MeasurementSystemName = measurementSystem.ToString();
             GenderTypeName = genderType.ToString();
             BodyMeasurements = bodyMeasurements;
-            
-            if (measurementSystem == MeasurementSystem.Imperial){
+
+            if (measurementSystem == MeasurementSystem.Imperial)
+            {
                 Weight = new Measurement("Pounds", "lb");
                 Length = new Measurement("Inches", "in");
             }
-            else{
+            else
+            {
                 Weight = new Measurement("Kilograms", "kg");
                 Length = new Measurement("Centimeters", "cm");
             }

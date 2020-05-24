@@ -1,4 +1,4 @@
-using Domain.Models;
+using Api.Domain.Models;
 
 namespace Api.ApplicationLogic.Users.Requests
 {

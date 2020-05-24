@@ -1,18 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Api.ApplicationLogic.BodyMeasurements.Handlers;
+using Api.Persistence;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
-using AutoMapper;
-using Api.ApplicationLogic.BodyMeasurements.Handlers;
+using Microsoft.Extensions.Logging;
 
 namespace Api
 {
+
     public class Startup
     {
         readonly string _corsPolicyName = "CorsPolicy";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,18 +29,20 @@ namespace Api
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
                     .AddNewtonsoftJson(options => {
                         options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
                     });
-            
+                    
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<BodyFitTrackerContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
+
             services.AddCors(options => {
                 options.AddPolicy(_corsPolicyName,
                 builder => {
@@ -40,9 +51,11 @@ namespace Api
                     .AllowAnyMethod();
                 });
             });
+            
             services.AddScoped<GetAllBodyMeasurementsHandler>();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

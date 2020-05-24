@@ -2,7 +2,7 @@ using System;
 
 namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
 {
-    public class BodyMeasurementDTO
+   public class BodyMeasurementDTO
     {
         public int BodyMeasurementId { get; set; }
 

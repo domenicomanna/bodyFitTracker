@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Api.ApplicationLogic.Interfaces;
 using Api.ApplicationLogic.Users.DataTransferObjects;
 using Api.ApplicationLogic.Users.Requests;
-using Domain.Models;
-using Persistence;
+using Api.Domain.Models;
+using Api.Infrastructure.PasswordHashing;
+using Api.Persistence;
 
 namespace Api.ApplicationLogic.Users.Handlers
 {

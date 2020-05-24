@@ -1,6 +1,6 @@
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
+using Api.Domain.Models;
 using AutoMapper;
-using Domain.Models;
 
 namespace Api.ApplicationLogic.BodyMeasurements
 {

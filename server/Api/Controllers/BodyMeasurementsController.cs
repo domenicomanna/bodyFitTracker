@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -18,7 +16,7 @@ namespace Api.Controllers
             _getAllBodyMeasurementsHandler = getAllBodyMeasurementsHandler;
         }
 
-        [HttpGet]
+        [HttpGet("")]
         public BodyMeasurementCollection Get()
         {
             return _getAllBodyMeasurementsHandler.Handle();
