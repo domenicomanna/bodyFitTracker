@@ -18,6 +18,12 @@ namespace Api.ApplicationLogic.Users.Requests
         public CreateUserRequestValidator()
         {
             RuleFor(x => x.Email).EmailAddress();
+            RuleFor(x => x.Password).NotEmpty();
+            RuleFor(x => x.ConfirmedPassword).Equal(x => x.Password);
+            RuleFor(x => x.Height).GreaterThan(0);
+            RuleFor(x => x.Weight).GreaterThan(0);
+            RuleFor(x => x.Gender).IsInEnum();
+            RuleFor(x => x.MeasurementPreference).IsInEnum();
         }
     }
 
