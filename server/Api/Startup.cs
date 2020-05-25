@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
 using Api.ApplicationLogic.Users.Handlers;
 using Api.ApplicationLogic.Users.Requests;
-using Api.Infrastructure.Jwt;
 using Api.Infrastructure.PasswordHashing;
+using Api.Infrastructure.Security;
 using Api.Persistence;
 using AutoMapper;
 using FluentValidation.AspNetCore;
@@ -79,6 +79,8 @@ namespace Api
                         };
                     });
             
+            services.AddScoped<IUserAccessor, UserAccessor>();
+
             services.AddScoped<GetAllBodyMeasurementsHandler>();
 
             services.AddScoped<IPasswordHasher, PasswordHasher>();

@@ -1,6 +1,6 @@
 using Api.Domain.Models;
 
-namespace Api.Infrastructure.Jwt
+namespace Api.Infrastructure.Security
 {
     public interface IJwtGenerator
     {

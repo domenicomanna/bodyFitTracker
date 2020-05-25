@@ -3,7 +3,7 @@ using System.Linq;
 using Api.ApplicationLogic.Users.DataTransferObjects;
 using Api.ApplicationLogic.Users.Requests;
 using Api.Domain.Models;
-using Api.Infrastructure.Jwt;
+using Api.Infrastructure.Security;
 using Api.Infrastructure.PasswordHashing;
 using Api.Persistence;
 
@@ -39,6 +39,7 @@ namespace Api.ApplicationLogic.Users.Handlers
             AppUser appUser = new AppUser(request.Email, hashedPassword, salt, request.Weight, request.Height, request.Gender, request.MeasurementPreference);
 
             // _bodyFitTrackerContext.AppUsers.Add(appUser);
+            // _bodyFitTrackerContext.SaveChanges();
 
             return new CreateUserResult
             {
