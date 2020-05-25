@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Persistence.Migrations
 {
     [DbContext(typeof(BodyFitTrackerContext))]
-    [Migration("20200524165714_InitialCreate")]
+    [Migration("20200525222026_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,10 @@ namespace Api.Persistence.Migrations
 
             modelBuilder.Entity("Api.Domain.Models.AppUser", b =>
                 {
+                    b.Property<int>("AppUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
@@ -45,13 +49,14 @@ namespace Api.Persistence.Migrations
                     b.Property<double>("Weight")
                         .HasColumnType("REAL");
 
-                    b.HasKey("Email");
+                    b.HasKey("AppUserId");
 
                     b.ToTable("AppUsers");
 
                     b.HasData(
                         new
                         {
+                            AppUserId = 1,
                             Email = "abc@gmail.com",
                             Gender = "Male",
                             HashedPassword = "abc",
@@ -68,9 +73,8 @@ namespace Api.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("AppUserEmail")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("BodyFatPercentage")
                         .HasColumnType("REAL");
@@ -92,7 +96,7 @@ namespace Api.Persistence.Migrations
 
                     b.HasKey("BodyMeasurementId");
 
-                    b.HasIndex("AppUserEmail");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("BodyMeasurements");
 
@@ -100,17 +104,7 @@ namespace Api.Persistence.Migrations
                         new
                         {
                             BodyMeasurementId = 1,
-                            AppUserEmail = "abc@gmail.com",
-                            BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 5, 24, 0, 0, 0, 0, DateTimeKind.Local),
-                            NeckCircumference = 12.0,
-                            WaistCircumference = 28.0,
-                            Weight = 125.0
-                        },
-                        new
-                        {
-                            BodyMeasurementId = 2,
-                            AppUserEmail = "abc@gmail.com",
+                            AppUserId = 1,
                             BodyFatPercentage = 10.0,
                             DateAdded = new DateTime(2020, 5, 25, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
@@ -119,10 +113,20 @@ namespace Api.Persistence.Migrations
                         },
                         new
                         {
-                            BodyMeasurementId = 3,
-                            AppUserEmail = "abc@gmail.com",
+                            BodyMeasurementId = 2,
+                            AppUserId = 1,
                             BodyFatPercentage = 10.0,
                             DateAdded = new DateTime(2020, 5, 26, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 3,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 5, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -133,7 +137,7 @@ namespace Api.Persistence.Migrations
                 {
                     b.HasOne("Api.Domain.Models.AppUser", "AppUser")
                         .WithMany("BodyMeasurements")
-                        .HasForeignKey("AppUserEmail")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

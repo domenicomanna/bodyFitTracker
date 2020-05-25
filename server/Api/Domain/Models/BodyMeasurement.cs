@@ -6,7 +6,7 @@ namespace Api.Domain.Models
     {
         public int BodyMeasurementId { get; private set; }
 
-        public string AppUserEmail { get; private set; }
+        public int AppUserId { get; private set; }
 
         public AppUser AppUser { get; private set; }
 
@@ -36,7 +36,7 @@ namespace Api.Domain.Models
             AppUser = appUser;
             NeckCircumference = neckCircumference;
             WaistCircumference = waistCircumference;
-            AppUserEmail = appUser.Email;
+            AppUserId = appUser.AppUserId;
             Weight = appUser.Weight;
             DateAdded = dateAdded;
             HipCircumference = appUser.Gender == GenderType.Female ? hipCircumference : null;

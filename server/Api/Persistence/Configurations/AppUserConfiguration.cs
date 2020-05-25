@@ -9,7 +9,13 @@ namespace Api.Persistence.Configurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder
-                .HasKey(a => a.Email);
+                .HasKey(a => a.AppUserId);
+            builder
+                .Property(a => a.AppUserId)
+                .ValueGeneratedOnAdd();
+            builder
+                .Property(a => a.Email)
+                .IsRequired();
             builder
                 .Property(a => a.HashedPassword)
                 .IsRequired();
@@ -27,7 +33,7 @@ namespace Api.Persistence.Configurations
             builder
                 .HasMany(b => b.BodyMeasurements)
                 .WithOne(a => a.AppUser)
-                .HasForeignKey(a => a.AppUserEmail)
+                .HasForeignKey(a => a.AppUserId)
                 .IsRequired();
         }
     }

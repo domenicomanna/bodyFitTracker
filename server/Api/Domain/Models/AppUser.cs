@@ -4,6 +4,7 @@ namespace Api.Domain.Models
 {
     public class AppUser
     {
+        public int AppUserId { get; private set; }
         public string Email { get; set; }
         public string HashedPassword { get; set; }
         public string Salt { get; set; }
