@@ -1,5 +1,6 @@
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
