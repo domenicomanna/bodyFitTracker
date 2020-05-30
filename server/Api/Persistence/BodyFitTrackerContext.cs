@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Persistence
 {
-     public class BodyFitTrackerContext : DbContext
+    public class BodyFitTrackerContext : DbContext
     {
         public bool SeedData { get; set; } = true;
 
@@ -14,8 +14,13 @@ namespace Api.Persistence
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<BodyMeasurement> BodyMeasurements { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {    
+        {
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new BodyMeasurementConfiguration());
 

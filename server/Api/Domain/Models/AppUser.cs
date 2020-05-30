@@ -12,7 +12,7 @@ namespace Api.Domain.Models
         public double Height { get; set; }
         public GenderType Gender { get; private set; }
         public MeasurementSystem MeasurementSystemPreference { get; set; }
-        public ICollection<BodyMeasurement> BodyMeasurements { get; private set; }
+        public virtual ICollection<BodyMeasurement> BodyMeasurements { get; private set; }
 
         protected AppUser() {}
 

@@ -28,9 +28,8 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         {
             int userId = _userAccessor.GetCurrentUserId();
             AppUser currentUser = _bodyFitTrackerContext.AppUsers.Find(userId);
-            List<BodyMeasurement> bodyMeasurements = _bodyFitTrackerContext.BodyMeasurements.Where(b => b.AppUserId == userId)
-                .OrderByDescending(b => b.DateAdded).ToList();
-
+            List<BodyMeasurement> bodyMeasurements = currentUser.BodyMeasurements.OrderByDescending(b => b.DateAdded).ToList();
+            
             List<BodyMeasurementDTO> bodyMeasurementDTOs = _mapper.Map<List<BodyMeasurement>, List<BodyMeasurementDTO>>(bodyMeasurements);
             return new BodyMeasurementCollection(MeasurementSystem.Imperial, currentUser.Gender, bodyMeasurementDTOs);
         }

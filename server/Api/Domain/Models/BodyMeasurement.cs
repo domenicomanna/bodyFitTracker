@@ -8,7 +8,7 @@ namespace Api.Domain.Models
 
         public int AppUserId { get; private set; }
 
-        public AppUser AppUser { get; private set; }
+        public virtual AppUser AppUser { get; private set; }
 
         public double NeckCircumference { get; private set; }
 
