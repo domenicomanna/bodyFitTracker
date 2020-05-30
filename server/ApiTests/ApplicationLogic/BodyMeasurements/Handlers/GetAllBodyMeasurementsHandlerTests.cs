@@ -31,7 +31,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             bodyFitTrackerContext.SaveChanges();
 
             var userAccessorMock = new Mock<IUserAccessor>(); 
-            userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(1); 
+            userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId); 
 
             MapperConfiguration mapperConfiguration = new MapperConfiguration(opts =>
             {

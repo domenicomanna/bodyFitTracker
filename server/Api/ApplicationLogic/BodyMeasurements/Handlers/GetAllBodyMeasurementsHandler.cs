@@ -22,7 +22,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         }
 
         /// <summary>
-        /// Returns a BodyMeasurementCollection for the current user
+        /// Returns a <see cref="BodyMeasurementCollection"/> for the current user
         /// </summary>
         public BodyMeasurementCollection Handle()
         {

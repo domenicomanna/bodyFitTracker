@@ -7,8 +7,8 @@ namespace ApiTests.ApplicationLogic
     {
         /// <summary>
         /// Returns an in memory database. If <paramref name="deleteExistingDatabase"/> is 
-        /// true, then the returned database new and empty . If <paramref name="deleteExistingDatabase"/> is false, then 
-        /// the returned  will use an existing database will be used, if there is one.
+        /// true, then the returned context will have an empty database. If <paramref name="deleteExistingDatabase"/> is false, then 
+        /// the returned context will use an existing database if there is one.
         /// If there is no existing database, then a new database will be created.
         /// </summary>
         public static BodyFitTrackerContext GetInMemoryDatabase(bool deleteExistingDatabase = true)
