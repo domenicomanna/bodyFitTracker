@@ -31,10 +31,11 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             {
                 throw new RestException(HttpStatusCode.NotFound, $"The bodymeasurement with id {bodyMeasurementIdToDelete} was not found");
             }
-            
+
             int currentUserId = _userAccessor.GetCurrentUserId();
 
-            if (currentUserId != bodyMeasurementToRemove.AppUserId){
+            if (currentUserId != bodyMeasurementToRemove.AppUserId)
+            {
                 throw new RestException(HttpStatusCode.Forbidden, $"Access to another user's body measurement is denied");
             }
 
