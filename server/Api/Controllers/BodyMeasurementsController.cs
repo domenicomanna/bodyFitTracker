@@ -11,9 +11,11 @@ namespace Api.Controllers
     public class BodyMeasurementsController
     {
         private readonly GetAllBodyMeasurementsHandler _getAllBodyMeasurementsHandler;
+        private readonly DeleteBodyMeasurementHandler _deleteBodyMeasurementHandler;
 
-        public BodyMeasurementsController(GetAllBodyMeasurementsHandler getAllBodyMeasurementsHandler)
+        public BodyMeasurementsController(GetAllBodyMeasurementsHandler getAllBodyMeasurementsHandler, DeleteBodyMeasurementHandler deleteBodyMeasurementHandler)
         {
+            _deleteBodyMeasurementHandler = deleteBodyMeasurementHandler;
             _getAllBodyMeasurementsHandler = getAllBodyMeasurementsHandler;
         }
 
@@ -21,6 +23,12 @@ namespace Api.Controllers
         public BodyMeasurementCollection Get()
         {
             return _getAllBodyMeasurementsHandler.Handle();
+        }
+
+        [HttpPost("Delete/{id}")]        
+        public void Delete(int id)
+        {
+            _deleteBodyMeasurementHandler.Handle(id);
         }
     }
 }
