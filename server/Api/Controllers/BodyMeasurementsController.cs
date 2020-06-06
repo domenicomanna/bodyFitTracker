@@ -25,7 +25,7 @@ namespace Api.Controllers
             return _getAllBodyMeasurementsHandler.Handle();
         }
 
-        [HttpPost("Delete/{id}")]        
+        [HttpDelete("{id}")]        
         public void Delete(int id)
         {
             _deleteBodyMeasurementHandler.Handle(id);
