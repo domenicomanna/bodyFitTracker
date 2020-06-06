@@ -54,57 +54,57 @@ namespace Api.Persistence.migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "AppUserId", "Email", "Gender", "HashedPassword", "Height", "MeasurementSystemPreference", "Salt", "Weight" },
-                values: new object[] { 1, "abc@gmail.com", "Male", "abc", 60.0, "Imperial", "abc", 120.0 });
+                values: new object[] { 1, "abc@gmail.com", "Male", "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=", 60.0, "Imperial", "HvJRurMKIz+KkIpQhw4DpA==", 120.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 1, 1, 10.0, new DateTime(2020, 6, 5, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 1, 1, 10.0, new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 2, 1, 10.0, new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 2, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 3, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 3, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 4, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 4, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 5, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 5, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 6, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 6, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 7, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 7, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 8, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 8, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 9, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 9, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 10, 1, 10.0, new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
+                values: new object[] { 10, 1, 10.0, new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local), null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BodyMeasurements_AppUserId",
