@@ -12,16 +12,25 @@ namespace Api.Controllers
     public class UsersController
     {
         private readonly CreateUserHandler _createUserHandler;
+        private readonly LoginHandler _loginHandler;
 
-        public UsersController(CreateUserHandler createUserHandler)
+        public UsersController(LoginHandler loginHandler, CreateUserHandler createUserHandler)
         {
+            _loginHandler = loginHandler;
             _createUserHandler = createUserHandler;
         }
 
+
+        [HttpGet("")]
+        public AppUserDTO Login(LoginRequest loginRequest)
+        {
+            return _loginHandler.Handle(loginRequest);
+        }
+
         [HttpPost("")]
-        public CreateUserResult CreateUser(CreateUserRequest createUserRequest){
-            CreateUserResult createUserResult = _createUserHandler.Handle(createUserRequest);
-            return createUserResult;
+        public CreateUserResult CreateUser(CreateUserRequest createUserRequest)
+        {
+            return _createUserHandler.Handle(createUserRequest);
         }
     }
 }

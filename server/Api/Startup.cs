@@ -94,6 +94,7 @@ namespace Api
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<CreateUserHandler>();
+            services.AddScoped<LoginHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
