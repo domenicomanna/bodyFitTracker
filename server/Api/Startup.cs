@@ -8,6 +8,7 @@ using Api.ApplicationLogic.Users.Handlers;
 using Api.ApplicationLogic.Users.Requests;
 using Api.Infrastructure.PasswordHashing;
 using Api.Infrastructure.Security;
+using Api.Middleware;
 using Api.Persistence;
 using AutoMapper;
 using FluentValidation.AspNetCore;
@@ -31,7 +32,7 @@ namespace Api
     public class Startup
     {
         readonly string _corsPolicyName = "CorsPolicy";
-        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -42,24 +43,29 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options => {
+            services.AddControllers(options =>
+            {
                 AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             })
-                .AddNewtonsoftJson(options => {
+                .AddNewtonsoftJson(options =>
+                {
                     options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
                 })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
-                    
+
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<BodyFitTrackerContext>(options => {
+            services.AddDbContext<BodyFitTrackerContext>(options =>
+            {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy(_corsPolicyName,
-                builder => {
+                builder =>
+                {
                     builder.WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
@@ -70,15 +76,17 @@ namespace Api
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(opt => {
-                        opt.TokenValidationParameters = new TokenValidationParameters{
+                    .AddJwtBearer(opt =>
+                    {
+                        opt.TokenValidationParameters = new TokenValidationParameters
+                        {
                             ValidateIssuerSigningKey = true,
                             IssuerSigningKey = securityKey,
                             ValidateIssuer = false,
                             ValidateAudience = false,
                         };
                     });
-            
+
             services.AddScoped<IUserAccessor, UserAccessor>();
 
             services.AddScoped<GetAllBodyMeasurementsHandler>();
@@ -89,12 +97,10 @@ namespace Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 

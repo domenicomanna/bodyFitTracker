@@ -7,13 +7,12 @@ namespace Api.ApplicationLogic.Errors
     public class RestException : Exception
     {
         public HttpStatusCode HttpStatusCode { get; private set; }
-        public string ErrorDescription { get; private set; }
-        public Dictionary<string, string> Errors { get; set; }
+        public Dictionary<string, string> Errors { get; private set; }
 
-        public RestException(HttpStatusCode httpStatusCode, string errorDescription) : base(errorDescription)
+        public RestException(HttpStatusCode httpStatusCode, Dictionary<string, string> errors)
         {
             HttpStatusCode = httpStatusCode;
-            ErrorDescription = errorDescription;
+            Errors = errors;
         }
     }
 }

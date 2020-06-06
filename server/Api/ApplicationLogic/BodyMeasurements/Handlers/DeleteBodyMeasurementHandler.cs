@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Api.ApplicationLogic.Errors;
@@ -24,19 +25,23 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         /// <param name="bodyMeasurementIdToDelete"></param>
         public void Handle(int bodyMeasurementIdToDelete)
         {
+            Dictionary<string, string> errors = new Dictionary<string, string>();
+
             BodyMeasurement bodyMeasurementToRemove = _bodyFitTrackerContext.BodyMeasurements
                 .Where(b => b.BodyMeasurementId == bodyMeasurementIdToDelete).FirstOrDefault();
 
             if (bodyMeasurementToRemove == null)
             {
-                throw new RestException(HttpStatusCode.NotFound, $"The bodymeasurement with id {bodyMeasurementIdToDelete} was not found");
+                errors.Add("", $"The bodymeasurement with id {bodyMeasurementIdToDelete} was not found");
+                throw new RestException(HttpStatusCode.NotFound, errors);
             }
 
             int currentUserId = _userAccessor.GetCurrentUserId();
 
             if (currentUserId != bodyMeasurementToRemove.AppUserId)
             {
-                throw new RestException(HttpStatusCode.Forbidden, $"Access to another user's body measurement is denied");
+                errors.Add("", "Access to another user's body measurement is denied");
+                throw new RestException(HttpStatusCode.Forbidden, errors);
             }
 
             _bodyFitTrackerContext.BodyMeasurements.Remove(bodyMeasurementToRemove);
