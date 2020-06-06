@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Api.Persistence.Migrations
+namespace Api.Persistence.migrations
 {
     [DbContext(typeof(BodyFitTrackerContext))]
     partial class BodyFitTrackerContextModelSnapshot : ModelSnapshot
@@ -23,6 +23,7 @@ namespace Api.Persistence.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Gender")
@@ -104,7 +105,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 1,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 5, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 6, 5, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -114,7 +115,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 2,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 5, 26, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 6, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -124,7 +125,77 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 3,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 5, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 4,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 5,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 6,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 7,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 8,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 9,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
+                            NeckCircumference = 12.0,
+                            WaistCircumference = 28.0,
+                            Weight = 125.0
+                        },
+                        new
+                        {
+                            BodyMeasurementId = 10,
+                            AppUserId = 1,
+                            BodyFatPercentage = 10.0,
+                            DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0

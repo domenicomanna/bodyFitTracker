@@ -53,6 +53,76 @@ namespace Api.Persistence
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 4,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 5,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 6,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 7,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 8,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 9,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
+                    },
+                    new
+                    {
+                        BodyMeasurementId = 10,
+                        NeckCircumference = 12.0,
+                        WaistCircumference = 28.0,
+                        Weight = 125.0,
+                        BodyFatPercentage = 10.0,
+                        AppUserId = 1,
+                        DateAdded = DateTime.Today.AddDays(2)
                     }
                 );
         }
