@@ -20,13 +20,13 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            AppUser dom = new AppUser("dom@gmail.com", "", "", 10, 10, GenderType.Male, MeasurementSystem.Imperial); // will have an id of 1
-            AppUser bob = new AppUser("bob@gmail.com", "", "", 10, 10, GenderType.Male, MeasurementSystem.Imperial); // will have an id of 2
+            AppUser dom = new AppUser("dom@gmail.com", "", "", 10, GenderType.Male, MeasurementSystem.Imperial); // will have an id of 1
+            AppUser bob = new AppUser("bob@gmail.com", "", "", 10, GenderType.Male, MeasurementSystem.Imperial); // will have an id of 2
             bodyFitTrackerContext.AppUsers.Add(dom);
             bodyFitTrackerContext.SaveChanges();
 
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(dom, 11, 12, null, DateTime.Today)); // will have id of 1
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(bob, 11, 20, null, DateTime.Today)); // will have an id of 2
+            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(dom, 11, 12, null, 10, DateTime.Today)); // will have id of 1
+            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(bob, 11, 20, null, 10, DateTime.Today)); // will have an id of 2
             bodyFitTrackerContext.SaveChanges();
 
             var userAccessorMock = new Mock<IUserAccessor>();

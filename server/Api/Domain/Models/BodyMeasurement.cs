@@ -24,7 +24,7 @@ namespace Api.Domain.Models
 
         protected BodyMeasurement() { }
 
-        public BodyMeasurement(AppUser appUser, double neckCircumference, double waistCircumference, double? hipCircumference, DateTime dateAdded)
+        public BodyMeasurement(AppUser appUser, double neckCircumference, double waistCircumference, double? hipCircumference, double weight, DateTime dateAdded)
         {
             if (appUser == null) throw new ArgumentNullException(nameof(appUser));
 
@@ -37,7 +37,7 @@ namespace Api.Domain.Models
             NeckCircumference = neckCircumference;
             WaistCircumference = waistCircumference;
             AppUserId = appUser.AppUserId;
-            Weight = appUser.Weight;
+            Weight = weight;
             DateAdded = dateAdded;
             HipCircumference = appUser.Gender == GenderType.Female ? hipCircumference : null;
         }

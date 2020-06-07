@@ -15,7 +15,6 @@ namespace Api.Persistence
                         Email = "abc@gmail.com",
                         HashedPassword = "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=",
                         Salt = "HvJRurMKIz+KkIpQhw4DpA==",
-                        Weight = 120.0,
                         Height = 60.0,
                         Gender = GenderType.Male,
                         MeasurementSystemPreference = MeasurementSystem.Imperial
@@ -39,7 +38,7 @@ namespace Api.Persistence
                         BodyMeasurementId = 2,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
+                        Weight = 120.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(1)
@@ -49,7 +48,7 @@ namespace Api.Persistence
                         BodyMeasurementId = 3,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
+                        Weight = 130.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
@@ -59,7 +58,7 @@ namespace Api.Persistence
                         BodyMeasurementId = 4,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
+                        Weight = 145.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
@@ -69,7 +68,7 @@ namespace Api.Persistence
                         BodyMeasurementId = 5,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
+                        Weight = 115.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
@@ -79,7 +78,7 @@ namespace Api.Persistence
                         BodyMeasurementId = 6,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
+                        Weight = 121.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
@@ -89,7 +88,7 @@ namespace Api.Persistence
                         BodyMeasurementId = 7,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
+                        Weight = 122.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
@@ -97,8 +96,8 @@ namespace Api.Persistence
                     new
                     {
                         BodyMeasurementId = 8,
-                        NeckCircumference = 12.0,
-                        WaistCircumference = 28.0,
+                        NeckCircumference = 10.0,
+                        WaistCircumference = 30.0,
                         Weight = 125.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
@@ -109,18 +108,18 @@ namespace Api.Persistence
                         BodyMeasurementId = 9,
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
-                        Weight = 125.0,
-                        BodyFatPercentage = 10.0,
+                        Weight = 126.6,
+                        BodyFatPercentage = 12.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
                     },
                     new
                     {
                         BodyMeasurementId = 10,
-                        NeckCircumference = 12.0,
-                        WaistCircumference = 28.0,
-                        Weight = 125.0,
-                        BodyFatPercentage = 10.0,
+                        NeckCircumference = 11.0,
+                        WaistCircumference = 29.0,
+                        Weight = 125.9,
+                        BodyFatPercentage = 11.0,
                         AppUserId = 1,
                         DateAdded = DateTime.Today.AddDays(2)
                     }

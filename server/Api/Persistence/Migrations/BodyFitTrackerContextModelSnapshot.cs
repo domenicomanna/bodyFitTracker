@@ -45,9 +45,6 @@ namespace Api.Persistence.migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("REAL");
-
                     b.HasKey("AppUserId");
 
                     b.ToTable("AppUsers");
@@ -61,8 +58,7 @@ namespace Api.Persistence.migrations
                             HashedPassword = "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=",
                             Height = 60.0,
                             MeasurementSystemPreference = "Imperial",
-                            Salt = "HvJRurMKIz+KkIpQhw4DpA==",
-                            Weight = 120.0
+                            Salt = "HvJRurMKIz+KkIpQhw4DpA=="
                         });
                 });
 
@@ -118,7 +114,7 @@ namespace Api.Persistence.migrations
                             DateAdded = new DateTime(2020, 6, 7, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 120.0
                         },
                         new
                         {
@@ -128,7 +124,7 @@ namespace Api.Persistence.migrations
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 130.0
                         },
                         new
                         {
@@ -138,7 +134,7 @@ namespace Api.Persistence.migrations
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 145.0
                         },
                         new
                         {
@@ -148,7 +144,7 @@ namespace Api.Persistence.migrations
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 115.0
                         },
                         new
                         {
@@ -158,7 +154,7 @@ namespace Api.Persistence.migrations
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 121.0
                         },
                         new
                         {
@@ -168,7 +164,7 @@ namespace Api.Persistence.migrations
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 122.0
                         },
                         new
                         {
@@ -176,29 +172,29 @@ namespace Api.Persistence.migrations
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            NeckCircumference = 12.0,
-                            WaistCircumference = 28.0,
+                            NeckCircumference = 10.0,
+                            WaistCircumference = 30.0,
                             Weight = 125.0
                         },
                         new
                         {
                             BodyMeasurementId = 9,
                             AppUserId = 1,
-                            BodyFatPercentage = 10.0,
+                            BodyFatPercentage = 12.0,
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
-                            Weight = 125.0
+                            Weight = 126.59999999999999
                         },
                         new
                         {
                             BodyMeasurementId = 10,
                             AppUserId = 1,
-                            BodyFatPercentage = 10.0,
+                            BodyFatPercentage = 11.0,
                             DateAdded = new DateTime(2020, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            NeckCircumference = 12.0,
-                            WaistCircumference = 28.0,
-                            Weight = 125.0
+                            NeckCircumference = 11.0,
+                            WaistCircumference = 29.0,
+                            Weight = 125.90000000000001
                         });
                 });
 

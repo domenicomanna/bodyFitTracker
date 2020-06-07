@@ -21,7 +21,7 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            AppUser dom = new AppUser("dom@gmail.com", _password, "", 10, 10, GenderType.Male, MeasurementSystem.Imperial);
+            AppUser dom = new AppUser("dom@gmail.com", _password, "", 10, GenderType.Male, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(dom);
             bodyFitTrackerContext.SaveChanges();
 

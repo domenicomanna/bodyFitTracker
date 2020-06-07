@@ -36,7 +36,7 @@ namespace Api.ApplicationLogic.Users.Handlers
             
             (string hashedPassword, string salt) = _passwordHasher.GeneratePassword(request.Password);
 
-            AppUser appUser = new AppUser(request.Email, hashedPassword, salt, request.Weight, request.Height, request.Gender, request.MeasurementPreference);
+            AppUser appUser = new AppUser(request.Email, hashedPassword, salt, request.Height, request.Gender, request.MeasurementPreference);
 
             // _bodyFitTrackerContext.AppUsers.Add(appUser);
             // _bodyFitTrackerContext.SaveChanges();

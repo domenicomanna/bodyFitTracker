@@ -22,12 +22,12 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
         [TestInitialize]
         public void SetUp(){
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            AppUser appUser = new AppUser("abc@gmail.com", "", "", 10, 10, GenderType.Male, MeasurementSystem.Imperial);
+            AppUser appUser = new AppUser("abc@gmail.com", "", "", 10, GenderType.Male, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(appUser);
             bodyFitTrackerContext.SaveChanges();
 
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 12, null, DateTime.Today));
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 20, null, DateTime.Today));
+            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 12, null, 40, DateTime.Today));
+            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 20, null, 40, DateTime.Today));
             bodyFitTrackerContext.SaveChanges();
 
             var userAccessorMock = new Mock<IUserAccessor>(); 
