@@ -44,7 +44,7 @@ it('should render the component if the user is authenticated', () => {
     render(
       <Router history={history}>
           <UserContext.Provider value = {userContextValue}>
-            <ProtectedRoute component = {TestComponent} path={route}/>
+            <ProtectedRoute render = { () => <TestComponent/> }  path={route}/> {/* test that the render prop instead of the component prop */} 
           </UserContext.Provider>
       </Router>
     )
