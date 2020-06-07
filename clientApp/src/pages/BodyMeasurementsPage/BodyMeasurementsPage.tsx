@@ -15,10 +15,11 @@ const BodyMeasurementsPage = () => {
     });
   }, []);
 
-  const deleteMeasurement = (bodyMeasurementId: number) => {
+  const deleteMeasurement = async (bodyMeasurementId: number) => {
     const measurementIndexToDelete = bodyMeasurementCollection!.bodyMeasurements.findIndex(
       (b) => b.bodyMeasurementId === bodyMeasurementId
     );
+    await bodyMeasurementsClient.deleteMeasurement(bodyMeasurementId);
     const bodyMeasuremenetCollectionWithMeasurementRemoved = update(bodyMeasurementCollection, {
       bodyMeasurements: { $splice: [[measurementIndexToDelete, 1]] },
     });
