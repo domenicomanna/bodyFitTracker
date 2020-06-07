@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Persistence.migrations
 {
     [DbContext(typeof(BodyFitTrackerContext))]
-    [Migration("20200606191202_InitialCreate")]
+    [Migration("20200607013018_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
