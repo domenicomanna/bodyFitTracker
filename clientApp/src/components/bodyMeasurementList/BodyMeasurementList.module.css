@@ -14,7 +14,7 @@
 .measurements th {
   font-weight: normal;
   text-align: left;
-  background: #7952b3;
+  background: var(--blue-500);
   color: #fff;
   position: sticky;
   top: 0px;
