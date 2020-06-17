@@ -1,0 +1,8 @@
+.form{
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem 2rem;
+    margin: auto;
+    align-items: center;
+}

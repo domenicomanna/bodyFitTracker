@@ -1,0 +1,19 @@
+.button{
+    padding: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid var(--grey-500);
+    font-size: .95rem;
+    transition: opacity .3s;
+}
+
+.primary{
+    color: white;
+    background: var(--blue-500);
+}
+
+@media (any-hover: hover) {
+    .primary:hover {
+      opacity: .88;
+    }
+  }
