@@ -36,7 +36,7 @@ it('should not render hip circumference if the hip circumference render property
     container: document.body.appendChild(tableWithBody),
   });
   const hipCircumferenceElement = screen.queryByText(hipCircumference.toString());
-  expect(hipCircumferenceElement).toBeFalsy;
+  expect(hipCircumferenceElement).toBeFalsy();
 });
 
 it('should render hip circumference if the hip circumference render property is true', () => {

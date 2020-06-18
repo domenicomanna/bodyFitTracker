@@ -34,7 +34,7 @@ it('should render a login page if the user is not authenticated', () => {
       </Router>
     )
     const loginElement = screen.getByText(/login/i);
-    expect(loginElement).toBeTruthy;
+    expect(loginElement).toBeTruthy();
 })
 
 it('should render the component if the user is authenticated', () => {
@@ -49,5 +49,5 @@ it('should render the component if the user is authenticated', () => {
       </Router>
     )
     const loginElement = screen.getByText(/testing component/i);
-    expect(loginElement).toBeTruthy;
+    expect(loginElement).toBeTruthy();
 })

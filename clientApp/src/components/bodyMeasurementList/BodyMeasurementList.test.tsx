@@ -41,7 +41,7 @@ describe('Component when measurements are not provided', () => {
     bodyMeasurementListProps.bodyMeasurementCollection.bodyMeasurements = [];
     render(<BodyMeasurementList {...bodyMeasurementListProps} />);
     const messageElement = screen.getByText(/You do not have any body measurements/i);
-    expect(messageElement).toBeTruthy;
+    expect(messageElement).toBeTruthy();
   });
 });
 
@@ -49,7 +49,7 @@ describe('Component when measurements are provided', () => {
   it("should render the user's body measurements", () => {
     render(<BodyMeasurementList {...bodyMeasurementListProps} />);
     const measurementsElement = screen.getByTestId(/measurements/i);
-    expect(measurementsElement).toBeTruthy;
+    expect(measurementsElement).toBeTruthy();
   });
 
   it('should render hip circumference if gender type is female', () => {
