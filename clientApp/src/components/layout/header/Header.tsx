@@ -5,9 +5,7 @@ import styles from './header.module.css';
 const Header = () => {
   const [hamburgerLinksShouldShow, toggleHamburgerLinks] = useState(false);
 
-  const navListClasses = `${styles.navListItems} ${
-    hamburgerLinksShouldShow ? styles.showHamburgerLinks : ''
-  }`;
+  const navListClasses = `${styles.navListItems} ${hamburgerLinksShouldShow ? styles.showHamburgerLinks : ''}`;
 
   return (
     <header className={styles.header}>
@@ -15,9 +13,7 @@ const Header = () => {
         <nav className={styles.nav}>
           <span
             className={styles.hamburger}
-            onClick={() =>
-              toggleHamburgerLinks(prevHamburgerLinksShouldShow => !prevHamburgerLinksShouldShow)
-            }
+            onClick={() => toggleHamburgerLinks((prevHamburgerLinksShouldShow) => !prevHamburgerLinksShouldShow)}
           >
             &#9776; {/* html code for hamburger icon */}
           </span>
