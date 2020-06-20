@@ -12,15 +12,18 @@ type Props = {
 
 const Button: FunctionComponent<Props> = ({ buttonClass, isSubmitting, style, children, ...rest }) => {
   const styleToHideText: CSSProperties | undefined = isSubmitting ? { color: 'transparent' } : undefined;
+
   const loader = isSubmitting ? (
     <span data-testid='loader' style={{ position: 'absolute' }}>
       <BarLoader color={'#fff'} loading={true} height={10} width={120} />
     </span>
   ) : null;
-  const allButtonStyles: CSSProperties | undefined = { ...style, ...styleToHideText };
+  const buttonClasses = [styles.button, styles[buttonClass]];
+  if (rest.disabled && !isSubmitting) buttonClasses.push(styles[`${buttonClass}Disabled`]);
+  if (isSubmitting) buttonClasses.push(styles[`${buttonClass}DisabledSubmitting`]);
 
   return (
-    <button style={allButtonStyles} className={`${styles.button} ${styles[buttonClass]}`} {...rest}>
+    <button style={{ ...style, ...styleToHideText }} className={buttonClasses.join(' ')} {...rest}>
       {children}
       {loader}
     </button>

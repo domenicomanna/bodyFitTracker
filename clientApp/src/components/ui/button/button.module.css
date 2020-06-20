@@ -1,22 +1,37 @@
-.button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: .5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid var(--grey-500);
-    font-size: .95rem;
-    transition: opacity .3s;
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid var(--grey-500);
+  font-size: 0.95rem;
+  transition: opacity 0.3s;
 }
 
-.primary{
-    color: white;
-    background: var(--blue-500);
+.primary {
+  color: white;
+  background: var(--blue-500);
+}
+
+.primaryDisabled {
+  --disabledButNotSubmittingOpacity: .5;
+  opacity: var(--disabledButNotSubmittingOpacity);
+  cursor: auto;
+}
+
+.primaryDisabledSubmitting{
+  cursor: auto;
 }
 
 @media (any-hover: hover) {
-    .primary:hover {
-      opacity: .88;
-    }
+  .primary:hover,
+  .primaryDisabledSubmitting:hover {
+    opacity: 0.85;
   }
+
+  .primaryDisabled:hover {
+    opacity: var(--disabledButNotSubmittingOpacity);
+  }
+}
