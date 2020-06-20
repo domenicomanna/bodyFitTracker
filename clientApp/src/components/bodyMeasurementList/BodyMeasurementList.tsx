@@ -1,9 +1,9 @@
-import React, { FunctionComponent, Fragment } from 'react';
+import React, { FunctionComponent } from 'react';
 import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
 import { Gender } from '../../models/gender';
-import styles from './BodyMeasurementList.module.css';
-import PageTitle from '../PageTitle/PageTitle';
+import styles from './bodyMeasurementList.module.css';
+import PageTitle from '../pageTitle/PageTitle';
 
 type Props = {
   bodyMeasurementCollection: BodyMeasurementCollectionModel;
@@ -15,7 +15,7 @@ const BodyMeasurementList: FunctionComponent<Props> = ({
   deleteMeasurement
 }) => {
   const { length, weight } = bodyMeasurementCollection;
-  const hipCircumferenceDataShouldBeRendered: boolean = bodyMeasurementCollection.genderTypeName == Gender.Female;
+  const hipCircumferenceDataShouldBeRendered: boolean = bodyMeasurementCollection.genderTypeName === Gender.Female;
   const hipCircumferenceRow = hipCircumferenceDataShouldBeRendered ? (
     <th>Hip Circumference ({length.abbreviation})</th>
   ) : null;
