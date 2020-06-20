@@ -15,7 +15,7 @@ describe('Component when in create mode', () => {
         <Route path="/create-measurement" component = {CreateOrEditMeasurementPage}/>
       </Router>
     );
-    const titleInCreateMode = screen.getByText(/create measurement/i);
+    const titleInCreateMode = await waitFor( () => screen.getByText(/create measurement/i)) ;
     expect(titleInCreateMode).toBeTruthy();
   });
 });
