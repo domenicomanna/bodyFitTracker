@@ -27,7 +27,7 @@
 
 @media (any-hover: hover) {
   .primary:hover,
-  .primaryDisabledSubmitting:hover {
+  .primaryDisabledSubmitting {
     opacity: 0.85;
   }
 
