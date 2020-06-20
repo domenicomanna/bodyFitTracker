@@ -1,15 +1,10 @@
 import React, { createContext, useState, FunctionComponent } from 'react';
-import { Gender } from '../models/gender';
+import { UserModel } from '../models/userModels';
+import { Gender } from '../models/userModels';
 
-export type UserContextModel = {
-  token: string;
-  gender: Gender,
-  isAuthenticated: () => boolean;
-}
+export const UserContext = createContext({} as UserModel);
 
-export const UserContext = createContext({} as UserContextModel);
-
-const UserContextProvider:FunctionComponent = ({ children }) => {
+const UserContextProvider: FunctionComponent = ({ children }) => {
   const [token, setToken] = useState('');
   const [gender, setGender] = useState<Gender>(Gender.Female);
 
@@ -17,11 +12,7 @@ const UserContextProvider:FunctionComponent = ({ children }) => {
     return true;
   };
 
-  return (
-    <UserContext.Provider value={{ token, isAuthenticated, gender}}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ token, isAuthenticated, gender }}>{children}</UserContext.Provider>;
 };
 
 export default UserContextProvider;

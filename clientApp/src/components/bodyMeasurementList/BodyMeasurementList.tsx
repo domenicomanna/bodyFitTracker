@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
-import { Gender } from '../../models/gender';
+import { Gender } from '../../models/userModels';
 import styles from './bodyMeasurementList.module.css';
 import PageTitle from '../pageTitle/PageTitle';
 

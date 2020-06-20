@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen, getByTestId } from '@testing-library/react';
 import BodyMeasurementList from './BodyMeasurementList';
-import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
-import { Gender } from '../../models/gender';
+import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
+import { Gender } from '../../models/userModels';
 
 let bodyMeasurementListProps: React.ComponentProps<typeof BodyMeasurementList>;
 
 beforeEach(() => {
-  const bodyMeasurementCollection = {
+  const bodyMeasurementCollection: BodyMeasurementCollectionModel = {
     measurementSystemName: '',
     genderTypeName: Gender.Male,
     length: {
