@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext, Fragment, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { string, object, number } from 'yup';
+import { object, number, date } from 'yup';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import { RouteComponentProps } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
@@ -15,6 +15,7 @@ type CreateOrEditFormValues = {
   waistCircumference: string | number;
   hipCircumference?: string | number;
   weight: string | number;
+  date: string | Date;
 };
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
@@ -31,6 +32,7 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
       ? number()
       : number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
     weight: number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
+    date: date().required('Required').max(new Date(), "Date can't be in the future"),
   });
 
   return validationSchema;
@@ -50,6 +52,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     waistCircumference: '',
     hipCircumference: '',
     weight: '',
+    date: new Date().toISOString().split('T')[0]
   });
 
   const formik = useFormik({
@@ -116,6 +119,14 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
           <Input id='weight' type='number' {...formik.getFieldProps('weight')} />
           {formik.touched.weight && formik.errors.weight ? (
             <FieldValidationError> {formik.errors.weight} </FieldValidationError>
+          ) : null}
+        </div>
+
+        <label htmlFor='date'>Date</label>
+        <div>
+          <Input id='date' type='date' {...formik.getFieldProps('date')} />
+          {formik.touched.date && formik.errors.date ? (
+            <FieldValidationError> {formik.errors.date} </FieldValidationError>
           ) : null}
         </div>
 
