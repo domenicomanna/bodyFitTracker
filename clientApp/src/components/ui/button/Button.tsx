@@ -12,7 +12,6 @@ type Props = {
 
 const Button: FunctionComponent<Props> = ({ buttonClass, isSubmitting, style, children, ...rest }) => {
   const styleToHideText: CSSProperties | undefined = isSubmitting ? { color: 'transparent' } : undefined;
-
   const loader = isSubmitting ? (
     <span data-testid='loader' style={{ position: 'absolute' }}>
       <BarLoader color={'#fff'} loading={true} height={10} width={120} />

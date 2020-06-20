@@ -16,12 +16,12 @@
 }
 
 .primaryDisabled {
-  --disabledButNotSubmittingOpacity: .5;
+  --disabledButNotSubmittingOpacity: 0.5;
   opacity: var(--disabledButNotSubmittingOpacity);
   cursor: auto;
 }
 
-.primaryDisabledSubmitting{
+.primaryDisabledSubmitting {
   cursor: auto;
 }
 

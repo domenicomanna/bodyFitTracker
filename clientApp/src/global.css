@@ -1,21 +1,23 @@
-body{
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.10rem;
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
 }
 
-#root{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-main{
-    flex: 1;
+main {
+  flex: 1;
 }
 
-:root{
-    --blue-500: #4c4cff;
+:root {
+  --blue-500: #4c4cff;
 
-    --grey-500: #ccc;
+  --grey-500: #ccc;
+
+  --red-500: #ff0000;
 }
