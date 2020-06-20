@@ -21,7 +21,8 @@ namespace Api.Infrastructure.Security
         public string CreateToken(AppUser appUser)
         {
             List<Claim> claims = new List<Claim>{
-                new Claim(ClaimTypes.NameIdentifier, appUser.AppUserId.ToString())
+                new Claim(ClaimTypes.NameIdentifier, appUser.AppUserId.ToString()),
+                new Claim(ClaimTypes.Gender, appUser.Gender.ToString())
             };
 
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
