@@ -10,31 +10,33 @@ using Moq;
 namespace ApiTests.ApplicationLogic.BodyMeasurements.Requests
 {
     [TestClass]
-    public class CreateBodyMeasurementRequestTests
+    public class CreateOrEditBodyMeasurementRequestTests
     {
 
         [TestMethod]
+        // Hip circumference can not be null if gender is female
         public void HipCircumferenceAndGenderTypeIsFemaleTests()
         {
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Female);
-            CreateBodyMeasurementRequestValidator validator = new CreateBodyMeasurementRequestValidator(userAccessorMock.Object);
+            CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(userAccessorMock.Object);
 
-            validator.ShouldHaveValidationErrorFor(x => x.HipCircumference, (decimal?)null);
-            validator.ShouldHaveValidationErrorFor(x => x.HipCircumference, (decimal?)0);
-            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (decimal?)10.4);
+            validator.ShouldHaveValidationErrorFor(x => x.HipCircumference, (double?) null);
+            validator.ShouldHaveValidationErrorFor(x => x.HipCircumference, (double?) 0);
+            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?) 10.4);
         }
 
         [TestMethod]
+        // Hip circumference can be null if gender is male
         public void HipCircumferenceAndGenderTypeIsMaleTests()
         {
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
-            CreateBodyMeasurementRequestValidator validator = new CreateBodyMeasurementRequestValidator(userAccessorMock.Object);
+            CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(userAccessorMock.Object);
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (decimal?)null);
-            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (decimal?)0);
-            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (decimal?)10.4);
+            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?) null);
+            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?) 0);
+            validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?) 10.4);
         }
 
         [TestMethod]
@@ -42,7 +44,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Requests
         {
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
-            CreateBodyMeasurementRequestValidator validator = new CreateBodyMeasurementRequestValidator(userAccessorMock.Object);
+            CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(userAccessorMock.Object);
 
             validator.ShouldHaveValidationErrorFor(x => x.CreationDate, DateTime.Today.AddDays(1));
         }
@@ -52,8 +54,8 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Requests
         {
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
-            CreateBodyMeasurementRequestValidator validator = new CreateBodyMeasurementRequestValidator(userAccessorMock.Object);
-            CreateBodyMeasurementRequest createBodyMeasurement = new CreateBodyMeasurementRequest
+            CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(userAccessorMock.Object);
+            CreateOrEditBodyMeasurementRequest createBodyMeasurement = new CreateOrEditBodyMeasurementRequest
             {
                 NeckCircumference = 10,
                 WaistCircumference = 10,

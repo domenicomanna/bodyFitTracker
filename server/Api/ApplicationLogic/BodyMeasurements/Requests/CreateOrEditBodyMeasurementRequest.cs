@@ -1,25 +1,26 @@
-using System;
+﻿using System;
 using Api.Domain.Models;
 using Api.Infrastructure.Security;
 using FluentValidation;
 
 namespace Api.ApplicationLogic.BodyMeasurements.Requests
 {
-    public class CreateBodyMeasurementRequest
+    public class CreateOrEditBodyMeasurementRequest
     {
-        public decimal NeckCircumference { get; set; }
-        public decimal WaistCircumference { get; set; }
-        public decimal? HipCircumference { get; set; }
-        public decimal Weight { get; set; }
+        public int? IdOfBodyMeasurementToEdit { get; set; } // if a measurement is being created this will be null
+        public double NeckCircumference { get; set; }
+        public double WaistCircumference { get; set; }
+        public double? HipCircumference { get; set; }
+        public double Weight { get; set; }
         public DateTime CreationDate { get; set; }
     }
 
 
-    public class CreateBodyMeasurementRequestValidator : AbstractValidator<CreateBodyMeasurementRequest>
+    public class CreateOrEditBodyMeasurementRequestValidator : AbstractValidator<CreateOrEditBodyMeasurementRequest>
     {
         private readonly IUserAccessor _userAccessor;
 
-        public CreateBodyMeasurementRequestValidator(IUserAccessor userAccessor)
+        public CreateOrEditBodyMeasurementRequestValidator(IUserAccessor userAccessor)
         {
             this._userAccessor = userAccessor;
 
@@ -34,7 +35,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
             RuleFor(x => x.CreationDate).LessThanOrEqualTo(DateTime.Today).NotNull();
         }
 
-        public bool GenderTypeIsFemale(CreateBodyMeasurementRequest _)
+        public bool GenderTypeIsFemale(CreateOrEditBodyMeasurementRequest _)
         {
             GenderType usersGender = _userAccessor.GetCurrentUsersGender();
             return usersGender == GenderType.Female;
