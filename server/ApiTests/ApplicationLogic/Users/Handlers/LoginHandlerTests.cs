@@ -15,20 +15,23 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
     public class LoginHandlerTests
     {
         LoginHandler _loginHandler;
-        string _password = "dom";
+        (string Email, string Password) _dom;
 
         [TestInitialize]
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            AppUser dom = new AppUser("dom@gmail.com", _password, "", 10, GenderType.Male, MeasurementSystem.Imperial);
+            AppUser dom = new AppUser("dom@gmail.com", "abc", "", 10, GenderType.Male, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(dom);
             bodyFitTrackerContext.SaveChanges();
+
+            _dom.Email = dom.Email;
+            _dom.Password = dom.HashedPassword;
 
             var passwordHasherMock = new Mock<IPasswordHasher>();
             var jwtGeneratorMock = new Mock<IJwtGenerator>();
 
-            passwordHasherMock.Setup(x => x.ValidatePlainTextPassword(_password, _password, It.IsAny<string>())).Returns(true);
+            passwordHasherMock.Setup(x => x.ValidatePlainTextPassword(dom.HashedPassword, dom.HashedPassword, It.IsAny<string>())).Returns(true);
             jwtGeneratorMock.Setup(x => x.CreateToken(It.IsAny<AppUser>())).Returns("");
 
             _loginHandler = new LoginHandler(bodyFitTrackerContext, passwordHasherMock.Object, jwtGeneratorMock.Object);
@@ -39,7 +42,7 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         {
             LoginRequest loginRequest = new LoginRequest
             {
-                Email = "d@gmail.com",
+                Email = "notFoundEmail@gmail.com",
                 Password = ""
             };
 
@@ -52,8 +55,8 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         {
             LoginRequest loginRequest = new LoginRequest
             {
-                Email = "dom@gmail.com",
-                Password = "test"
+                Email = _dom.Email,
+                Password = "Invalid password"
             };
 
             Assert.ThrowsException<RestException>(() => _loginHandler.Handle(loginRequest));
@@ -65,8 +68,8 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         {
             LoginRequest loginRequest = new LoginRequest
             {
-                Email = "dom@gmail.com",
-                Password = _password
+                Email = _dom.Email,
+                Password = _dom.Password
             };
 
             AppUserDTO appUserDTO = _loginHandler.Handle(loginRequest);
