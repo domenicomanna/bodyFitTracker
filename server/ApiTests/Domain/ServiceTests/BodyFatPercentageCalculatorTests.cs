@@ -18,7 +18,7 @@ namespace ApiTests.Domain.ServiceTests
         {
             AppUser appUser = new AppUser("", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
             BodyMeasurement bodyMeasurement = new BodyMeasurement(appUser, 10, 30, null, 60, DateTime.Today);
-            double actual = BodyFatPercentageCalculator.CalculateBodyFatPercentage(appUser, bodyMeasurement);
+            double actual = BodyFatPercentageCalculator.CalculateBodyFatPercentage(bodyMeasurement);
             Assert.AreEqual(24.11, actual, .01);
         }
 
@@ -27,7 +27,7 @@ namespace ApiTests.Domain.ServiceTests
         {
             AppUser appUser = new AppUser("", "", "", 60, GenderType.Female, MeasurementSystem.Imperial);
             BodyMeasurement bodyMeasurement = new BodyMeasurement(appUser, 10, 30, 30, 60, DateTime.Today);
-            double actual = BodyFatPercentageCalculator.CalculateBodyFatPercentage(appUser, bodyMeasurement);
+            double actual = BodyFatPercentageCalculator.CalculateBodyFatPercentage(bodyMeasurement);
             Assert.AreEqual(25.19, actual, .01);
         }
     }
