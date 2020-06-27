@@ -90,6 +90,7 @@ namespace Api
             services.AddScoped<IUserAccessor, UserAccessor>();
 
             services.AddScoped<GetAllBodyMeasurementsHandler>();
+            services.AddScoped<CreateOrEditBodyMeasurementHandler>();
             services.AddScoped<DeleteBodyMeasurementHandler>();
 
             services.AddScoped<IPasswordHasher, PasswordHasher>();
