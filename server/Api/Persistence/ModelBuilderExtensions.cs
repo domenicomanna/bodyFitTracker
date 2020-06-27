@@ -10,13 +10,24 @@ namespace Api.Persistence
         {
             modelBuilder.Entity<AppUser>()
                 .HasData(
-                    new {
+                    new
+                    {
                         AppUserId = 1,
                         Email = "abc@gmail.com",
                         HashedPassword = "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=",
                         Salt = "HvJRurMKIz+KkIpQhw4DpA==",
                         Height = 60.0,
                         Gender = GenderType.Male,
+                        MeasurementSystemPreference = MeasurementSystem.Imperial
+                    },
+                    new
+                    {
+                        AppUserId = 2,
+                        Email = "bcdf@gmail.com",
+                        HashedPassword = "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=",
+                        Salt = "HvJRurMKIz+KkIpQhw4DpA==",
+                        Height = 55.0,
+                        Gender = GenderType.Female,
                         MeasurementSystemPreference = MeasurementSystem.Imperial
                     }
                 );
@@ -80,7 +91,8 @@ namespace Api.Persistence
                         WaistCircumference = 28.0,
                         Weight = 121.0,
                         BodyFatPercentage = 10.0,
-                        AppUserId = 1,
+                        HipCircumference = 20.0,
+                        AppUserId = 2,
                         DateAdded = DateTime.Today.AddDays(2)
                     },
                     new
@@ -89,8 +101,9 @@ namespace Api.Persistence
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
                         Weight = 122.0,
+                        HipCircumference = 20.0,
                         BodyFatPercentage = 10.0,
-                        AppUserId = 1,
+                        AppUserId = 2,
                         DateAdded = DateTime.Today.AddDays(2)
                     },
                     new
@@ -99,8 +112,9 @@ namespace Api.Persistence
                         NeckCircumference = 10.0,
                         WaistCircumference = 30.0,
                         Weight = 125.0,
+                        HipCircumference = 20.0,
                         BodyFatPercentage = 10.0,
-                        AppUserId = 1,
+                        AppUserId = 2,
                         DateAdded = DateTime.Today.AddDays(2)
                     },
                     new
@@ -109,8 +123,9 @@ namespace Api.Persistence
                         NeckCircumference = 12.0,
                         WaistCircumference = 28.0,
                         Weight = 126.6,
+                        HipCircumference = 20.0,
                         BodyFatPercentage = 12.0,
-                        AppUserId = 1,
+                        AppUserId = 2,
                         DateAdded = DateTime.Today.AddDays(2)
                     },
                     new
@@ -119,8 +134,9 @@ namespace Api.Persistence
                         NeckCircumference = 11.0,
                         WaistCircumference = 29.0,
                         Weight = 125.9,
+                        HipCircumference = 20.0,
                         BodyFatPercentage = 11.0,
-                        AppUserId = 1,
+                        AppUserId = 2,
                         DateAdded = DateTime.Today.AddDays(2)
                     }
                 );
