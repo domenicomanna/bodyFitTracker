@@ -1,4 +1,5 @@
 using System;
+using Api.Domain.Services;
 
 namespace Api.Domain.Models
 {
@@ -10,15 +11,15 @@ namespace Api.Domain.Models
 
         public virtual AppUser AppUser { get; private set; }
 
-        public double NeckCircumference { get; private set; }
+        public double NeckCircumference { get; set; }
 
-        public double WaistCircumference { get; private set; }
+        public double WaistCircumference { get; set; }
 
-        public double? HipCircumference { get; private set; }
+        public double? HipCircumference { get; set; }
 
-        public double Weight { get; private set; }
+        public double Weight { get; set; }
 
-        public DateTime DateAdded { get; private set; }
+        public DateTime DateAdded { get; set; }
 
         public double BodyFatPercentage { get; set; }
 
@@ -40,6 +41,7 @@ namespace Api.Domain.Models
             Weight = weight;
             DateAdded = dateAdded;
             HipCircumference = appUser.Gender == GenderType.Female ? hipCircumference : null;
+            BodyFatPercentage = BodyFatPercentageCalculator.CalculateBodyFatPercentage(this);
         }
     }
 }
