@@ -51,9 +51,11 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
         public void TheUsersBodyMeasurementShouldBeDeletedIfFound()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(false);
-            
             Assert.IsNotNull(bodyFitTrackerContext.BodyMeasurements.Where(b => b.BodyMeasurementId == 1).First());
+
             _deleteBodyMeasurementHandler.Handle(1);
+
+            bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(false);
             Assert.IsNull(bodyFitTrackerContext.BodyMeasurements.Where(b => b.BodyMeasurementId == 1).FirstOrDefault());
         }
 
