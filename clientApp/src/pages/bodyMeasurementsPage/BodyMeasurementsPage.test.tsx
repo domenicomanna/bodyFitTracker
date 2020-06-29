@@ -2,7 +2,8 @@ import React from 'react';
 import { render, screen, waitForElementToBeRemoved, waitFor, fireEvent } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
 import { AxiosResponse } from 'axios';
-import { UserContext, UserContextModel } from '../../contexts/UserContext';
+import { UserContext } from '../../contexts/UserContext';
+import { UserModel } from '../../models/userModels';
 import BodyMeasurementsPage from './BodyMeasurementsPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
@@ -11,15 +12,16 @@ import { Gender } from '../../models/userModels';
 jest.mock('../../api/bodyMeasurementsClient');
 
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
-let userContextModel: UserContextModel;
+let userModel: UserModel;
 let bodyMeasurementCollection: BodyMeasurementCollectionModel;
 let axiosResponse: AxiosResponse;
 
 const waistCircumference = 23.4323432; // make it very precise so we don't accidentally retrieve another value when querying for this
 
 beforeEach(() => {
-  userContextModel = {
+  userModel = {
     isAuthenticated: () => false,
+    gender : Gender.Female,
     token: '',
   };
   bodyMeasurementCollection = {
@@ -57,10 +59,10 @@ beforeEach(() => {
 
 describe('Component when measurements are loading', () => {
   it('should render a loading message when the measurements are being loaded', async () => {
-    userContextModel.isAuthenticated = () => true;
+    userModel.isAuthenticated = () => true;
     mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
     render(
-      <UserContext.Provider value={userContextModel}>
+      <UserContext.Provider value={userModel}>
         <BodyMeasurementsPage />
       </UserContext.Provider>
     );
@@ -72,10 +74,10 @@ describe('Component when measurements are loading', () => {
 
 describe('Component when measurements have been loaded', () => {
   it('should remove the loading message after the measurements have loaded', async () => {
-    userContextModel.isAuthenticated = () => true;
+    userModel.isAuthenticated = () => true;
     mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
     render(
-      <UserContext.Provider value={userContextModel}>
+      <UserContext.Provider value={userModel}>
         <BodyMeasurementsPage />
       </UserContext.Provider>
     );
@@ -85,11 +87,11 @@ describe('Component when measurements have been loaded', () => {
   });
 
   it('should remove the measurement that the user deletes', async () => {
-    userContextModel.isAuthenticated = () => true;
+    userModel.isAuthenticated = () => true;
     mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
     mockedBodyMeasurementsClient.deleteMeasurement.mockResolvedValue(axiosResponse);
     render(
-      <UserContext.Provider value={userContextModel}>
+      <UserContext.Provider value={userModel}>
         <BodyMeasurementsPage />
       </UserContext.Provider>
     );

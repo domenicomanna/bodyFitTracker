@@ -1,16 +1,19 @@
-import {get, post, put, destroy} from './baseConfiguration';
-import { BodyMeasurementCollectionModel } from '../models/bodyMeasurementModels';
+import { get, post, put, destroy } from './baseConfiguration';
+import { BodyMeasurementCollectionModel, CreateOrEditMeasurementModel } from '../models/bodyMeasurementModels';
 import { AxiosResponse } from 'axios';
 
-
 const requests = {
-    getAllMeasurements: () => get('bodyMeasurements').then(response => response.data),
-    deleteMeasurement: (id: number) => destroy(`bodyMeasurements/${id}`)
-}
+  getAllMeasurements: () => get('bodyMeasurements').then((response) => response.data),
+  deleteMeasurement: (id: number) => destroy(`bodyMeasurements/${id}`),
+  createMeasurement: (createMeasurementModel: CreateOrEditMeasurementModel) =>
+    post('bodyMeasurements', createMeasurementModel),
+};
 
 const bodyMeasurementsClient = {
-    getAllMeasurements: (): Promise<BodyMeasurementCollectionModel> => requests.getAllMeasurements(),
-    deleteMeasurement: (id: number): Promise<AxiosResponse> => requests.deleteMeasurement(id)
-}
+  getAllMeasurements: (): Promise<BodyMeasurementCollectionModel> => requests.getAllMeasurements(),
+  deleteMeasurement: (id: number): Promise<AxiosResponse> => requests.deleteMeasurement(id),
+  createMeasurement: (createMeasurementModel: CreateOrEditMeasurementModel): Promise<AxiosResponse> =>
+    requests.createMeasurement(createMeasurementModel),
+};
 
 export default bodyMeasurementsClient;

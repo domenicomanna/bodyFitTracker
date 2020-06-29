@@ -9,17 +9,11 @@ import Form from '../../components/ui/form/Form';
 import Input from '../../components/ui/input/Input';
 import Button from '../../components/ui/button/Button';
 import FieldValidationError from '../../components/ui/fieldValidationError/FieldValidationError';
-
-type CreateOrEditFormValues = {
-  neckCircumference: string | number;
-  waistCircumference: string | number;
-  hipCircumference?: string | number;
-  weight: string | number;
-  date: string | Date;
-};
+import { CreateOrEditMeasurementModel } from '../../models/bodyMeasurementModels';
+import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
-  let validationSchema = object<CreateOrEditFormValues>({
+  let validationSchema = object<CreateOrEditMeasurementModel>({
     neckCircumference: number()
       .moreThan(0, 'Must be greater than 0')
       .max(1000, 'Must be less than 1000')
@@ -32,7 +26,7 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
       ? number()
       : number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
     weight: number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
-    date: date().required('Required').max(new Date(), "Date can't be in the future"),
+    creationDate: date().required('Required').max(new Date(), "Date can't be in the future"),
   });
 
   return validationSchema;
@@ -47,37 +41,39 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   const pageTitleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
 
   const [formIsSubmitting, setFormIsSubmitting] = useState(false);
-  const [initialFormValues, setInitialFormValues] = useState<CreateOrEditFormValues>({
+  const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>({
     neckCircumference: '',
     waistCircumference: '',
     hipCircumference: '',
     weight: '',
-    date: new Date().toISOString().split('T')[0]
+    creationDate: new Date().toISOString().split('T')[0],
   });
 
   const formik = useFormik({
-    initialValues: initialFormValues as CreateOrEditFormValues,
+    initialValues: initialFormValues as CreateOrEditMeasurementModel,
     validationSchema: CreateValidationSchema(gender == Gender.Female),
-    onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (createOrEditMeasurementModel) => {
+      console.log(createOrEditMeasurementModel);
       setFormIsSubmitting(true);
-      setTimeout(() => {
-        setFormIsSubmitting(false);
-      }, 4000);
+      if (measurementIsBeingCreated) await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
+      setFormIsSubmitting(false);
     },
     validateOnMount: measurementIsBeingCreated,
     enableReinitialize: true,
   });
 
-  // useEffect(() => {
-  //   setInitialFormValues({
-  //     neckCircumference: '19',
-  //     waistCircumference: '20',
-  //     hipCircumference: '30',
-  //     weight: '120',
-  //   })
-  //   formik.initialValues = initialFormValues as CreateOrEditFormValues
-  // }, []);
+  useEffect(() => {
+    if (!measurementIsBeingCreated) {
+      setInitialFormValues({
+        neckCircumference: '19',
+        waistCircumference: '20',
+        hipCircumference: '30',
+        weight: '120',
+        creationDate: '2020-06-19',
+      });
+      formik.initialValues = initialFormValues as CreateOrEditMeasurementModel;
+    }
+  }, []);
 
   const hipCircumferenceFields =
     gender == Gender.Male ? null : (
@@ -118,15 +114,15 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         <div>
           <Input id='weight' type='number' {...formik.getFieldProps('weight')} />
           {formik.touched.weight && formik.errors.weight ? (
-            <FieldValidationError> {formik.errors.weight} </FieldValidationError>
+            <FieldValidationError testId={'weight'}> {formik.errors.weight} </FieldValidationError>
           ) : null}
         </div>
 
         <label htmlFor='date'>Date</label>
         <div>
-          <Input id='date' type='date' {...formik.getFieldProps('date')} />
-          {formik.touched.date && formik.errors.date ? (
-            <FieldValidationError> {formik.errors.date} </FieldValidationError>
+          <Input id='date' type='date' {...formik.getFieldProps('creationDate')} />
+          {formik.touched.creationDate && formik.errors.creationDate ? (
+            <FieldValidationError> {formik.errors.creationDate} </FieldValidationError>
           ) : null}
         </div>
 
