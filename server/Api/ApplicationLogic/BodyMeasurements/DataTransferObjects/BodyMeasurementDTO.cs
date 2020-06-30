@@ -12,8 +12,12 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
 
         public double? HipCircumference { get; set; }
 
+        public double Height { get; set; }
+
         public double Weight { get; set; }
+
         public double BodyFatPercentage { get; set; }
+        
         public DateTime DateAdded { get; set; }
 
         public bool ShouldSerializeHipCircumference() => HipCircumference != null;
