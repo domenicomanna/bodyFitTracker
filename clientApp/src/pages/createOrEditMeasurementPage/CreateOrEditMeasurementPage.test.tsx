@@ -118,6 +118,7 @@ describe('Component when trying to submit the form', () => {
 
     const neckCircumferenceInputElement = await waitFor(() => screen.getByLabelText(/neck Circumference/i));
     const waistCircumferenceInputElement = await waitFor(() => screen.getByLabelText(/waist Circumference/i));
+    const heightInputElement = await waitFor(() => screen.getByLabelText(/height/i));
     const weightInputElement = await waitFor(() => screen.getByLabelText(/weight/i));
     const dateInputElement = await waitFor(() => screen.getByLabelText(/date/i));
     const submitButton = await waitFor(() =>  screen.getByText(/submit/i));
@@ -126,6 +127,7 @@ describe('Component when trying to submit the form', () => {
 
     await waitFor(() => fireEvent.change(neckCircumferenceInputElement, { target: { value: '12' } }));
     await waitFor(() => fireEvent.change(waistCircumferenceInputElement, { target: { value: '32' } }));
+    await waitFor(() => fireEvent.change(heightInputElement, { target: { value: '60' } }));
     await waitFor(() => fireEvent.change(weightInputElement, { target: { value: '123' } }));
     await waitFor(() => fireEvent.change(dateInputElement, { target: { value: '2020-06-20' } }));
     

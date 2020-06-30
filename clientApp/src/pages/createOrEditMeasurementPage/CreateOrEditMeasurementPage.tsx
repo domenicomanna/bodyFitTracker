@@ -25,6 +25,7 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
     hipCircumference: !shouldValidateHipCircumference
       ? number()
       : number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
+    height: number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
     weight: number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
     creationDate: date().required('Required').max(new Date(), "Date can't be in the future"),
   });
@@ -45,6 +46,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     neckCircumference: '',
     waistCircumference: '',
     hipCircumference: '',
+    height: '',
     weight: '',
     creationDate: new Date().toISOString().split('T')[0],
   });
@@ -68,6 +70,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         neckCircumference: '19',
         waistCircumference: '20',
         hipCircumference: '30',
+        height: '60',
         weight: '120',
         creationDate: '2020-06-19',
       });
@@ -109,6 +112,14 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         </div>
 
         {hipCircumferenceFields}
+
+        <label htmlFor='height'>Height</label>
+        <div>
+          <Input id='height' type='number' {...formik.getFieldProps('height')} />
+          {formik.touched.height && formik.errors.height ? (
+            <FieldValidationError> {formik.errors.height} </FieldValidationError>
+          ) : null}
+        </div>
 
         <label htmlFor='weight'>Weight</label>
         <div>

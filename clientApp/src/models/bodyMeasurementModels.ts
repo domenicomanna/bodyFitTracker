@@ -27,6 +27,7 @@ export type CreateOrEditMeasurementModel = {
   neckCircumference: string | number;
   waistCircumference: string | number;
   hipCircumference?: string | number;
+  height: string | number;
   weight: string | number;
   creationDate: string | Date;
 };
