@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Persistence.migrations
 {
     [DbContext(typeof(BodyFitTrackerContext))]
-    [Migration("20200627195216_InitialCreate")]
+    [Migration("20200630223033_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,9 @@ namespace Api.Persistence.migrations
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("TEXT");
 
+                    b.Property<double>("Height")
+                        .HasColumnType("REAL");
+
                     b.Property<double?>("HipCircumference")
                         .HasColumnType("REAL");
 
@@ -113,7 +116,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 1,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 6, 30, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 125.0
@@ -123,7 +127,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 2,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 28, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 120.0
@@ -133,7 +138,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 3,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 130.0
@@ -143,7 +149,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 4,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 145.0
@@ -153,7 +160,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 5,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
                             Weight = 115.0
@@ -163,7 +171,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 6,
                             AppUserId = 2,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
@@ -174,7 +183,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 7,
                             AppUserId = 2,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
@@ -185,7 +195,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 8,
                             AppUserId = 2,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 10.0,
                             WaistCircumference = 30.0,
@@ -196,7 +207,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 9,
                             AppUserId = 2,
                             BodyFatPercentage = 12.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 12.0,
                             WaistCircumference = 28.0,
@@ -207,7 +219,8 @@ namespace Api.Persistence.migrations
                             BodyMeasurementId = 10,
                             AppUserId = 2,
                             BodyFatPercentage = 11.0,
-                            DateAdded = new DateTime(2020, 6, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 11.0,
                             WaistCircumference = 29.0,

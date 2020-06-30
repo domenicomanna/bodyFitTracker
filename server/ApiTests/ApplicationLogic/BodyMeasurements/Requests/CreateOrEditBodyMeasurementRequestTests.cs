@@ -60,7 +60,8 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Requests
                 NeckCircumference = 10,
                 WaistCircumference = 10,
                 HipCircumference = 10,
-                Weight = 1,
+                Height = 60,
+                Weight = 100,
                 CreationDate = DateTime.Today,
             };
 

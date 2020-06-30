@@ -11,6 +11,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
         public double NeckCircumference { get; set; }
         public double WaistCircumference { get; set; }
         public double? HipCircumference { get; set; }
+        public double Height { get; set; }
         public double Weight { get; set; }
         public DateTime CreationDate { get; set; }
     }
@@ -26,13 +27,14 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
 
             When(GenderTypeIsFemale, () =>
             {
-                RuleFor(x => x.HipCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotNull();
+                RuleFor(x => x.HipCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
             });
 
-            RuleFor(x => x.NeckCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotNull();
-            RuleFor(x => x.WaistCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotNull();
-            RuleFor(x => x.Weight).GreaterThan(0).LessThanOrEqualTo(1000).NotNull();
-            RuleFor(x => x.CreationDate).LessThanOrEqualTo(DateTime.Today).NotNull();
+            RuleFor(x => x.NeckCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
+            RuleFor(x => x.WaistCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
+            RuleFor(x => x.Height).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
+            RuleFor(x => x.Weight).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
+            RuleFor(x => x.CreationDate).LessThanOrEqualTo(DateTime.Today).NotEmpty();
         }
 
         public bool GenderTypeIsFemale(CreateOrEditBodyMeasurementRequest _)

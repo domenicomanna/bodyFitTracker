@@ -48,7 +48,8 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
 
             BodyMeasurement bodyMeasurement = new BodyMeasurement(appUser, createOrEditBodyMeasurementRequest.NeckCircumference,
                 createOrEditBodyMeasurementRequest.WaistCircumference, createOrEditBodyMeasurementRequest.HipCircumference,
-                createOrEditBodyMeasurementRequest.Weight, createOrEditBodyMeasurementRequest.CreationDate);
+                createOrEditBodyMeasurementRequest.Height, createOrEditBodyMeasurementRequest.Weight, 
+                createOrEditBodyMeasurementRequest.CreationDate);
 
             return bodyMeasurement;
 

@@ -17,7 +17,7 @@ namespace Api.Domain.Services
             if (appUser.Gender == GenderType.Male)
             {
                 double maleBodyFatPercentage = 86.01 * Math.Log10(bodyMeasurement.WaistCircumference - bodyMeasurement.NeckCircumference) -
-                    (70.041 * Math.Log10(appUser.Height)) + 36.76;
+                    (70.041 * Math.Log10(bodyMeasurement.Height)) + 36.76;
 
                 return maleBodyFatPercentage;
             }
@@ -25,7 +25,7 @@ namespace Api.Domain.Services
             // Calculation for female
             double hipCircumference = (double) bodyMeasurement.HipCircumference;
             double femaleBodyFatPercentage = 163.205 * Math.Log10(bodyMeasurement.WaistCircumference + hipCircumference -
-                bodyMeasurement.NeckCircumference) - (97.684 * Math.Log10(appUser.Height)) - 78.387; ;
+                bodyMeasurement.NeckCircumference) - (97.684 * Math.Log10(bodyMeasurement.Height)) - 78.387; ;
 
             return femaleBodyFatPercentage;
         }
