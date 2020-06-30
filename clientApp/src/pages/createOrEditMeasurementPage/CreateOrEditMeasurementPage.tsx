@@ -78,12 +78,31 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     }
   }, []);
 
+  const inputStyle: React.CSSProperties = {
+    width: '90%',
+  };
+
+  const unitStyle: React.CSSProperties = {
+    marginLeft: '.5rem',
+  };
+
+  const weightUnit = 'lbs';
+  const lengthUnit = 'in';
+
   const hipCircumferenceFields =
     gender == Gender.Male ? null : (
       <>
         <label htmlFor='hipCircumference'>Hip Circumference</label>
         <div>
-          <Input id='hipCircumference' type='number' {...formik.getFieldProps('hipCircumference')} />
+          <div>
+            <Input
+              style={inputStyle}
+              id='hipCircumference'
+              type='number'
+              {...formik.getFieldProps('hipCircumference')}
+            />
+            <span style={unitStyle}>{lengthUnit}</span>
+          </div>
           {formik.touched.hipCircumference && formik.errors.hipCircumference ? (
             <FieldValidationError>{formik.errors.hipCircumference}</FieldValidationError>
           ) : null}
@@ -97,7 +116,15 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
       <Form onSubmit={formik.handleSubmit}>
         <label htmlFor='neckCircumference'>Neck Circumference</label>
         <div>
-          <Input id='neckCircumference' type='number' {...formik.getFieldProps('neckCircumference')} />
+          <div>
+            <Input
+              style={inputStyle}
+              id='neckCircumference'
+              type='number'
+              {...formik.getFieldProps('neckCircumference')}
+            />
+            <span style={unitStyle}>{lengthUnit}</span>
+          </div>
           {formik.touched.neckCircumference && formik.errors.neckCircumference ? (
             <FieldValidationError>{formik.errors.neckCircumference}</FieldValidationError>
           ) : null}
@@ -105,7 +132,15 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
         <label htmlFor='waistCircumference'>Waist Circumference</label>
         <div>
-          <Input id='waistCircumference' type='number' {...formik.getFieldProps('waistCircumference')} />
+          <div>
+            <Input
+              style={inputStyle}
+              id='waistCircumference'
+              type='number'
+              {...formik.getFieldProps('waistCircumference')}
+            />
+            <span style={unitStyle}>{lengthUnit}</span>
+          </div>
           {formik.touched.waistCircumference && formik.errors.waistCircumference ? (
             <FieldValidationError>{formik.errors.waistCircumference}</FieldValidationError>
           ) : null}
@@ -115,7 +150,10 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
         <label htmlFor='height'>Height</label>
         <div>
-          <Input id='height' type='number' {...formik.getFieldProps('height')} />
+          <div>
+            <Input style={inputStyle} id='height' type='number' {...formik.getFieldProps('height')} />
+            <span style={unitStyle}>{lengthUnit}</span>
+          </div>
           {formik.touched.height && formik.errors.height ? (
             <FieldValidationError> {formik.errors.height} </FieldValidationError>
           ) : null}
@@ -123,7 +161,10 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
         <label htmlFor='weight'>Weight</label>
         <div>
-          <Input id='weight' type='number' {...formik.getFieldProps('weight')} />
+          <div>
+            <Input style={inputStyle} id='weight' type='number' {...formik.getFieldProps('weight')} />
+            <span style={unitStyle}>{weightUnit}</span>
+          </div>
           {formik.touched.weight && formik.errors.weight ? (
             <FieldValidationError testId={'weight'}> {formik.errors.weight} </FieldValidationError>
           ) : null}
@@ -131,7 +172,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
         <label htmlFor='date'>Date</label>
         <div>
-          <Input id='date' type='date' {...formik.getFieldProps('creationDate')} />
+          <Input style={inputStyle} id='date' type='date' {...formik.getFieldProps('creationDate')} />
           {formik.touched.creationDate && formik.errors.creationDate ? (
             <FieldValidationError> {formik.errors.creationDate} </FieldValidationError>
           ) : null}
@@ -139,6 +180,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
         <span></span>
         <Button
+          style={inputStyle}
           buttonClass='primary'
           disabled={!formik.isValid || formIsSubmitting}
           type='submit'
