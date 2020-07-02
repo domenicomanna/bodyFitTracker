@@ -1,5 +1,3 @@
-import { Gender } from './userModels';
-
 export type BodyMeasurementModel = {
   bodyMeasurementId: number;
   neckCircumference: number;
@@ -8,19 +6,6 @@ export type BodyMeasurementModel = {
   bodyFatPercentage: number;
   weight: number;
   dateAdded: Date;
-};
-
-export type MeasurementModel = {
-  name: string;
-  abbreviation: string;
-};
-
-export type BodyMeasurementCollectionModel = {
-  measurementSystemName: string;
-  genderTypeName: Gender;
-  length: MeasurementModel;
-  weight: MeasurementModel;
-  bodyMeasurements: BodyMeasurementModel[];
 };
 
 export type CreateOrEditMeasurementModel = {

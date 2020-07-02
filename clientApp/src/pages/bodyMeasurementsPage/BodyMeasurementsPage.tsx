@@ -2,34 +2,35 @@ import React, { useState, useEffect, useContext } from 'react';
 import update from 'immutability-helper';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import BodyMeasurementList from '../../components/bodyMeasurementList/BodyMeasurementList';
-import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 
 const BodyMeasurementsPage = () => {
   const [isLoading, setLoading] = useState(true);
-  const [bodyMeasurementCollection, setBodyMeasurementCollection] = useState<BodyMeasurementCollectionModel>();
+  const [bodyMeasurements, setBodyMeasurements] = useState<BodyMeasurementModel[]>();
 
   useEffect(() => {
-    bodyMeasurementsClient.getAllMeasurements().then((bodyMeasurementCollection) => {
-      setBodyMeasurementCollection(bodyMeasurementCollection);
+    bodyMeasurementsClient.getAllMeasurements().then((bodyMeasurements) => {
+      console.log(bodyMeasurements);
+      setBodyMeasurements(bodyMeasurements);
       setLoading(false);
     });
   }, []);
 
   const deleteMeasurement = async (bodyMeasurementId: number) => {
-    const measurementIndexToDelete = bodyMeasurementCollection!.bodyMeasurements.findIndex(
+    const measurementIndexToDelete = bodyMeasurements!.findIndex(
       (b) => b.bodyMeasurementId === bodyMeasurementId
     );
     await bodyMeasurementsClient.deleteMeasurement(bodyMeasurementId);
-    const bodyMeasuremenetCollectionWithMeasurementRemoved = update(bodyMeasurementCollection, {
-      bodyMeasurements: { $splice: [[measurementIndexToDelete, 1]] },
+    const bodyMeasurementsWithMeasurementRemoved = update(bodyMeasurements, {
+      $splice: [[measurementIndexToDelete, 1]] ,
     });
-    setBodyMeasurementCollection(bodyMeasuremenetCollectionWithMeasurementRemoved);
+    setBodyMeasurements(bodyMeasurementsWithMeasurementRemoved);
   };
 
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <BodyMeasurementList bodyMeasurementCollection={bodyMeasurementCollection!} deleteMeasurement={deleteMeasurement} />
+    <BodyMeasurementList bodyMeasurements={bodyMeasurements!} deleteMeasurement={deleteMeasurement} />
   );
 };
 

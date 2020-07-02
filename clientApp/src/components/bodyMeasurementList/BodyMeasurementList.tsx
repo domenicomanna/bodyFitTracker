@@ -1,26 +1,23 @@
-import React, { FunctionComponent } from 'react';
-import { BodyMeasurementCollectionModel, BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import React, { FunctionComponent, useContext } from 'react';
+import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
 import { Gender } from '../../models/userModels';
 import styles from './bodyMeasurementList.module.css';
 import PageTitle from '../pageTitle/PageTitle';
+import { UserContext } from '../../contexts/UserContext';
 
 type Props = {
-  bodyMeasurementCollection: BodyMeasurementCollectionModel;
+  bodyMeasurements: BodyMeasurementModel[];
   deleteMeasurement: (bodyMeasurementId: number) => void;
 };
 
-const BodyMeasurementList: FunctionComponent<Props> = ({
-  bodyMeasurementCollection,
-  deleteMeasurement
-}) => {
-  const { length, weight } = bodyMeasurementCollection;
-  const hipCircumferenceDataShouldBeRendered: boolean = bodyMeasurementCollection.genderTypeName === Gender.Female;
-  const hipCircumferenceRow = hipCircumferenceDataShouldBeRendered ? (
-    <th>Hip Circumference ({length.abbreviation})</th>
-  ) : null;
+const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, deleteMeasurement }) => {
+  const { gender, measurementPreference } = useContext(UserContext);
+  const { lengthUnit, weightUnit } = measurementPreference;
+  const hipCircumferenceDataShouldBeRendered: boolean = gender === Gender.Female;
+  const hipCircumferenceRow = hipCircumferenceDataShouldBeRendered ? <th>Hip Circumference ({lengthUnit})</th> : null;
 
-  const transformedBodyMeasurements = bodyMeasurementCollection.bodyMeasurements.map((bodyMeasurement) => (
+  const transformedBodyMeasurements = bodyMeasurements.map((bodyMeasurement) => (
     <BodyMeasurement
       key={bodyMeasurement.bodyMeasurementId}
       measurement={bodyMeasurement}
@@ -37,10 +34,10 @@ const BodyMeasurementList: FunctionComponent<Props> = ({
           <thead>
             <tr>
               <th>Date Added</th>
-              <th>Neck Circumference ({length.abbreviation})</th>
-              <th>Waist Circumference ({length.abbreviation})</th>
+              <th>Neck Circumference ({lengthUnit})</th>
+              <th>Waist Circumference ({lengthUnit})</th>
               {hipCircumferenceRow}
-              <th>Weight ({weight.abbreviation})</th>
+              <th>Weight ({weightUnit})</th>
               <th>Body fat (%)</th>
               <th></th>
             </tr>
@@ -51,7 +48,7 @@ const BodyMeasurementList: FunctionComponent<Props> = ({
     </>
   );
 
-  if (bodyMeasurementCollection.bodyMeasurements.length === 0) {
+  if (bodyMeasurements.length === 0) {
     contentToRender = <p>You do not have any body measurements. Create one now!</p>;
   }
 
