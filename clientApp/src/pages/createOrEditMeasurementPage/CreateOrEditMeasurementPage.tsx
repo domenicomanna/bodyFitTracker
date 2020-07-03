@@ -36,7 +36,7 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
 type MeasurementIdToEdit = { measurementIdToEdit: string };
 
 const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<MeasurementIdToEdit>> = ({ match }) => {
-  const { gender } = useContext(UserContext);
+  const { gender, measurementPreference } = useContext(UserContext);
 
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const pageTitleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
@@ -86,8 +86,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     marginLeft: '.5rem',
   };
 
-  const weightUnit = 'lbs';
-  const lengthUnit = 'in';
+  const { weightUnit, lengthUnit } = measurementPreference;
 
   const hipCircumferenceFields =
     gender == Gender.Male ? null : (
