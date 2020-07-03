@@ -58,7 +58,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
                 WaistCircumference = 30,
                 HipCircumference = null,
                 Weight = 140,
-                CreationDate = DateTime.Today,
+                DateAdded = DateTime.Today,
             };
 
             _createOrEditBodyMeasurementHandler.Handle(createMeasurementRequest);
@@ -101,7 +101,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
                 WaistCircumference = 12,
                 HipCircumference = null,
                 Weight = newWeight,
-                CreationDate = DateTime.Today,
+                DateAdded = DateTime.Today,
             };
 
             _createOrEditBodyMeasurementHandler.Handle(createMeasurementRequest);

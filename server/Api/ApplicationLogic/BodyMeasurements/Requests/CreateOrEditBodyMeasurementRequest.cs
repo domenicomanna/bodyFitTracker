@@ -13,7 +13,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
         public double? HipCircumference { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 
 
@@ -34,7 +34,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
             RuleFor(x => x.WaistCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
             RuleFor(x => x.Height).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
             RuleFor(x => x.Weight).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
-            RuleFor(x => x.CreationDate).LessThanOrEqualTo(DateTime.Today).NotEmpty();
+            RuleFor(x => x.DateAdded).LessThanOrEqualTo(DateTime.Today).NotEmpty();
         }
 
         public bool GenderTypeIsFemale(CreateOrEditBodyMeasurementRequest _)

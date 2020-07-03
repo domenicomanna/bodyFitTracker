@@ -13,9 +13,9 @@ const AuthenticatedApp = () => {
   return (
     <Layout>
       <Switch>
-        <ProtectedRoute path='/' exact component={BodyMeasurementsPage} />
-        {/* <ProtectedRoute path='/:measurementIdToEdit(\d+)' exact component = {CreateOrEditMeasurementPage} /> */}
-        {/* <ProtectedRoute path='/' exact component = {CreateOrEditMeasurementPage} /> */}
+        {/* <ProtectedRoute path='/' exact component={BodyMeasurementsPage} /> */}
+        <ProtectedRoute path='/edit-measurement/:measurementIdToEdit(\d+)' exact component = {CreateOrEditMeasurementPage} />
+        {/* <ProtectedRoute path='/create-measurement/' exact component = {CreateOrEditMeasurementPage} /> */}
       </Switch>
     </Layout>
   );

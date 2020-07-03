@@ -49,7 +49,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             BodyMeasurement bodyMeasurement = new BodyMeasurement(appUser, createOrEditBodyMeasurementRequest.NeckCircumference,
                 createOrEditBodyMeasurementRequest.WaistCircumference, createOrEditBodyMeasurementRequest.HipCircumference,
                 createOrEditBodyMeasurementRequest.Height, createOrEditBodyMeasurementRequest.Weight, 
-                createOrEditBodyMeasurementRequest.CreationDate);
+                createOrEditBodyMeasurementRequest.DateAdded);
 
             return bodyMeasurement;
 
@@ -79,7 +79,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             bodyMeasurementToEdit.WaistCircumference = createOrEditBodyMeasurementRequest.WaistCircumference;
             bodyMeasurementToEdit.HipCircumference = createOrEditBodyMeasurementRequest.HipCircumference;
             bodyMeasurementToEdit.Weight = createOrEditBodyMeasurementRequest.Weight;
-            bodyMeasurementToEdit.DateAdded = createOrEditBodyMeasurementRequest.CreationDate;
+            bodyMeasurementToEdit.DateAdded = createOrEditBodyMeasurementRequest.DateAdded;
             bodyMeasurementToEdit.BodyFatPercentage = BodyFatPercentageCalculator.CalculateBodyFatPercentage(bodyMeasurementToEdit);
 
             _bodyFitTrackerContext.SaveChanges();

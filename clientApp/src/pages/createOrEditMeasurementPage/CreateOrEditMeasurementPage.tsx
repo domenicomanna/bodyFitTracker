@@ -27,7 +27,7 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
       : number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
     height: number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
     weight: number().moreThan(0, 'Must be greater than 0').max(1000, 'Must be less than 1000').required('Required'),
-    creationDate: date().required('Required').max(new Date(), "Date can't be in the future"),
+    dateAdded: date().required('Required').max(new Date(), "Date can't be in the future"),
   });
 
   return validationSchema;
@@ -48,7 +48,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     hipCircumference: '',
     height: '',
     weight: '',
-    creationDate: new Date().toISOString().split('T')[0],
+    dateAdded: new Date().toISOString().split('T')[0],
   });
 
   const formik = useFormik({
@@ -58,6 +58,10 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
       console.log(createOrEditMeasurementModel);
       setFormIsSubmitting(true);
       if (measurementIsBeingCreated) await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
+      else {
+        const measurementId: number = parseInt(match.params.measurementIdToEdit);
+        await bodyMeasurementsClient.editMeasurement(measurementId, createOrEditMeasurementModel);
+      }
       setFormIsSubmitting(false);
     },
     validateOnMount: measurementIsBeingCreated,
@@ -65,16 +69,22 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   });
 
   useEffect(() => {
-    if (!measurementIsBeingCreated) {
+    const updateFormBasedOffOfExistingMeasurement = async () => {
+      const measurementId: number = parseInt(match.params.measurementIdToEdit);
+      const measurement: CreateOrEditMeasurementModel = await bodyMeasurementsClient.getMeasurement(measurementId);
       setInitialFormValues({
-        neckCircumference: '19',
-        waistCircumference: '20',
-        hipCircumference: '30',
-        height: '60',
-        weight: '120',
-        creationDate: '2020-06-19',
+        neckCircumference: measurement.neckCircumference,
+        waistCircumference: measurement.waistCircumference,
+        hipCircumference: measurement.hipCircumference,
+        height: measurement.height,
+        weight: measurement.weight,
+        dateAdded: measurement.dateAdded,
       });
       formik.initialValues = initialFormValues as CreateOrEditMeasurementModel;
+    }
+
+    if (!measurementIsBeingCreated) {
+      updateFormBasedOffOfExistingMeasurement();
     }
   }, []);
 
@@ -171,9 +181,9 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
         <label htmlFor='date'>Date</label>
         <div>
-          <Input style={inputStyle} id='date' type='date' {...formik.getFieldProps('creationDate')} />
-          {formik.touched.creationDate && formik.errors.creationDate ? (
-            <FieldValidationError> {formik.errors.creationDate} </FieldValidationError>
+          <Input style={inputStyle} id='date' type='date' {...formik.getFieldProps('dateAdded')} />
+          {formik.touched.dateAdded && formik.errors.dateAdded ? (
+            <FieldValidationError> {formik.errors.dateAdded} </FieldValidationError>
           ) : null}
         </div>
 

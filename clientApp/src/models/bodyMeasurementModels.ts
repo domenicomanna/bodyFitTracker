@@ -14,5 +14,5 @@ export type CreateOrEditMeasurementModel = {
   hipCircumference?: string | number;
   height: string | number;
   weight: string | number;
-  creationDate: string | Date;
+  dateAdded: string | Date;
 };

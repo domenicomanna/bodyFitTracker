@@ -46,7 +46,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Requests
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
             CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(userAccessorMock.Object);
 
-            validator.ShouldHaveValidationErrorFor(x => x.CreationDate, DateTime.Today.AddDays(1));
+            validator.ShouldHaveValidationErrorFor(x => x.DateAdded, DateTime.Today.AddDays(1));
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Requests
                 HipCircumference = 10,
                 Height = 60,
                 Weight = 100,
-                CreationDate = DateTime.Today,
+                DateAdded = DateTime.Today,
             };
 
             ValidationResult validationResult = validator.Validate(createBodyMeasurement);
