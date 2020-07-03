@@ -19,14 +19,19 @@ beforeEach(() => {
     isAuthenticated: () => false,
     gender: Gender.Female,
     token: '',
+    measurementPreference: {
+      measurementSystemName: 'Imperial',
+      weightUnit: 'lb',
+      lengthUnit: 'in',
+    },
   };
   axiosResponse = {
-    data: "",
+    data: '',
     status: 200,
-    statusText: "OK",
+    statusText: 'OK',
     config: {},
-    headers: {}
-  }
+    headers: {},
+  };
   mockedBodyMeasurementsClient.createMeasurement.mockReset();
 });
 
@@ -121,7 +126,7 @@ describe('Component when trying to submit the form', () => {
     const heightInputElement = await waitFor(() => screen.getByLabelText(/height/i));
     const weightInputElement = await waitFor(() => screen.getByLabelText(/weight/i));
     const dateInputElement = await waitFor(() => screen.getByLabelText(/date/i));
-    const submitButton = await waitFor(() =>  screen.getByText(/submit/i));
+    const submitButton = await waitFor(() => screen.getByText(/submit/i));
 
     expect(submitButton).toBeDisabled();
 
@@ -130,9 +135,9 @@ describe('Component when trying to submit the form', () => {
     await waitFor(() => fireEvent.change(heightInputElement, { target: { value: '60' } }));
     await waitFor(() => fireEvent.change(weightInputElement, { target: { value: '123' } }));
     await waitFor(() => fireEvent.change(dateInputElement, { target: { value: '2020-06-20' } }));
-    
+
     expect(submitButton).toBeEnabled();
-    
+
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockedBodyMeasurementsClient.createMeasurement).toHaveBeenCalledTimes(1));

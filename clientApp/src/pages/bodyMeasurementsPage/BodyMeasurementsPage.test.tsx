@@ -6,14 +6,14 @@ import { UserContext } from '../../contexts/UserContext';
 import { UserModel } from '../../models/userModels';
 import BodyMeasurementsPage from './BodyMeasurementsPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
-import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import { Gender } from '../../models/userModels';
 
 jest.mock('../../api/bodyMeasurementsClient');
 
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
 let userModel: UserModel;
-let bodyMeasurementCollection: BodyMeasurementCollectionModel;
+let bodyMeasurements: BodyMeasurementModel[];
 let axiosResponse: AxiosResponse;
 
 const waistCircumference = 23.4323432; // make it very precise so we don't accidentally retrieve another value when querying for this
@@ -21,46 +21,39 @@ const waistCircumference = 23.4323432; // make it very precise so we don't accid
 beforeEach(() => {
   userModel = {
     isAuthenticated: () => false,
-    gender : Gender.Female,
+    gender: Gender.Female,
     token: '',
-  };
-  bodyMeasurementCollection = {
-    measurementSystemName: '',
-    genderTypeName: Gender.Female,
-    length: {
-      name: '',
-      abbreviation: '',
+    measurementPreference: {
+      measurementSystemName: 'Imperial',
+      weightUnit: 'lb',
+      lengthUnit: 'in',
     },
-    weight: {
-      name: '',
-      abbreviation: '',
-    },
-    bodyMeasurements: [
-      {
-        bodyMeasurementId: 2,
-        bodyFatPercentage: 10,
-        neckCircumference: 10,
-        waistCircumference: waistCircumference,
-        hipCircumference: 10,
-        weight: 10,
-        dateAdded: new Date(2019, 9, 12),
-      },
-    ],
   };
+  bodyMeasurements = [
+    {
+      bodyMeasurementId: 2,
+      bodyFatPercentage: 10,
+      neckCircumference: 10,
+      waistCircumference: waistCircumference,
+      hipCircumference: 10,
+      weight: 10,
+      dateAdded: new Date(2019, 9, 12),
+    },
+  ];
   axiosResponse = {
-    data: "",
+    data: '',
     status: 200,
-    statusText: "OK",
+    statusText: 'OK',
     config: {},
-    headers: {}
-  }
+    headers: {},
+  };
   mockedBodyMeasurementsClient.getAllMeasurements.mockReset();
 });
 
 describe('Component when measurements are loading', () => {
   it('should render a loading message when the measurements are being loaded', async () => {
     userModel.isAuthenticated = () => true;
-    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
+    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurements);
     render(
       <UserContext.Provider value={userModel}>
         <BodyMeasurementsPage />
@@ -75,7 +68,7 @@ describe('Component when measurements are loading', () => {
 describe('Component when measurements have been loaded', () => {
   it('should remove the loading message after the measurements have loaded', async () => {
     userModel.isAuthenticated = () => true;
-    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
+    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurements);
     render(
       <UserContext.Provider value={userModel}>
         <BodyMeasurementsPage />
@@ -88,7 +81,7 @@ describe('Component when measurements have been loaded', () => {
 
   it('should remove the measurement that the user deletes', async () => {
     userModel.isAuthenticated = () => true;
-    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurementCollection);
+    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurements);
     mockedBodyMeasurementsClient.deleteMeasurement.mockResolvedValue(axiosResponse);
     render(
       <UserContext.Provider value={userModel}>
@@ -107,5 +100,4 @@ describe('Component when measurements have been loaded', () => {
     const waistCircumferenceFromMeasurementAfterDeletion = screen.queryByText(waistCircumference.toString());
     expect(waistCircumferenceFromMeasurementAfterDeletion).toBeFalsy();
   });
-
 });

@@ -10,7 +10,6 @@ const BodyMeasurementsPage = () => {
 
   useEffect(() => {
     bodyMeasurementsClient.getAllMeasurements().then((bodyMeasurements) => {
-      console.log(bodyMeasurements);
       setBodyMeasurements(bodyMeasurements);
       setLoading(false);
     });

@@ -1,45 +1,54 @@
 import React from 'react';
 import { render, screen, getByTestId } from '@testing-library/react';
 import BodyMeasurementList from './BodyMeasurementList';
-import { BodyMeasurementCollectionModel } from '../../models/bodyMeasurementModels';
-import { Gender } from '../../models/userModels';
+import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { Gender, UserModel } from '../../models/userModels';
+import { UserContext } from '../../contexts/UserContext';
 
 let bodyMeasurementListProps: React.ComponentProps<typeof BodyMeasurementList>;
+let userModel: UserModel;
 
 beforeEach(() => {
-  const bodyMeasurementCollection: BodyMeasurementCollectionModel = {
-    measurementSystemName: '',
-    genderTypeName: Gender.Male,
-    length: {
-      name: '',
-      abbreviation: '',
+  const bodyMeasurements: BodyMeasurementModel[] = [
+    {
+      bodyMeasurementId: 1,
+      bodyFatPercentage: 10,
+      neckCircumference: 10,
+      waistCircumference: 10,
+      hipCircumference: 10,
+      weight: 10,
+      dateAdded: new Date(2019, 9, 12),
     },
-    weight: {
-      name: '',
-      abbreviation: '',
-    },
-    bodyMeasurements: [
-      {
-        bodyMeasurementId: 1,
-        bodyFatPercentage: 10,
-        neckCircumference: 10,
-        waistCircumference: 10,
-        hipCircumference: 10,
-        weight: 10,
-        dateAdded: new Date(2019, 9, 12),
-      },
-    ],
-  };
+  ];
   bodyMeasurementListProps = {
-    bodyMeasurementCollection : bodyMeasurementCollection,
-    deleteMeasurement:  () => { }
-  }
+    bodyMeasurements: bodyMeasurements,
+    deleteMeasurement: () => {},
+  };
+  userModel = {
+    isAuthenticated: () => false,
+    gender: Gender.Male,
+    token: '',
+    measurementPreference: {
+      measurementSystemName: 'Imperial',
+      weightUnit: 'lb',
+      lengthUnit: 'in',
+    },
+  };
 });
+
+const handleRendering = (gender: Gender = Gender.Male) => {
+  userModel.gender = gender;
+  render(
+    <UserContext.Provider value={userModel}>
+      <BodyMeasurementList {...bodyMeasurementListProps} />
+    </UserContext.Provider>
+  );
+};
 
 describe('Component when measurements are not provided', () => {
   it('should render a message indicating the user has no body measurements', () => {
-    bodyMeasurementListProps.bodyMeasurementCollection.bodyMeasurements = [];
-    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
+    bodyMeasurementListProps.bodyMeasurements = [];
+    handleRendering();
     const messageElement = screen.getByText(/You do not have any body measurements/i);
     expect(messageElement).toBeTruthy();
   });
@@ -47,21 +56,19 @@ describe('Component when measurements are not provided', () => {
 
 describe('Component when measurements are provided', () => {
   it("should render the user's body measurements", () => {
-    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
+    handleRendering();
     const measurementsElement = screen.getByTestId(/measurements/i);
     expect(measurementsElement).toBeTruthy();
   });
 
   it('should render hip circumference if gender type is female', () => {
-    bodyMeasurementListProps.bodyMeasurementCollection.genderTypeName = Gender.Female;
-    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
+    handleRendering(Gender.Female);
     const hipCircumferenceElement = screen.getByText(/hip circumference/i);
     expect(hipCircumferenceElement).toBeTruthy();
   });
 
   it('should not render hip circumference if gender type is male', () => {
-    bodyMeasurementListProps.bodyMeasurementCollection.genderTypeName = Gender.Male;
-    render(<BodyMeasurementList {...bodyMeasurementListProps} />);
+    handleRendering(Gender.Male);
     const hipCircumferenceElement = screen.queryByText(/hip circumference/i);
     expect(hipCircumferenceElement).toBeFalsy();
   });
