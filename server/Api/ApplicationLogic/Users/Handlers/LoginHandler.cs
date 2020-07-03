@@ -50,6 +50,8 @@ namespace Api.ApplicationLogic.Users.Handlers
             return new AppUserDTO
             {
                 Email = appUser.Email,
+                Gender = appUser.Gender.ToString(),
+                MeasurementSystemPreference = new MeasurementSystemDTO(appUser.MeasurementSystemPreference),
                 Token = _jwtGenerator.CreateToken(appUser)
             };
         }
