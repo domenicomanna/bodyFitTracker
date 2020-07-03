@@ -4,9 +4,9 @@ using AutoMapper;
 
 namespace Api.ApplicationLogic.BodyMeasurements
 {
-    public class MeasurementsMappingProfile : Profile
+    public class BodyMeasurementsMappingProfile : Profile
     {
-        public MeasurementsMappingProfile()
+        public BodyMeasurementsMappingProfile()
         {
             CreateMap<BodyMeasurement, BodyMeasurementDTO>();
         }

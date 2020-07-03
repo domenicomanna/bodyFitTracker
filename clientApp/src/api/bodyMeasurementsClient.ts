@@ -3,7 +3,7 @@ import { BodyMeasurementModel, CreateOrEditMeasurementModel } from '../models/bo
 import { AxiosResponse } from 'axios';
 
 const requests = {
-  getAllMeasurements: () => get('bodyMeasurements').then((response) => response.data.bodyMeasurements),
+  getAllMeasurements: () => get('bodyMeasurements').then((response) => response.data),
   deleteMeasurement: (id: number) => destroy(`bodyMeasurements/${id}`),
   createMeasurement: (createMeasurementModel: CreateOrEditMeasurementModel) =>
     post('bodyMeasurements', createMeasurementModel),

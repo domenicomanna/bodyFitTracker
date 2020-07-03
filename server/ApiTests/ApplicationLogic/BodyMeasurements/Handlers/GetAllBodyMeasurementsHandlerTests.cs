@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Api.ApplicationLogic.BodyMeasurements;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
@@ -35,7 +36,7 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
 
             MapperConfiguration mapperConfiguration = new MapperConfiguration(opts =>
             {
-                opts.AddProfile(new MeasurementsMappingProfile());
+                opts.AddProfile(new BodyMeasurementsMappingProfile());
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
 
@@ -45,8 +46,8 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
 
         [TestMethod]
         public void TwoBodyMeasurementsShouldBeReturned(){
-            BodyMeasurementCollection bodyMeasurementCollection = _getAllBodyMeasurementsHandler.Handle();
-            Assert.IsTrue(bodyMeasurementCollection.BodyMeasurements.Count() == 2);
+            List<BodyMeasurementDTO> bodyMeasurements = _getAllBodyMeasurementsHandler.Handle();
+            Assert.IsTrue(bodyMeasurements.Count() == 2);
         }
         
     }

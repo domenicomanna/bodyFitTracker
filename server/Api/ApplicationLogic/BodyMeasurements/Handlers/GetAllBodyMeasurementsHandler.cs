@@ -22,16 +22,16 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         }
 
         /// <summary>
-        /// Returns a <see cref="BodyMeasurementCollection"/> for the current user
+        /// Returns a list of <see cref="BodyMeasurementDTO"/> for the current user
         /// </summary>
-        public BodyMeasurementCollection Handle()
+        public List<BodyMeasurementDTO> Handle()
         {
             int userId = _userAccessor.GetCurrentUserId();
             AppUser currentUser = _bodyFitTrackerContext.AppUsers.Find(userId);
             List<BodyMeasurement> bodyMeasurements = currentUser.BodyMeasurements.OrderByDescending(b => b.DateAdded).ToList();
             
             List<BodyMeasurementDTO> bodyMeasurementDTOs = _mapper.Map<List<BodyMeasurement>, List<BodyMeasurementDTO>>(bodyMeasurements);
-            return new BodyMeasurementCollection(MeasurementSystem.Imperial, currentUser.Gender, bodyMeasurementDTOs);
+            return bodyMeasurementDTOs;
         }
     }
 }

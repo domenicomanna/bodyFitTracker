@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
 using Api.ApplicationLogic.BodyMeasurements.Requests;
@@ -23,7 +24,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("")]
-        public BodyMeasurementCollection Get()
+        public List<BodyMeasurementDTO> Get()
         {
             return _getAllBodyMeasurementsHandler.Handle();
         }
