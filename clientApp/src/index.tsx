@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import UserContextProvider from './contexts/UserContext';
+import './fontawesomeLibrary';
 
 const app = (
   <UserContextProvider>

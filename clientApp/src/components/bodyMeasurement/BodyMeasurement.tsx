@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type Props = {
   measurement: BodyMeasurementModel;
@@ -24,9 +25,11 @@ const BodyMeasurement: FunctionComponent<Props> = ({
       {hipCircumferenceData}
       <td>{measurement.weight}</td>
       <td>{measurement.bodyFatPercentage}</td>
-      <td data-testid='edit-measurement' onClick={() => editMeasurement(measurement.bodyMeasurementId)}>Edit</td>
+      <td onClick={() => editMeasurement(measurement.bodyMeasurementId)}>
+        <FontAwesomeIcon icon="pencil-alt"/>
+      </td>
       <td data-testid='delete-measurement' onClick={() => deleteMeasurement(measurement.bodyMeasurementId)}>
-        Delete
+        <FontAwesomeIcon icon="trash-alt" color="red"/>
       </td>
     </tr>
   );
