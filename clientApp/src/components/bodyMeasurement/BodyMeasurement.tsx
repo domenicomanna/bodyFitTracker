@@ -5,11 +5,13 @@ type Props = {
   measurement: BodyMeasurementModel;
   hipCircumferenceDataShouldBeRendered: boolean;
   deleteMeasurement: (bodyMeasurementId: number) => void;
+  editMeasurement: (bodyMeasurementId: number) => void;
 };
 
 const BodyMeasurement: FunctionComponent<Props> = ({
   measurement,
   hipCircumferenceDataShouldBeRendered,
+  editMeasurement,
   deleteMeasurement,
 }) => {
   const hipCircumferenceData = hipCircumferenceDataShouldBeRendered ? <td>{measurement.hipCircumference}</td> : null;
@@ -22,6 +24,7 @@ const BodyMeasurement: FunctionComponent<Props> = ({
       {hipCircumferenceData}
       <td>{measurement.weight}</td>
       <td>{measurement.bodyFatPercentage}</td>
+      <td data-testid='edit-measurement' onClick={() => editMeasurement(measurement.bodyMeasurementId)}>Edit</td>
       <td data-testid='delete-measurement' onClick={() => deleteMeasurement(measurement.bodyMeasurementId)}>
         Delete
       </td>

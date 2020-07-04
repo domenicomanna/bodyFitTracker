@@ -9,9 +9,10 @@ import { UserContext } from '../../contexts/UserContext';
 type Props = {
   bodyMeasurements: BodyMeasurementModel[];
   deleteMeasurement: (bodyMeasurementId: number) => void;
+  editMeasurement: (bodyMeasurementId: number) => void;
 };
 
-const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, deleteMeasurement }) => {
+const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, editMeasurement, deleteMeasurement }) => {
   const { gender, measurementPreference } = useContext(UserContext);
   const { lengthUnit, weightUnit } = measurementPreference;
   const hipCircumferenceDataShouldBeRendered: boolean = gender === Gender.Female;
@@ -23,6 +24,7 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, delet
       measurement={bodyMeasurement}
       hipCircumferenceDataShouldBeRendered={hipCircumferenceDataShouldBeRendered}
       deleteMeasurement={deleteMeasurement}
+      editMeasurement={editMeasurement}
     />
   ));
 
@@ -39,6 +41,8 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, delet
               {hipCircumferenceRow}
               <th>Weight ({weightUnit})</th>
               <th>Body fat (%)</th>
+              {/* empty headers for edit and delete icons */}
+              <th></th>
               <th></th>
             </tr>
           </thead>
