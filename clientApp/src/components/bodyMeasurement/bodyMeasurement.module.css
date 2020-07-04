@@ -1,0 +1,21 @@
+.editMeasurement,
+.deleteMeasurement {
+  display: inline-block;
+  padding: 0.3rem;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.deleteMeasurement {
+  color: var(--red-500);
+}
+
+@media (any-hover: hover) {
+  .editMeasurement:hover {
+    color: var(--blue-500);
+  }
+
+  .deleteMeasurement:hover {
+    color: black;
+  }
+}

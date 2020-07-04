@@ -25,6 +25,18 @@
   cursor: auto;
 }
 
+.icon{
+  display: initial;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: initial;
+}
+
+.icon:focus{
+  outline: none;;
+}
+
 @media (any-hover: hover) {
   .primary:hover,
   .primaryDisabledSubmitting {

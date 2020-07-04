@@ -4,7 +4,7 @@ import styles from './button.module.css';
 
 type Props = {
   type: 'button' | 'submit';
-  buttonClass: 'primary';
+  buttonClass: 'primary' | 'icon';
   style?: CSSProperties;
   disabled?: boolean;
   isSubmitting?: boolean;
