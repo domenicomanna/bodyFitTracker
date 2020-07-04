@@ -34,7 +34,7 @@
 }
 
 .icon:focus{
-  outline: none;;
+  outline: none;
 }
 
 @media (any-hover: hover) {

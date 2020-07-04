@@ -42,7 +42,9 @@ describe('Page title for different modes', () => {
     history.push(path);
     render(
       <Router history={history}>
-        <Route path={path} component={CreateOrEditMeasurementPage} />
+        <UserContext.Provider value={userModel}>
+          <Route path={path} component={CreateOrEditMeasurementPage} />
+        </UserContext.Provider>
       </Router>
     );
     const titleInCreateMode = await waitFor(() => screen.getByText(/create measurement/i));
@@ -50,13 +52,24 @@ describe('Page title for different modes', () => {
   });
 
   it('should have a title of edit measurement when in edit mode', async () => {
+    mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue({
+      neckCircumference: 10,
+      waistCircumference: 30,
+      hipCircumference: 10,
+      weight: 10,
+      dateAdded: new Date(2019, 9, 12),
+      height: 60
+    });
     const history = createMemoryHistory();
     history.push('/10');
     render(
       <Router history={history}>
-        <Route path='/:measurementIdToEdit' component={CreateOrEditMeasurementPage} />
+        <UserContext.Provider value={userModel}>
+          <Route path='/:measurementIdToEdit' component={CreateOrEditMeasurementPage} />
+        </UserContext.Provider>
       </Router>
     );
+    await waitFor(() => expect(mockedBodyMeasurementsClient.getMeasurement).toHaveBeenCalledTimes(1));
     const titleInEditMode = screen.getByText(/edit measurement/i);
     expect(titleInEditMode).toBeTruthy();
   });
