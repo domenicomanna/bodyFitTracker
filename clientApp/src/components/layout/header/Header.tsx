@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Container from '../../container/Container';
 import styles from './header.module.css';
+import { Link } from 'react-router-dom';
+import routeUrls from '../../../constants/routeUrls';
 
 const Header = () => {
   const [hamburgerLinksShouldShow, toggleHamburgerLinks] = useState(false);
@@ -20,13 +22,10 @@ const Header = () => {
 
           <ul className={navListClasses}>
             <li className={styles.navListItem}>
-              <a href=''>Home</a>
+              <Link to={routeUrls.home}> Home </Link>
             </li>
             <li className={styles.navListItem}>
-              <a href=''>All Measurements</a>
-            </li>
-            <li className={styles.navListItem}>
-              <a href=''>Add Measurement</a>
+              <Link to={routeUrls.createMeasurement}>Add Measurement</Link>
             </li>
           </ul>
 

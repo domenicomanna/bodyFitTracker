@@ -1,5 +1,5 @@
 import axios from 'axios';
-import tokenKey from '../constants';
+import tokenKey from '../constants/tokenKey';
 
 axios.defaults.baseURL = 'https://localhost:5001/api/';
 

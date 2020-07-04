@@ -6,16 +6,16 @@ import Layout from './layout/Layout';
 import bodyMeasurementsClient from '../api/bodyMeasurementsClient';
 import BodyMeasurementsPage from '../pages/bodyMeasurementsPage/BodyMeasurementsPage';
 import CreateOrEditMeasurementPage from '../pages/createOrEditMeasurementPage/CreateOrEditMeasurementPage';
+import routeUrls from '../constants/routeUrls';
 
 bodyMeasurementsClient.getAllMeasurements().then((res) => console.log(res));
-
 const AuthenticatedApp = () => {
   return (
     <Layout>
       <Switch>
-        {/* <ProtectedRoute path='/' exact component={BodyMeasurementsPage} /> */}
-        <ProtectedRoute path='/edit-measurement/:measurementIdToEdit(\d+)' exact component = {CreateOrEditMeasurementPage} />
-        {/* <ProtectedRoute path='/create-measurement/' exact component = {CreateOrEditMeasurementPage} /> */}
+        <ProtectedRoute path={routeUrls.home} exact component={BodyMeasurementsPage} />
+        <ProtectedRoute path={routeUrls.editMeasurement} exact component = {CreateOrEditMeasurementPage} />
+        <ProtectedRoute path={routeUrls.createMeasurement} exact component = {CreateOrEditMeasurementPage} />
       </Switch>
     </Layout>
   );
