@@ -1,12 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext, FunctionComponent } from 'react';
+import { useHistory, RouteComponentProps, useLocation } from 'react-router-dom';
 import update from 'immutability-helper';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import BodyMeasurementList from '../../components/bodyMeasurementList/BodyMeasurementList';
 import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import routeUrls from '../../constants/routeUrls';
+import { toast } from 'react-toastify';
+
+type Location = {
+  measurementWasCreated: boolean;
+  measurementWasEdited: boolean;
+};
 
 const BodyMeasurementsPage = () => {
+  const location = useLocation<Location>();
   const history = useHistory();
   const [isLoading, setLoading] = useState(true);
   const [bodyMeasurements, setBodyMeasurements] = useState<BodyMeasurementModel[]>();
@@ -21,6 +28,7 @@ const BodyMeasurementsPage = () => {
   const editMeasurement = (bodyMeasurementId: number) => {
     history.push(`${routeUrls.editMeasurementWithoutRouteParameter}/${bodyMeasurementId}`);
   };
+
   const deleteMeasurement = async (bodyMeasurementId: number) => {
     const measurementIndexToDelete = bodyMeasurements!.findIndex((b) => b.bodyMeasurementId === bodyMeasurementId);
     await bodyMeasurementsClient.deleteMeasurement(bodyMeasurementId);
@@ -30,16 +38,27 @@ const BodyMeasurementsPage = () => {
     setBodyMeasurements(bodyMeasurementsWithMeasurementRemoved);
   };
 
+  if (location.state && location.state.measurementWasCreated) toast.success('Measurement created!');
+  else if (location.state && location.state.measurementWasEdited) toast.success('Measurement edited!');
+
+  if (location.state) {
+    // prevent toast message from showing multiple times by clearing the state
+    history.replace({
+      pathname: location.pathname,
+      state: undefined,
+    });
+  }
+
+  console.log(location);
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <>
-      <BodyMeasurementList
-        bodyMeasurements={bodyMeasurements!}
-        editMeasurement={editMeasurement}
-        deleteMeasurement={deleteMeasurement}
-      />
-    </>
+    <BodyMeasurementList
+      bodyMeasurements={bodyMeasurements!}
+      editMeasurement={editMeasurement}
+      deleteMeasurement={deleteMeasurement}
+    />
   );
 };
 

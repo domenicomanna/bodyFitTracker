@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useContext, Fragment, useEffect, useState } from 'react';
+import React, { FunctionComponent, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { object, number, date } from 'yup';
 import PageTitle from '../../components/pageTitle/PageTitle';
@@ -11,6 +12,7 @@ import Button from '../../components/ui/button/Button';
 import FieldValidationError from '../../components/ui/fieldValidationError/FieldValidationError';
 import { CreateOrEditMeasurementModel } from '../../models/bodyMeasurementModels';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
+import routeUrls from '../../constants/routeUrls';
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
   let validationSchema = object<CreateOrEditMeasurementModel>({
@@ -41,6 +43,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const pageTitleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
 
+  const history = useHistory();
   const [formIsSubmitting, setFormIsSubmitting] = useState(false);
   const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>({
     neckCircumference: '',
@@ -57,12 +60,15 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     onSubmit: async (createOrEditMeasurementModel) => {
       console.log(createOrEditMeasurementModel);
       setFormIsSubmitting(true);
-      if (measurementIsBeingCreated) await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
+      if (measurementIsBeingCreated) {
+        await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
+        history.push(routeUrls.home, {measurementWasCreated: true});
+      }
       else {
         const measurementId: number = parseInt(match.params.measurementIdToEdit);
         await bodyMeasurementsClient.editMeasurement(measurementId, createOrEditMeasurementModel);
+        history.push(routeUrls.home, {measurementWasEdited: true});
       }
-      setFormIsSubmitting(false);
     },
     validateOnMount: measurementIsBeingCreated,
     enableReinitialize: true,
@@ -81,7 +87,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         dateAdded: measurement.dateAdded,
       });
       formik.initialValues = initialFormValues as CreateOrEditMeasurementModel;
-    }
+    };
 
     if (!measurementIsBeingCreated) {
       updateFormBasedOffOfExistingMeasurement();

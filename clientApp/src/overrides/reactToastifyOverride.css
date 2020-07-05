@@ -1,0 +1,7 @@
+.Toastify__toast {
+  border-radius: 5px;
+}
+
+.Toastify__toast--success {
+  background: var(--green-500);
+}
