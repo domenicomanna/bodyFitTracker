@@ -7,13 +7,13 @@ import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
 import routeUrls from '../../constants/routeUrls';
 import { toast } from 'react-toastify';
 
-type Location = {
+export type LocationState = {
   measurementWasCreated: boolean;
   measurementWasEdited: boolean;
 };
 
 const BodyMeasurementsPage = () => {
-  const location = useLocation<Location>();
+  const location = useLocation<LocationState>();
   const history = useHistory();
   const [isLoading, setLoading] = useState(true);
   const [bodyMeasurements, setBodyMeasurements] = useState<BodyMeasurementModel[]>();
@@ -48,8 +48,6 @@ const BodyMeasurementsPage = () => {
       state: undefined,
     });
   }
-
-  console.log(location);
 
   if (isLoading) return <p>Loading...</p>;
 
