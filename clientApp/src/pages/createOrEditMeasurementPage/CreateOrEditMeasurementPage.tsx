@@ -35,29 +35,28 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
   return validationSchema;
 }
 
+const defaultFormValues: CreateOrEditMeasurementModel = {
+  neckCircumference: '',
+  waistCircumference: '',
+  hipCircumference: '',
+  height: '',
+  weight: '',
+  dateAdded: new Date().toISOString().split('T')[0],
+};
+
 type MeasurementIdToEdit = { measurementIdToEdit: string };
 
 const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<MeasurementIdToEdit>> = ({ match }) => {
   const { gender, measurementPreference } = useContext(UserContext);
 
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
-  const defaultFormValues: CreateOrEditMeasurementModel = {
-    neckCircumference: '',
-    waistCircumference: '',
-    hipCircumference: '',
-    height: '',
-    weight: '',
-    dateAdded: new Date().toISOString().split('T')[0],
-  };
   const history = useHistory();
-  const [formIsSubmitting, setFormIsSubmitting] = useState(false);
   const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>(defaultFormValues);
 
   const formik = useFormik({
     initialValues: initialFormValues as CreateOrEditMeasurementModel,
     validationSchema: CreateValidationSchema(gender == Gender.Female),
     onSubmit: async (createOrEditMeasurementModel) => {
-      setFormIsSubmitting(true);
       if (measurementIsBeingCreated) {
         await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
         history.push(routeUrls.home, { measurementWasCreated: true });
@@ -67,7 +66,6 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         history.push(routeUrls.home, { measurementWasEdited: true });
       }
     },
-    validateOnMount: measurementIsBeingCreated,
     enableReinitialize: true,
   });
 
@@ -83,7 +81,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         weight: measurement.weight,
         dateAdded: measurement.dateAdded,
       });
-      formik.initialValues = initialFormValues as CreateOrEditMeasurementModel;
+      formik.initialValues = measurement;
     };
 
     if (measurementIsBeingCreated) {
@@ -199,9 +197,9 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         <Button
           style={inputStyle}
           buttonClass='primary'
-          disabled={!formik.isValid || formIsSubmitting}
+          disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
           type='submit'
-          isSubmitting={formIsSubmitting}
+          isSubmitting={formik.isSubmitting}
         >
           Submit
         </Button>
