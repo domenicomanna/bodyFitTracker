@@ -41,33 +41,30 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   const { gender, measurementPreference } = useContext(UserContext);
 
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
-  const pageTitleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
-
-  const history = useHistory();
-  const [formIsSubmitting, setFormIsSubmitting] = useState(false);
-  const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>({
+  const defaultFormValues: CreateOrEditMeasurementModel = {
     neckCircumference: '',
     waistCircumference: '',
     hipCircumference: '',
     height: '',
     weight: '',
     dateAdded: new Date().toISOString().split('T')[0],
-  });
+  };
+  const history = useHistory();
+  const [formIsSubmitting, setFormIsSubmitting] = useState(false);
+  const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>(defaultFormValues);
 
   const formik = useFormik({
     initialValues: initialFormValues as CreateOrEditMeasurementModel,
     validationSchema: CreateValidationSchema(gender == Gender.Female),
     onSubmit: async (createOrEditMeasurementModel) => {
-      console.log(createOrEditMeasurementModel);
       setFormIsSubmitting(true);
       if (measurementIsBeingCreated) {
         await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
-        history.push(routeUrls.home, {measurementWasCreated: true});
-      }
-      else {
+        history.push(routeUrls.home, { measurementWasCreated: true });
+      } else {
         const measurementId: number = parseInt(match.params.measurementIdToEdit);
         await bodyMeasurementsClient.editMeasurement(measurementId, createOrEditMeasurementModel);
-        history.push(routeUrls.home, {measurementWasEdited: true});
+        history.push(routeUrls.home, { measurementWasEdited: true });
       }
     },
     validateOnMount: measurementIsBeingCreated,
@@ -89,10 +86,15 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
       formik.initialValues = initialFormValues as CreateOrEditMeasurementModel;
     };
 
-    if (!measurementIsBeingCreated) {
+    if (measurementIsBeingCreated) {
+      setInitialFormValues(defaultFormValues);
+      formik.validateForm(defaultFormValues);
+    } else {
       updateFormBasedOffOfExistingMeasurement();
     }
-  }, []);
+  }, [match.params.measurementIdToEdit]);
+
+  const pageTitleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
 
   const inputStyle: React.CSSProperties = {
     width: '90%',

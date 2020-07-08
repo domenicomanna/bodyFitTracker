@@ -130,7 +130,7 @@ describe('Component when trying to submit the form', () => {
     expect(submitButton).toBeDisabled();
   });
 
-  it('it should enable submission if all form fields are valid', async () => {
+  it('should enable submission if all form fields are valid', async () => {
     handleRendering();
     mockedBodyMeasurementsClient.createMeasurement.mockResolvedValue(axiosResponse);
 
