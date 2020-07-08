@@ -78,6 +78,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             bodyMeasurementToEdit.NeckCircumference = createOrEditBodyMeasurementRequest.NeckCircumference;
             bodyMeasurementToEdit.WaistCircumference = createOrEditBodyMeasurementRequest.WaistCircumference;
             bodyMeasurementToEdit.HipCircumference = createOrEditBodyMeasurementRequest.HipCircumference;
+            bodyMeasurementToEdit.Height = createOrEditBodyMeasurementRequest.Height;
             bodyMeasurementToEdit.Weight = createOrEditBodyMeasurementRequest.Weight;
             bodyMeasurementToEdit.DateAdded = createOrEditBodyMeasurementRequest.DateAdded;
             bodyMeasurementToEdit.BodyFatPercentage = BodyFatPercentageCalculator.CalculateBodyFatPercentage(bodyMeasurementToEdit);
