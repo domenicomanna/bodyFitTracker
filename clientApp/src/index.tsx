@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import  history  from './utils/history';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,13 +10,13 @@ import './global.css';
 import './overrides/reactToastifyOverride.css';
 import App from './App';
 import UserContextProvider from './contexts/UserContext';
-import './fontawesomeLibrary';
+import './utils/fontawesomeLibrary';
 
 const app = (
   <UserContextProvider>
-    <Router>
+    <Router history={history}>
       <App />
-      <ToastContainer position="bottom-right" />
+      <ToastContainer position='bottom-right' />
     </Router>
   </UserContextProvider>
 );

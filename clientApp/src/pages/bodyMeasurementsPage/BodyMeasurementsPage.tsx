@@ -41,13 +41,9 @@ const BodyMeasurementsPage = () => {
 
   if (location.state && location.state.measurementWasCreated) toast.success('Measurement created!');
   else if (location.state && location.state.measurementWasEdited) toast.success('Measurement edited!');
-
   if (location.state) {
     // prevent toast message from showing multiple times by clearing the state
-    history.replace({
-      pathname: location.pathname,
-      state: undefined,
-    });
+    history.replace(location.pathname, undefined);
   }
 
   if (isLoading) return <p>Loading...</p>;

@@ -8,7 +8,7 @@ type Props = {
   message?: string;
 };
 
-const defaultMessage = 'Oh no! The page you were looking for could not be found.';
+const defaultMessage = 'Oh no! The page you are looking for could not be found.';
 
 const NotFound: FunctionComponent<Props> = ({ message = defaultMessage }) => {
   return (

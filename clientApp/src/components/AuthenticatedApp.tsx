@@ -19,6 +19,7 @@ const AuthenticatedApp = () => {
           <ProtectedRoute path={routeUrls.createMeasurement} component={CreateOrEditMeasurementPage} />
         </Layout>
       </Route>
+      <Route path={routeUrls.notFound} component={NotFound}/>
       <Route render={() => <NotFound/>} />
     </Switch>
   );

@@ -3,6 +3,7 @@ const routeUrls = {
   editMeasurement: '/edit-measurement/:measurementIdToEdit(\\d+)',
   editMeasurementWithoutRouteParameter: '/edit-measurement',
   createMeasurement: '/create-measurement',
+  notFound: '/not-found',
 };
 
 export default routeUrls;
