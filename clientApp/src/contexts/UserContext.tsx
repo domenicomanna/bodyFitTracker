@@ -8,16 +8,21 @@ const UserContextProvider: FunctionComponent = ({ children }) => {
   const [token, setToken] = useState('');
   const [gender, setGender] = useState<Gender>(Gender.Male);
   const [measurementPreference, setMeasurementPreference] = useState<MeasurementPreferenceModel>({
-    measurementSystemName : 'Imperial',
-    weightUnit : 'lb',
-    lengthUnit : 'in',
+    measurementSystemName: 'Imperial',
+    weightUnit: 'lb',
+    lengthUnit: 'in',
   });
+  const [height, setHeight] = useState(120);
 
   const isAuthenticated = () => {
     return true;
   };
 
-  return <UserContext.Provider value={{ token, isAuthenticated, gender, measurementPreference }}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ token, isAuthenticated, gender, measurementPreference, height }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default UserContextProvider;

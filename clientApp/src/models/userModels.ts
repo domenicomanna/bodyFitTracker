@@ -12,6 +12,7 @@ export type MeasurementPreferenceModel = {
 export type UserModel = {
   token: string;
   gender: Gender;
+  height: number,
   measurementPreference: MeasurementPreferenceModel
   isAuthenticated: () => boolean;
 };

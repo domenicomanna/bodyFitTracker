@@ -23,10 +23,12 @@ beforeEach(() => {
   bodyMeasurementListProps = {
     bodyMeasurements: bodyMeasurements,
     deleteMeasurement: () => {},
+    editMeasurement: () => {}
   };
   userModel = {
     isAuthenticated: () => false,
     gender: Gender.Male,
+    height: 60,
     token: '',
     measurementPreference: {
       measurementSystemName: 'Imperial',

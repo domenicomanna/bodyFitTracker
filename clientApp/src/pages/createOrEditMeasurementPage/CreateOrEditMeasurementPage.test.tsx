@@ -19,6 +19,7 @@ beforeEach(() => {
     isAuthenticated: () => false,
     gender: Gender.Female,
     token: '',
+    height: 120,
     measurementPreference: {
       measurementSystemName: 'Imperial',
       weightUnit: 'lb',

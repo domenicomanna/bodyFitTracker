@@ -35,20 +35,20 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
   return validationSchema;
 }
 
-const defaultFormValues: CreateOrEditMeasurementModel = {
-  neckCircumference: '',
-  waistCircumference: '',
-  hipCircumference: '',
-  height: '',
-  weight: '',
-  dateAdded: new Date().toISOString().split('T')[0],
-};
-
 type MeasurementIdToEdit = { measurementIdToEdit: string };
 
 const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<MeasurementIdToEdit>> = ({ match }) => {
-  const { gender, measurementPreference } = useContext(UserContext);
+  const { gender, measurementPreference, height } = useContext(UserContext);
 
+  const defaultFormValues: CreateOrEditMeasurementModel = {
+    neckCircumference: '',
+    waistCircumference: '',
+    hipCircumference: '',
+    height: height,
+    weight: '', 
+    dateAdded: new Date().toISOString().split('T')[0],
+  };
+  
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const history = useHistory();
   const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>(defaultFormValues);
