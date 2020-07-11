@@ -36,6 +36,7 @@ const BodyMeasurementsPage = () => {
       $splice: [[measurementIndexToDelete, 1]],
     });
     setBodyMeasurements(bodyMeasurementsWithMeasurementRemoved);
+    toast.success('Measurement removed!');
   };
 
   if (location.state && location.state.measurementWasCreated) toast.success('Measurement created!');

@@ -26,7 +26,8 @@ beforeEach(() => {
   bodyMeasurementProps = {
     measurement : bodyMeasurementModel,
     hipCircumferenceDataShouldBeRendered: false,
-    deleteMeasurement : () => {}
+    deleteMeasurement : () => {},
+    editMeasurement : () => {}
   }
 });
 

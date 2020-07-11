@@ -71,6 +71,7 @@ const handleRendering = (measurementWasCreated: boolean = false, measurementWasE
 
 describe('Component when measurements are loading', () => {
   it('should render a loading message when the measurements are being loaded', async () => {
+    mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurements);
     handleRendering();
     const loadingElement = screen.getByText(/loading/i);
     expect(loadingElement).toBeTruthy();
@@ -96,12 +97,15 @@ describe('Component when measurements have been loaded', () => {
     const waistCircumferenceFromMeasurementBeforeDeletion = screen.getByText(waistCircumference.toString());
     expect(waistCircumferenceFromMeasurementBeforeDeletion).toBeTruthy();
 
-    const deleteMeasurementAction = screen.getByTestId('delete-measurement');
-    fireEvent.click(deleteMeasurementAction);
+    const deleteMeasurementButton = screen.getByTestId('delete-measurement');
+    fireEvent.click(deleteMeasurementButton);
     await waitFor(() => expect(mockedBodyMeasurementsClient.deleteMeasurement).toHaveBeenCalledTimes(1));
 
     const waistCircumferenceFromMeasurementAfterDeletion = screen.queryByText(waistCircumference.toString());
     expect(waistCircumferenceFromMeasurementAfterDeletion).toBeFalsy();
+
+    const measurementRemovedMessage = await screen.findByText(/measurement removed/i);
+    expect(measurementRemovedMessage).toBeTruthy();
   });
 });
 
