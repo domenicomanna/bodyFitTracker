@@ -6,17 +6,21 @@ import bodyMeasurementsClient from '../api/bodyMeasurementsClient';
 import BodyMeasurementsPage from '../pages/bodyMeasurementsPage/BodyMeasurementsPage';
 import CreateOrEditMeasurementPage from '../pages/createOrEditMeasurementPage/CreateOrEditMeasurementPage';
 import routeUrls from '../constants/routeUrls';
+import NotFound from '../pages/notFound/NotFound';
 
 bodyMeasurementsClient.getAllMeasurements().then((res) => console.log(res));
 const AuthenticatedApp = () => {
   return (
-    <Layout>
-      <Switch>
-        <ProtectedRoute path={routeUrls.home} exact component={BodyMeasurementsPage} />
-        <ProtectedRoute path={routeUrls.editMeasurement} exact component = {CreateOrEditMeasurementPage} />
-        <ProtectedRoute path={routeUrls.createMeasurement} exact component = {CreateOrEditMeasurementPage} />
-      </Switch>
-    </Layout>
+    <Switch>
+      <Route exact path={[routeUrls.home, routeUrls.editMeasurement, routeUrls.createMeasurement]}>
+        <Layout>
+          <ProtectedRoute path={routeUrls.home} exact component={BodyMeasurementsPage} />
+          <ProtectedRoute path={routeUrls.editMeasurement} component={CreateOrEditMeasurementPage} />
+          <ProtectedRoute path={routeUrls.createMeasurement} component={CreateOrEditMeasurementPage} />
+        </Layout>
+      </Route>
+      <Route render={() => <NotFound/>} />
+    </Switch>
   );
 };
 

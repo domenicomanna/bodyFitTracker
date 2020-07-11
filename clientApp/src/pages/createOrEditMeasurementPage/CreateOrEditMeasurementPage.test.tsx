@@ -19,7 +19,7 @@ beforeEach(() => {
     isAuthenticated: () => false,
     gender: Gender.Female,
     token: '',
-    height: 120,
+    height: 60,
     measurementPreference: {
       measurementSystemName: 'Imperial',
       weightUnit: 'lb',
@@ -59,7 +59,7 @@ describe('Page title for different modes', () => {
       hipCircumference: 10,
       weight: 10,
       dateAdded: new Date(2019, 9, 12),
-      height: 60
+      height: 60,
     });
     const history = createMemoryHistory();
     history.push('/10');

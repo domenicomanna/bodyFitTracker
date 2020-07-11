@@ -12,7 +12,7 @@ const UserContextProvider: FunctionComponent = ({ children }) => {
     weightUnit: 'lb',
     lengthUnit: 'in',
   });
-  const [height, setHeight] = useState(120);
+  const [height, setHeight] = useState(60);
 
   const isAuthenticated = () => {
     return true;
