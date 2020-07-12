@@ -2,8 +2,10 @@ using System;
 
 namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
 {
-   public class BodyMeasurementDTO
+    public class BodyMeasurementDTO
     {
+        private double _bodyFatPercentage;
+
         public int BodyMeasurementId { get; set; }
 
         public double NeckCircumference { get; set; }
@@ -16,8 +18,18 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
 
         public double Weight { get; set; }
 
-        public double BodyFatPercentage { get; set; }
-        
+        public double BodyFatPercentage
+        {
+            get
+            {
+                return Math.Round(_bodyFatPercentage, 2, MidpointRounding.AwayFromZero);
+            }
+            set
+            {
+                _bodyFatPercentage = value;
+            }
+        }
+
         public DateTime DateAdded { get; set; }
 
         public bool ShouldSerializeHipCircumference() => HipCircumference != null;
