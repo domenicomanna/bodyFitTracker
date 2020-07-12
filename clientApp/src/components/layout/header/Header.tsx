@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Container from '../../container/Container';
 import styles from './header.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import routeUrls from '../../../constants/routeUrls';
 
 const Header = () => {
@@ -22,10 +22,14 @@ const Header = () => {
 
           <ul className={navListClasses}>
             <li className={styles.navListItem}>
-              <Link to={routeUrls.home}> Home </Link>
+              <NavLink to={routeUrls.home} activeClassName={styles.active} exact>
+                Home
+              </NavLink>
             </li>
             <li className={styles.navListItem}>
-              <Link to={routeUrls.createMeasurement}>Add Measurement</Link>
+              <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                Add Measurement
+              </NavLink>
             </li>
           </ul>
 

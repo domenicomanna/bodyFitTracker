@@ -35,6 +35,10 @@
   text-decoration: none;
 }
 
+.active {
+  color: #000;
+}
+
 @media (min-width: 600px) {
   .nav {
     display: flex;
@@ -64,13 +68,15 @@
   }
 
   .navListItem a {
-    padding: 0.65rem 0.5rem;
+    padding: 0.8rem 0.5rem;
     border-radius: 5px;
     width: auto;
     transition: 0.3s;
   }
 
-  .navListItem a:hover {
-    background: #ccc;
+  @media (any-hover: hover) {
+    .navListItem a:hover {
+      color: #000;
+    }
   }
 }

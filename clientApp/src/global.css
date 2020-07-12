@@ -14,6 +14,10 @@ main {
   flex: 1;
 }
 
+a{
+  color: #2d2d99;
+}
+
 :root {
   --blue-500: #4c4cff;
 
