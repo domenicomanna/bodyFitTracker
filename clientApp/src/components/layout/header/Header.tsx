@@ -6,6 +6,7 @@ import routeUrls from '../../../constants/routeUrls';
 
 const Header = () => {
   const [hamburgerLinksShouldShow, toggleHamburgerLinks] = useState(false);
+  const [profileDropDownMenuShouldShow, toggleProfileDropDownMenu] = useState(false);
 
   const navListClasses = `${styles.navListItems} ${hamburgerLinksShouldShow ? styles.showHamburgerLinks : ''}`;
 
@@ -34,8 +35,25 @@ const Header = () => {
           </ul>
 
           <ul className={navListClasses}>
-            <li className={styles.navListItem}>
-              <a href=''>My Profile</a>
+            <li style={{ position: 'relative' }} className={styles.navListItem}>
+              <button style={profileDropDownMenuShouldShow ? { color: 'black' } : undefined} type='button'
+              onClick={() => toggleProfileDropDownMenu(prev => !prev)}>
+                My Profile
+              </button>
+              {profileDropDownMenuShouldShow && (
+                <ul className={styles.dropDownMenu}>
+                  <li>
+                    <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                      Settings
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                      Change Password
+                    </NavLink>
+                  </li>
+                </ul>
+              )}
             </li>
             <li className={styles.navListItem}>
               <a href=''>Sign Out</a>

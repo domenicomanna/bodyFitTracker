@@ -1,3 +1,15 @@
+:root {
+  --blue-500: #4c4cff;
+  --blue-800: #2d2d99;
+
+  --green-500: #b3b300;
+
+  --grey-500: #ccc;
+  /* --grey-200:  */
+
+  --red-500: #ff0000;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
@@ -14,16 +26,6 @@ main {
   flex: 1;
 }
 
-a{
+a {
   color: #2d2d99;
-}
-
-:root {
-  --blue-500: #4c4cff;
-
-  --green-500: #b3b300;
-
-  --grey-500: #ccc;
-
-  --red-500: #ff0000;
 }
