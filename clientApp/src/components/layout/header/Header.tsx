@@ -36,8 +36,11 @@ const Header = () => {
 
           <ul className={navListClasses}>
             <li style={{ position: 'relative' }} className={styles.navListItem}>
-              <button style={profileDropDownMenuShouldShow ? { color: 'black' } : undefined} type='button'
-              onClick={() => toggleProfileDropDownMenu(prev => !prev)}>
+              <button
+                style={profileDropDownMenuShouldShow ? { color: 'black' } : undefined}
+                type='button'
+                onClick={() => toggleProfileDropDownMenu((prev) => !prev)}
+              >
                 My Profile
               </button>
               {profileDropDownMenuShouldShow && (
@@ -52,11 +55,13 @@ const Header = () => {
                       Change Password
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                      Sign Out
+                    </NavLink>
+                  </li>
                 </ul>
               )}
-            </li>
-            <li className={styles.navListItem}>
-              <a href=''>Sign Out</a>
             </li>
           </ul>
         </nav>
