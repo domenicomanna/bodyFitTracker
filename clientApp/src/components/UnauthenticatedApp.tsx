@@ -1,10 +1,11 @@
 import React from 'react';
+import UnauthenticatedLayout from './unauthenticatedLayout/UnauthenticatedLayout';
 
 const UnauthenticatedApp = () => {
   return (
-    <div>
+    <UnauthenticatedLayout>
       Login
-    </div>
+    </UnauthenticatedLayout>
   );
 };
 

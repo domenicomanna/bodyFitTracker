@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
-import Layout from './layout/Layout';
+import Layout from './authenticatedLayout/Layout';
 import bodyMeasurementsClient from '../api/bodyMeasurementsClient';
 import BodyMeasurementsPage from '../pages/bodyMeasurementsPage/BodyMeasurementsPage';
 import CreateOrEditMeasurementPage from '../pages/createOrEditMeasurementPage/CreateOrEditMeasurementPage';

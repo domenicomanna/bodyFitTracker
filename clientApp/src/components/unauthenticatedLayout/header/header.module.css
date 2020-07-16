@@ -1,0 +1,51 @@
+.header {
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  color: #000;
+	text-decoration: none;
+	font-size: 1.5rem;
+}
+
+.navList{
+	list-style: none;
+	display: flex;
+}
+
+.navListItem{
+	margin: 0 .5rem;
+}
+
+.navListItem:first-child{
+	margin-left: 0;
+}
+
+.navListItem:last-child{
+	margin-right: 0;
+}
+
+.navListItem a{
+	text-decoration: none;
+	transition: color .3s;
+	padding: .5rem
+}
+
+.active{
+	color: #000
+}
+
+@media(any-hover: hover){
+	.navListItem a:hover{
+		color: #000;
+	}
+}
+

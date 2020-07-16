@@ -5,8 +5,8 @@ import UnauthenticatedApp from './components/UnauthenticatedApp';
 
 function App() {
   const userContext = useContext(UserContext)
-  
-  return userContext.isAuthenticated() ? <AuthenticatedApp/> : <UnauthenticatedApp/> 
+  return <UnauthenticatedApp/>
+  // return userContext.isAuthenticated() ? <AuthenticatedApp/> : <UnauthenticatedApp/> 
 }
 
 export default App;
