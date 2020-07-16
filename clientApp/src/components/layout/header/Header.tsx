@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Container from '../../container/Container';
 import styles from './header.module.css';
 import { NavLink } from 'react-router-dom';
 import routeUrls from '../../../constants/routeUrls';
 
 const Header = () => {
-  const [hamburgerLinksShouldShow, toggleHamburgerLinks] = useState(false);
-  const [profileDropDownMenuShouldShow, toggleProfileDropDownMenu] = useState(false);
+  const [hamburgerMenuIsOpen, setHamburgerMenuOpen] = useState(false);
+  const [profileDropDownMenuShouldShow, setProfileDropDownMenuOpen] = useState(false);
+  const profileDropDownMenuParentNodeRef = useRef<HTMLLIElement>(null); // the list item that contains the drop-down menu
+  const headerRef = useRef<HTMLHeadElement>(null);
 
-  const navListClasses = `${styles.navListItems} ${hamburgerLinksShouldShow ? styles.showHamburgerLinks : ''}`;
+  const handleClick = (e: MouseEvent) => {
+    console.log(e.target);
+    const clickedElement: Node = e.target as Node;
+    if (profileDropDownMenuParentNodeRef && !profileDropDownMenuParentNodeRef.current?.contains(clickedElement)) {
+      setProfileDropDownMenuOpen(false);
+    }
+
+    if (headerRef && !headerRef.current?.contains(clickedElement)){
+      setHamburgerMenuOpen(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  });
+
+  const navListClasses = `${styles.navListItems} ${hamburgerMenuIsOpen ? styles.showHamburgerLinks : ''}`;
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={headerRef}>
       <Container>
         <nav className={styles.nav}>
           <span
             className={styles.hamburger}
-            onClick={() => toggleHamburgerLinks((prevHamburgerLinksShouldShow) => !prevHamburgerLinksShouldShow)}
+            onClick={() => setHamburgerMenuOpen((isOpen) => !isOpen)}
           >
             &#9776; {/* html code for hamburger icon */}
           </span>
@@ -35,11 +55,11 @@ const Header = () => {
           </ul>
 
           <ul className={navListClasses}>
-            <li style={{ position: 'relative' }} className={styles.navListItem}>
+            <li style={{ position: 'relative' }} className={styles.navListItem} ref={profileDropDownMenuParentNodeRef}>
               <button
                 style={profileDropDownMenuShouldShow ? { color: 'black' } : undefined}
                 type='button'
-                onClick={() => toggleProfileDropDownMenu((prev) => !prev)}
+                onClick={() => setProfileDropDownMenuOpen((isOpen) => !isOpen)}
               >
                 My Profile
               </button>
