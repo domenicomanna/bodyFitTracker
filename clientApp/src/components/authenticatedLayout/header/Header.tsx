@@ -11,7 +11,6 @@ const Header = () => {
   const headerRef = useRef<HTMLHeadElement>(null);
 
   const handleClick = (e: MouseEvent) => {
-    console.log(e.target);
     const clickedElement: Node = e.target as Node;
     if (profileDropDownMenuParentNodeRef && !profileDropDownMenuParentNodeRef.current?.contains(clickedElement)) {
       setProfileDropDownMenuOpen(false);
@@ -35,6 +34,7 @@ const Header = () => {
       <Container>
         <nav className={styles.nav}>
           <span
+            data-testid="hamburger"
             className={styles.hamburger}
             onClick={() => setHamburgerMenuOpen((isOpen) => !isOpen)}
           >
