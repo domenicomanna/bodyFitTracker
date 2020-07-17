@@ -30,7 +30,7 @@ const Header = () => {
   const navListClasses = `${styles.navListItems} ${hamburgerMenuIsOpen ? styles.showHamburgerLinks : ''}`;
 
   return (
-    <header className={styles.header} ref={headerRef}>
+    <header className={styles.header} ref={headerRef} data-testid="header">
       <Container>
         <nav className={styles.nav}>
           <span
@@ -64,7 +64,7 @@ const Header = () => {
                 My Profile
               </button>
               {profileDropDownMenuShouldShow && (
-                <ul className={styles.dropDownMenu}>
+                <ul data-testid="dropDownMenu" className={styles.dropDownMenu}>
                   <li>
                     <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
                       Settings
