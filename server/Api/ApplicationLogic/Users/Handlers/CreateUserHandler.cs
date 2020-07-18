@@ -3,7 +3,6 @@ using System.Linq;
 using Api.ApplicationLogic.Users.DataTransferObjects;
 using Api.ApplicationLogic.Users.Requests;
 using Api.Domain.Models;
-using Api.Infrastructure.PasswordHashing;
 using Api.Persistence;
 using Api.ApplicationLogic.Interfaces;
 

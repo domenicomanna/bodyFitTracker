@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Api.ApplicationLogic.Users.Requests
+namespace Api.ApplicationLogic.Authentication.Requests
 {
     public class LoginRequest
     {

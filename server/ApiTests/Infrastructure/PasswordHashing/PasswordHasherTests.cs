@@ -1,9 +1,9 @@
-using Api.Infrastructure.PasswordHashing;
+using Api.Infrastructure.Security;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApiTests.Infrastructure.PasswordHashing
 {
-[TestClass]
+    [TestClass]
     public class PasswordHasherTests
     {
 

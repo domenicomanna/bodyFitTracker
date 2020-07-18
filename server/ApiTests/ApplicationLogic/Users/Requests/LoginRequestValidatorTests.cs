@@ -1,4 +1,4 @@
-using Api.ApplicationLogic.Users.Requests;
+using Api.ApplicationLogic.Authentication.Requests;
 using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

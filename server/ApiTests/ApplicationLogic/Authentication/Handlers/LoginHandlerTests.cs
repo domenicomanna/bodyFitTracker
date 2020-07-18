@@ -1,15 +1,15 @@
+using Api.ApplicationLogic.Authentication.DataTransferObjects;
+using Api.ApplicationLogic.Authentication.Handlers;
+using Api.ApplicationLogic.Authentication.Requests;
 using Api.ApplicationLogic.Errors;
 using Api.ApplicationLogic.Interfaces;
 using Api.ApplicationLogic.Users.DataTransferObjects;
-using Api.ApplicationLogic.Users.Handlers;
-using Api.ApplicationLogic.Users.Requests;
 using Api.Domain.Models;
-using Api.Infrastructure.PasswordHashing;
 using Api.Persistence;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace ApiTests.ApplicationLogic.Users.Handlers
+namespace ApiTests.ApplicationLogic.Authentication.Handlers
 {
     [TestClass]
     public class LoginHandlerTests
@@ -38,7 +38,7 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         }
 
         [TestMethod]
-        public void IfUserIsNotFoundARestExceptionShouldBeThrown()
+        public void IfUserIsNotFoundSignInShouldFail()
         {
             LoginRequest loginRequest = new LoginRequest
             {
@@ -46,12 +46,13 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
                 Password = ""
             };
 
-            Assert.ThrowsException<RestException>(() => _loginHandler.Handle(loginRequest));
+            SignInResult signInResult = _loginHandler.Handle(loginRequest);
+            Assert.IsFalse(signInResult.SignInWasSuccessful);
 
         }
 
         [TestMethod]
-        public void IfUserIsFoundButCredentialsAreNotValidARestExceptionShouldBeThrown()
+        public void IfUserIsFoundButCredentialsAreNotValidSignInShouldFail()
         {
             LoginRequest loginRequest = new LoginRequest
             {
@@ -59,7 +60,8 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
                 Password = "Invalid password"
             };
 
-            Assert.ThrowsException<RestException>(() => _loginHandler.Handle(loginRequest));
+            SignInResult signInResult = _loginHandler.Handle(loginRequest);
+            Assert.IsFalse(signInResult.SignInWasSuccessful);
 
         }
 
@@ -72,9 +74,8 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
                 Password = _dom.Password
             };
 
-            AppUserDTO appUserDTO = _loginHandler.Handle(loginRequest);
-            Assert.IsNotNull(appUserDTO);
-
+            SignInResult signInResult = _loginHandler.Handle(loginRequest);
+            Assert.IsTrue(signInResult.SignInWasSuccessful);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Api.Infrastructure.PasswordHashing
+namespace Api.ApplicationLogic.Interfaces
 {
     public interface IPasswordHasher
     {

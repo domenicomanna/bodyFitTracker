@@ -1,15 +1,11 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using Api.ApplicationLogic.Errors;
+using Api.ApplicationLogic.Authentication.DataTransferObjects;
+using Api.ApplicationLogic.Authentication.Requests;
 using Api.ApplicationLogic.Interfaces;
-using Api.ApplicationLogic.Users.DataTransferObjects;
-using Api.ApplicationLogic.Users.Requests;
 using Api.Domain.Models;
-using Api.Infrastructure.PasswordHashing;
 using Api.Persistence;
 
-namespace Api.ApplicationLogic.Users.Handlers
+namespace Api.ApplicationLogic.Authentication.Handlers
 {
     public class LoginHandler
     {
@@ -25,33 +21,27 @@ namespace Api.ApplicationLogic.Users.Handlers
         }
 
         /// <summary>
-        /// Attempts to log in the user based off of the credentials in <paramref name="loginRequest"/>. If the credentials are invalid
-        /// a <see cref="RestException"/> will be thrown.
+        /// Attempts to log in the user based off of the credentials in <paramref name="loginRequest"/>.
         /// </summary>
-        public AppUserDTO Handle(LoginRequest loginRequest)
+        public SignInResult Handle(LoginRequest loginRequest)
         {
-            Dictionary<string, string> errors = new Dictionary<string, string>();
             AppUser appUser = _bodyFitTrackerContext.AppUsers.Where(x => x.Email == loginRequest.Email).FirstOrDefault();
 
             if (appUser == null)
             {
-                errors.Add("", "Invalid username or password");
-                throw new RestException(HttpStatusCode.Unauthorized, errors);
+                return new SignInResult { SignInWasSuccessful = false, ErrorMessage = "Invalid username or password" };
             }
 
             bool passwordIsValid = _passwordHasher.ValidatePlainTextPassword(loginRequest.Password, appUser.HashedPassword, appUser.Salt);
 
             if (!passwordIsValid)
             {
-                errors.Add("", "Invalid username or password");
-                throw new RestException(HttpStatusCode.Unauthorized, errors);
+                return new SignInResult { SignInWasSuccessful = false, ErrorMessage = "Invalid username or password" };
             }
 
-            return new AppUserDTO
+            return new SignInResult
             {
-                Email = appUser.Email,
-                Gender = appUser.Gender.ToString(),
-                MeasurementSystemPreference = new MeasurementSystemDTO(appUser.MeasurementSystemPreference),
+                SignInWasSuccessful = true,
                 Token = _jwtGenerator.CreateToken(appUser)
             };
         }
