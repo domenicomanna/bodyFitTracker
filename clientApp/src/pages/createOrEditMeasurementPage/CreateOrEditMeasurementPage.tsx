@@ -9,7 +9,7 @@ import { Gender } from '../../models/userModels';
 import Form from '../../components/ui/form/Form';
 import Input from '../../components/ui/input/Input';
 import Button from '../../components/ui/button/Button';
-import FieldValidationError from '../../components/ui/fieldValidationError/FieldValidationError';
+import ValidationError from '../../components/ui/fieldValidationError/FieldValidationError';
 import { CreateOrEditMeasurementModel } from '../../models/bodyMeasurementModels';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import routeUrls from '../../constants/routeUrls';
@@ -119,7 +119,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
             <span style={unitStyle}>{lengthUnit}</span>
           </div>
           {formik.touched.hipCircumference && formik.errors.hipCircumference ? (
-            <FieldValidationError>{formik.errors.hipCircumference}</FieldValidationError>
+            <ValidationError>{formik.errors.hipCircumference}</ValidationError>
           ) : null}
         </div>
       </>
@@ -141,7 +141,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
             <span style={unitStyle}>{lengthUnit}</span>
           </div>
           {formik.touched.neckCircumference && formik.errors.neckCircumference ? (
-            <FieldValidationError>{formik.errors.neckCircumference}</FieldValidationError>
+            <ValidationError>{formik.errors.neckCircumference}</ValidationError>
           ) : null}
         </div>
 
@@ -157,7 +157,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
             <span style={unitStyle}>{lengthUnit}</span>
           </div>
           {formik.touched.waistCircumference && formik.errors.waistCircumference ? (
-            <FieldValidationError>{formik.errors.waistCircumference}</FieldValidationError>
+            <ValidationError>{formik.errors.waistCircumference}</ValidationError>
           ) : null}
         </div>
 
@@ -170,7 +170,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
             <span style={unitStyle}>{lengthUnit}</span>
           </div>
           {formik.touched.height && formik.errors.height ? (
-            <FieldValidationError> {formik.errors.height} </FieldValidationError>
+            <ValidationError> {formik.errors.height} </ValidationError>
           ) : null}
         </div>
 
@@ -181,7 +181,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
             <span style={unitStyle}>{weightUnit}</span>
           </div>
           {formik.touched.weight && formik.errors.weight ? (
-            <FieldValidationError testId={'weight'}> {formik.errors.weight} </FieldValidationError>
+            <ValidationError testId={'weight'}> {formik.errors.weight} </ValidationError>
           ) : null}
         </div>
 
@@ -189,7 +189,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         <div>
           <Input style={inputStyle} id='date' type='date' {...formik.getFieldProps('dateAdded')} />
           {formik.touched.dateAdded && formik.errors.dateAdded ? (
-            <FieldValidationError> {formik.errors.dateAdded} </FieldValidationError>
+            <ValidationError> {formik.errors.dateAdded} </ValidationError>
           ) : null}
         </div>
 

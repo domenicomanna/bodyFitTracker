@@ -3,14 +3,15 @@ import styles from './fieldValidationError.module.css';
 
 type Props = {
   testId?: string;
+  style?: React.CSSProperties;
 };
 
-const FieldValidationError: FunctionComponent<Props> = ({ testId, children }) => {
+const ValidationError: FunctionComponent<Props> = ({ testId, style, children }) => {
   return (
-    <span data-testid={`${testId}FieldValidationError`} className={styles.fieldError}>
+    <span style={{ ...style }} data-testid={`${testId}FieldValidationError`} className={styles.fieldError}>
       {children}
     </span>
   );
 };
 
-export default FieldValidationError;
+export default ValidationError;
