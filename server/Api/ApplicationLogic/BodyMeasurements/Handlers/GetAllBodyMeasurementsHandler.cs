@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
+using Api.ApplicationLogic.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Security;
 using Api.Persistence;
 using AutoMapper;
 
 namespace Api.ApplicationLogic.BodyMeasurements.Handlers
 {
-   public class GetAllBodyMeasurementsHandler
+    public class GetAllBodyMeasurementsHandler
     {
         private readonly BodyFitTrackerContext _bodyFitTrackerContext;
         private readonly IMapper _mapper;

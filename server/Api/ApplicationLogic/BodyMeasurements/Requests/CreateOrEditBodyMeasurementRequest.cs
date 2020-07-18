@@ -1,6 +1,6 @@
 ﻿using System;
+using Api.ApplicationLogic.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Security;
 using FluentValidation;
 
 namespace Api.ApplicationLogic.BodyMeasurements.Requests

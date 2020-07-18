@@ -1,7 +1,7 @@
 using System;
 using Api.ApplicationLogic.BodyMeasurements.Requests;
+using Api.ApplicationLogic.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Security;
 using FluentValidation.Results;
 using FluentValidation.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

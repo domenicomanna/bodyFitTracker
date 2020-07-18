@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Api.ApplicationLogic.Errors;
+using Api.ApplicationLogic.Interfaces;
 using Api.ApplicationLogic.Users.DataTransferObjects;
 using Api.ApplicationLogic.Users.Requests;
 using Api.Domain.Models;
 using Api.Infrastructure.PasswordHashing;
-using Api.Infrastructure.Security;
 using Api.Persistence;
 
 namespace Api.ApplicationLogic.Users.Handlers

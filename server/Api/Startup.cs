@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
+using Api.ApplicationLogic.Interfaces;
 using Api.ApplicationLogic.Users.Handlers;
 using Api.ApplicationLogic.Users.Requests;
 using Api.Infrastructure.PasswordHashing;
