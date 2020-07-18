@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -9,6 +9,10 @@ import { UserContext, UserContextModel } from '../../contexts/UserContext';
 const TestComponent = () => {
   return <div>testing component</div>;
 };
+
+const FakeLoginComponent = () => {
+  return <div>Login</div>
+}
 
 const route = '/test';
 let userContextValue: UserContextModel;
@@ -28,9 +32,11 @@ it('should render a login page if the user is not authenticated', () => {
     <Router history={history}>
       <UserContext.Provider value={userContextValue}>
         <ProtectedRoute component={TestComponent} path={route} />
+        <Route path="/login" component={FakeLoginComponent}/>
       </UserContext.Provider>
     </Router>
   );
+
   const loginElement = screen.getByText(/login/i);
   expect(loginElement).toBeTruthy();
 });
@@ -47,6 +53,7 @@ it('should render the component if the user is authenticated', () => {
       </UserContext.Provider>
     </Router>
   );
+  
   const loginElement = screen.getByText(/testing component/i);
   expect(loginElement).toBeTruthy();
 });

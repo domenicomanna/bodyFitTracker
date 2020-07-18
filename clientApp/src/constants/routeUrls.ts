@@ -3,6 +3,8 @@ const routeUrls = {
   editMeasurement: '/edit-measurement/:measurementIdToEdit(\\d+)',
   editMeasurementWithoutRouteParameter: '/edit-measurement',
   createMeasurement: '/create-measurement',
+  login: '/login',
+  about: '/about',
   notFound: '/not-found',
 };
 

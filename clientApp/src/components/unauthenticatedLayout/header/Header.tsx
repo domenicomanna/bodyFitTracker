@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from '../../container/Container';
 import styles from './header.module.css';
+import routeUrls from '../../../constants/routeUrls';
 
 const Header = () => {
   return (
@@ -9,16 +10,16 @@ const Header = () => {
       <Container>
         <nav className={styles.navigation}>
           <h2 style={{ margin: '0' }}>
-            <NavLink to='/' className={styles.brand}>
+            <NavLink to={routeUrls.about} className={styles.brand}>
               BodyFitTracker
             </NavLink>
           </h2>
           <ul className={styles.navList}>
             <li className={styles.navListItem}>
-              <NavLink to='/'>Login</NavLink>
+              <NavLink to={routeUrls.login}>Login</NavLink>
             </li>
             <li className={styles.navListItem}>
-              <NavLink to='/'>About</NavLink>
+              <NavLink to={routeUrls.about}>About</NavLink>
             </li>
           </ul>
         </nav>

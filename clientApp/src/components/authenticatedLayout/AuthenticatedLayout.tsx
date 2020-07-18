@@ -3,7 +3,7 @@ import Container from '../container/Container';
 import Header from './header/Header';
 import Footer from '../footer/Footer';
 
-const Layout: FunctionComponent = ({ children }) => {
+const AuthenticatedLayout: FunctionComponent = ({ children }) => {
   return (
     <>
       <Header />
@@ -15,4 +15,4 @@ const Layout: FunctionComponent = ({ children }) => {
   );
 };
 
-export default Layout;
+export default AuthenticatedLayout;
