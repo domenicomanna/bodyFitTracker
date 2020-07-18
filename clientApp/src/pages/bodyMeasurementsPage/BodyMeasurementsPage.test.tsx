@@ -1,38 +1,29 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { render, screen, waitForElementToBeRemoved, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
 import { AxiosResponse } from 'axios';
 import { UserContext } from '../../contexts/UserContext';
-import { UserModel } from '../../models/userModels';
+import { UserContextModel } from '../../models/userModels';
 import BodyMeasurementsPage, { LocationState } from './BodyMeasurementsPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
-import { Gender } from '../../models/userModels';
 import { Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { defaultUserContextModel, defaultAxiosResponse } from '../../testHelpers/testData';
 
 jest.mock('../../api/bodyMeasurementsClient');
 
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
-let userModel: UserModel;
+let userContextModel: UserContextModel;
 let bodyMeasurements: BodyMeasurementModel[];
 let axiosResponse: AxiosResponse;
 
 const waistCircumference = 23.4323432; // make it very precise so we don't accidentally retrieve another value when querying for this
 
+
 beforeEach(() => {
-  userModel = {
-    isAuthenticated: () => false,
-    gender: Gender.Female,
-    token: '',
-    height: 60,
-    measurementPreference: {
-      measurementSystemName: 'Imperial',
-      weightUnit: 'lb',
-      lengthUnit: 'in',
-    },
-  };
+  userContextModel = defaultUserContextModel;
   bodyMeasurements = [
     {
       bodyMeasurementId: 2,
@@ -44,13 +35,7 @@ beforeEach(() => {
       dateAdded: new Date(2019, 9, 12),
     },
   ];
-  axiosResponse = {
-    data: '',
-    status: 200,
-    statusText: 'OK',
-    config: {},
-    headers: {},
-  };
+  axiosResponse = defaultAxiosResponse
 
   mockedBodyMeasurementsClient.getAllMeasurements.mockReset();
 });
@@ -62,7 +47,7 @@ const handleRendering = (measurementWasCreated: boolean = false, measurementWasE
   history.push('', locationState);
   return render(
     <Router history={history}>
-      <UserContext.Provider value={userModel}>
+      <UserContext.Provider value={userContextModel}>
         <ToastContainer />
         <BodyMeasurementsPage />
       </UserContext.Provider>

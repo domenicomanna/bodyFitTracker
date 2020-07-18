@@ -5,34 +5,19 @@ import { createMemoryHistory } from 'history';
 import { mocked } from 'ts-jest/utils';
 import CreateOrEditMeasurementPage from './CreateOrEditMeasurementPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
-import { UserModel, Gender } from '../../models/userModels';
+import { Gender, UserContextModel } from '../../models/userModels';
 import { UserContext } from '../../contexts/UserContext';
 import { AxiosResponse } from 'axios';
+import { defaultUserContextModel, defaultAxiosResponse } from '../../testHelpers/testData';
 
 jest.mock('../../api/bodyMeasurementsClient');
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
 let axiosResponse: AxiosResponse;
-let userModel: UserModel;
+let userContextModel: UserContextModel;
 
 beforeEach(() => {
-  userModel = {
-    isAuthenticated: () => false,
-    gender: Gender.Female,
-    token: '',
-    height: 60,
-    measurementPreference: {
-      measurementSystemName: 'Imperial',
-      weightUnit: 'lb',
-      lengthUnit: 'in',
-    },
-  };
-  axiosResponse = {
-    data: '',
-    status: 200,
-    statusText: 'OK',
-    config: {},
-    headers: {},
-  };
+  userContextModel = defaultUserContextModel
+  axiosResponse = defaultAxiosResponse
   mockedBodyMeasurementsClient.createMeasurement.mockReset();
 });
 
@@ -43,7 +28,7 @@ describe('Page title for different modes', () => {
     history.push(path);
     render(
       <Router history={history}>
-        <UserContext.Provider value={userModel}>
+        <UserContext.Provider value={userContextModel}>
           <Route path={path} component={CreateOrEditMeasurementPage} />
         </UserContext.Provider>
       </Router>
@@ -65,7 +50,7 @@ describe('Page title for different modes', () => {
     history.push('/10');
     render(
       <Router history={history}>
-        <UserContext.Provider value={userModel}>
+        <UserContext.Provider value={userContextModel}>
           <Route path='/:measurementIdToEdit' component={CreateOrEditMeasurementPage} />
         </UserContext.Provider>
       </Router>
@@ -78,13 +63,13 @@ describe('Page title for different modes', () => {
 
 describe('Form fields for different genders', () => {
   const handleRendering = (gender: Gender) => {
-    userModel.gender = gender;
+    userContextModel.gender = gender;
     const path = '/create-measurement';
     const history = createMemoryHistory();
     history.push(path);
     return render(
       <Router history={history}>
-        <UserContext.Provider value={userModel}>
+        <UserContext.Provider value={userContextModel}>
           <Route path={path} component={CreateOrEditMeasurementPage} />
         </UserContext.Provider>
       </Router>
@@ -106,13 +91,13 @@ describe('Form fields for different genders', () => {
 
 describe('Component when trying to submit the form', () => {
   const handleRendering = () => {
-    userModel.gender = Gender.Male;
+    userContextModel.gender = Gender.Male;
     const path = '/create-measurement';
     const history = createMemoryHistory();
     history.push(path);
     return render(
       <Router history={history}>
-        <UserContext.Provider value={userModel}>
+        <UserContext.Provider value={userContextModel}>
           <Route path={path} component={CreateOrEditMeasurementPage} />
         </UserContext.Provider>
       </Router>

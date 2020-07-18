@@ -1,30 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import NotFound from './NotFound';
-import { UserModel, Gender } from '../../models/userModels';
+import { UserModel, Gender, UserContextModel } from '../../models/userModels';
 import { UserContext } from '../../contexts/UserContext';
 import { MemoryRouter } from 'react-router-dom';
+import { defaultUserContextModel } from '../../testHelpers/testData';
 
-let userModel: UserModel;
+let userContextModel: UserContextModel;
 
 beforeEach(() => {
-  userModel = {
-    isAuthenticated: () => false,
-    gender: Gender.Female,
-    token: '',
-    height: 60,
-    measurementPreference: {
-      measurementSystemName: 'Imperial',
-      weightUnit: 'lb',
-      lengthUnit: 'in',
-    },
-  };
+  userContextModel = defaultUserContextModel;
 });
 
 const handleRendering = (isAuthenticated: boolean) => {
-  userModel.isAuthenticated = () => isAuthenticated;
+  userContextModel.isAuthenticated = () => isAuthenticated;
   return render(
-    <UserContext.Provider value={userModel}>
+    <UserContext.Provider value={userContextModel}>
       <NotFound />
     </UserContext.Provider>,
     { wrapper: MemoryRouter }
@@ -33,18 +24,18 @@ const handleRendering = (isAuthenticated: boolean) => {
 
 it('should render authenticated layout if user is authenticated', () => {
   handleRendering(true);
-	const myProfileElement = screen.getByText(/My Profile/i);
-	const loginElement = screen.queryByText(/Login/i);
+  const myProfileElement = screen.getByText(/My Profile/i);
+  const loginElement = screen.queryByText(/Login/i);
 
-	expect(myProfileElement).toBeTruthy();
-	expect(loginElement).toBeFalsy();
+  expect(myProfileElement).toBeTruthy();
+  expect(loginElement).toBeFalsy();
 });
 
 it('should render unauthenticated layout if user is not authenticated', () => {
-	handleRendering(false);
-	const myProfileElement = screen.queryByText(/My Profile/i);
-	const loginElement = screen.getByText(/Login/i);
+  handleRendering(false);
+  const myProfileElement = screen.queryByText(/My Profile/i);
+  const loginElement = screen.getByText(/Login/i);
 
-	expect(myProfileElement).toBeFalsy();
-	expect(loginElement).toBeTruthy();
+  expect(myProfileElement).toBeFalsy();
+  expect(loginElement).toBeTruthy();
 });

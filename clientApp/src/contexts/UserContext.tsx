@@ -1,12 +1,13 @@
 import React, { createContext, useState, FunctionComponent } from 'react';
-import { UserModel, MeasurementPreferenceModel } from '../models/userModels';
+import { UserModel, MeasurementPreferenceModel, UserContextModel } from '../models/userModels';
 import { Gender } from '../models/userModels';
 
-export const UserContext = createContext({} as UserModel);
+export const UserContext = createContext({} as UserContextModel);
 
 const UserContextProvider: FunctionComponent = ({ children }) => {
   const [token, setToken] = useState('');
   const [gender, setGender] = useState<Gender>(Gender.Male);
+  const [email, setEmail] = useState('');
   const [measurementPreference, setMeasurementPreference] = useState<MeasurementPreferenceModel>({
     measurementSystemName: 'Imperial',
     weightUnit: 'lb',
@@ -19,7 +20,20 @@ const UserContextProvider: FunctionComponent = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ token, isAuthenticated, gender, measurementPreference, height }}>
+    <UserContext.Provider
+      value={{
+        gender,
+        height,
+        email,
+        measurementPreference,
+        token,
+        setHeight,
+        setEmail,
+        setMeasurementPreference,
+        setToken,
+        isAuthenticated,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
