@@ -1,10 +1,12 @@
 using Api.ApplicationLogic.Authentication.Handlers;
 using Api.ApplicationLogic.Authentication.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SignInResult = Api.ApplicationLogic.Authentication.DataTransferObjects.SignInResult;
 
 namespace Api.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthenticationController

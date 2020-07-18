@@ -8,7 +8,6 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [AllowAnonymous]
     public class UsersController
     {
         private readonly CreateUserHandler _createUserHandler;
@@ -18,6 +17,7 @@ namespace Api.Controllers
             _createUserHandler = createUserHandler;
         }
 
+        [AllowAnonymous]
         [HttpPost("")]
         public CreateUserResult CreateUser(CreateUserRequest createUserRequest)
         {
