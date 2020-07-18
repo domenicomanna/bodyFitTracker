@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Security.Claims;
-using Api.ApplicationLogic.Interfaces;
+using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Persistence;
 using Microsoft.AspNetCore.Http;

@@ -1,9 +1,9 @@
 using System.Text;
 using Api.ApplicationLogic.Authentication.Handlers;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
-using Api.ApplicationLogic.Interfaces;
 using Api.ApplicationLogic.Users.Handlers;
 using Api.ApplicationLogic.Users.Requests;
+using Api.Common.Interfaces;
 using Api.Infrastructure.Security;
 using Api.Middleware;
 using Api.Persistence;

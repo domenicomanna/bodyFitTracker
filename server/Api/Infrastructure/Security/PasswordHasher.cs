@@ -1,6 +1,6 @@
 using System;
 using System.Security.Cryptography;
-using Api.ApplicationLogic.Interfaces;
+using Api.Common.Interfaces;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Api.Infrastructure.Security

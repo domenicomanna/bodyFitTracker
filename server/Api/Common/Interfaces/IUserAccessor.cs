@@ -1,6 +1,6 @@
 using Api.Domain.Models;
 
-namespace Api.ApplicationLogic.Interfaces
+namespace Api.Common.Interfaces
 {
     public interface IUserAccessor
     {

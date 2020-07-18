@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
-using Api.ApplicationLogic.Interfaces;
+using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Persistence;
 using AutoMapper;

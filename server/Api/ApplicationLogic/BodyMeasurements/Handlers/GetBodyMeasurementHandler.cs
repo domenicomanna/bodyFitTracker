@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.ApplicationLogic.Errors;
-using Api.ApplicationLogic.Interfaces;
+using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Persistence;
 using AutoMapper;

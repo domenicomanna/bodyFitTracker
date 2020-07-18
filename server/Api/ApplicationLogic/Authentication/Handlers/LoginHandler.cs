@@ -1,7 +1,7 @@
 using System.Linq;
 using Api.ApplicationLogic.Authentication.DataTransferObjects;
 using Api.ApplicationLogic.Authentication.Requests;
-using Api.ApplicationLogic.Interfaces;
+using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Persistence;
 

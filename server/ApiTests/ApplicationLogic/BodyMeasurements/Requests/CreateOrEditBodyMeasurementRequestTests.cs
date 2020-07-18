@@ -1,6 +1,6 @@
 using System;
 using Api.ApplicationLogic.BodyMeasurements.Requests;
-using Api.ApplicationLogic.Interfaces;
+using Api.Common.Interfaces;
 using Api.Domain.Models;
 using FluentValidation.Results;
 using FluentValidation.TestHelper;
