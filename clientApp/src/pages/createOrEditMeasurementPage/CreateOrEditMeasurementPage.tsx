@@ -55,7 +55,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
   const formik = useFormik({
     initialValues: initialFormValues as CreateOrEditMeasurementModel,
-    validationSchema: CreateValidationSchema(gender == Gender.Female),
+    validationSchema: CreateValidationSchema(gender === Gender.Female),
     onSubmit: async (createOrEditMeasurementModel) => {
       if (measurementIsBeingCreated) {
         await bodyMeasurementsClient.createMeasurement(createOrEditMeasurementModel);
@@ -105,7 +105,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   const { weightUnit, lengthUnit } = measurementPreference;
 
   const hipCircumferenceFields =
-    gender == Gender.Male ? null : (
+    gender === Gender.Male ? null : (
       <>
         <label htmlFor='hipCircumference'>Hip Circumference</label>
         <div>

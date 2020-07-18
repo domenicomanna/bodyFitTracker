@@ -1,4 +1,4 @@
-import React, { FunctionComponent, HTMLAttributes } from 'react';
+import React, { FunctionComponent } from 'react';
 import styles from './fieldValidationError.module.css';
 
 type Props = {

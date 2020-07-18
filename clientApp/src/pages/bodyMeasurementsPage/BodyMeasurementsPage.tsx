@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, FunctionComponent } from 'react';
-import { useHistory, RouteComponentProps, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import update from 'immutability-helper';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import BodyMeasurementList from '../../components/bodyMeasurementList/BodyMeasurementList';

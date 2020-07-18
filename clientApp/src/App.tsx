@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import routeUrls from './constants/routeUrls';
 import AuthenticatedLayout from './components/authenticatedLayout/AuthenticatedLayout';

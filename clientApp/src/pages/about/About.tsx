@@ -9,7 +9,11 @@ const About = () => {
       <p>
         BodyFitTracker is an app that aims to support you on your weight loss or weight gain journey. Through taking
         several different body measurements and with the use of the{' '}
-        <a target='_blank' href='https://fitties.com/fat-caliper-plus/body-fat-calculation-methods/us-navy/'>
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href='https://fitties.com/fat-caliper-plus/body-fat-calculation-methods/us-navy/'
+        >
           US Navy Body Fat Formula
         </a>
         , this app allows you to track your body measurements and body fat percentage.

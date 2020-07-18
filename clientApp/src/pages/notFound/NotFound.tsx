@@ -1,10 +1,8 @@
 import React, { FunctionComponent, useContext } from 'react';
 import PageTitle from '../../components/pageTitle/PageTitle';
-import Container from '../../components/container/Container';
 import { Link } from 'react-router-dom';
 import routeUrls from '../../constants/routeUrls';
 import { UserContext } from '../../contexts/UserContext';
-import Layout from '../../components/authenticatedLayout/AuthenticatedLayout';
 import AuthenticatedLayout from '../../components/authenticatedLayout/AuthenticatedLayout';
 import UnauthenticatedLayout from '../../components/unauthenticatedLayout/UnauthenticatedLayout';
 
