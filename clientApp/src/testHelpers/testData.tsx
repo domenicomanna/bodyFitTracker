@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 
 export const defaultUserContextType: UserContextType = {
   gender: Gender.Female,
-  token: '',
   height: 60,
   email: '',
   measurementPreference: {
@@ -11,11 +10,11 @@ export const defaultUserContextType: UserContextType = {
     weightUnit: 'lb',
     lengthUnit: 'in',
   },
+  setGender: () => {},
   setHeight: () => {},
   setEmail: () => {},
   setMeasurementPreference: () => {},
   isAuthenticated: () => false,
-  setToken: () => {},
 };
 
 export const defaultAxiosResponse: AxiosResponse = {

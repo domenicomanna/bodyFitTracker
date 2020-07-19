@@ -17,10 +17,9 @@ export type UserSettings = {
 };
 
 export type UserContextType = UserSettings & {
-  token: string;
   isAuthenticated: () => boolean;
+  setGender: (gender: Gender) => void;
   setHeight: (height: number) => void;
   setEmail: (email: string) => void;
   setMeasurementPreference: (measurementPreference: MeasurementPreference) => void;
-  setToken: (token: string) => void;
 };

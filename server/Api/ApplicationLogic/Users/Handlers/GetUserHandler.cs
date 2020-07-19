@@ -28,7 +28,7 @@ namespace Api.ApplicationLogic.Users.Handlers
 
             AppUser appUser = _bodyFitTrackerContext.AppUsers.Where(x => x.AppUserId == currentUserId).First();
             AppUserDTO appUserDto = _mapper.Map<AppUser, AppUserDTO>(appUser);
-            appUserDto.MeasurementSystemPreference = new MeasurementSystemDTO(appUser.MeasurementSystemPreference);
+            appUserDto.MeasurementPreference = new MeasurementSystemDTO(appUser.MeasurementSystemPreference);
             return appUserDto;
         }
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import Form from '../../components/ui/form/Form';
 import { useFormik } from 'formik';
@@ -6,11 +6,15 @@ import { object, string } from 'yup';
 import Input from '../../components/ui/input/Input';
 import ValidationError from '../../components/ui/validationError/ValidationError';
 import Button from '../../components/ui/button/Button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import routeUrls from '../../constants/routeUrls';
 import styles from './login.module.css';
 import { SignInFormValues, SignInResult } from '../../types/authenticationTypes';
 import authenticationClient from '../../api/authenticationClient';
+import usersClient from '../../api/usersClient';
+import { UserSettings } from '../../types/userTypes';
+import tokenKey from '../../constants/tokenKey';
+import { UserContext } from '../../contexts/UserContext';
 
 let validationSchema = object<SignInFormValues>({
   email: string().email('Invalid email').required('Required'),
@@ -18,14 +22,16 @@ let validationSchema = object<SignInFormValues>({
 });
 
 const Login = () => {
+  const { setEmail, setHeight, setMeasurementPreference, setGender } = useContext(UserContext);
   const [signInErrorMessage, setSignInErrorMessage] = useState('');
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     } as SignInFormValues,
-  
+
     onSubmit: async (formValues: SignInFormValues) => {
       const formIsValid = await validationSchema.isValid(formValues);
       if (!formIsValid) {
@@ -38,7 +44,13 @@ const Login = () => {
         setSignInErrorMessage(signInResult.errorMessage);
         formik.setFieldValue('password', '');
       } else {
-        console.log('Signing in...');
+        localStorage.setItem(tokenKey, signInResult.token);
+        const user: UserSettings = await usersClient.getUser();
+        setHeight(user.height);
+        setEmail(user.email);
+        setGender(user.gender);
+        setMeasurementPreference(user.measurementPreference);
+        history.push(routeUrls.home);
       }
     },
   });

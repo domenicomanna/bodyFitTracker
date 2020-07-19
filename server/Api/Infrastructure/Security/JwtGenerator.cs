@@ -32,7 +32,7 @@ namespace Api.Infrastructure.Security
 
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddDays(70),
                 Subject = new ClaimsIdentity(claims),
                 SigningCredentials = signingCredentials
             };

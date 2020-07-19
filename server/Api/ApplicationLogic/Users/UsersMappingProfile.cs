@@ -10,7 +10,7 @@ namespace Api.ApplicationLogic.Users
         public UsersMappingProfile()
         {
             CreateMap<decimal, decimal>().ConvertUsing(x => Math.Round(x, 2));
-            CreateMap<AppUser, AppUserDTO>().ForMember(x => x.MeasurementSystemPreference, opt => opt.Ignore());
+            CreateMap<AppUser, AppUserDTO>().ForMember(x => x.MeasurementPreference, opt => opt.Ignore());
         }
     }
 }
