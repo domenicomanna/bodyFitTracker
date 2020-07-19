@@ -182,7 +182,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
             <span style={unitStyle}>{weightUnit}</span>
           </div>
           {formik.touched.weight && formik.errors.weight ? (
-            <ValidationError testId={'weight'}> {formik.errors.weight} </ValidationError>
+            <ValidationError testId={'weightError'}> {formik.errors.weight} </ValidationError>
           ) : null}
         </div>
 

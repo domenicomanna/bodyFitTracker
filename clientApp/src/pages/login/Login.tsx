@@ -71,13 +71,13 @@ const Login = () => {
         {signInErrorMessage && (
           <>
             <span></span>
-            <ValidationError style={{ margin: '0' }}>{signInErrorMessage}</ValidationError>
+            <ValidationError testId="signInErrorMessage" style={{ margin: '0' }}>{signInErrorMessage}</ValidationError>
           </>
         )}
 
         <span></span>
         <Button buttonClass='primary' disabled={formik.isSubmitting} type='submit' isSubmitting={formik.isSubmitting}>
-          Submit
+          Sign in
         </Button>
 
         <span></span>

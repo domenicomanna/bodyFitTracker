@@ -110,7 +110,7 @@ describe('Component when trying to submit the form', () => {
     await waitFor(() => fireEvent.change(weightInputElement, { target: { value: '-123' } })); // invalid weight
     await waitFor(() => fireEvent.blur(weightInputElement));
 
-    const weightValidationError = screen.getByTestId(/weightFieldValidationError/i);
+    const weightValidationError = screen.getByTestId(/weightError/i);
     const submitButton = screen.getByText(/submit/i);
     expect(weightValidationError).toBeTruthy();
     expect(submitButton).toBeDisabled();

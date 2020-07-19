@@ -8,7 +8,7 @@ type Props = {
 
 const ValidationError: FunctionComponent<Props> = ({ testId, style, children }) => {
   return (
-    <span style={{ ...style }} data-testid={`${testId}FieldValidationError`} className={styles.fieldError}>
+    <span style={{ ...style }} data-testid={testId} className={styles.fieldError}>
       {children}
     </span>
   );
