@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -9,11 +9,11 @@ import { UserContextType } from '../../types/userTypes';
 import { defaultUserContextType } from '../../testHelpers/testData';
 
 const TestComponent = () => {
-  return <div>testing component</div>;
+  return <div data-testid='protectedComponent'>testing component</div>;
 };
 
 const FakeLoginComponent = () => {
-  return <div>Login</div>;
+  return <div data-testid='loginComponent'>Login</div>;
 };
 
 const route = '/test';
@@ -23,36 +23,32 @@ beforeEach(() => {
   userContextType = defaultUserContextType;
 });
 
-it('should render a login page if the user is not authenticated', () => {
+const handleRendering = (isAuthenticated: boolean) => {
   const history = createMemoryHistory();
   history.push(route);
-  userContextType.isAuthenticated = () => false;
-  render(
-    <Router history={history}>
-      <UserContext.Provider value={userContextType}>
-        <ProtectedRoute component={TestComponent} path={route} />
-        <Route path='/login' component={FakeLoginComponent} />
-      </UserContext.Provider>
-    </Router>
+  userContextType.isAuthenticated = () => isAuthenticated;
+  return render(
+    <UserContext.Provider value={userContextType}>
+      <Router history={history}>
+        <Switch>
+          <ProtectedRoute component={TestComponent} path={route} />
+          <Route path='/login' component={FakeLoginComponent} />
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
+};
 
-  const loginElement = screen.getByText(/login/i);
-  expect(loginElement).toBeTruthy();
+it('should redirect the user to an unprotected component if the user is not authenticated', () => {
+  handleRendering(false);
+  const loginComponent = screen.getByTestId('loginComponent');
+  const protectedComponent = screen.queryByTestId(/protectedComponent/i);
+  expect(loginComponent).toBeTruthy();
+  expect(protectedComponent).toBeFalsy();
 });
 
-it('should render the component if the user is authenticated', () => {
-  const history = createMemoryHistory();
-  history.push(route);
-  userContextType.isAuthenticated = () => true;
-  render(
-    <Router history={history}>
-      <UserContext.Provider value={userContextType}>
-        <ProtectedRoute render={() => <TestComponent />} path={route} />{' '}
-        {/* test that the render prop instead of the component prop */}
-      </UserContext.Provider>
-    </Router>
-  );
-
-  const loginElement = screen.getByText(/testing component/i);
-  expect(loginElement).toBeTruthy();
+it('should render the protected component if the user is authenticated', () => {
+  handleRendering(true);
+  const protectedComponent = screen.getByTestId(/protectedComponent/i);
+  expect(protectedComponent).toBeTruthy();
 });

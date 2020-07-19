@@ -81,7 +81,7 @@ describe('Component when form is valid', () => {
     expect(errorMessageElement).toBeTruthy();
   });
 
-  it('redirect on successful sign in', async () => {
+  it('should redirect on successful sign in', async () => {
     handleRendering();
     const errorMessage = 'sign in failed';
     mockedAuthenticationClient.signIn.mockResolvedValue({ signInWasSuccessful: true, errorMessage, token: '' });
