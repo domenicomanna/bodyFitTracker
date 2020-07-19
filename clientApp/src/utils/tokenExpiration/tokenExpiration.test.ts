@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
-import tokenIsExpired from './tokenExpiration';
+import isExpired from './tokenExpiration';
 
 it('should return true if token is invalid', () => {
-  expect(tokenIsExpired('')).toBe(true);
+  expect(isExpired('')).toBe(true);
 });
 
 it('should return false if token is not expired', () => {
@@ -13,7 +13,7 @@ it('should return false if token is not expired', () => {
     },
     'secret'
 	);
-  expect(tokenIsExpired(token)).toBe(false);
+  expect(isExpired(token)).toBe(false);
 });
 
 it('should return true if token is expired', () => {
@@ -24,5 +24,5 @@ it('should return true if token is expired', () => {
     },
     'secret'
 	);
-  expect(tokenIsExpired(token)).toBe(true);
+  expect(isExpired(token)).toBe(true);
 });

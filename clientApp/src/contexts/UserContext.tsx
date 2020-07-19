@@ -2,7 +2,7 @@ import React, { createContext, useState, FunctionComponent } from 'react';
 import { MeasurementPreference, UserContextType } from '../types/userTypes';
 import { Gender } from '../types/userTypes';
 import tokenKey from '../constants/tokenKey';
-import tokenIsExpired from '../utils/tokenExpiration/tokenExpiration';
+import isExpired from '../utils/tokenExpiration/tokenExpiration';
 
 export const UserContext = createContext({} as UserContextType);
 
@@ -19,7 +19,7 @@ const UserContextProvider: FunctionComponent = ({ children }) => {
   const isAuthenticated = (): boolean => {
     const token = localStorage.getItem(tokenKey);
     if (!token) return false;
-    return !tokenIsExpired(token);
+    return !isExpired(token);
   };
 
   return (
