@@ -88,9 +88,10 @@ namespace Api
             services.AddScoped<CreateOrEditBodyMeasurementHandler>();
             services.AddScoped<DeleteBodyMeasurementHandler>();
 
+            services.AddScoped<GetUserHandler>();
+            services.AddScoped<CreateUserHandler>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IJwtGenerator, JwtGenerator>();
-            services.AddScoped<CreateUserHandler>();
             services.AddScoped<LoginHandler>();
         }
 

@@ -19,23 +19,26 @@ let validationSchema = object<SignInFormValues>({
 
 const Login = () => {
   const [signInErrorMessage, setSignInErrorMessage] = useState('');
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     } as SignInFormValues,
+  
     onSubmit: async (formValues: SignInFormValues) => {
       const formIsValid = await validationSchema.isValid(formValues);
       if (!formIsValid) {
         setSignInErrorMessage('Invalid username or password');
         return;
       }
+      setSignInErrorMessage('');
       const signInResult: SignInResult = await authenticationClient.signIn(formValues);
       if (!signInResult.signInWasSuccessful) {
         setSignInErrorMessage(signInResult.errorMessage);
         formik.setFieldValue('password', '');
       } else {
-        console.log("Signing in...");
+        console.log('Signing in...');
       }
     },
   });
@@ -50,7 +53,7 @@ const Login = () => {
         </div>
         <label htmlFor='password'>Password</label>
         <div>
-          <Input id='password' type='password' {...formik.getFieldProps('password')}/>
+          <Input id='password' type='password' {...formik.getFieldProps('password')} />
         </div>
 
         {signInErrorMessage && (

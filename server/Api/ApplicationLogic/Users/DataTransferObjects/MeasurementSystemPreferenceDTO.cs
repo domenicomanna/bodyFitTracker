@@ -19,7 +19,7 @@ namespace Api.ApplicationLogic.Users.DataTransferObjects
             else
             {
                 LengthUnit = "cm";
-                WeightUnit = "lb";
+                WeightUnit = "kg";
             }
         }
     }

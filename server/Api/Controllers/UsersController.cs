@@ -10,11 +10,19 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class UsersController
     {
+        private readonly GetUserHandler _getUserHandler;
         private readonly CreateUserHandler _createUserHandler;
 
-        public UsersController(CreateUserHandler createUserHandler)
+        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler)
         {
+            _getUserHandler = getUserHandler;
             _createUserHandler = createUserHandler;
+        }
+
+        [HttpGet("")]
+        public AppUserDTO GetUser()
+        {
+            return _getUserHandler.Handle();
         }
 
         [AllowAnonymous]
