@@ -13,6 +13,7 @@ import ValidationError from '../../components/ui/validationError/ValidationError
 import { CreateOrEditMeasurement } from '../../types/bodyMeasurementTypes';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import routeUrls from '../../constants/routeUrls';
+import moment from 'moment';
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
   let validationSchema = object<CreateOrEditMeasurement>({
@@ -46,9 +47,9 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     hipCircumference: '',
     height: height,
     weight: '', 
-    dateAdded: new Date().toISOString().split('T')[0],
+    dateAdded: moment().format().split('T')[0],
   };
-  
+
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const history = useHistory();
   const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurement>(defaultFormValues);
