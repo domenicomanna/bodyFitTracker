@@ -12,7 +12,7 @@ import styles from './login.module.css';
 import { SignInFormValues, SignInResult } from '../../types/authenticationTypes';
 import authenticationClient from '../../api/authenticationClient';
 import usersClient from '../../api/usersClient';
-import { UserSettings } from '../../types/userTypes';
+import { User } from '../../types/userTypes';
 import tokenKey from '../../constants/tokenKey';
 import { UserContext } from '../../contexts/UserContext';
 
@@ -45,7 +45,7 @@ const Login = () => {
         formik.setFieldValue('password', '');
       } else {
         localStorage.setItem(tokenKey, signInResult.token);
-        const user: UserSettings = await usersClient.getUser();
+        const user: User = await usersClient.getUser();
         setHeight(user.height);
         setEmail(user.email);
         setGender(user.gender);

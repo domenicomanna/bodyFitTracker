@@ -9,14 +9,14 @@ export type MeasurementPreference = {
   weightUnit: string;
 };
 
-export type UserSettings = {
+export type User = {
   gender: Gender;
   height: number;
   email: string;
   measurementPreference: MeasurementPreference;
 };
 
-export type UserContextType = UserSettings & {
+export type UserContextType = User & {
   isAuthenticated: () => boolean;
   setGender: (gender: Gender) => void;
   setHeight: (height: number) => void;

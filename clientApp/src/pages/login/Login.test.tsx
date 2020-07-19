@@ -7,7 +7,7 @@ import Login from './Login';
 import { mocked } from 'ts-jest/utils';
 import authenticationClient from '../../api/authenticationClient';
 import usersClient from '../../api/usersClient';
-import { Gender, UserContextType, UserSettings } from '../../types/userTypes';
+import { Gender, UserContextType, User } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { defaultUserContextType } from '../../testHelpers/testData';
 
@@ -17,13 +17,13 @@ jest.mock('../../api/authenticationClient');
 let mockedAuthenticationClient = mocked(authenticationClient, true);
 let mockedUsersClient = mocked(usersClient, true);
 let userContextType: UserContextType;
-let userSettings: UserSettings;
+let user: User;
 
 beforeEach(() => {
   mockedAuthenticationClient.signIn.mockReset;
   mockedUsersClient.getUser.mockReset;
   userContextType = defaultUserContextType;
-  userSettings = {
+  user = {
     email: '',
     height: 60,
     gender: Gender.Female,
@@ -85,7 +85,7 @@ describe('Component when form is valid', () => {
     handleRendering();
     const errorMessage = 'sign in failed';
     mockedAuthenticationClient.signIn.mockResolvedValue({ signInWasSuccessful: true, errorMessage, token: '' });
-    mockedUsersClient.getUser.mockResolvedValue(userSettings);
+    mockedUsersClient.getUser.mockResolvedValue(user);
 
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/password/i);
