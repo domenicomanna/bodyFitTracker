@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import BodyMeasurementList from './BodyMeasurementList';
-import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
-import { Gender, UserContextModel } from '../../models/userModels';
+import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
+import { Gender, UserContextType } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
-import { defaultUserContextModel } from '../../testHelpers/testData';
+import { defaultUserContextType } from '../../testHelpers/testData';
 
 let bodyMeasurementListProps: React.ComponentProps<typeof BodyMeasurementList>;
-let userContextModel: UserContextModel;
+let userContextType: UserContextType;
 
 beforeEach(() => {
-  const bodyMeasurements: BodyMeasurementModel[] = [
+  const bodyMeasurements: BodyMeasurementType[] = [
     {
       bodyMeasurementId: 1,
       bodyFatPercentage: 10,
@@ -26,13 +26,13 @@ beforeEach(() => {
     deleteMeasurement: () => {},
     editMeasurement: () => {},
   };
-  userContextModel = defaultUserContextModel
+  userContextType = defaultUserContextType
 });
 
 const handleRendering = (gender: Gender = Gender.Male) => {
-  userContextModel.gender = gender;
+  userContextType.gender = gender;
   return render(
-    <UserContext.Provider value={userContextModel}>
+    <UserContext.Provider value={userContextType}>
       <BodyMeasurementList {...bodyMeasurementListProps} />
     </UserContext.Provider>
   );

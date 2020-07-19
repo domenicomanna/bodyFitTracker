@@ -1,5 +1,5 @@
 import { post } from './baseConfiguration';
-import { SignInFormValues, SignInResult } from '../models/authenticationModels';
+import { SignInFormValues, SignInResult } from '../types/authenticationTypes';
 
 const requests = {
   signIn: (values: SignInFormValues) => post('authentication', values).then((response) => response.data),

@@ -1,14 +1,14 @@
 import React, { createContext, useState, FunctionComponent } from 'react';
-import { UserModel, MeasurementPreferenceModel, UserContextModel } from '../models/userModels';
-import { Gender } from '../models/userModels';
+import { MeasurementPreference, UserContextType } from '../types/userTypes';
+import { Gender } from '../types/userTypes';
 
-export const UserContext = createContext({} as UserContextModel);
+export const UserContext = createContext({} as UserContextType);
 
 const UserContextProvider: FunctionComponent = ({ children }) => {
   const [token, setToken] = useState('');
   const [gender, setGender] = useState<Gender>(Gender.Male);
   const [email, setEmail] = useState('');
-  const [measurementPreference, setMeasurementPreference] = useState<MeasurementPreferenceModel>({
+  const [measurementPreference, setMeasurementPreference] = useState<MeasurementPreference>({
     measurementSystemName: 'Imperial',
     weightUnit: 'lb',
     lengthUnit: 'in',

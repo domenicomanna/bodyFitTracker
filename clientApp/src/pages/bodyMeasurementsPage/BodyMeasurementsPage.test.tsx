@@ -3,27 +3,26 @@ import { createMemoryHistory } from 'history';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
 import { AxiosResponse } from 'axios';
-import { UserContext } from '../../contexts/UserContext';
-import { UserContextModel } from '../../models/userModels';
+import { UserContextType } from '../../types/userTypes';
 import BodyMeasurementsPage, { LocationState } from './BodyMeasurementsPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
-import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import { Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { defaultUserContextModel, defaultAxiosResponse } from '../../testHelpers/testData';
+import { defaultUserContextType, defaultAxiosResponse } from '../../testHelpers/testData';
+import { UserContext } from '../../contexts/UserContext';
 
 jest.mock('../../api/bodyMeasurementsClient');
 
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
-let userContextModel: UserContextModel;
-let bodyMeasurements: BodyMeasurementModel[];
+let userContextType: UserContextType;
+let bodyMeasurements: BodyMeasurementType[];
 let axiosResponse: AxiosResponse;
 
 const waistCircumference = 23.4323432; // make it very precise so we don't accidentally retrieve another value when querying for this
 
-
 beforeEach(() => {
-  userContextModel = defaultUserContextModel;
+  userContextType = defaultUserContextType;
   bodyMeasurements = [
     {
       bodyMeasurementId: 2,
@@ -47,7 +46,7 @@ const handleRendering = (measurementWasCreated: boolean = false, measurementWasE
   history.push('', locationState);
   return render(
     <Router history={history}>
-      <UserContext.Provider value={userContextModel}>
+      <UserContext.Provider value={userContextType}>
         <ToastContainer />
         <BodyMeasurementsPage />
       </UserContext.Provider>

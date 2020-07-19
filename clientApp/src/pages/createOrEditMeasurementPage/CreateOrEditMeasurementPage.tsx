@@ -5,17 +5,17 @@ import { object, number, date } from 'yup';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import { RouteComponentProps } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
-import { Gender } from '../../models/userModels';
+import { Gender } from '../../types/userTypes';
 import Form from '../../components/ui/form/Form';
 import Input from '../../components/ui/input/Input';
 import Button from '../../components/ui/button/Button';
-import ValidationError from '../../components/ui/fieldValidationError/FieldValidationError';
-import { CreateOrEditMeasurementModel } from '../../models/bodyMeasurementModels';
+import ValidationError from '../../components/ui/validationError/ValidationError';
+import { CreateOrEditMeasurement } from '../../types/bodyMeasurementTypes';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import routeUrls from '../../constants/routeUrls';
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
-  let validationSchema = object<CreateOrEditMeasurementModel>({
+  let validationSchema = object<CreateOrEditMeasurement>({
     neckCircumference: number()
       .moreThan(0, 'Must be greater than 0')
       .max(1000, 'Must be less than 1000')
@@ -40,7 +40,7 @@ type MeasurementIdToEdit = { measurementIdToEdit: string };
 const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<MeasurementIdToEdit>> = ({ match }) => {
   const { gender, measurementPreference, height } = useContext(UserContext);
 
-  const defaultFormValues: CreateOrEditMeasurementModel = {
+  const defaultFormValues: CreateOrEditMeasurement = {
     neckCircumference: '',
     waistCircumference: '',
     hipCircumference: '',
@@ -51,10 +51,10 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const history = useHistory();
-  const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurementModel>(defaultFormValues);
+  const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurement>(defaultFormValues);
 
   const formik = useFormik({
-    initialValues: initialFormValues as CreateOrEditMeasurementModel,
+    initialValues: initialFormValues as CreateOrEditMeasurement,
     validationSchema: CreateValidationSchema(gender === Gender.Female),
     onSubmit: async (createOrEditMeasurementModel) => {
       if (measurementIsBeingCreated) {
@@ -72,7 +72,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   useEffect(() => {
     const updateFormBasedOffOfExistingMeasurement = async () => {
       const measurementId: number = parseInt(match.params.measurementIdToEdit);
-      const measurement: CreateOrEditMeasurementModel = await bodyMeasurementsClient.getMeasurement(measurementId);
+      const measurement: CreateOrEditMeasurement = await bodyMeasurementsClient.getMeasurement(measurementId);
       setInitialFormValues({
         neckCircumference: measurement.neckCircumference,
         waistCircumference: measurement.waistCircumference,

@@ -4,12 +4,12 @@ import Form from '../../components/ui/form/Form';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import Input from '../../components/ui/input/Input';
-import ValidationError from '../../components/ui/fieldValidationError/FieldValidationError';
+import ValidationError from '../../components/ui/validationError/ValidationError';
 import Button from '../../components/ui/button/Button';
 import { NavLink } from 'react-router-dom';
 import routeUrls from '../../constants/routeUrls';
 import styles from './login.module.css';
-import { SignInFormValues, SignInResult } from '../../models/authenticationModels';
+import { SignInFormValues, SignInResult } from '../../types/authenticationTypes';
 import authenticationClient from '../../api/authenticationClient';
 
 let validationSchema = object<SignInFormValues>({

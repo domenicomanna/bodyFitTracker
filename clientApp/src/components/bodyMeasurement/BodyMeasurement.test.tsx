@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementType as BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
 
-let bodyMeasurementModel: BodyMeasurementModel;
+let bodyMeasurementType: BodyMeasurementType;
 let tableWithBody: HTMLElement;
 const hipCircumference = 23.23432334324; // make it very precise so we don't accidentally retrieve another value when querying for this
 
 let bodyMeasurementProps: React.ComponentProps<typeof BodyMeasurement>;
 
 beforeEach(() => {
-  bodyMeasurementModel = {
+  bodyMeasurementType = {
     bodyMeasurementId: 1,
     neckCircumference: 10000,
     waistCircumference: 1000,
@@ -24,7 +24,7 @@ beforeEach(() => {
   tableWithBody = table.appendChild(tableBody);
 
   bodyMeasurementProps = {
-    measurement : bodyMeasurementModel,
+    measurement : bodyMeasurementType,
     hipCircumferenceDataShouldBeRendered: false,
     deleteMeasurement : () => {},
     editMeasurement : () => {}

@@ -1,21 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import NotFound from './NotFound';
-import { UserModel, Gender, UserContextModel } from '../../models/userModels';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContextType } from '../../types/userTypes';
+import { UserContext} from '../../contexts/UserContext';
 import { MemoryRouter } from 'react-router-dom';
-import { defaultUserContextModel } from '../../testHelpers/testData';
+import { defaultUserContextType } from '../../testHelpers/testData';
 
-let userContextModel: UserContextModel;
+let userContextType: UserContextType;
 
 beforeEach(() => {
-  userContextModel = defaultUserContextModel;
+  userContextType = defaultUserContextType;
 });
 
 const handleRendering = (isAuthenticated: boolean) => {
-  userContextModel.isAuthenticated = () => isAuthenticated;
+  userContextType.isAuthenticated = () => isAuthenticated;
   return render(
-    <UserContext.Provider value={userContextModel}>
+    <UserContext.Provider value={userContextType}>
       <NotFound />
     </UserContext.Provider>,
     { wrapper: MemoryRouter }

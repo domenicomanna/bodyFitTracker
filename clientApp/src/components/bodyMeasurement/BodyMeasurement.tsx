@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../ui/button/Button';
 import styles from './bodyMeasurement.module.css';
 
 type Props = {
-  measurement: BodyMeasurementModel;
+  measurement: BodyMeasurementType;
   hipCircumferenceDataShouldBeRendered: boolean;
   deleteMeasurement: (bodyMeasurementId: number) => void;
   editMeasurement: (bodyMeasurementId: number) => void;

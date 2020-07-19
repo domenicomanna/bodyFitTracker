@@ -1,7 +1,7 @@
-import { UserContextModel, Gender, MeasurementPreferenceModel } from '../models/userModels';
+import { UserContextType, Gender, MeasurementPreference } from '../types/userTypes';
 import { AxiosResponse } from 'axios';
 
-export const defaultUserContextModel: UserContextModel = {
+export const defaultUserContextType: UserContextType = {
   gender: Gender.Female,
   token: '',
   height: 60,

@@ -1,4 +1,4 @@
-export type BodyMeasurementModel = {
+export type BodyMeasurementType = {
   bodyMeasurementId: number;
   neckCircumference: number;
   waistCircumference: number;
@@ -8,7 +8,7 @@ export type BodyMeasurementModel = {
   dateAdded: Date;
 };
 
-export type CreateOrEditMeasurementModel = {
+export type CreateOrEditMeasurement = {
   neckCircumference: string | number;
   waistCircumference: string | number;
   hipCircumference?: string | number;

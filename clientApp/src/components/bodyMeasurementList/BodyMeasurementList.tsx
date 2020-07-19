@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useContext } from 'react';
-import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
-import { Gender } from '../../models/userModels';
+import { Gender } from '../../types/userTypes';
 import styles from './bodyMeasurementList.module.css';
 import PageTitle from '../pageTitle/PageTitle';
 import { UserContext } from '../../contexts/UserContext';
 
 type Props = {
-  bodyMeasurements: BodyMeasurementModel[];
+  bodyMeasurements: BodyMeasurementType[];
   deleteMeasurement: (bodyMeasurementId: number) => void;
   editMeasurement: (bodyMeasurementId: number) => void;
 };

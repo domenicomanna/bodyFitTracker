@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import update from 'immutability-helper';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import BodyMeasurementList from '../../components/bodyMeasurementList/BodyMeasurementList';
-import { BodyMeasurementModel } from '../../models/bodyMeasurementModels';
+import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import routeUrls from '../../constants/routeUrls';
 import { toast } from 'react-toastify';
 
@@ -16,7 +16,7 @@ const BodyMeasurementsPage = () => {
   const location = useLocation<LocationState>();
   const history = useHistory();
   const [isLoading, setLoading] = useState(true);
-  const [bodyMeasurements, setBodyMeasurements] = useState<BodyMeasurementModel[]>();
+  const [bodyMeasurements, setBodyMeasurements] = useState<BodyMeasurementType[]>();
 
   useEffect(() => {
     bodyMeasurementsClient.getAllMeasurements().then((bodyMeasurements) => {
