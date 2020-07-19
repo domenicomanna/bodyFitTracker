@@ -35,7 +35,7 @@ const Login = () => {
     onSubmit: async (formValues: SignInFormValues) => {
       const formIsValid = await validationSchema.isValid(formValues);
       if (!formIsValid) {
-        setSignInErrorMessage('Invalid username or password');
+        setSignInErrorMessage('Invalid email or password');
         return;
       }
       setSignInErrorMessage('');
@@ -57,7 +57,7 @@ const Login = () => {
 
   return (
     <>
-      <PageTitle>Log in</PageTitle>
+      <PageTitle>Login</PageTitle>
       <Form style={{ maxWidth: '600px' }} onSubmit={formik.handleSubmit}>
         <label htmlFor='email'>Email</label>
         <div>

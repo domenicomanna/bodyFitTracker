@@ -2,7 +2,7 @@ import React, { createContext, useState, FunctionComponent } from 'react';
 import { MeasurementPreference, UserContextType } from '../types/userTypes';
 import { Gender } from '../types/userTypes';
 import tokenKey from '../constants/tokenKey';
-import { string } from 'yup';
+import tokenIsExpired from '../utils/tokenExpiration/tokenExpiration';
 
 export const UserContext = createContext({} as UserContextType);
 
@@ -16,9 +16,10 @@ const UserContextProvider: FunctionComponent = ({ children }) => {
   });
   const [height, setHeight] = useState(60);
 
-  const isAuthenticated = () => {
+  const isAuthenticated = (): boolean => {
     const token = localStorage.getItem(tokenKey);
-    return token ? true : false;
+    if (!token) return false;
+    return !tokenIsExpired(token);
   };
 
   return (
