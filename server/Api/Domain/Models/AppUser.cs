@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Api.Domain.Models
@@ -22,7 +23,7 @@ namespace Api.Domain.Models
             Salt = salt;
             Gender = gender;
             Height = height;
-            measurementSystemPreference = MeasurementSystemPreference;
+            MeasurementSystemPreference = measurementSystemPreference;
         }
     }
 }

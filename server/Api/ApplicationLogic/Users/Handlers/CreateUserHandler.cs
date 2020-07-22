@@ -29,16 +29,16 @@ namespace Api.ApplicationLogic.Users.Handlers
 
             if (emailIsTaken)
             {
-                errors.Add(nameof(request.Email), "That email address is not available");
+                errors.Add("email", "That email address is already taken");
                 return new CreateUserResult { Errors = errors };
             }
             
             (string hashedPassword, string salt) = _passwordHasher.GeneratePassword(request.Password);
 
-            AppUser appUser = new AppUser(request.Email, hashedPassword, salt, request.Height, request.Gender, request.MeasurementPreference);
+            AppUser appUser = new AppUser(request.Email, hashedPassword, salt, request.Height, request.Gender, request.UnitsOfMeasure);
 
-            // _bodyFitTrackerContext.AppUsers.Add(appUser);
-            // _bodyFitTrackerContext.SaveChanges();
+            _bodyFitTrackerContext.AppUsers.Add(appUser);
+            _bodyFitTrackerContext.SaveChanges();
 
             return new CreateUserResult
             {
