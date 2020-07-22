@@ -1,5 +1,5 @@
 import React, { createContext, useState, FunctionComponent } from 'react';
-import { MeasurementPreference, UserContextType } from '../types/userTypes';
+import { MeasurementPreference, UserContextType, MeasurementSystemName } from '../types/userTypes';
 import { Gender } from '../types/userTypes';
 import tokenKey from '../constants/tokenKey';
 import isExpired from '../utils/tokenExpiration/tokenExpiration';
@@ -10,7 +10,7 @@ const UserContextProvider: FunctionComponent = ({ children }) => {
   const [gender, setGender] = useState<Gender>(Gender.Male);
   const [email, setEmail] = useState('');
   const [measurementPreference, setMeasurementPreference] = useState<MeasurementPreference>({
-    measurementSystemName: 'Imperial',
+    measurementSystemName: MeasurementSystemName.Imperial,
     weightUnit: 'lb',
     lengthUnit: 'in',
   });

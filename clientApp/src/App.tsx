@@ -9,6 +9,7 @@ import CreateOrEditMeasurementPage from './pages/createOrEditMeasurementPage/Cre
 import About from './pages/about/About';
 import UnauthenticatedLayout from './components/unauthenticatedLayout/UnauthenticatedLayout';
 import Login from './pages/login/Login';
+import SignUp from './pages/signUp/SignUp';
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
         </AuthenticatedLayout>
       </Route>
 
-      <Route exact path={[routeUrls.login, routeUrls.about]}>
+      <Route exact path={[routeUrls.login, routeUrls.signUp, routeUrls.about]}>
         <UnauthenticatedLayout>
           <Route path={routeUrls.login} exact component={Login} />
+          <Route path={routeUrls.signUp} exact component={SignUp} />
           <Route path={routeUrls.about} exact component={About} />
         </UnauthenticatedLayout>
       </Route>

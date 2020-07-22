@@ -1,4 +1,4 @@
-import { UserContextType, Gender, MeasurementPreference } from '../types/userTypes';
+import { UserContextType, Gender, MeasurementPreference, MeasurementSystemName } from '../types/userTypes';
 import { AxiosResponse } from 'axios';
 
 export const defaultUserContextType: UserContextType = {
@@ -6,7 +6,7 @@ export const defaultUserContextType: UserContextType = {
   height: 60,
   email: '',
   measurementPreference: {
-    measurementSystemName: 'Imperial',
+    measurementSystemName: MeasurementSystemName.Imperial,
     weightUnit: 'lb',
     lengthUnit: 'in',
   },

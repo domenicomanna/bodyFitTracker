@@ -3,11 +3,33 @@ export enum Gender {
   Female = 'Female',
 }
 
+export enum MeasurementSystemName {
+  Imperial = 'Imperial',
+  Metric = 'Metric'
+} ;
+
 export type MeasurementPreference = {
-  measurementSystemName: 'Imperial' | 'Metric';
+  measurementSystemName: MeasurementSystemName
   lengthUnit: string;
   weightUnit: string;
 };
+
+export type CreateUserType = {
+  email: string,
+  password: string,
+  confirmedPassword: string,
+  height: number | string,
+  gender: Gender
+  unitsOfMeasure: MeasurementSystemName
+}
+
+export type CreateUserResultError = 'email';
+
+export type CreateUserResult = {
+  errors: Record<CreateUserResultError, string>,
+  succeeded: boolean,
+  token: string
+}
 
 export type User = {
   gender: Gender;
