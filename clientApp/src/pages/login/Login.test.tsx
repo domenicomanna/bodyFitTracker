@@ -7,7 +7,7 @@ import Login from './Login';
 import { mocked } from 'ts-jest/utils';
 import authenticationClient from '../../api/authenticationClient';
 import usersClient from '../../api/usersClient';
-import { Gender, UserContextType, User } from '../../types/userTypes';
+import { Gender, UserContextType, User, MeasurementSystemName } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { defaultUserContextType } from '../../testHelpers/testData';
 
@@ -28,7 +28,7 @@ beforeEach(() => {
     height: 60,
     gender: Gender.Female,
     measurementPreference: {
-      measurementSystemName: 'Imperial',
+      measurementSystemName: MeasurementSystemName.Imperial,
       lengthUnit: 'in',
       weightUnit: 'lb',
     },

@@ -7,21 +7,17 @@ axios.defaults.baseURL = 'https://localhost:5001/api/';
 
 const token = localStorage.getItem(tokenKey);
 
-axios.interceptors.request.use(
-  config => {
-    config.headers['Authorization'] = `Bearer ${token}`
-    return config;
-  },
-  error => {
-    return Promise.reject({ ...error });
-  }
-);
+export const setAuthorizationToken = (token: string) => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+};
+
+if (token) setAuthorizationToken(token);
 
 axios.interceptors.response.use(
-  config => {
+  (config) => {
     return config;
   },
-  error => {
+  (error) => {
     const responseStatus: number = error.response.status;
     console.log(responseStatus);
     if (responseStatus === 404) history.push(routeUrls.notFound);

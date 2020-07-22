@@ -15,6 +15,7 @@ import usersClient from '../../api/usersClient';
 import { User } from '../../types/userTypes';
 import tokenKey from '../../constants/tokenKey';
 import { UserContext } from '../../contexts/UserContext';
+import { setAuthorizationToken } from '../../api/baseConfiguration';
 
 let validationSchema = object<SignInFormValues>({
   email: string().email('Invalid email').required('Required'),
@@ -45,6 +46,7 @@ const Login = () => {
         formik.setFieldValue('password', '');
       } else {
         localStorage.setItem(tokenKey, signInResult.token);
+        setAuthorizationToken(signInResult.token);
         const user: User = await usersClient.getUser();
         setHeight(user.height);
         setEmail(user.email);
@@ -61,7 +63,7 @@ const Login = () => {
       <Form style={{ maxWidth: '600px' }} onSubmit={formik.handleSubmit}>
         <label htmlFor='email'>Email</label>
         <div>
-          <Input id='email' type='text' {...formik.getFieldProps('email')} />
+          <Input id='email' type='email' {...formik.getFieldProps('email')} />
         </div>
         <label htmlFor='password'>Password</label>
         <div>
