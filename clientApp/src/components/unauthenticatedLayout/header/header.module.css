@@ -12,40 +12,39 @@
 
 .brand {
   color: #000;
-	text-decoration: none;
-	font-size: 1.5rem;
+  text-decoration: none;
+  font-size: 1.5rem;
 }
 
-.navList{
-	list-style: none;
-	display: flex;
+.navList {
+  list-style: none;
+  display: flex;
 }
 
-.navListItem{
-	margin: 0 .5rem;
+.navListItem {
+  margin: 0 0.5rem;
 }
 
-.navListItem:first-child{
-	margin-left: 0;
+.navListItem:first-child {
+  margin-left: 0;
 }
 
-.navListItem:last-child{
-	margin-right: 0;
+.navListItem:last-child {
+  margin-right: 0;
 }
 
-.navListItem a{
-	text-decoration: none;
-	transition: color .3s;
-	padding: .5rem
+.navListItem a {
+  text-decoration: none;
+  transition: color 0.3s;
+  padding: 0.5rem;
 }
 
-.active{
-	color: #000
+.active {
+  color: #000;
 }
 
-@media(any-hover: hover){
-	.navListItem a:hover{
-		color: #000;
-	}
+@media (any-hover: hover) {
+  .navListItem a:hover {
+    color: #000;
+  }
 }
-

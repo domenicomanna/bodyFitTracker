@@ -16,10 +16,19 @@ const Header = () => {
           </h2>
           <ul className={styles.navList}>
             <li className={styles.navListItem}>
-              <NavLink to={routeUrls.login}>Login</NavLink>
+              <NavLink to={routeUrls.login} activeClassName={styles.active}>
+                Login
+              </NavLink>
             </li>
             <li className={styles.navListItem}>
-              <NavLink to={routeUrls.about}>About</NavLink>
+              <NavLink to={routeUrls.signUp} activeClassName={styles.active}>
+                Sign Up
+              </NavLink>
+            </li>
+            <li className={styles.navListItem}>
+              <NavLink to={routeUrls.about} activeClassName={styles.active}>
+                About
+              </NavLink>
             </li>
           </ul>
         </nav>
