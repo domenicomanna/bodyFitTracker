@@ -57,7 +57,6 @@ const Header = () => {
           <ul className={navListClasses}>
             <li style={{ position: 'relative' }} className={styles.navListItem} ref={profileDropDownMenuParentNodeRef}>
               <button
-                style={profileDropDownMenuShouldShow ? { color: 'black' } : undefined}
                 type='button'
                 onClick={() => setProfileDropDownMenuOpen((isOpen) => !isOpen)}
               >
@@ -66,17 +65,17 @@ const Header = () => {
               {profileDropDownMenuShouldShow && (
                 <ul data-testid="dropDownMenu" className={styles.dropDownMenu}>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                    <NavLink to={routeUrls.createMeasurement} exact>
                       Settings
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                    <NavLink to={routeUrls.createMeasurement} exact>
                       Change Password
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+                    <NavLink to={routeUrls.createMeasurement} exact>
                       Sign Out
                     </NavLink>
                   </li>

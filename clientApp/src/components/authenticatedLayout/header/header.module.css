@@ -45,10 +45,9 @@
   outline: none;
 }
 
-.active {
+.navListItem .active {
   color: #000;
 }
-
 
 .dropDownMenu{
   width: 170px;
@@ -101,6 +100,7 @@
     box-sizing: border-box;
     width: 100%;
     padding: .5rem 0;
+    color: var(--blue-800);
   }
 
   @media (any-hover: hover) {
