@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import Input from '../../components/ui/input/Input';
@@ -37,6 +37,7 @@ function CreateValidationSchema() {
 
 const SignUp = () => {
   const { setEmail, setHeight, setMeasurementPreference, setGender } = useContext(UserContext);
+  const [lengthUnit, setLengthUnit] = useState('in');
   const history = useHistory();
 
   const formik = useFormik({
@@ -109,7 +110,7 @@ const SignUp = () => {
         <div>
           <div>
             <Input style={inputStyle} id='height' type='number' {...formik.getFieldProps('height')} />
-            <span style={unitStyle}>in</span>
+            <span style={unitStyle}>{lengthUnit}</span>
           </div>
           {formik.touched.height && formik.errors.height && <ValidationError>{formik.errors.height}</ValidationError>}
         </div>
@@ -119,13 +120,19 @@ const SignUp = () => {
           <RadioButton
             name='unitsOfMeasure'
             checked={formik.values.unitsOfMeasure === MeasurementSystemName.Imperial}
-            onChange={() => formik.setFieldValue('unitsOfMeasure', MeasurementSystemName.Imperial)}
+            onChange={() => {
+              formik.setFieldValue('unitsOfMeasure', MeasurementSystemName.Imperial);
+              setLengthUnit('in');
+            }}
             displayText='Imperial'
           />
           <RadioButton
             name='unitsOfMeasure'
             checked={formik.values.unitsOfMeasure === MeasurementSystemName.Metric}
-            onChange={() => formik.setFieldValue('unitsOfMeasure', MeasurementSystemName.Metric)}
+            onChange={() => {
+              formik.setFieldValue('unitsOfMeasure', MeasurementSystemName.Metric);
+              setLengthUnit('cm');
+            }}
             displayText='Metric'
           />
         </RadioButtonGroup>
