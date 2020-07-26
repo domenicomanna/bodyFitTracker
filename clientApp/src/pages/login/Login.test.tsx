@@ -10,6 +10,7 @@ import usersClient from '../../api/usersClient';
 import { Gender, UserContextType, User, MeasurementSystemName } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { defaultUserContextType } from '../../testHelpers/testData';
+import routeUrls from '../../constants/routeUrls';
 
 jest.mock('../../api/usersClient');
 jest.mock('../../api/authenticationClient');
@@ -48,7 +49,7 @@ const handleRendering = () => {
       <Router history={history}>
         <Switch>
           <Route path={route} component={Login} />
-          <Route path='/' component={TestComponent} />
+          <Route path={routeUrls.home} component={TestComponent} />
         </Switch>
       </Router>
     </UserContext.Provider>
