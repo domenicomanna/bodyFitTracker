@@ -7,9 +7,9 @@ import Login from './Login';
 import { mocked } from 'ts-jest/utils';
 import authenticationClient from '../../api/authenticationClient';
 import usersClient from '../../api/usersClient';
-import { Gender, UserContextType, User, MeasurementSystemName } from '../../types/userTypes';
+import { UserContextType, User } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
-import { defaultUserContextType } from '../../testHelpers/testData';
+import { defaultUserContextType, defaultUser } from '../../testHelpers/testData';
 import routeUrls from '../../constants/routeUrls';
 
 jest.mock('../../api/usersClient');
@@ -24,16 +24,7 @@ beforeEach(() => {
   mockedAuthenticationClient.signIn.mockReset;
   mockedUsersClient.getUser.mockReset;
   userContextType = defaultUserContextType;
-  user = {
-    email: '',
-    height: 60,
-    gender: Gender.Female,
-    measurementPreference: {
-      measurementSystemName: MeasurementSystemName.Imperial,
-      lengthUnit: 'in',
-      weightUnit: 'lb',
-    },
-  };
+  user = defaultUser
 });
 
 const TestComponent = () => {

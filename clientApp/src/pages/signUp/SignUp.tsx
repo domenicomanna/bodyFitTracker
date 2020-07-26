@@ -110,7 +110,7 @@ const SignUp = () => {
         <div>
           <div>
             <Input style={inputStyle} id='height' type='number' {...formik.getFieldProps('height')} />
-            <span style={unitStyle}>{lengthUnit}</span>
+            <span data-testid="lengthUnit" style={unitStyle}>{lengthUnit}</span>
           </div>
           {formik.touched.height && formik.errors.height && <ValidationError>{formik.errors.height}</ValidationError>}
         </div>
