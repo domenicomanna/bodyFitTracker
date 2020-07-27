@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Api.ApplicationLogic.Users.DataTransferObjects;
 using Api.ApplicationLogic.Users.Handlers;
 using Api.ApplicationLogic.Users.Requests;
@@ -12,11 +13,13 @@ namespace Api.Controllers
     {
         private readonly GetUserHandler _getUserHandler;
         private readonly CreateUserHandler _createUserHandler;
+        private readonly ChangePasswordHandler _changePasswordHandler;
 
-        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler)
+        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler)
         {
             _getUserHandler = getUserHandler;
             _createUserHandler = createUserHandler;
+            _changePasswordHandler = changePasswordHandler;
         }
 
         [HttpGet("")]
@@ -30,6 +33,12 @@ namespace Api.Controllers
         public CreateUserResult CreateUser(CreateUserRequest createUserRequest)
         {
             return _createUserHandler.Handle(createUserRequest);
+        }
+
+        [HttpPut("change-password")]
+        public ChangePasswordResult ChangePassword(ChangePasswordRequest changePasswordRequest)
+        {
+            return _changePasswordHandler.Handle(changePasswordRequest);
         }
     }
 }
