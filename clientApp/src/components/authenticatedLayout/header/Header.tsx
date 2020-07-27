@@ -3,6 +3,7 @@ import Container from '../../container/Container';
 import styles from './header.module.css';
 import { NavLink } from 'react-router-dom';
 import routeUrls from '../../../constants/routeUrls';
+import tokenKey from '../../../constants/tokenKey';
 
 const Header = () => {
   const [hamburgerMenuIsOpen, setHamburgerMenuOpen] = useState(false);
@@ -26,6 +27,10 @@ const Header = () => {
       document.removeEventListener('click', handleClick);
     };
   });
+
+  const signUserOut = () => {
+    localStorage.removeItem(tokenKey);
+  }
 
   const navListClasses = `${styles.navListItems} ${hamburgerMenuIsOpen ? styles.showHamburgerLinks : ''}`;
 
@@ -75,7 +80,7 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} exact>
+                    <NavLink to={routeUrls.login} onClick={signUserOut} exact>
                       Sign Out
                     </NavLink>
                   </li>
