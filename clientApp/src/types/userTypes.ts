@@ -5,31 +5,44 @@ export enum Gender {
 
 export enum MeasurementSystemName {
   Imperial = 'Imperial',
-  Metric = 'Metric'
-} ;
+  Metric = 'Metric',
+}
 
 export type MeasurementPreference = {
-  measurementSystemName: MeasurementSystemName
+  measurementSystemName: MeasurementSystemName;
   lengthUnit: string;
   weightUnit: string;
 };
 
 export type CreateUserType = {
-  email: string,
-  password: string,
-  confirmedPassword: string,
-  height: number | string,
-  gender: Gender
-  unitsOfMeasure: MeasurementSystemName
-}
+  email: string;
+  password: string;
+  confirmedPassword: string;
+  height: number | string;
+  gender: Gender;
+  unitsOfMeasure: MeasurementSystemName;
+};
 
 export type CreateUserResultError = 'email';
 
 export type CreateUserResult = {
-  errors: Record<CreateUserResultError, string>,
-  succeeded: boolean,
-  token: string
-}
+  errors: Record<CreateUserResultError, string>;
+  succeeded: boolean;
+  token: string;
+};
+
+export type ChangePasswordType = {
+  currentPassword: string;
+  newPassword: string;
+  confirmedNewPassword: string;
+};
+
+export type ChangePasswordResultError = 'currentPassword';
+
+export type ChangePasswordResult = {
+  errors: Record<ChangePasswordResultError, string>;
+  succeeded: boolean;
+};
 
 export type User = {
   gender: Gender;

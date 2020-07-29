@@ -10,15 +10,17 @@ import About from './pages/about/About';
 import UnauthenticatedLayout from './components/unauthenticatedLayout/UnauthenticatedLayout';
 import Login from './pages/login/Login';
 import SignUp from './pages/signUp/SignUp';
+import { ChangePassword } from './pages/changePassword/ChangePassword';
 
 function App() {
   return (
     <Switch>
-      <Route exact path={[routeUrls.home, routeUrls.editMeasurement, routeUrls.createMeasurement]}>
+      <Route exact path={[routeUrls.home, routeUrls.editMeasurement, routeUrls.createMeasurement, routeUrls.changePassword]}>
         <AuthenticatedLayout>
           <ProtectedRoute path={routeUrls.home} exact component={BodyMeasurementsPage} />
           <ProtectedRoute path={routeUrls.editMeasurement} component={CreateOrEditMeasurementPage} />
           <ProtectedRoute path={routeUrls.createMeasurement} component={CreateOrEditMeasurementPage} />
+          <ProtectedRoute path={routeUrls.changePassword} component={ChangePassword} />
         </AuthenticatedLayout>
       </Route>
 

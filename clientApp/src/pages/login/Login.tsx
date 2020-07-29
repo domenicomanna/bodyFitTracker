@@ -6,7 +6,7 @@ import { object, string } from 'yup';
 import Input from '../../components/ui/input/Input';
 import ValidationError from '../../components/ui/validationError/ValidationError';
 import Button from '../../components/ui/button/Button';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import routeUrls from '../../constants/routeUrls';
 import styles from './login.module.css';
 import { SignInFormValues, SignInResult } from '../../types/authenticationTypes';
@@ -16,16 +16,22 @@ import { User } from '../../types/userTypes';
 import tokenKey from '../../constants/tokenKey';
 import { UserContext } from '../../contexts/UserContext';
 import { setAuthorizationToken } from '../../api/baseConfiguration';
+import { toast } from 'react-toastify';
 
 let validationSchema = object<SignInFormValues>({
   email: string().email('Invalid email').required('Required'),
   password: string().required('Required'),
 });
 
+export type LoginLocationState = {
+  passwordWasChanged?: boolean;
+};
+
 const Login = () => {
   const { setEmail, setHeight, setMeasurementPreference, setGender } = useContext(UserContext);
   const [signInErrorMessage, setSignInErrorMessage] = useState('');
   const history = useHistory();
+  const location = useLocation<LoginLocationState>();
 
   const formik = useFormik({
     initialValues: {
@@ -57,6 +63,9 @@ const Login = () => {
     },
   });
 
+  if (location.state && location.state.passwordWasChanged) toast.success('Password changed!');
+  if (location.state) history.replace(location.pathname, undefined);
+
   return (
     <>
       <PageTitle>Login</PageTitle>
@@ -73,7 +82,9 @@ const Login = () => {
         {signInErrorMessage && (
           <>
             <span></span>
-            <ValidationError testId="signInErrorMessage" style={{ margin: '0' }}>{signInErrorMessage}</ValidationError>
+            <ValidationError testId='signInErrorMessage' style={{ margin: '0' }}>
+              {signInErrorMessage}
+            </ValidationError>
           </>
         )}
 
