@@ -4,6 +4,7 @@ import styles from './header.module.css';
 import { NavLink } from 'react-router-dom';
 import routeUrls from '../../../constants/routeUrls';
 import tokenKey from '../../../constants/tokenKey';
+import { setAuthorizationToken } from '../../../api/baseConfiguration';
 
 const Header = () => {
   const [hamburgerMenuIsOpen, setHamburgerMenuOpen] = useState(false);
@@ -30,6 +31,7 @@ const Header = () => {
 
   const signUserOut = () => {
     localStorage.removeItem(tokenKey);
+    setAuthorizationToken('');
   }
 
   const navListClasses = `${styles.navListItems} ${hamburgerMenuIsOpen ? styles.showHamburgerLinks : ''}`;
@@ -75,7 +77,7 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} exact>
+                    <NavLink to={routeUrls.changePassword} exact>
                       Change Password
                     </NavLink>
                   </li>
