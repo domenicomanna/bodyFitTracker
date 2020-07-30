@@ -5,6 +5,7 @@ import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import { Gender, UserContextType } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { defaultUserContextType } from '../../testHelpers/testData';
+import { MemoryRouter } from 'react-router-dom';
 
 let bodyMeasurementListProps: React.ComponentProps<typeof BodyMeasurementList>;
 let userContextType: UserContextType;
@@ -34,7 +35,7 @@ const handleRendering = (gender: Gender = Gender.Male) => {
   return render(
     <UserContext.Provider value={userContextType}>
       <BodyMeasurementList {...bodyMeasurementListProps} />
-    </UserContext.Provider>
+    </UserContext.Provider>, {wrapper: MemoryRouter}
   );
 };
 
@@ -42,7 +43,7 @@ describe('Component when measurements are not provided', () => {
   it('should render a message indicating the user has no body measurements', () => {
     bodyMeasurementListProps.bodyMeasurements = [];
     handleRendering();
-    const messageElement = screen.getByText(/You do not have any body measurements/i);
+    const messageElement = screen.getByText(/You currently do not have any measurements/i);
     expect(messageElement).toBeTruthy();
   });
 });

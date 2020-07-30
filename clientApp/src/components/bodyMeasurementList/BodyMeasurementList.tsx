@@ -5,6 +5,8 @@ import { Gender } from '../../types/userTypes';
 import styles from './bodyMeasurementList.module.css';
 import PageTitle from '../pageTitle/PageTitle';
 import { UserContext } from '../../contexts/UserContext';
+import { NavLink } from 'react-router-dom';
+import routeUrls from '../../constants/routeUrls';
 
 type Props = {
   bodyMeasurements: BodyMeasurementType[];
@@ -29,31 +31,32 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, editM
   ));
 
   let contentToRender = (
-    <>
-      <PageTitle>Measurements</PageTitle>
-      <div className={styles.measurementsWrapper}>
-        <table className={styles.measurements}>
-          <thead>
-            <tr>
-              <th>Date Added</th>
-              <th>Neck Circumference ({lengthUnit})</th>
-              <th>Waist Circumference ({lengthUnit})</th>
-              {hipCircumferenceRow}
-              <th>Weight ({weightUnit})</th>
-              <th>Body fat (%)</th>
-              {/* empty headers for edit and delete icons */}
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody data-testid='measurements'>{transformedBodyMeasurements}</tbody>
-        </table>
-      </div>
-    </>
+    <div className={styles.measurementsWrapper}>
+      <table className={styles.measurements}>
+        <thead>
+          <tr>
+            <th>Date Added</th>
+            <th>Neck Circumference ({lengthUnit})</th>
+            <th>Waist Circumference ({lengthUnit})</th>
+            {hipCircumferenceRow}
+            <th>Weight ({weightUnit})</th>
+            <th>Body fat (%)</th>
+            {/* empty headers for edit and delete icons */}
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody data-testid='measurements'>{transformedBodyMeasurements}</tbody>
+      </table>
+    </div>
   );
 
   if (bodyMeasurements.length === 0) {
-    contentToRender = <p>You do not have any body measurements. Create one now!</p>;
+    contentToRender = (
+      <p style={{textAlign: "center"}}>
+        You currently do not have any measurements. <NavLink to={routeUrls.createMeasurement}>Create one now</NavLink>
+      </p>
+    );
   }
 
   return contentToRender;

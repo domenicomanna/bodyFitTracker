@@ -6,6 +6,7 @@ import BodyMeasurementList from '../../components/bodyMeasurementList/BodyMeasur
 import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import routeUrls from '../../constants/routeUrls';
 import { toast } from 'react-toastify';
+import PageTitle from '../../components/pageTitle/PageTitle';
 
 export type LocationState = {
   measurementWasCreated: boolean;
@@ -49,11 +50,14 @@ const BodyMeasurementsPage = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <BodyMeasurementList
-      bodyMeasurements={bodyMeasurements!}
-      editMeasurement={editMeasurement}
-      deleteMeasurement={deleteMeasurement}
-    />
+    <>
+      <PageTitle>Measurements</PageTitle>
+      <BodyMeasurementList
+        bodyMeasurements={bodyMeasurements!}
+        editMeasurement={editMeasurement}
+        deleteMeasurement={deleteMeasurement}
+      />
+    </>
   );
 };
 
