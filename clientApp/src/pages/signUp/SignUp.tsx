@@ -15,15 +15,12 @@ import { UserContext } from '../../contexts/UserContext';
 import routeUrls from '../../constants/routeUrls';
 import { useHistory } from 'react-router-dom';
 import { setAuthorizationToken } from '../../api/baseConfiguration';
+import password from '../../validationRules/password';
 
 function CreateValidationSchema() {
   let validationSchema = object({
     email: string().email('Please enter a valid email address').required('Required'),
-    password: string()
-      .trim('The password can not contain any leading or trailing spaces')
-      .min(4, 'Password must be at least 4 characters')
-      .strict(true)
-      .required('Required'),
+    password: password,
     confirmedPassword: string()
       .required('Required')
       .test('Password match', 'The passwords do not match', function (value) {

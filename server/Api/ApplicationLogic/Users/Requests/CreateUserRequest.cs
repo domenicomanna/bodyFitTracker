@@ -1,3 +1,4 @@
+using Api.ApplicationLogic.ValidationRules;
 using Api.Domain.Models;
 using FluentValidation;
 
@@ -18,7 +19,7 @@ namespace Api.ApplicationLogic.Users.Requests
         public CreateUserRequestValidator()
         {
             RuleFor(x => x.Email).EmailAddress();
-            RuleFor(x => x.Password).NotEmpty().MinimumLength(4);
+            RuleFor(x => x.Password).Password();
             RuleFor(x => x.ConfirmedPassword).Equal(x => x.Password);
             RuleFor(x => x.Height).GreaterThan(0);
             RuleFor(x => x.Gender).IsInEnum();
