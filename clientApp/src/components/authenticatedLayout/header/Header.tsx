@@ -18,7 +18,7 @@ const Header = () => {
       setProfileDropDownMenuOpen(false);
     }
 
-    if (headerRef && !headerRef.current?.contains(clickedElement)){
+    if (headerRef && !headerRef.current?.contains(clickedElement)) {
       setHamburgerMenuOpen(false);
     }
   };
@@ -32,16 +32,22 @@ const Header = () => {
   const signUserOut = () => {
     localStorage.removeItem(tokenKey);
     setAuthorizationToken('');
-  }
+    closeMenus();
+  };
+
+  const closeMenus = () => {
+    setProfileDropDownMenuOpen(false);
+    setHamburgerMenuOpen(false);
+  };
 
   const navListClasses = `${styles.navListItems} ${hamburgerMenuIsOpen ? styles.showHamburgerLinks : ''}`;
 
   return (
-    <header className={styles.header} ref={headerRef} data-testid="header">
+    <header className={styles.header} ref={headerRef} data-testid='header'>
       <Container>
         <nav className={styles.nav}>
           <span
-            data-testid="hamburger"
+            data-testid='hamburger'
             className={styles.hamburger}
             onClick={() => setHamburgerMenuOpen((isOpen) => !isOpen)}
           >
@@ -50,12 +56,12 @@ const Header = () => {
 
           <ul className={navListClasses}>
             <li className={styles.navListItem}>
-              <NavLink to={routeUrls.home} activeClassName={styles.active} exact>
+              <NavLink to={routeUrls.home} activeClassName={styles.active} exact onClick={closeMenus}>
                 Home
               </NavLink>
             </li>
             <li className={styles.navListItem}>
-              <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact>
+              <NavLink to={routeUrls.createMeasurement} activeClassName={styles.active} exact onClick={closeMenus}>
                 Add Measurement
               </NavLink>
             </li>
@@ -63,21 +69,18 @@ const Header = () => {
 
           <ul className={navListClasses}>
             <li style={{ position: 'relative' }} className={styles.navListItem} ref={profileDropDownMenuParentNodeRef}>
-              <button
-                type='button'
-                onClick={() => setProfileDropDownMenuOpen((isOpen) => !isOpen)}
-              >
+              <button type='button' onClick={() => setProfileDropDownMenuOpen((isOpen) => !isOpen)}>
                 My Profile
               </button>
               {profileDropDownMenuShouldShow && (
-                <ul data-testid="dropDownMenu" className={styles.dropDownMenu}>
+                <ul data-testid='dropDownMenu' className={styles.dropDownMenu}>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} exact>
+                    <NavLink to={routeUrls.createMeasurement} exact onClick={closeMenus}>
                       Settings
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={routeUrls.changePassword} exact>
+                    <NavLink to={routeUrls.changePassword} exact onClick={closeMenus}>
                       Change Password
                     </NavLink>
                   </li>
