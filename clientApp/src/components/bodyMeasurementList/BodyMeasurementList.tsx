@@ -3,7 +3,6 @@ import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import BodyMeasurement from '../bodyMeasurement/BodyMeasurement';
 import { Gender } from '../../types/userTypes';
 import styles from './bodyMeasurementList.module.css';
-import PageTitle from '../pageTitle/PageTitle';
 import { UserContext } from '../../contexts/UserContext';
 import { NavLink } from 'react-router-dom';
 import routeUrls from '../../constants/routeUrls';

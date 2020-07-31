@@ -27,7 +27,7 @@ beforeEach(() => {
     deleteMeasurement: () => {},
     editMeasurement: () => {},
   };
-  userContextType = defaultUserContextType
+  userContextType = defaultUserContextType;
 });
 
 const handleRendering = (gender: Gender = Gender.Male) => {
@@ -35,7 +35,8 @@ const handleRendering = (gender: Gender = Gender.Male) => {
   return render(
     <UserContext.Provider value={userContextType}>
       <BodyMeasurementList {...bodyMeasurementListProps} />
-    </UserContext.Provider>, {wrapper: MemoryRouter}
+    </UserContext.Provider>,
+    { wrapper: MemoryRouter }
   );
 };
 

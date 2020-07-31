@@ -7,6 +7,7 @@ import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import routeUrls from '../../constants/routeUrls';
 import { toast } from 'react-toastify';
 import PageTitle from '../../components/pageTitle/PageTitle';
+import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
 
 export type LocationState = {
   measurementWasCreated: boolean;
@@ -47,7 +48,7 @@ const BodyMeasurementsPage = () => {
     history.replace(location.pathname, undefined);
   }
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <PageLoader />;
 
   return (
     <>

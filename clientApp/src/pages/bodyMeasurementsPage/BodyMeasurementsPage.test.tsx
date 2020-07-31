@@ -34,7 +34,7 @@ beforeEach(() => {
       dateAdded: new Date(2019, 9, 12),
     },
   ];
-  axiosResponse = defaultAxiosResponse
+  axiosResponse = defaultAxiosResponse;
 
   mockedBodyMeasurementsClient.getAllMeasurements.mockReset();
 });
@@ -58,9 +58,8 @@ describe('Component when measurements are loading', () => {
   it('should render a loading message when the measurements are being loaded', async () => {
     mockedBodyMeasurementsClient.getAllMeasurements.mockResolvedValue(bodyMeasurements);
     handleRendering();
-    const loadingElement = screen.getByText(/loading/i);
+    const loadingElement = await screen.findByTestId(/pageLoader/i);
     expect(loadingElement).toBeTruthy();
-    await screen.findByText(/loading/i);
   });
 });
 
