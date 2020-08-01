@@ -5,6 +5,8 @@ import routeUrls from '../../constants/routeUrls';
 import { UserContext } from '../../contexts/UserContext';
 import AuthenticatedLayout from '../../components/authenticatedLayout/AuthenticatedLayout';
 import UnauthenticatedLayout from '../../components/unauthenticatedLayout/UnauthenticatedLayout';
+import siteTitle from '../../constants/siteTitle';
+import { Helmet } from 'react-helmet';
 
 type Props = {
   message?: string;
@@ -17,6 +19,9 @@ const NotFound: FunctionComponent<Props> = ({ message = defaultMessage }) => {
 
   const notFoundContent = (
     <>
+      <Helmet>
+        <title>{siteTitle} | Not Found</title>
+      </Helmet>
       <PageTitle style={{ marginTop: '1rem' }}>404 NOT FOUND</PageTitle>
       <p>{defaultMessage}</p>
       <p>
@@ -25,8 +30,8 @@ const NotFound: FunctionComponent<Props> = ({ message = defaultMessage }) => {
     </>
   );
 
-  if (isAuthenticated()) return <AuthenticatedLayout>{notFoundContent}</AuthenticatedLayout>
-  return <UnauthenticatedLayout>{notFoundContent}</UnauthenticatedLayout>
+  if (isAuthenticated()) return <AuthenticatedLayout>{notFoundContent}</AuthenticatedLayout>;
+  return <UnauthenticatedLayout>{notFoundContent}</UnauthenticatedLayout>;
 };
 
 export default NotFound;

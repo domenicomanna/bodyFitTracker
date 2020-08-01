@@ -14,6 +14,8 @@ import { CreateOrEditMeasurement } from '../../types/bodyMeasurementTypes';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import routeUrls from '../../constants/routeUrls';
 import moment from 'moment';
+import { Helmet } from 'react-helmet';
+import siteTitle from '../../constants/siteTitle';
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
   let validationSchema = object<CreateOrEditMeasurement>({
@@ -46,7 +48,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     waistCircumference: '',
     hipCircumference: '',
     height: height,
-    weight: '', 
+    weight: '',
     dateAdded: moment().format().split('T')[0],
   };
 
@@ -93,7 +95,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     }
   }, [match.params.measurementIdToEdit]);
 
-  const pageTitleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
+  const titleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
 
   const inputStyle: React.CSSProperties = {
     width: '90%',
@@ -128,7 +130,12 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
   return (
     <>
-      <PageTitle>{pageTitleContent}</PageTitle>
+      <Helmet>
+        <title>
+          {siteTitle} | {titleContent}
+        </title>
+      </Helmet>
+      <PageTitle>{titleContent}</PageTitle>
       <Form onSubmit={formik.handleSubmit}>
         <label htmlFor='neckCircumference'>Neck Circumference</label>
         <div>

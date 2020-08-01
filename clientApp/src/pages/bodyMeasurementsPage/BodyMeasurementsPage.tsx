@@ -8,6 +8,8 @@ import routeUrls from '../../constants/routeUrls';
 import { toast } from 'react-toastify';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
+import { Helmet } from 'react-helmet';
+import siteTitle from '../../constants/siteTitle';
 
 export type LocationState = {
   measurementWasCreated: boolean;
@@ -52,6 +54,9 @@ const BodyMeasurementsPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{siteTitle} | Measurements</title>
+      </Helmet>
       <PageTitle>Measurements</PageTitle>
       <BodyMeasurementList
         bodyMeasurements={bodyMeasurements!}

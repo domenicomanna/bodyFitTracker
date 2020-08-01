@@ -16,6 +16,8 @@ import routeUrls from '../../constants/routeUrls';
 import { useHistory } from 'react-router-dom';
 import { setAuthorizationToken } from '../../api/baseConfiguration';
 import password from '../../validationRules/password';
+import { Helmet } from 'react-helmet';
+import siteTitle from '../../constants/siteTitle';
 
 function CreateValidationSchema() {
   let validationSchema = object({
@@ -74,6 +76,9 @@ const SignUp = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{siteTitle} | Sign Up</title>
+      </Helmet>
       <PageTitle>Sign Up</PageTitle>
       <Form onSubmit={formik.handleSubmit}>
         <label htmlFor='email'>Email</label>
@@ -107,7 +112,9 @@ const SignUp = () => {
         <div>
           <div>
             <Input style={inputStyle} id='height' type='number' {...formik.getFieldProps('height')} />
-            <span data-testid="lengthUnit" style={unitStyle}>{lengthUnit}</span>
+            <span data-testid='lengthUnit' style={unitStyle}>
+              {lengthUnit}
+            </span>
           </div>
           {formik.touched.height && formik.errors.height && <ValidationError>{formik.errors.height}</ValidationError>}
         </div>
