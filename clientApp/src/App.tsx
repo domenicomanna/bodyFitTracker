@@ -13,6 +13,8 @@ import Login from './pages/login/Login';
 import SignUp from './pages/signUp/SignUp';
 import { ChangePassword } from './pages/changePassword/ChangePassword';
 import siteTitle from './constants/siteTitle';
+import { ResetPasswordStepOne } from './pages/resetPasswordPages/resetPasswordStepOne/ResetPasswordStepOne';
+import { ResetPasswordStepOneSuccess } from './pages/resetPasswordPages/resetPasswordStepOneSuccess/ResetPasswordStepOneSuccess';
 
 function App() {
   return (
@@ -33,11 +35,13 @@ function App() {
           </AuthenticatedLayout>
         </Route>
 
-        <Route exact path={[routeUrls.login, routeUrls.signUp, routeUrls.about]}>
+        <Route exact path={[routeUrls.login, routeUrls.signUp, routeUrls.about, routeUrls.resetPassword.stepOne, routeUrls.resetPassword.stepOneSuccess]}>
           <UnauthenticatedLayout>
             <Route path={routeUrls.login} exact component={Login} />
             <Route path={routeUrls.signUp} exact component={SignUp} />
             <Route path={routeUrls.about} exact component={About} />
+            <Route path={routeUrls.resetPassword.stepOne} exact component={ResetPasswordStepOne}/> 
+            <Route path={routeUrls.resetPassword.stepOneSuccess} exact component={ResetPasswordStepOneSuccess}/>
           </UnauthenticatedLayout>
         </Route>
 

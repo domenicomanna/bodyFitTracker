@@ -44,6 +44,10 @@ export type ChangePasswordResult = {
   succeeded: boolean;
 };
 
+export type ResetPasswordStepOneType = {
+  email: string
+}
+
 export type User = {
   gender: Gender;
   height: number;

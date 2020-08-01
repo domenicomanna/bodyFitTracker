@@ -8,6 +8,11 @@ const routeUrls = {
   signUp: '/signUp',
   about: '/about',
   notFound: '/not-found',
+  resetPassword:{
+    stepOne: '/reset-password-step-one',
+    stepOneSuccess: '/reset-password-email-sent',
+    stepTwo: '/reset-password-step-two',
+  }
 };
 
 export default routeUrls;
