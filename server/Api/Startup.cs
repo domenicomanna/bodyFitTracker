@@ -83,7 +83,7 @@ namespace Api
                         };
                     });
 
-            services.AddScoped<IUserAccessor, UserAccessor>();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.AddScoped<GetAllBodyMeasurementsHandler>();
             services.AddScoped<GetBodyMeasurementHandler>();
@@ -92,12 +92,15 @@ namespace Api
 
             services.AddScoped<GetUserHandler>();
             services.AddScoped<CreateUserHandler>();
-            services.AddScoped<IPasswordHasher, PasswordHasher>();
-            services.AddScoped<IJwtGenerator, JwtGenerator>();
+
             services.AddScoped<LoginHandler>();
             services.AddScoped<ChangePasswordHandler>();
+            services.AddScoped<ResetPasswordStepOneHandler>();
 
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IPasswordResetTokenGenerator, PasswordResetTokenGenerator>();
             services.AddScoped<IEmailSender, EmailSender>();
         }
 

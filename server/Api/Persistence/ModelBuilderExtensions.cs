@@ -13,7 +13,7 @@ namespace Api.Persistence
                     new
                     {
                         AppUserId = 1,
-                        Email = "abc@gmail.com",
+                        Email = "mannadomenico2849@gmail.com",
                         HashedPassword = "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=",
                         Salt = "HvJRurMKIz+KkIpQhw4DpA==",
                         Height = 60.0,

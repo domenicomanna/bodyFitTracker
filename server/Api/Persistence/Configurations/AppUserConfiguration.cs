@@ -11,6 +11,8 @@ namespace Api.Persistence.Configurations
             builder
                 .HasKey(a => a.AppUserId);
             builder
+                .HasAlternateKey(a => a.Email);
+            builder
                 .Property(a => a.AppUserId)
                 .ValueGeneratedOnAdd();
             builder

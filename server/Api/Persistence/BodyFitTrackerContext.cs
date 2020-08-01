@@ -13,6 +13,7 @@ namespace Api.Persistence
         }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<BodyMeasurement> BodyMeasurements { get; set; }
+        public DbSet<PasswordReset> PasswordResets{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,6 +24,7 @@ namespace Api.Persistence
         {
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new BodyMeasurementConfiguration());
+            modelBuilder.ApplyConfiguration(new PasswordResetConfiguration());
 
             if (SeedData) modelBuilder.Seed();
         }

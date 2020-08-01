@@ -14,12 +14,14 @@ namespace Api.Controllers
         private readonly GetUserHandler _getUserHandler;
         private readonly CreateUserHandler _createUserHandler;
         private readonly ChangePasswordHandler _changePasswordHandler;
+        private readonly ResetPasswordStepOneHandler _resetPasswordStepOneHandler;
 
-        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler)
+        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler, ResetPasswordStepOneHandler resetPasswordStepOneHandler)
         {
             _getUserHandler = getUserHandler;
             _createUserHandler = createUserHandler;
             _changePasswordHandler = changePasswordHandler;
+            _resetPasswordStepOneHandler = resetPasswordStepOneHandler;
         }
 
         [HttpGet("")]
@@ -39,6 +41,20 @@ namespace Api.Controllers
         public ChangePasswordResult ChangePassword(ChangePasswordRequest changePasswordRequest)
         {
             return _changePasswordHandler.Handle(changePasswordRequest);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("reset-password-step-one")]
+        public void ResetPasswordStepOne(ResetPasswordStepOneRequest resetPasswordStepOneRequest)
+        {
+            _resetPasswordStepOneHandler.Handle(resetPasswordStepOneRequest);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("reset-password-step-two")]
+        public void ResetPasswordStepTwo(ResetPasswordStepTwoRequest resetPasswordStepTwoRequest)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

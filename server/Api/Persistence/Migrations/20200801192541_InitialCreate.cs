@@ -23,6 +23,7 @@ namespace Api.Persistence.migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUsers", x => x.AppUserId);
+                    table.UniqueConstraint("AK_AppUsers_Email", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,10 +52,29 @@ namespace Api.Persistence.migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PasswordResets",
+                columns: table => new
+                {
+                    Token = table.Column<string>(nullable: false),
+                    AppUserId = table.Column<int>(nullable: false),
+                    Expiration = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PasswordResets", x => x.Token);
+                    table.ForeignKey(
+                        name: "FK_PasswordResets_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "AppUserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "AppUserId", "Email", "Gender", "HashedPassword", "Height", "MeasurementSystemPreference", "Salt" },
-                values: new object[] { 1, "abc@gmail.com", "Male", "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=", 60.0, "Imperial", "HvJRurMKIz+KkIpQhw4DpA==" });
+                values: new object[] { 1, "mannadomenico2849@gmail.com", "Male", "Xt+eYgLCOWjNy3YBxMWvcDKOQoEVtVwIyCDp9qfo+ag=", 60.0, "Imperial", "HvJRurMKIz+KkIpQhw4DpA==" });
 
             migrationBuilder.InsertData(
                 table: "AppUsers",
@@ -64,56 +84,61 @@ namespace Api.Persistence.migrations
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 1, 1, 10.0, new DateTime(2020, 6, 30, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 125.0 });
+                values: new object[] { 1, 1, 10.0, new DateTime(2020, 8, 1, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 2, 1, 10.0, new DateTime(2020, 7, 1, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 120.0 });
+                values: new object[] { 2, 1, 10.0, new DateTime(2020, 8, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 120.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 3, 1, 10.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 130.0 });
+                values: new object[] { 3, 1, 10.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 130.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 4, 1, 10.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 145.0 });
+                values: new object[] { 4, 1, 10.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 145.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 5, 1, 10.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 115.0 });
+                values: new object[] { 5, 1, 10.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, null, 12.0, 28.0, 115.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 6, 2, 10.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 12.0, 28.0, 121.0 });
+                values: new object[] { 6, 2, 10.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 12.0, 28.0, 121.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 7, 2, 10.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 12.0, 28.0, 122.0 });
+                values: new object[] { 7, 2, 10.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 12.0, 28.0, 122.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 8, 2, 10.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 10.0, 30.0, 125.0 });
+                values: new object[] { 8, 2, 10.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 10.0, 30.0, 125.0 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 9, 2, 12.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 12.0, 28.0, 126.59999999999999 });
+                values: new object[] { 9, 2, 12.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 12.0, 28.0, 126.59999999999999 });
 
             migrationBuilder.InsertData(
                 table: "BodyMeasurements",
                 columns: new[] { "BodyMeasurementId", "AppUserId", "BodyFatPercentage", "DateAdded", "Height", "HipCircumference", "NeckCircumference", "WaistCircumference", "Weight" },
-                values: new object[] { 10, 2, 11.0, new DateTime(2020, 7, 2, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 11.0, 29.0, 125.90000000000001 });
+                values: new object[] { 10, 2, 11.0, new DateTime(2020, 8, 3, 0, 0, 0, 0, DateTimeKind.Local), 60.0, 20.0, 11.0, 29.0, 125.90000000000001 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BodyMeasurements_AppUserId",
                 table: "BodyMeasurements",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PasswordResets_AppUserId",
+                table: "PasswordResets",
                 column: "AppUserId");
         }
 
@@ -121,6 +146,9 @@ namespace Api.Persistence.migrations
         {
             migrationBuilder.DropTable(
                 name: "BodyMeasurements");
+
+            migrationBuilder.DropTable(
+                name: "PasswordResets");
 
             migrationBuilder.DropTable(
                 name: "AppUsers");
