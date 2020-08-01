@@ -4,6 +4,8 @@ using Api.ApplicationLogic.BodyMeasurements.Handlers;
 using Api.ApplicationLogic.Users.Handlers;
 using Api.ApplicationLogic.Users.Requests;
 using Api.Common.Interfaces;
+using Api.Configurations;
+using Api.Infrastructure.Emailing;
 using Api.Infrastructure.Security;
 using Api.Middleware;
 using Api.Persistence;
@@ -94,6 +96,9 @@ namespace Api
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<LoginHandler>();
             services.AddScoped<ChangePasswordHandler>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddScoped<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

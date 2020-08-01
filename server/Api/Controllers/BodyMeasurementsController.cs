@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
 using Api.ApplicationLogic.BodyMeasurements.Requests;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
