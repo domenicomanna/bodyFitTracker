@@ -50,19 +50,21 @@ const BodyMeasurementsPage = () => {
     history.replace(location.pathname, undefined);
   }
 
-  if (isLoading) return <PageLoader />;
-
   return (
     <>
       <Helmet>
         <title>{siteTitle} | Measurements</title>
       </Helmet>
       <PageTitle>Measurements</PageTitle>
-      <BodyMeasurementList
-        bodyMeasurements={bodyMeasurements!}
-        editMeasurement={editMeasurement}
-        deleteMeasurement={deleteMeasurement}
-      />
+      {isLoading ? (
+        <PageLoader testId='pageLoader' />
+      ) : (
+        <BodyMeasurementList
+          bodyMeasurements={bodyMeasurements!}
+          editMeasurement={editMeasurement}
+          deleteMeasurement={deleteMeasurement}
+        />
+      )}
     </>
   );
 };
