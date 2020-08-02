@@ -15,13 +15,17 @@ namespace Api.Controllers
         private readonly CreateUserHandler _createUserHandler;
         private readonly ChangePasswordHandler _changePasswordHandler;
         private readonly ResetPasswordStepOneHandler _resetPasswordStepOneHandler;
+        private readonly ValidateResetPasswordTokenHandler _validateResetPasswordTokenHandler;
+        private readonly ResetPasswordStepTwoHandler _resetPasswordStepTwoHandler;
 
-        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler, ResetPasswordStepOneHandler resetPasswordStepOneHandler)
+        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler, ResetPasswordStepOneHandler resetPasswordStepOneHandler, ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler, ResetPasswordStepTwoHandler resetPasswordStepTwoHandler)
         {
             _getUserHandler = getUserHandler;
             _createUserHandler = createUserHandler;
             _changePasswordHandler = changePasswordHandler;
             _resetPasswordStepOneHandler = resetPasswordStepOneHandler;
+            _validateResetPasswordTokenHandler = validateResetPasswordTokenHandler;
+            _resetPasswordStepTwoHandler = resetPasswordStepTwoHandler;
         }
 
         [HttpGet("")]
@@ -51,10 +55,18 @@ namespace Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPut("reset-password-step-two")]
-        public void ResetPasswordStepTwo(ResetPasswordStepTwoRequest resetPasswordStepTwoRequest)
+        [HttpGet("validate-reset-password-token/{token}")]
+        public ResetPasswordValidationResult ResetPasswordStepOne(string token)
         {
-            throw new System.NotImplementedException();
+            return _validateResetPasswordTokenHandler.Handle(token);
+        }
+
+
+        [AllowAnonymous]
+        [HttpPut("reset-password-step-two")]
+        public ResetPasswordStepTwoResult ResetPasswordStepTwo(ResetPasswordStepTwoRequest resetPasswordStepTwoRequest)
+        {
+            return _resetPasswordStepTwoHandler.Handle(resetPasswordStepTwoRequest);
         }
     }
 }

@@ -96,6 +96,8 @@ namespace Api
             services.AddScoped<LoginHandler>();
             services.AddScoped<ChangePasswordHandler>();
             services.AddScoped<ResetPasswordStepOneHandler>();
+            services.AddScoped<ResetPasswordStepTwoHandler>();
+            services.AddScoped<ValidateResetPasswordTokenHandler>();
 
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IJwtGenerator, JwtGenerator>();
