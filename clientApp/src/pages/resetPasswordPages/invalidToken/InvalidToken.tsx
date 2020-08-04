@@ -16,7 +16,7 @@ export const InvalidToken = () => {
       <Container style={{ maxWidth: '600px' }}>
         <p>The token is either expired or was not found. </p>
         <p>
-          <NavLink to={routeUrls.resetPassword.stepOne}>Are you trying to change your password?</NavLink>
+          <NavLink to={routeUrls.resetPassword.stepOne}>Are you trying to reset your password?</NavLink>
         </p>
       </Container>
     </>
