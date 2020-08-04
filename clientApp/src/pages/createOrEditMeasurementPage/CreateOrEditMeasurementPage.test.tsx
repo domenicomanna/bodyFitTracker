@@ -9,52 +9,59 @@ import { Gender, UserContextType } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { AxiosResponse } from 'axios';
 import { defaultUserContextType, defaultAxiosResponse } from '../../testHelpers/testData';
+import { CreateOrEditMeasurement } from '../../types/bodyMeasurementTypes';
 
 jest.mock('../../api/bodyMeasurementsClient');
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
 let axiosResponse: AxiosResponse;
 let userContextType: UserContextType;
+let editMeasurementType: CreateOrEditMeasurement;
 
 beforeEach(() => {
-  userContextType = defaultUserContextType
-  axiosResponse = defaultAxiosResponse
+  userContextType = defaultUserContextType;
+  axiosResponse = defaultAxiosResponse;
+  mockedBodyMeasurementsClient.getMeasurement.mockReset();
   mockedBodyMeasurementsClient.createMeasurement.mockReset();
+  editMeasurementType = {
+    neckCircumference: 10,
+    waistCircumference: 30,
+    hipCircumference: 10,
+    weight: 10,
+    dateAdded: new Date(2019, 9, 12),
+    height: 60,
+  };
 });
+
+const handleRendering = (gender: Gender, measurementIsBeingCreated: boolean) => {
+  userContextType.gender = gender;
+  const history = createMemoryHistory();
+  let path;
+  if (measurementIsBeingCreated) {
+    path = '/create-measurement';
+    history.push(path);
+  } else {
+    path = '/:measurementIdToEdit';
+    history.push('/10');
+  }
+  return render(
+    <Router history={history}>
+      <UserContext.Provider value={userContextType}>
+        <Route path={path} component={CreateOrEditMeasurementPage} />
+      </UserContext.Provider>
+    </Router>
+  );
+};
 
 describe('Page title for different modes', () => {
   it('should have a title of create measurement when in create mode', async () => {
-    const path = '/create-measurement';
-    const history = createMemoryHistory();
-    history.push(path);
-    render(
-      <Router history={history}>
-        <UserContext.Provider value={userContextType}>
-          <Route path={path} component={CreateOrEditMeasurementPage} />
-        </UserContext.Provider>
-      </Router>
-    );
+    handleRendering(Gender.Male, true);
     const titleInCreateMode = await waitFor(() => screen.getByText(/create measurement/i));
     expect(titleInCreateMode).toBeTruthy();
   });
 
   it('should have a title of edit measurement when in edit mode', async () => {
-    mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue({
-      neckCircumference: 10,
-      waistCircumference: 30,
-      hipCircumference: 10,
-      weight: 10,
-      dateAdded: new Date(2019, 9, 12),
-      height: 60,
-    });
-    const history = createMemoryHistory();
-    history.push('/10');
-    render(
-      <Router history={history}>
-        <UserContext.Provider value={userContextType}>
-          <Route path='/:measurementIdToEdit' component={CreateOrEditMeasurementPage} />
-        </UserContext.Provider>
-      </Router>
-    );
+    mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue(editMeasurementType);
+    handleRendering(Gender.Male, false);
     await waitFor(() => expect(mockedBodyMeasurementsClient.getMeasurement).toHaveBeenCalledTimes(1));
     const titleInEditMode = screen.getByText(/edit measurement/i);
     expect(titleInEditMode).toBeTruthy();
@@ -62,62 +69,22 @@ describe('Page title for different modes', () => {
 });
 
 describe('Form fields for different genders', () => {
-  const handleRendering = (gender: Gender) => {
-    userContextType.gender = gender;
-    const path = '/create-measurement';
-    const history = createMemoryHistory();
-    history.push(path);
-    return render(
-      <Router history={history}>
-        <UserContext.Provider value={userContextType}>
-          <Route path={path} component={CreateOrEditMeasurementPage} />
-        </UserContext.Provider>
-      </Router>
-    );
-  };
-
   it('should not have a hip circumference field if gender is male', async () => {
-    handleRendering(Gender.Male);
+    handleRendering(Gender.Male, true);
     const hipCircumferenceElement = await waitFor(() => screen.queryByLabelText(/hip circumference/i));
     expect(hipCircumferenceElement).toBeFalsy();
   });
 
   it('should have a hip circumference field if gender is female', async () => {
-    handleRendering(Gender.Female);
+    handleRendering(Gender.Female, true);
     const hipCircumferenceElement = await waitFor(() => screen.getAllByText(/hip circumference/i));
     expect(hipCircumferenceElement).toBeTruthy();
   });
 });
 
 describe('Component when trying to submit the form', () => {
-  const handleRendering = () => {
-    userContextType.gender = Gender.Male;
-    const path = '/create-measurement';
-    const history = createMemoryHistory();
-    history.push(path);
-    return render(
-      <Router history={history}>
-        <UserContext.Provider value={userContextType}>
-          <Route path={path} component={CreateOrEditMeasurementPage} />
-        </UserContext.Provider>
-      </Router>
-    );
-  };
-
-  it('should have a disabled submit button if form fields are invalid', async () => {
-    handleRendering();
-    const weightInputElement = await waitFor(() => screen.getByLabelText(/weight/i));
-    await waitFor(() => fireEvent.change(weightInputElement, { target: { value: '-123' } })); // invalid weight
-    await waitFor(() => fireEvent.blur(weightInputElement));
-
-    const weightValidationError = screen.getByTestId(/weightError/i);
-    const submitButton = screen.getByText(/submit/i);
-    expect(weightValidationError).toBeTruthy();
-    expect(submitButton).toBeDisabled();
-  });
-
   it('should enable submission if all form fields are valid', async () => {
-    handleRendering();
+    handleRendering(Gender.Male, true);
     mockedBodyMeasurementsClient.createMeasurement.mockResolvedValue(axiosResponse);
 
     const neckCircumferenceInputElement = await waitFor(() => screen.getByLabelText(/neck Circumference/i));
