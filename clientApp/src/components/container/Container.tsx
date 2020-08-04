@@ -1,9 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import styles from './container.module.css';
 
-const Container: FunctionComponent = ({ children }) => {
+type Props = {
+  style?: React.CSSProperties
+}
+
+const Container: FunctionComponent<Props> = ({ children, style }) => {
   return (
-    <div className={styles.container}>
+    <div style={style} className={styles.container}>
       {children}
     </div>
   );
