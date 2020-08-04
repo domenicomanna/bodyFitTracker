@@ -6,6 +6,9 @@ import {
   ChangePasswordType,
   ChangePasswordResult,
   ResetPasswordStepOneType,
+  ResetPasswordValidationResult,
+  ResetPasswordStepTwoType,
+  ResetPasswordResult,
 } from '../types/userTypes';
 
 const requests = {
@@ -15,6 +18,10 @@ const requests = {
     put('users/change-password/', changePasswordType).then((response) => response.data),
   resetPasswordStepOne: (resetPasswordStepOneType: ResetPasswordStepOneType) =>
     post('users/reset-password-step-one', resetPasswordStepOneType),
+  resetPasswordStepTwo: (resetPasswordStepTwoType: ResetPasswordStepTwoType) =>
+    put('users/reset-password-step-two', resetPasswordStepTwoType).then((response) => response.data),
+  validateResetPasswordToken: (token: string) =>
+    get(`users/validate-reset-password-token/${token}`).then((response) => response.data),
 };
 
 const usersClient = {
@@ -24,6 +31,10 @@ const usersClient = {
     requests.changePassword(changePasswordType),
   resetPasswordStepOne: (resetPasswordStepOneType: ResetPasswordStepOneType) =>
     requests.resetPasswordStepOne(resetPasswordStepOneType),
+  resetPasswordStepTwo: (resetPasswordStepTwoType: ResetPasswordStepTwoType): Promise<ResetPasswordResult> =>
+    requests.resetPasswordStepTwo(resetPasswordStepTwoType),
+  validateResetPasswordToken: (token: string): Promise<ResetPasswordValidationResult> =>
+    requests.validateResetPasswordToken(token),
 };
 
 export default usersClient;

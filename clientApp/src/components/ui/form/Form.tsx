@@ -3,12 +3,13 @@ import styles from './form.module.css';
 
 type Props = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void | Promise<any>;
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
+  testId?: string;
 };
 
-const Form: FunctionComponent<Props> = ({ children, onSubmit, style }) => {
+const Form: FunctionComponent<Props> = ({ children, onSubmit, style, testId }) => {
   return (
-    <form style={style} className={styles.form} onSubmit={onSubmit}>
+    <form data-testid={testId} style={style} className={styles.form} onSubmit={onSubmit}>
       {children}
     </form>
   );

@@ -11,7 +11,8 @@ const routeUrls = {
   resetPassword:{
     stepOne: '/reset-password-step-one',
     stepOneSuccess: '/reset-password-email-sent',
-    stepTwo: '/reset-password-step-two',
+    stepTwo: '/reset-password-step-two/:token',
+    invalidToken: '/reset-password-invalid-token'
   }
 };
 

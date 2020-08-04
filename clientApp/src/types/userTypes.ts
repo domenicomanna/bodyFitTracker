@@ -1,3 +1,5 @@
+import { string } from "yup";
+
 export enum Gender {
   Male = 'Male',
   Female = 'Female',
@@ -47,6 +49,23 @@ export type ChangePasswordResult = {
 export type ResetPasswordStepOneType = {
   email: string
 }
+
+export type ResetPasswordStepTwoType = {
+  resetPasswordToken: string,
+  newPassword: string,
+  confirmedNewPassword: string
+}
+
+export type ResetPasswordValidationResult = {
+  succeeded: boolean,
+  errorMessage: string
+}
+
+export type ResetPasswordResult = {
+  succeeded: boolean,
+  errorMessage: string
+}
+
 
 export type User = {
   gender: Gender;

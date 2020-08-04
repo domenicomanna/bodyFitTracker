@@ -27,6 +27,7 @@ let validationSchema = object<SignInFormValues>({
 
 export type LoginLocationState = {
   passwordWasChanged?: boolean;
+  passswordWasReset?: boolean;
 };
 
 const Login = () => {
@@ -66,6 +67,7 @@ const Login = () => {
   });
 
   if (location.state && location.state.passwordWasChanged) toast.success('Password changed!');
+  else if (location.state && location.state.passswordWasReset) toast.success('Password reset!');
   if (location.state) history.replace(location.pathname, undefined);
 
   return (

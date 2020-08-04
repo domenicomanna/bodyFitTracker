@@ -15,6 +15,8 @@ import { ChangePassword } from './pages/changePassword/ChangePassword';
 import siteTitle from './constants/siteTitle';
 import { ResetPasswordStepOne } from './pages/resetPasswordPages/resetPasswordStepOne/ResetPasswordStepOne';
 import { ResetPasswordStepOneSuccess } from './pages/resetPasswordPages/resetPasswordStepOneSuccess/ResetPasswordStepOneSuccess';
+import ResetPasswordStepTwo from './pages/resetPasswordPages/resetPasswordStepTwo/ResetPasswordStepTwo';
+import { InvalidToken } from './pages/resetPasswordPages/invalidToken/InvalidToken';
 
 function App() {
   return (
@@ -35,13 +37,15 @@ function App() {
           </AuthenticatedLayout>
         </Route>
 
-        <Route exact path={[routeUrls.login, routeUrls.signUp, routeUrls.about, routeUrls.resetPassword.stepOne, routeUrls.resetPassword.stepOneSuccess]}>
+        <Route exact path={[routeUrls.login, routeUrls.signUp, routeUrls.about, routeUrls.resetPassword.stepOne, routeUrls.resetPassword.stepOneSuccess, routeUrls.resetPassword.stepTwo, routeUrls.resetPassword.invalidToken]}>
           <UnauthenticatedLayout>
             <Route path={routeUrls.login} exact component={Login} />
             <Route path={routeUrls.signUp} exact component={SignUp} />
             <Route path={routeUrls.about} exact component={About} />
             <Route path={routeUrls.resetPassword.stepOne} exact component={ResetPasswordStepOne}/> 
             <Route path={routeUrls.resetPassword.stepOneSuccess} exact component={ResetPasswordStepOneSuccess}/>
+            <Route path={routeUrls.resetPassword.stepTwo} exact component={ResetPasswordStepTwo}/>
+            <Route path={routeUrls.resetPassword.invalidToken} exact component={InvalidToken}/>
           </UnauthenticatedLayout>
         </Route>
 
