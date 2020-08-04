@@ -68,6 +68,18 @@ describe('Page title for different modes', () => {
   });
 });
 
+describe('Component when measurement to edit is being loaded', () => {
+  it('should show a page loader', async () => {
+    mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue(editMeasurementType);
+    handleRendering(Gender.Male, false);
+    const pageLoader = await screen.findByTestId('pageLoader');
+    expect(pageLoader).toBeTruthy();
+    await waitFor(() => expect(mockedBodyMeasurementsClient.getMeasurement).toHaveBeenCalledTimes(1));
+    const titleInEditMode = screen.getByText(/edit measurement/i);
+    expect(titleInEditMode).toBeTruthy();
+  });
+});
+
 describe('Form fields for different genders', () => {
   it('should not have a hip circumference field if gender is male', async () => {
     handleRendering(Gender.Male, true);
