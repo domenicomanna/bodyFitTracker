@@ -42,8 +42,8 @@ namespace Api.ApplicationLogic.Users.Handlers
         {
             EmailMessage emailMessage = new EmailMessage(appUser.Email, "Reset Your Password");
             StringBuilder htmlBody = new StringBuilder();
-            htmlBody.Append("<p>Hi, we received a request to reset your password.<p>");
-            htmlBody.Append("<p>Please follow <a href='' target='_blank'>this link</a> to reset your password.");
+            htmlBody.Append("<p>Hi, a request was received to reset your password.<p>");
+            htmlBody.Append($"<p>Please follow <a href='http://localhost:3000/reset-password-step-two/{resetToken}' target='_blank'>this link</a> to reset your password.");
             emailMessage.HtmlBody = htmlBody.ToString();
 
             return emailMessage;
