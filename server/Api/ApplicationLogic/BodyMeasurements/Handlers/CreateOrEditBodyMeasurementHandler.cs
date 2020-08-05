@@ -77,7 +77,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             MeasurementSystem destinationUnits = MeasurementSystem.Imperial;
 
             bodyMeasurementToEdit.NeckCircumference =
-                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.NeckCircumference, sourceUnits, destinationUnits;
+                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.NeckCircumference, sourceUnits, destinationUnits);
 
             bodyMeasurementToEdit.WaistCircumference =
                 MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.WaistCircumference,
@@ -89,7 +89,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
                     MeasurementConverter.ConvertLength((double)createOrEditBodyMeasurementRequest.HipCircumference, sourceUnits, destinationUnits);
             }
             bodyMeasurementToEdit.Height =
-                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.Height, sourceUnits, destinationUnits;
+                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.Height, sourceUnits, destinationUnits);
 
             bodyMeasurementToEdit.Weight =
                 MeasurementConverter.ConvertWeight(createOrEditBodyMeasurementRequest.Weight, sourceUnits, destinationUnits);

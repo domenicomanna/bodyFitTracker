@@ -3,6 +3,7 @@ using System.Linq;
 using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
+using Api.Domain.Services;
 using Api.Persistence;
 using AutoMapper;
 
@@ -28,8 +29,13 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         {
             int userId = _userAccessor.GetCurrentUserId();
             AppUser currentUser = _bodyFitTrackerContext.AppUsers.Find(userId);
-            List<BodyMeasurement> bodyMeasurements = currentUser.BodyMeasurements.OrderByDescending(b => b.DateAdded).ToList();
-            
+
+            // all measurements in the database are in imperial units
+            List<BodyMeasurement> bodyMeasurements = BodyMeasurementConverter.Convert(currentUser.
+                BodyMeasurements.ToList(), MeasurementSystem.Imperial, currentUser.MeasurementSystemPreference);
+
+            bodyMeasurements = bodyMeasurements.OrderByDescending(b => b.DateAdded).ToList();
+
             List<BodyMeasurementDTO> bodyMeasurementDTOs = _mapper.Map<List<BodyMeasurement>, List<BodyMeasurementDTO>>(bodyMeasurements);
             return bodyMeasurementDTOs;
         }
