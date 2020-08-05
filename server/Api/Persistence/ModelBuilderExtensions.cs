@@ -43,7 +43,8 @@ namespace Api.Persistence
                         Weight = 125.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
-                        DateAdded = DateTime.Today
+                        DateAdded = DateTime.Today,
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -54,7 +55,8 @@ namespace Api.Persistence
                         Weight = 120.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
-                        DateAdded = DateTime.Today.AddDays(1)
+                        DateAdded = DateTime.Today.AddDays(-1),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -65,7 +67,8 @@ namespace Api.Persistence
                         Weight = 130.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -76,7 +79,8 @@ namespace Api.Persistence
                         Weight = 145.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -87,7 +91,8 @@ namespace Api.Persistence
                         Weight = 115.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 1,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -99,7 +104,8 @@ namespace Api.Persistence
                         BodyFatPercentage = 10.0,
                         HipCircumference = 20.0,
                         AppUserId = 2,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -111,7 +117,8 @@ namespace Api.Persistence
                         HipCircumference = 20.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 2,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -123,7 +130,8 @@ namespace Api.Persistence
                         HipCircumference = 20.0,
                         BodyFatPercentage = 10.0,
                         AppUserId = 2,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -135,7 +143,8 @@ namespace Api.Persistence
                         HipCircumference = 20.0,
                         BodyFatPercentage = 12.0,
                         AppUserId = 2,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     },
                     new
                     {
@@ -147,7 +156,8 @@ namespace Api.Persistence
                         HipCircumference = 20.0,
                         BodyFatPercentage = 11.0,
                         AppUserId = 2,
-                        DateAdded = DateTime.Today.AddDays(2)
+                        DateAdded = DateTime.Today.AddDays(-2),
+                        Units = MeasurementSystem.Imperial
                     }
                 );
         }

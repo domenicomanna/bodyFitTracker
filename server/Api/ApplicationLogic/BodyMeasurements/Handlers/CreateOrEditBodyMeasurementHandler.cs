@@ -49,7 +49,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             BodyMeasurement bodyMeasurement = new BodyMeasurement(appUser, createOrEditBodyMeasurementRequest.NeckCircumference,
                 createOrEditBodyMeasurementRequest.WaistCircumference, createOrEditBodyMeasurementRequest.HipCircumference,
                 createOrEditBodyMeasurementRequest.Height, createOrEditBodyMeasurementRequest.Weight, 
-                createOrEditBodyMeasurementRequest.DateAdded);
+                createOrEditBodyMeasurementRequest.DateAdded, MeasurementSystem.Imperial);
 
             return bodyMeasurement;
 

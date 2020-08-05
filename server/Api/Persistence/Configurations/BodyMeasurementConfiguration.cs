@@ -12,6 +12,10 @@ namespace Api.Persistence.Configurations
             builder
                 .Property(b => b.BodyMeasurementId)
                 .ValueGeneratedOnAdd();
+            builder
+                .Property(b => b.Units)
+                .IsRequired()
+                .HasConversion<string>();
         }
     }
 }

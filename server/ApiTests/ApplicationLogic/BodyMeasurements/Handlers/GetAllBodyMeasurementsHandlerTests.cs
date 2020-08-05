@@ -27,8 +27,8 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             bodyFitTrackerContext.AppUsers.Add(appUser);
             bodyFitTrackerContext.SaveChanges();
 
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today));
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 20, null, 60, 120, DateTime.Today));
+            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial));
+            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 20, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial));
             bodyFitTrackerContext.SaveChanges();
 
             var userAccessorMock = new Mock<IUserAccessor>(); 

@@ -26,8 +26,8 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
             AppUser dom = new AppUser("dom@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
             AppUser bob = new AppUser("bob@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
-            BodyMeasurement domsBodyMeasurement = new BodyMeasurement(dom, 11, 30, null, 60, 130, DateTime.Today);
-            BodyMeasurement bobsBodyMeasurement = new BodyMeasurement(bob, 11, 30, null, 60, 130, DateTime.Today);
+            BodyMeasurement domsBodyMeasurement = new BodyMeasurement(dom, 11, 30, null, 60, 130, DateTime.Today, MeasurementSystem.Imperial);
+            BodyMeasurement bobsBodyMeasurement = new BodyMeasurement(bob, 11, 30, null, 60, 130, DateTime.Today, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(dom);
             bodyFitTrackerContext.AppUsers.Add(bob);
             bodyFitTrackerContext.BodyMeasurements.Add(domsBodyMeasurement);
