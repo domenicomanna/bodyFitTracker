@@ -48,11 +48,12 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
 
             BodyMeasurement bodyMeasurement = new BodyMeasurement(appUser, createOrEditBodyMeasurementRequest.NeckCircumference,
                 createOrEditBodyMeasurementRequest.WaistCircumference, createOrEditBodyMeasurementRequest.HipCircumference,
-                createOrEditBodyMeasurementRequest.Height, createOrEditBodyMeasurementRequest.Weight, 
-                createOrEditBodyMeasurementRequest.DateAdded, MeasurementSystem.Imperial);
+                createOrEditBodyMeasurementRequest.Height, createOrEditBodyMeasurementRequest.Weight,
+                createOrEditBodyMeasurementRequest.DateAdded, appUser.MeasurementSystemPreference);
 
-            return bodyMeasurement;
+            BodyMeasurement bodyMeasurementConvertedToImperial = BodyMeasurementConverter.Convert(bodyMeasurement, appUser.MeasurementSystemPreference, MeasurementSystem.Imperial); // all measurements in the database should be in imperial units
 
+            return bodyMeasurementConvertedToImperial;
         }
 
         private void TryEditingMeasurement(CreateOrEditBodyMeasurementRequest createOrEditBodyMeasurementRequest)
@@ -70,12 +71,31 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
                 throw new RestException(HttpStatusCode.NotFound, errors);
             }
 
-            bodyMeasurementToEdit.NeckCircumference = createOrEditBodyMeasurementRequest.NeckCircumference;
-            bodyMeasurementToEdit.WaistCircumference = createOrEditBodyMeasurementRequest.WaistCircumference;
-            bodyMeasurementToEdit.HipCircumference = createOrEditBodyMeasurementRequest.HipCircumference;
-            bodyMeasurementToEdit.Height = createOrEditBodyMeasurementRequest.Height;
-            bodyMeasurementToEdit.Weight = createOrEditBodyMeasurementRequest.Weight;
+            // all measurements in the database should be in imperial units
+
+            MeasurementSystem sourceUnits = appUser.MeasurementSystemPreference;
+            MeasurementSystem destinationUnits = MeasurementSystem.Imperial;
+
+            bodyMeasurementToEdit.NeckCircumference =
+                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.NeckCircumference, sourceUnits, destinationUnits;
+
+            bodyMeasurementToEdit.WaistCircumference =
+                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.WaistCircumference,
+                sourceUnits, destinationUnits);
+
+            if (createOrEditBodyMeasurementRequest.HipCircumference.HasValue)
+            {
+                bodyMeasurementToEdit.HipCircumference =
+                    MeasurementConverter.ConvertLength((double)createOrEditBodyMeasurementRequest.HipCircumference, sourceUnits, destinationUnits);
+            }
+            bodyMeasurementToEdit.Height =
+                MeasurementConverter.ConvertLength(createOrEditBodyMeasurementRequest.Height, sourceUnits, destinationUnits;
+
+            bodyMeasurementToEdit.Weight =
+                MeasurementConverter.ConvertWeight(createOrEditBodyMeasurementRequest.Weight, sourceUnits, destinationUnits);
+
             bodyMeasurementToEdit.DateAdded = createOrEditBodyMeasurementRequest.DateAdded;
+
             bodyMeasurementToEdit.BodyFatPercentage = BodyFatPercentageCalculator.CalculateBodyFatPercentage(bodyMeasurementToEdit);
 
             _bodyFitTrackerContext.SaveChanges();
