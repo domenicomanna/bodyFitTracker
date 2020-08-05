@@ -18,25 +18,21 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
         CreateOrEditBodyMeasurementHandler _createOrEditBodyMeasurementHandler;
 
         (int UserId, int IdOfMeasurement) _dom;
-        (int UserId, int IdOfMeasurement) _bob;
+
 
         [TestInitialize]
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
             AppUser dom = new AppUser("dom@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
-            AppUser bob = new AppUser("bob@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
-            BodyMeasurement domsBodyMeasurement = new BodyMeasurement(dom, 11, 30, null, 60, 130, DateTime.Today, MeasurementSystem.Imperial);
-            BodyMeasurement bobsBodyMeasurement = new BodyMeasurement(bob, 11, 30, null, 60, 130, DateTime.Today, MeasurementSystem.Imperial);
+            BodyMeasurement bodyMeasurement = new BodyMeasurement(dom, 11, 30, null, 60, 130, DateTime.Today, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(dom);
-            bodyFitTrackerContext.AppUsers.Add(bob);
-            bodyFitTrackerContext.BodyMeasurements.Add(domsBodyMeasurement);
-            bodyFitTrackerContext.BodyMeasurements.Add(bobsBodyMeasurement);
+
+            bodyFitTrackerContext.BodyMeasurements.Add(bodyMeasurement);
 
             bodyFitTrackerContext.SaveChanges();
 
-            _dom = (dom.AppUserId, domsBodyMeasurement.AppUserId);
-            _bob = (bob.AppUserId, bobsBodyMeasurement.BodyMeasurementId);
+            _dom = (dom.AppUserId, bodyMeasurement.AppUserId);
 
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
@@ -77,17 +73,6 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             };
 
             Assert.ThrowsException<RestException>(() => _createOrEditBodyMeasurementHandler.Handle(createMeasurementRequest));
-        }
-
-        [TestMethod]
-        public void ARestExceptionShouldBeThrownIfCurrentUserTriesToEditAnotherUsersMeasurement()
-        {
-            CreateOrEditBodyMeasurementRequest editMeasurementRequest = new CreateOrEditBodyMeasurementRequest
-            {
-                IdOfBodyMeasurementToEdit = _bob.UserId
-            };
-
-            Assert.ThrowsException<RestException>(() => _createOrEditBodyMeasurementHandler.Handle(editMeasurementRequest));
         }
 
         [TestMethod]

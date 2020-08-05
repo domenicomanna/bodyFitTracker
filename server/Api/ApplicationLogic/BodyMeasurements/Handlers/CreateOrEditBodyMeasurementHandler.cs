@@ -59,20 +59,15 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         {
             int currentUserId = _userAccessor.GetCurrentUserId();
             Dictionary<string, string> errors = new Dictionary<string, string>();
+            AppUser appUser = _bodyFitTrackerContext.AppUsers.Where(x => x.AppUserId == currentUserId).First();
 
-            BodyMeasurement bodyMeasurementToEdit = _bodyFitTrackerContext.BodyMeasurements.Where(x => x.BodyMeasurementId ==
+            BodyMeasurement bodyMeasurementToEdit = appUser.BodyMeasurements.Where(x => x.BodyMeasurementId ==
                 createOrEditBodyMeasurementRequest.IdOfBodyMeasurementToEdit).FirstOrDefault();
 
             if (bodyMeasurementToEdit == null)
             {
                 errors.Add("", $"The bodymeasurement with id {createOrEditBodyMeasurementRequest.IdOfBodyMeasurementToEdit} was not found");
                 throw new RestException(HttpStatusCode.NotFound, errors);
-            }
-
-            if (currentUserId != bodyMeasurementToEdit.AppUserId)
-            {
-                errors.Add("", "Access to another user's body measurement is denied");
-                throw new RestException(HttpStatusCode.Forbidden, errors);
             }
 
             bodyMeasurementToEdit.NeckCircumference = createOrEditBodyMeasurementRequest.NeckCircumference;
