@@ -97,7 +97,6 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   }, [match.params.measurementIdToEdit, userDetailsAreBeingFetched]);
 
   const titleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
-  const submitButtonContent = titleContent;
 
   const inputStyle: React.CSSProperties = {
     width: '90%',
@@ -204,7 +203,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         type='submit'
         isSubmitting={formik.isSubmitting}
       >
-        {submitButtonContent}
+        Submit
       </Button>
     </Form>
   );
