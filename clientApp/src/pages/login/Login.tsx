@@ -103,10 +103,10 @@ const Login = () => {
         <span></span>
         <div className={styles.helpContent}>
           <span>
-            <NavLink to={routeUrls.login}>Forgot your password?</NavLink>
+            <NavLink to={routeUrls.resetPassword.stepOne}>Forgot your password?</NavLink>
           </span>
           <span>
-            <NavLink to={routeUrls.login}>Create account</NavLink>
+            <NavLink to={routeUrls.signUp}>Need an account? Create one</NavLink>
           </span>
         </div>
       </Form>
