@@ -3,7 +3,7 @@ import styles from './input.module.css';
 
 type Props = {
   id: string;
-  type: string;
+  type: 'number' | 'text' | 'date' | 'password' | 'email';
   value: string | number;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void | undefined;
   onBlur: (event: FocusEvent<HTMLInputElement>) => void | undefined;
@@ -11,7 +11,8 @@ type Props = {
 };
 
 const Input: FunctionComponent<Props> = ({ ...rest }) => {
-  return <input className={styles.input} {...rest}></input>;
+  const step = rest.type === 'number' ? 'any' : undefined;
+  return <input className={styles.input} {...rest} step={step}></input>;
 };
 
 export default Input;
