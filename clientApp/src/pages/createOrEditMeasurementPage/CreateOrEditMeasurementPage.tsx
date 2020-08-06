@@ -42,21 +42,23 @@ function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
 type MeasurementIdToEdit = { measurementIdToEdit: string };
 
 const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<MeasurementIdToEdit>> = ({ match }) => {
-  const { gender, measurementPreference, height } = useContext(UserContext);
+  const { gender, measurementPreference, height, userDetailsAreBeingFetched } = useContext(UserContext);
 
   const defaultFormValues: CreateOrEditMeasurement = {
     neckCircumference: '',
     waistCircumference: '',
     hipCircumference: '',
-    height: height,
+    height: userDetailsAreBeingFetched ? '' : height,
     weight: '',
     dateAdded: moment().format().split('T')[0],
   };
+
 
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const history = useHistory();
   const [initialFormValues, setInitialFormValues] = useState<CreateOrEditMeasurement>(defaultFormValues);
   const [measurementToEditIsBeingFetched, setMeasurementToEditIsBeingFetched] = useState(!measurementIsBeingCreated);
+
   const formik = useFormik({
     initialValues: initialFormValues as CreateOrEditMeasurement,
     validationSchema: CreateValidationSchema(gender === Gender.Female),
@@ -85,19 +87,17 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         weight: measurement.weight,
         dateAdded: measurement.dateAdded,
       });
-      formik.initialValues = measurement;
       setMeasurementToEditIsBeingFetched(false);
     };
-
     if (measurementIsBeingCreated) {
       setInitialFormValues(defaultFormValues);
-      formik.validateForm(defaultFormValues);
     } else {
       updateFormBasedOffOfExistingMeasurement();
     }
-  }, [match.params.measurementIdToEdit]);
+  }, [match.params.measurementIdToEdit, userDetailsAreBeingFetched]);
 
   const titleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
+  const submitButtonContent = titleContent;
 
   const inputStyle: React.CSSProperties = {
     width: '90%',
@@ -204,7 +204,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         type='submit'
         isSubmitting={formik.isSubmitting}
       >
-        Submit
+        {submitButtonContent}
       </Button>
     </Form>
   );
@@ -217,7 +217,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         </title>
       </Helmet>
       <PageTitle>{titleContent}</PageTitle>
-      {measurementToEditIsBeingFetched ? <PageLoader testId='pageLoader' /> : formContent}
+      {measurementToEditIsBeingFetched || userDetailsAreBeingFetched ? <PageLoader testId='pageLoader' /> : formContent}
     </>
   );
 };

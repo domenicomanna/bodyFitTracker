@@ -8,17 +8,18 @@ import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import { Gender, UserContextType } from '../../types/userTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { AxiosResponse } from 'axios';
-import { defaultUserContextType, defaultAxiosResponse } from '../../testHelpers/testData';
+import { defaultUserContextType, defaultAxiosResponse, defaultUser } from '../../testHelpers/testData';
 import { CreateOrEditMeasurement } from '../../types/bodyMeasurementTypes';
 
 jest.mock('../../api/bodyMeasurementsClient');
 let mockedBodyMeasurementsClient = mocked(bodyMeasurementsClient, true);
 let axiosResponse: AxiosResponse;
-let userContextType: UserContextType;
+let defaultUserContext: UserContextType;
 let editMeasurementType: CreateOrEditMeasurement;
 
 beforeEach(() => {
-  userContextType = defaultUserContextType;
+  defaultUserContext = defaultUserContextType;
+  defaultUserContext.userDetailsAreBeingFetched = false;
   axiosResponse = defaultAxiosResponse;
   mockedBodyMeasurementsClient.getMeasurement.mockReset();
   mockedBodyMeasurementsClient.createMeasurement.mockReset();
@@ -32,8 +33,7 @@ beforeEach(() => {
   };
 });
 
-const handleRendering = (gender: Gender, measurementIsBeingCreated: boolean) => {
-  userContextType.gender = gender;
+const handleRendering = (userContext: UserContextType, measurementIsBeingCreated: boolean) => {
   const history = createMemoryHistory();
   let path;
   if (measurementIsBeingCreated) {
@@ -45,7 +45,7 @@ const handleRendering = (gender: Gender, measurementIsBeingCreated: boolean) => 
   }
   return render(
     <Router history={history}>
-      <UserContext.Provider value={userContextType}>
+      <UserContext.Provider value={defaultUserContext}>
         <Route path={path} component={CreateOrEditMeasurementPage} />
       </UserContext.Provider>
     </Router>
@@ -54,41 +54,50 @@ const handleRendering = (gender: Gender, measurementIsBeingCreated: boolean) => 
 
 describe('Page title for different modes', () => {
   it('should have a title of create measurement when in create mode', async () => {
-    handleRendering(Gender.Male, true);
+    handleRendering(defaultUserContext, true);
     const titleInCreateMode = await waitFor(() => screen.getByText(/create measurement/i));
     expect(titleInCreateMode).toBeTruthy();
   });
 
   it('should have a title of edit measurement when in edit mode', async () => {
     mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue(editMeasurementType);
-    handleRendering(Gender.Male, false);
+    handleRendering(defaultUserContext, false);
     await waitFor(() => expect(mockedBodyMeasurementsClient.getMeasurement).toHaveBeenCalledTimes(1));
     const titleInEditMode = screen.getByText(/edit measurement/i);
     expect(titleInEditMode).toBeTruthy();
   });
 });
 
+describe('Component when user details are being fetched', () => {
+  it('should show a page loader', async () => {
+    defaultUserContext.userDetailsAreBeingFetched = true;
+    handleRendering(defaultUserContext, true);
+    const pageLoader = await screen.findByTestId('pageLoader');
+    expect(pageLoader).toBeTruthy();
+  })
+})
+
 describe('Component when measurement to edit is being loaded', () => {
   it('should show a page loader', async () => {
     mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue(editMeasurementType);
-    handleRendering(Gender.Male, false);
+    handleRendering(defaultUserContext, false);
     const pageLoader = await screen.findByTestId('pageLoader');
     expect(pageLoader).toBeTruthy();
     await waitFor(() => expect(mockedBodyMeasurementsClient.getMeasurement).toHaveBeenCalledTimes(1));
-    const titleInEditMode = screen.getByText(/edit measurement/i);
-    expect(titleInEditMode).toBeTruthy();
   });
 });
 
 describe('Form fields for different genders', () => {
   it('should not have a hip circumference field if gender is male', async () => {
-    handleRendering(Gender.Male, true);
+    defaultUserContext.gender = Gender.Male;
+    handleRendering(defaultUserContext, true);
     const hipCircumferenceElement = await waitFor(() => screen.queryByLabelText(/hip circumference/i));
     expect(hipCircumferenceElement).toBeFalsy();
   });
 
   it('should have a hip circumference field if gender is female', async () => {
-    handleRendering(Gender.Female, true);
+    defaultUserContext.gender = Gender.Female;
+    handleRendering(defaultUserContext, true);
     const hipCircumferenceElement = await waitFor(() => screen.getAllByText(/hip circumference/i));
     expect(hipCircumferenceElement).toBeTruthy();
   });
@@ -96,7 +105,8 @@ describe('Form fields for different genders', () => {
 
 describe('Component when trying to submit the form', () => {
   it('should enable submission if all form fields are valid', async () => {
-    handleRendering(Gender.Male, true);
+    defaultUserContext.gender = Gender.Male;
+    handleRendering(defaultUserContext, true);
     mockedBodyMeasurementsClient.createMeasurement.mockResolvedValue(axiosResponse);
 
     const neckCircumferenceInputElement = await waitFor(() => screen.getByLabelText(/neck Circumference/i));

@@ -76,6 +76,7 @@ export type User = {
 
 export type UserContextType = User & {
   isAuthenticated: () => boolean;
+  userDetailsAreBeingFetched: boolean
   setGender: (gender: Gender) => void;
   setHeight: (height: number) => void;
   setEmail: (email: string) => void;

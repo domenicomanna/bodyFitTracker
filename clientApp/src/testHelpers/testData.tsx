@@ -10,6 +10,7 @@ export const defaultUserContextType: UserContextType = {
     weightUnit: 'lb',
     lengthUnit: 'in',
   },
+  userDetailsAreBeingFetched: false,
   setGender: () => {},
   setHeight: () => {},
   setEmail: () => {},
