@@ -166,7 +166,7 @@ const SignUp = () => {
           type='submit'
           isSubmitting={formik.isSubmitting}
         >
-          Submit
+          Create Account
         </Button>
       </Form>
     </>
