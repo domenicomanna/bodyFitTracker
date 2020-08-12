@@ -11,7 +11,7 @@ namespace Api.Domain.Services
         /// <returns> The body fat percentage </returns>
         public static double CalculateBodyFatPercentage(BodyMeasurement bodyMeasurement)
         {
-            BodyMeasurement bodyMeasurementConvertedToImperial = BodyMeasurementConverter.Convert(bodyMeasurement, bodyMeasurement.Units , MeasurementSystem.Imperial);
+            BodyMeasurement bodyMeasurementConvertedToImperial = BodyMeasurementConverter.Convert(bodyMeasurement, bodyMeasurement.Units, MeasurementSystem.Imperial);
             return CalculateBodyFatPercentageUsingImperialUnits(bodyMeasurementConvertedToImperial);
         }
 

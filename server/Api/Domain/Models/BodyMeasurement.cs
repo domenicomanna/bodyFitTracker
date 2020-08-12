@@ -5,7 +5,7 @@ namespace Api.Domain.Models
 {
     public class BodyMeasurement
     {
-        public int BodyMeasurementId { get; private set; }
+        public int BodyMeasurementId { get; set; }
 
         public int AppUserId { get; private set; }
 
