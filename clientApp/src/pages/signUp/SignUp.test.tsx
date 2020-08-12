@@ -83,7 +83,7 @@ describe('Component when creating an account fails', () => {
     await waitFor(() => fireEvent.change(heightInput, { target: { value: '60' } }));
 
     expect(screen.queryByText(emailError)).toBeFalsy();
-    fireEvent.click(screen.getByText(/Submit/i));
+    fireEvent.click(screen.getByText(/Create Account/i));
     expect(await screen.findByText(emailError)).toBeTruthy();
   });
 });
@@ -111,7 +111,7 @@ describe('Component when account creation succeeds', () => {
     await waitFor(() => fireEvent.change(confirmedPasswordInput, { target: { value: 'abcd' } }));
     await waitFor(() => fireEvent.change(heightInput, { target: { value: '60' } }));
 
-    fireEvent.click(screen.getByText(/Submit/i));
+    fireEvent.click(screen.getByText(/Create Account/i));
 
     const testComponentElement = await screen.findByTestId('testComponent');
     expect(testComponentElement).toBeTruthy();
