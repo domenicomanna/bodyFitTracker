@@ -66,6 +66,11 @@ export type ResetPasswordResult = {
   errorMessage: string
 }
 
+export type EditAccountType = {
+  email: string;
+  height: string | number,
+  unitsOfMeasure: MeasurementSystemName
+}
 
 export type User = {
   gender: Gender;

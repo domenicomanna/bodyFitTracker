@@ -17,6 +17,7 @@ import { ResetPasswordStepOne } from './pages/resetPasswordPages/resetPasswordSt
 import { ResetPasswordStepOneSuccess } from './pages/resetPasswordPages/resetPasswordStepOneSuccess/ResetPasswordStepOneSuccess';
 import ResetPasswordStepTwo from './pages/resetPasswordPages/resetPasswordStepTwo/ResetPasswordStepTwo';
 import { InvalidToken } from './pages/resetPasswordPages/invalidToken/InvalidToken';
+import EditAccount from './pages/editAccount/EditAccount';
 
 function App() {
   return (
@@ -27,13 +28,14 @@ function App() {
       <Switch>
         <Route
           exact
-          path={[routeUrls.home, routeUrls.editMeasurement, routeUrls.createMeasurement, routeUrls.changePassword]}
+          path={[routeUrls.home, routeUrls.editMeasurement, routeUrls.createMeasurement, routeUrls.changePassword, routeUrls.editAccount]}
         >
           <AuthenticatedLayout>
             <ProtectedRoute path={routeUrls.home} exact component={BodyMeasurementsPage} />
             <ProtectedRoute path={routeUrls.editMeasurement} component={CreateOrEditMeasurementPage} />
             <ProtectedRoute path={routeUrls.createMeasurement} component={CreateOrEditMeasurementPage} />
             <ProtectedRoute path={routeUrls.changePassword} component={ChangePassword} />
+            <ProtectedRoute path={routeUrls.editAccount} component={EditAccount} />
           </AuthenticatedLayout>
         </Route>
 

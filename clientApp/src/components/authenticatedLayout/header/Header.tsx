@@ -75,7 +75,7 @@ const Header = () => {
               {profileDropDownMenuShouldShow && (
                 <ul data-testid='dropDownMenu' className={styles.dropDownMenu}>
                   <li>
-                    <NavLink to={routeUrls.createMeasurement} exact onClick={closeMenus}>
+                    <NavLink to={routeUrls.editAccount} exact onClick={closeMenus}>
                       Settings
                     </NavLink>
                   </li>

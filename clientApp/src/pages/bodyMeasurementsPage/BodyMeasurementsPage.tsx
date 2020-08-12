@@ -11,13 +11,14 @@ import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
 import { Helmet } from 'react-helmet';
 import siteTitle from '../../constants/siteTitle';
 
-export type LocationState = {
-  measurementWasCreated: boolean;
-  measurementWasEdited: boolean;
+export type BodyMeasurementsPageLocationState = {
+  measurementWasCreated?: boolean;
+  measurementWasEdited?: boolean;
+  profileSettingsUpdated?: boolean;
 };
 
 const BodyMeasurementsPage = () => {
-  const location = useLocation<LocationState>();
+  const location = useLocation<BodyMeasurementsPageLocationState>();
   const history = useHistory();
   const [isLoading, setLoading] = useState(true);
   const [bodyMeasurements, setBodyMeasurements] = useState<BodyMeasurementType[]>();
@@ -42,11 +43,11 @@ const BodyMeasurementsPage = () => {
     setBodyMeasurements(bodyMeasurementsWithMeasurementRemoved);
     toast.success('Measurement removed!');
   };
-
-  if (location.state && location.state.measurementWasCreated) toast.success('Measurement created!');
-  else if (location.state && location.state.measurementWasEdited) toast.success('Measurement edited!');
   if (location.state) {
-    // prevent toast message from showing multiple times by clearing the state
+    if (location.state.measurementWasCreated) toast.success('Measurement created!');
+    else if (location.state.measurementWasEdited) toast.success('Measurement edited!');
+    else if (location.state.profileSettingsUpdated) toast.success('Settings updated!');
+
     history.replace(location.pathname, undefined);
   }
 

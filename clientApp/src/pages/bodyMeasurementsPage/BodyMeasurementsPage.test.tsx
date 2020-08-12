@@ -4,7 +4,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
 import { AxiosResponse } from 'axios';
 import { UserContextType } from '../../types/userTypes';
-import BodyMeasurementsPage, { LocationState } from './BodyMeasurementsPage';
+import BodyMeasurementsPage, { BodyMeasurementsPageLocationState } from './BodyMeasurementsPage';
 import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import { Router } from 'react-router-dom';
@@ -41,7 +41,7 @@ beforeEach(() => {
 
 const handleRendering = (measurementWasCreated: boolean = false, measurementWasEdited: boolean = false) => {
   const history = createMemoryHistory();
-  const locationState: LocationState = { measurementWasCreated, measurementWasEdited };
+  const locationState: BodyMeasurementsPageLocationState = { measurementWasCreated, measurementWasEdited };
   history.replace('', undefined);
   history.push('', locationState);
   return render(

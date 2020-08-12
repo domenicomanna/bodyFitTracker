@@ -9,7 +9,9 @@ import {
   ResetPasswordValidationResult,
   ResetPasswordStepTwoType,
   ResetPasswordResult,
+  EditAccountType,
 } from '../types/userTypes';
+import { AxiosResponse } from 'axios';
 
 const requests = {
   getUser: () => get('users').then((response) => response.data),
@@ -22,6 +24,8 @@ const requests = {
     put('users/reset-password-step-two', resetPasswordStepTwoType).then((response) => response.data),
   validateResetPasswordToken: (token: string) =>
     get(`users/validate-reset-password-token/${token}`).then((response) => response.data),
+  changeProfileSettings: (editAccountType: EditAccountType) =>
+    put(`users/`, editAccountType).then((response) => response.data),
 };
 
 const usersClient = {
@@ -35,6 +39,8 @@ const usersClient = {
     requests.resetPasswordStepTwo(resetPasswordStepTwoType),
   validateResetPasswordToken: (token: string): Promise<ResetPasswordValidationResult> =>
     requests.validateResetPasswordToken(token),
+  changeProfileSettings: (editAccountType: EditAccountType): Promise<AxiosResponse> =>
+    requests.changeProfileSettings(editAccountType),
 };
 
 export default usersClient;

@@ -4,6 +4,7 @@ const routeUrls = {
   editMeasurementWithoutRouteParameter: '/edit-measurement',
   createMeasurement: '/create-measurement',
   changePassword: '/change-password',
+  editAccount: '/edit-account',
   login: '/login',
   signUp: '/signUp',
   about: '/about',
