@@ -17,8 +17,10 @@ namespace Api.Controllers
         private readonly ResetPasswordStepOneHandler _resetPasswordStepOneHandler;
         private readonly ValidateResetPasswordTokenHandler _validateResetPasswordTokenHandler;
         private readonly ResetPasswordStepTwoHandler _resetPasswordStepTwoHandler;
+        private readonly ChangeProfileSettingsHandler _changeProfileSettingsHandler;
 
-        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler, ResetPasswordStepOneHandler resetPasswordStepOneHandler, ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler, ResetPasswordStepTwoHandler resetPasswordStepTwoHandler)
+        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler, ResetPasswordStepOneHandler resetPasswordStepOneHandler, ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler, ResetPasswordStepTwoHandler resetPasswordStepTwoHandler,
+        ChangeProfileSettingsHandler changeProfileSettingsHandler)
         {
             _getUserHandler = getUserHandler;
             _createUserHandler = createUserHandler;
@@ -26,6 +28,7 @@ namespace Api.Controllers
             _resetPasswordStepOneHandler = resetPasswordStepOneHandler;
             _validateResetPasswordTokenHandler = validateResetPasswordTokenHandler;
             _resetPasswordStepTwoHandler = resetPasswordStepTwoHandler;
+            _changeProfileSettingsHandler = changeProfileSettingsHandler;
         }
 
         [HttpGet("")]
@@ -39,6 +42,11 @@ namespace Api.Controllers
         public CreateUserResult CreateUser(CreateUserRequest createUserRequest)
         {
             return _createUserHandler.Handle(createUserRequest);
+        }
+
+        public void ChangeProfileSettings(ChangeProfileSettingsRequest changeProfileSettingsRequest)
+        {
+            _changeProfileSettingsHandler.Handle(changeProfileSettingsRequest);
         }
 
         [HttpPut("change-password")]
