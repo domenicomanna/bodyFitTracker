@@ -34,7 +34,7 @@ const BodyMeasurementList: FunctionComponent<Props> = ({ bodyMeasurements, editM
       <table className={styles.measurements}>
         <thead>
           <tr>
-            <th>Date Added</th>
+            <th style={{width:"100px"}}>Date Added</th>
             <th>Neck Circumference ({lengthUnit})</th>
             <th>Waist Circumference ({lengthUnit})</th>
             {hipCircumferenceRow}

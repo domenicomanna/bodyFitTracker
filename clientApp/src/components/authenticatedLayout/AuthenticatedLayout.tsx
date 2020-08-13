@@ -7,7 +7,7 @@ const AuthenticatedLayout: FunctionComponent = ({ children }) => {
   return (
     <>
       <Header />
-      <main>
+      <main style={{marginBottom:"2rem"}}>
         <Container>{children}</Container>
       </main>
       <Footer />

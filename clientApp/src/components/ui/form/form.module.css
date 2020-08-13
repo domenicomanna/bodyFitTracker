@@ -6,3 +6,10 @@
   margin: auto;
   align-items: center;
 }
+
+@media (max-width: 650px){
+  .form{
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

@@ -57,7 +57,7 @@
   list-style: none;
   padding: .5rem 0;
   background: #fff;
-  right: 2%;
+  right: 7%;
 }
 
 @media (min-width: 600px) {
@@ -114,5 +114,4 @@
       color: var(--blue-800);
     }
   }
-
 }
