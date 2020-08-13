@@ -5,6 +5,7 @@ using Api.ApplicationLogic.BodyMeasurements.DataTransferObjects;
 using Api.ApplicationLogic.Errors;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
+using Api.Domain.Services;
 using Api.Persistence;
 using AutoMapper;
 
@@ -40,7 +41,9 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
                 throw new RestException(HttpStatusCode.NotFound, errors);
             }
 
-            return _mapper.Map<BodyMeasurement, BodyMeasurementDTO>(bodyMeasurement);
+            BodyMeasurement measurementInUsersPreferredUnits = BodyMeasurementConverter.Convert(bodyMeasurement, MeasurementSystem.Imperial, currentUser.MeasurementSystemPreference);
+
+            return _mapper.Map<BodyMeasurement, BodyMeasurementDTO>(measurementInUsersPreferredUnits);
         }
     }
 }
