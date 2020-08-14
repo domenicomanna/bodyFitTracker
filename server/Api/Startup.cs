@@ -50,12 +50,12 @@ namespace Api
                 })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
 
-            services.AddAutoMapper(typeof(Startup));
-
             services.AddDbContext<BodyFitTrackerContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseMySql(Configuration["DbConnection"]);
             });
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddCors(options =>
             {
@@ -110,7 +110,8 @@ namespace Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-
+            UpdateDatabase(app); 
+            
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
@@ -128,5 +129,18 @@ namespace Api
                 endpoints.MapControllers();
             });
         }
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<BodyFitTrackerContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
+        }
     }
+
 }

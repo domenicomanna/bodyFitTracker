@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Api.Persistence.Migrations
+namespace Api.Persistence.migrations
 {
     [DbContext(typeof(BodyFitTrackerContext))]
     partial class BodyFitTrackerContextModelSnapshot : ModelSnapshot
@@ -14,36 +14,37 @@ namespace Api.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0");
+                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Api.Domain.Models.AppUser", b =>
                 {
                     b.Property<int>("AppUserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("HashedPassword")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<double>("Height")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.Property<string>("MeasurementSystemPreference")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Salt")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("AppUserId");
 
@@ -79,35 +80,35 @@ namespace Api.Persistence.Migrations
                 {
                     b.Property<int>("BodyMeasurementId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<double>("BodyFatPercentage")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.Property<DateTime>("DateAdded")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<double>("Height")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.Property<double?>("HipCircumference")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.Property<double>("NeckCircumference")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.Property<string>("Units")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<double>("WaistCircumference")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.Property<double>("Weight")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double");
 
                     b.HasKey("BodyMeasurementId");
 
@@ -121,7 +122,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 1,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 14, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             NeckCircumference = 12.0,
                             Units = "Imperial",
@@ -133,7 +134,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 2,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 13, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             NeckCircumference = 12.0,
                             Units = "Imperial",
@@ -145,7 +146,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 3,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             NeckCircumference = 12.0,
                             Units = "Imperial",
@@ -157,7 +158,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 4,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             NeckCircumference = 12.0,
                             Units = "Imperial",
@@ -169,7 +170,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 5,
                             AppUserId = 1,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             NeckCircumference = 12.0,
                             Units = "Imperial",
@@ -181,7 +182,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 6,
                             AppUserId = 2,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 12.0,
@@ -194,7 +195,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 7,
                             AppUserId = 2,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 12.0,
@@ -207,7 +208,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 8,
                             AppUserId = 2,
                             BodyFatPercentage = 10.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 10.0,
@@ -220,7 +221,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 9,
                             AppUserId = 2,
                             BodyFatPercentage = 12.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 12.0,
@@ -233,7 +234,7 @@ namespace Api.Persistence.Migrations
                             BodyMeasurementId = 10,
                             AppUserId = 2,
                             BodyFatPercentage = 11.0,
-                            DateAdded = new DateTime(2020, 8, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateAdded = new DateTime(2020, 8, 12, 0, 0, 0, 0, DateTimeKind.Local),
                             Height = 60.0,
                             HipCircumference = 20.0,
                             NeckCircumference = 11.0,
@@ -246,13 +247,13 @@ namespace Api.Persistence.Migrations
             modelBuilder.Entity("Api.Domain.Models.PasswordReset", b =>
                 {
                     b.Property<string>("Token")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<int>("AppUserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Expiration")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Token");
 
