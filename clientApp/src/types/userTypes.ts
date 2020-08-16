@@ -1,5 +1,3 @@
-import { string } from "yup";
-
 export enum Gender {
   Male = 'Male',
   Female = 'Female',
