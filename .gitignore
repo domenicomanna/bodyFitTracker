@@ -36,3 +36,4 @@ msbuild.wrn
 
 # Other
 migrations.txt
+appsettings.Production.json

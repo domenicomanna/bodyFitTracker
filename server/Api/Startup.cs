@@ -114,8 +114,6 @@ namespace Api
             
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseCors(_corsPolicyName);
