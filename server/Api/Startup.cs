@@ -62,7 +62,7 @@ namespace Api
                 options.AddPolicy(_corsPolicyName,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000")
+                    builder.WithOrigins("http://localhost:3000", "https://bodyfitnesstracker.com", "https://eager-shirley-7d408c.netlify.app")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
@@ -110,8 +110,8 @@ namespace Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
-            UpdateDatabase(app); 
-            
+            UpdateDatabase(app);
+
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseRouting();
