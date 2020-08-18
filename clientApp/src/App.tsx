@@ -18,6 +18,7 @@ import { ResetPasswordStepOneSuccess } from './pages/resetPasswordPages/resetPas
 import ResetPasswordStepTwo from './pages/resetPasswordPages/resetPasswordStepTwo/ResetPasswordStepTwo';
 import { InvalidToken } from './pages/resetPasswordPages/invalidToken/InvalidToken';
 import EditAccount from './pages/editAccount/EditAccount';
+import ServerError from './pages/serverError/ServerError';
 
 function App() {
   return (
@@ -50,6 +51,8 @@ function App() {
             <Route path={routeUrls.resetPassword.invalidToken} exact component={InvalidToken}/>
           </UnauthenticatedLayout>
         </Route>
+
+        <Route path={routeUrls.serverError} component={ServerError}/>
 
         <Route render={() => <NotFound />} />
       </Switch>

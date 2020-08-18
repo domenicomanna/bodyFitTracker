@@ -9,6 +9,7 @@ const routeUrls = {
   signUp: '/signUp',
   about: '/about',
   notFound: '/not-found',
+  serverError: '/server-error',
   resetPassword:{
     stepOne: '/reset-password-step-one',
     stepOneSuccess: '/reset-password-email-sent',
