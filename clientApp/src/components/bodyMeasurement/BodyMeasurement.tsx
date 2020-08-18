@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import moment from 'moment';
 import { BodyMeasurementType } from '../../types/bodyMeasurementTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../ui/button/Button';
@@ -18,10 +19,10 @@ const BodyMeasurement: FunctionComponent<Props> = ({
   deleteMeasurement,
 }) => {
   const hipCircumferenceData = hipCircumferenceDataShouldBeRendered ? <td>{measurement.hipCircumference}</td> : null;
-
+  const formattedDate: string = moment(measurement.dateAdded, 'YYYY-MM-DD').format('MM/DD/YYYY')
   return (
     <tr>
-      <td>{measurement.dateAdded.toString()}</td>
+      <td>{formattedDate}</td>
       <td>{measurement.neckCircumference}</td>
       <td>{measurement.waistCircumference}</td>
       {hipCircumferenceData}
