@@ -90,7 +90,7 @@ export const ChangePassword = () => {
           type='submit'
           isSubmitting={formik.isSubmitting}
         >
-          Submit
+          Change Password
         </Button>
       </Form>
     </>

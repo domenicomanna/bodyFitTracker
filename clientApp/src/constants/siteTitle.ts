@@ -1,1 +1,1 @@
-export default "BodyFitTracker";
+export default "Body Fitness Tracker";

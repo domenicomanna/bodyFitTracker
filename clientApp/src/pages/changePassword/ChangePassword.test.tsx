@@ -51,7 +51,7 @@ it('should display the returned error message when changing the password in is u
   await waitFor(() => fireEvent.change(currentPasswordInput, { target: { value: 'random' } }));
   await waitFor(() => fireEvent.change(newPasswordInput, { target: { value: 'abcde' } }));
   await waitFor(() => fireEvent.change(confirmedNewPasswordInput, { target: { value: 'abcde' } }));
-  fireEvent.click(screen.getByText(/Submit/i));
+  fireEvent.click(screen.getByText(/Change Password/i, {selector: 'button'}));
 
   const errorMessageElement = await screen.findByText(errorMessage);
   expect(errorMessageElement).toBeTruthy();
@@ -73,7 +73,7 @@ it('should redirect the user when changing the password is successful', async ()
   await waitFor(() => fireEvent.change(currentPasswordInput, { target: { value: 'random' } }));
   await waitFor(() => fireEvent.change(newPasswordInput, { target: { value: 'abcde' } }));
   await waitFor(() => fireEvent.change(confirmedNewPasswordInput, { target: { value: 'abcde' } }));
-  fireEvent.click(screen.getByText(/Submit/i));
+  fireEvent.click(screen.getByText(/Change Password/i, {selector: 'button'}));
 
   const testComponentElement = await screen.findByTestId(idForTestComponent);
   expect(testComponentElement).toBeTruthy();

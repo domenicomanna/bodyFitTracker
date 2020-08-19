@@ -11,7 +11,7 @@ const Header = () => {
         <nav className={styles.navigation}>
           <h2 style={{ margin: '0' }}>
             <NavLink to={routeUrls.about} className={styles.brand}>
-              BodyFitTracker
+              Body Fitness Tracker
             </NavLink>
           </h2>
           <ul className={styles.navList}>
