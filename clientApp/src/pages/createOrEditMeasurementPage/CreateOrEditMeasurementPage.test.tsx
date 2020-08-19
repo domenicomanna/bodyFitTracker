@@ -55,7 +55,7 @@ const handleRendering = (userContext: UserContextType, measurementIsBeingCreated
 describe('Page title for different modes', () => {
   it('should have a title of create measurement when in create mode', async () => {
     handleRendering(defaultUserContext, true);
-    const titleInCreateMode = await waitFor(() => screen.getByText(/create measurement/i));
+    const titleInCreateMode = await waitFor(() => screen.getByText(/create measurement/i, {selector: 'h1'}));
     expect(titleInCreateMode).toBeTruthy();
   });
 
@@ -63,7 +63,7 @@ describe('Page title for different modes', () => {
     mockedBodyMeasurementsClient.getMeasurement.mockResolvedValue(editMeasurementType);
     handleRendering(defaultUserContext, false);
     await waitFor(() => expect(mockedBodyMeasurementsClient.getMeasurement).toHaveBeenCalledTimes(1));
-    const titleInEditMode = screen.getByText(/edit measurement/i);
+    const titleInEditMode = screen.getByText(/edit measurement/i, {selector : 'h1'});
     expect(titleInEditMode).toBeTruthy();
   });
 });
@@ -114,7 +114,7 @@ describe('Component when trying to submit the form', () => {
     const heightInputElement = await waitFor(() => screen.getByLabelText(/height/i));
     const weightInputElement = await waitFor(() => screen.getByLabelText(/weight/i));
     const dateInputElement = await waitFor(() => screen.getByLabelText(/date/i));
-    const submitButton = await waitFor(() => screen.getByText(/submit/i));
+    const submitButton = await waitFor(() => screen.getByText(/Create Measurement/i, {selector: 'button'}));
 
     expect(submitButton).toBeDisabled();
 

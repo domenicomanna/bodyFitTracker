@@ -17,6 +17,9 @@ import moment from 'moment';
 import { Helmet } from 'react-helmet';
 import siteTitle from '../../constants/siteTitle';
 import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactTooltip from 'react-tooltip';
+import styles from './createOrEditMeasurementPage.module.css';
 
 function CreateValidationSchema(shouldValidateHipCircumference: boolean) {
   let validationSchema = object<CreateOrEditMeasurement>({
@@ -52,7 +55,6 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     weight: '',
     dateAdded: moment().format().split('T')[0],
   };
-
 
   const measurementIsBeingCreated: boolean = match.params.measurementIdToEdit ? false : true;
   const history = useHistory();
@@ -97,6 +99,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   }, [match.params.measurementIdToEdit, userDetailsAreBeingFetched]);
 
   const titleContent = measurementIsBeingCreated ? 'Create Measurement' : 'Edit Measurement';
+  const buttonContent = titleContent;
 
   const inputStyle: React.CSSProperties = {
     width: '90%',
@@ -111,7 +114,13 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
   const hipCircumferenceFields =
     gender === Gender.Male ? null : (
       <>
-        <label htmlFor='hipCircumference'>Hip Circumference</label>
+        <div>
+          <label htmlFor='hipCircumference'>Hip Circumference</label>
+          <FontAwesomeIcon icon='info-circle' className={styles.info} data-tip data-for='hipCircumferenceToolTip' />
+          <ReactTooltip id='hipCircumferenceToolTip' effect='solid'>
+            Measure at the widest part of the hip
+          </ReactTooltip>
+        </div>
         <div>
           <div>
             <Input
@@ -131,7 +140,13 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
 
   const formContent = (
     <Form onSubmit={formik.handleSubmit}>
-      <label htmlFor='neckCircumference'>Neck Circumference</label>
+      <div>
+        <label htmlFor='neckCircumference'>Neck Circumference</label>
+        <FontAwesomeIcon icon='info-circle' className={styles.info} data-tip data-for='neckCircumferenceToolTip' />
+        <ReactTooltip id='neckCircumferenceToolTip' effect='solid'>
+          Measure just beneath the Adam's Apple
+        </ReactTooltip>
+      </div>
       <div>
         <div>
           <Input
@@ -147,7 +162,13 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         ) : null}
       </div>
 
-      <label htmlFor='waistCircumference'>Waist Circumference</label>
+      <div>
+        <label htmlFor='waistCircumference'>Waist Circumference</label>
+        <FontAwesomeIcon icon='info-circle' className={styles.info} data-tip data-for='waistCircumferenceToolTip' />
+        <ReactTooltip id='waistCircumferenceToolTip' effect='solid'>
+          Measure at the level of the belly button
+        </ReactTooltip>
+      </div>
       <div>
         <div>
           <Input
@@ -203,7 +224,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
         type='submit'
         isSubmitting={formik.isSubmitting}
       >
-        Submit
+        {buttonContent}
       </Button>
     </Form>
   );

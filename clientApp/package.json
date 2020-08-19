@@ -27,6 +27,7 @@
     "react-scripts": "3.4.0",
     "react-spinners": "^0.8.3",
     "react-toastify": "^6.0.8",
+    "react-tooltip": "^4.2.8",
     "typescript": "^3.8",
     "yup": "^0.29.1"
   },

@@ -1,0 +1,5 @@
+.info {
+  color: var(--blue-500);
+	cursor: pointer;
+	margin-left: .25rem;
+}
