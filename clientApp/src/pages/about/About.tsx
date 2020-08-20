@@ -13,7 +13,7 @@ const About = () => {
       <div className={styles.about}>
         <PageTitle>About This App</PageTitle>
         <p>
-          BodyFitTracker is an app that aims to support you on your weight loss or weight gain journey. Through taking
+          Body Fitness Tracker is an app that aims to support you on your weight loss or weight gain journey. Through taking
           several different body measurements and with the use of the{' '}
           <a
             target='_blank'
