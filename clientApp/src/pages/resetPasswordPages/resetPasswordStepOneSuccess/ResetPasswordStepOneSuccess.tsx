@@ -1,14 +1,14 @@
 import React from 'react';
 import PageTitle from '../../../components/pageTitle/PageTitle';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../../constants/siteTitle';
+import brandName from '../../../constants/brandName';
 import Container from '../../../components/container/Container';
 
 export const ResetPasswordStepOneSuccess = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | Reset Password</title>
+        <title>{brandName} | Reset Password</title>
       </Helmet>
       <Container style={{ maxWidth: '650px' }}>
         <PageTitle>Check Your Email</PageTitle>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import { Link } from 'react-router-dom';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 import { Helmet } from 'react-helmet';
 import { WrappingLayout } from '../../components/wrappingLayout/WrappingLayout';
 import routeUrls from '../../constants/routeUrls';
@@ -11,7 +11,7 @@ const ServerError = () => {
     <WrappingLayout>
       <>
         <Helmet>
-          <title>{siteTitle} | Server Error</title>
+          <title>{brandName} | Server Error</title>
         </Helmet>
         <PageTitle>500 Server Error</PageTitle>
         <p>An error on the server occurred.</p>

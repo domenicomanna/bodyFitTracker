@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Container from '../../container/Container';
 import styles from './header.module.css';
 import routeUrls from '../../../constants/routeUrls';
+import brandName from '../../../constants/brandName';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
         <nav className={styles.navigation}>
           <h2 style={{ margin: '0' }}>
             <NavLink to={routeUrls.about} className={styles.brand}>
-              Body Fitness Tracker
+              {brandName}
             </NavLink>
           </h2>
           <ul className={styles.navList}>

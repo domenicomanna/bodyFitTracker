@@ -1,7 +1,7 @@
 import React from 'react';
 import PageTitle from '../../../components/pageTitle/PageTitle';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../../constants/siteTitle';
+import brandName from '../../../constants/brandName';
 import Form from '../../../components/ui/form/Form';
 import Input from '../../../components/ui/input/Input';
 import Button from '../../../components/ui/button/Button';
@@ -32,7 +32,7 @@ export const ResetPasswordStepOne = () => {
   return (
     <>
       <Helmet>
-        <title> {siteTitle} | Reset Password</title>
+        <title> {brandName} | Reset Password</title>
       </Helmet>
       <PageTitle>Find Your Account</PageTitle>
       <Form style={{ maxWidth: '600px' }} onSubmit={formik.handleSubmit}>

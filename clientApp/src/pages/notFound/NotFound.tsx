@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from 'react';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import { Link } from 'react-router-dom';
 import routeUrls from '../../constants/routeUrls';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 import { Helmet } from 'react-helmet';
 import { WrappingLayout } from '../../components/wrappingLayout/WrappingLayout';
 
@@ -17,7 +17,7 @@ const NotFound: FunctionComponent<Props> = ({ message = defaultMessage }) => {
     <WrappingLayout>
           <>
       <Helmet>
-        <title>{siteTitle} | Not Found</title>
+        <title>{brandName} | Not Found</title>
       </Helmet>
       <PageTitle>404 NOT FOUND</PageTitle>
       <p>{defaultMessage}</p>

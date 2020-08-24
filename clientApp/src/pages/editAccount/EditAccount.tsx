@@ -14,7 +14,7 @@ import { UserContext } from '../../contexts/UserContext';
 import routeUrls from '../../constants/routeUrls';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
 import { measurementConverter } from '../../utils/measurementConversion/measurementConverter';
 import { BodyMeasurementsPageLocationState } from '../bodyMeasurementsPage/BodyMeasurementsPage';
@@ -158,7 +158,7 @@ const EditAccount = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | Edit Settings</title>
+        <title>{brandName} | Edit Settings</title>
       </Helmet>
       <PageTitle>Edit Settings</PageTitle>
       {userDetailsAreBeingFetched ? <PageLoader /> : formContent}

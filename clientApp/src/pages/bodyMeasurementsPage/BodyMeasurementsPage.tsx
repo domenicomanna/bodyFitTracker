@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 
 export type BodyMeasurementsPageLocationState = {
   measurementWasCreated?: boolean;
@@ -54,7 +54,7 @@ const BodyMeasurementsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | Measurements</title>
+        <title>{brandName} | Measurements</title>
       </Helmet>
       <PageTitle>Measurements</PageTitle>
       {isLoading ? (

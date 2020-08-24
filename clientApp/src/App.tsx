@@ -12,7 +12,7 @@ import UnauthenticatedLayout from './components/unauthenticatedLayout/Unauthenti
 import Login from './pages/login/Login';
 import SignUp from './pages/signUp/SignUp';
 import { ChangePassword } from './pages/changePassword/ChangePassword';
-import siteTitle from './constants/siteTitle';
+import brandName from './constants/brandName';
 import { ResetPasswordStepOne } from './pages/resetPasswordPages/resetPasswordStepOne/ResetPasswordStepOne';
 import { ResetPasswordStepOneSuccess } from './pages/resetPasswordPages/resetPasswordStepOneSuccess/ResetPasswordStepOneSuccess';
 import ResetPasswordStepTwo from './pages/resetPasswordPages/resetPasswordStepTwo/ResetPasswordStepTwo';
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>{siteTitle}</title>
+        <title>{brandName}</title>
       </Helmet>
       <Switch>
         <Route

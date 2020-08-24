@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../../constants/siteTitle';
+import brandName from '../../../constants/brandName';
 import PageTitle from '../../../components/pageTitle/PageTitle';
 import { useFormik } from 'formik';
 import Input from '../../../components/ui/input/Input';
@@ -90,7 +90,7 @@ const ResetPasswordStepTwo: FunctionComponent<RouteComponentProps<TokenParameter
   return (
     <>
       <Helmet>
-        <title> {siteTitle} | Reset Password</title>
+        <title> {brandName} | Reset Password</title>
       </Helmet>
       <PageTitle>Reset Your Password</PageTitle>
 

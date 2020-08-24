@@ -15,7 +15,7 @@ import bodyMeasurementsClient from '../../api/bodyMeasurementsClient';
 import routeUrls from '../../constants/routeUrls';
 import moment from 'moment';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 import { PageLoader } from '../../components/ui/pageLoader/PageLoader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTooltip from 'react-tooltip';
@@ -233,7 +233,7 @@ const CreateOrEditMeasurementPage: FunctionComponent<RouteComponentProps<Measure
     <>
       <Helmet>
         <title>
-          {siteTitle} | {titleContent}
+          {brandName} | {titleContent}
         </title>
       </Helmet>
       <PageTitle>{titleContent}</PageTitle>

@@ -2,13 +2,13 @@ import React from 'react';
 import PageTitle from '../../components/pageTitle/PageTitle';
 import styles from './about.module.css';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 
 const About = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | About</title>
+        <title>{brandName} | About</title>
       </Helmet>
       <div className={styles.about}>
         <PageTitle>About This App</PageTitle>

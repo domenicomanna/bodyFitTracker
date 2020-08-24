@@ -18,7 +18,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { setAuthorizationToken } from '../../api/baseConfiguration';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 
 let validationSchema = object<SignInFormValues>({
   email: string().email('Invalid email').required('Required'),
@@ -73,7 +73,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | Login</title>
+        <title>{brandName} | Login</title>
       </Helmet>
       <PageTitle>Login</PageTitle>
       <Form style={{ maxWidth: '600px' }} onSubmit={formik.handleSubmit}>

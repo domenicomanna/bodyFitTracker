@@ -15,7 +15,7 @@ import routeUrls from '../../constants/routeUrls';
 import { useHistory } from 'react-router-dom';
 import { setAuthorizationToken } from '../../api/baseConfiguration';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 
 let validationSchema = object<ChangePasswordType>({
   currentPassword: string().required('Required'),
@@ -55,7 +55,7 @@ export const ChangePassword = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | Change Password</title>
+        <title>{brandName} | Change Password</title>
       </Helmet>
       <PageTitle>Change Password</PageTitle>
       <Form onSubmit={formik.handleSubmit}>

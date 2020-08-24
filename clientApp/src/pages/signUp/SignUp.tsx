@@ -17,7 +17,7 @@ import { useHistory } from 'react-router-dom';
 import { setAuthorizationToken } from '../../api/baseConfiguration';
 import password from '../../validationRules/password';
 import { Helmet } from 'react-helmet';
-import siteTitle from '../../constants/siteTitle';
+import brandName from '../../constants/brandName';
 
 function CreateValidationSchema() {
   let validationSchema = object({
@@ -77,7 +77,7 @@ const SignUp = () => {
   return (
     <>
       <Helmet>
-        <title>{siteTitle} | Sign Up</title>
+        <title>{brandName} | Sign Up</title>
       </Helmet>
       <PageTitle>Sign Up</PageTitle>
       <Form onSubmit={formik.handleSubmit}>
