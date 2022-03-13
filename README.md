@@ -23,7 +23,7 @@ Installation
  2. Run the following commands
  ```
  dotnet user-secrets set 'TokenKey' 'superSecretKeyGoesHere'
- dotnet user-secrets set 'DbConnection' 'DbConnection = Server=localhost; Database=bodyFitTracker; Uid=yourUsername; Password=yourPassword'
+ dotnet user-secrets set 'DbConnection' 'Server=localhost; Database=bodyFitTracker; Uid=yourUsername; Password=yourPassword'
  dotnet user-secrets set 'EmailSettings:Username' 'yourEmailAddress'
  dotnet user-secrets set 'EmailSettings:Password' 'yourPassword' 
  ```
