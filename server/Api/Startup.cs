@@ -52,7 +52,7 @@ namespace Api
 
             services.AddDbContext<BodyFitTrackerContext>(options =>
             {
-                options.UseMySql(Configuration["DbConnection"]);
+                options.UseMySql(Configuration["DbConnection"], ServerVersion.AutoDetect(Configuration["DbConnection"]));
             });
 
             services.AddAutoMapper(typeof(Startup));
