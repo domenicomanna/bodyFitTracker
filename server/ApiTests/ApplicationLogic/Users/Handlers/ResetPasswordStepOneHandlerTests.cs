@@ -29,13 +29,11 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
 
             var emailSender = new Mock<IEmailSender>();
             var passwordResetTokenGenerator = new Mock<IPasswordResetTokenGenerator>();
-            var configuration = new Mock<IConfiguration>();
-            configuration.SetupGet(x => x[It.IsAny<string>()]).Returns("");
 
             emailSender.Setup(x => x.SendEmail(It.IsAny<EmailMessage>()));
             passwordResetTokenGenerator.Setup(x => x.CreateResetToken()).Returns(("reset-token"));
 
-            _resetPasswordStepOneHandler = new ResetPasswordStepOneHandler(bodyFitTrackerContext, emailSender.Object, passwordResetTokenGenerator.Object, configuration.Object);
+            _resetPasswordStepOneHandler = new ResetPasswordStepOneHandler(bodyFitTrackerContext, emailSender.Object, passwordResetTokenGenerator.Object);
         }
 
         [TestMethod]

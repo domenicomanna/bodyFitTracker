@@ -1,10 +1,8 @@
-using System.Security.Authentication;
 using Api.Common;
 using Api.Common.Interfaces;
 using Api.Configurations;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.Extensions.Options;
 using MimeKit;
 
 namespace Api.Infrastructure.Emailing
@@ -13,9 +11,15 @@ namespace Api.Infrastructure.Emailing
     {
         private readonly EmailSettings _emailSettings;
 
-        public EmailSender(IOptions<EmailSettings> emailSettings)
+        public EmailSender()
         {
-            _emailSettings = emailSettings.Value;
+            _emailSettings = new EmailSettings {
+                From = DotNetEnv.Env.GetString("EmailAddress"),
+                UserName = DotNetEnv.Env.GetString("EmailAddress"),
+                Password = DotNetEnv.Env.GetString("EmailPassword"),
+                SmtpServer = DotNetEnv.Env.GetString("EmailSmtpServer"),
+                Port = DotNetEnv.Env.GetInt("EmailPort")
+            };
         }
 
         public void SendEmail(EmailMessage emailMessage)

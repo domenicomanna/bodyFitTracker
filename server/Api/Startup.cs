@@ -39,6 +39,8 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            DotNetEnv.Env.TraversePath().Load();
+        
             services.AddControllers(options =>
             {
                 AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -49,10 +51,12 @@ namespace Api
                     options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
                 })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
+            
+            string databaseConnectionString = DotNetEnv.Env.GetString("DbConnection");
 
             services.AddDbContext<BodyFitTrackerContext>(options =>
             {
-                options.UseMySql(Configuration["DbConnection"], ServerVersion.AutoDetect(Configuration["DbConnection"]));
+                options.UseMySql(databaseConnectionString, ServerVersion.AutoDetect(databaseConnectionString));
             });
 
             services.AddAutoMapper(typeof(Startup));
@@ -68,7 +72,7 @@ namespace Api
                 });
             });
 
-            string secret = Configuration["TokenKey"];
+            string secret = DotNetEnv.Env.GetString("JWTSecret");
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -14,9 +14,9 @@ namespace Api.Infrastructure.Security
     {
         readonly string _key;
 
-        public JwtGenerator(IConfiguration configuration)
+        public JwtGenerator()
         {
-            _key = configuration["TokenKey"];
+            _key = DotNetEnv.Env.GetString("JWTSecret");
         }
 
         public string CreateToken(AppUser appUser)
