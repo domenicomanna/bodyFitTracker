@@ -6,7 +6,6 @@ namespace Api.Persistence
 {
     public class BodyFitTrackerContext : DbContext
     {
-        public bool SeedData { get; set; } = true;
 
         public BodyFitTrackerContext(DbContextOptions options) : base(options)
         {
@@ -25,8 +24,6 @@ namespace Api.Persistence
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new BodyMeasurementConfiguration());
             modelBuilder.ApplyConfiguration(new PasswordResetConfiguration());
-
-            if (SeedData) modelBuilder.Seed();
         }
     }
 }

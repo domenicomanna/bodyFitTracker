@@ -17,9 +17,7 @@ namespace ApiTests.ApplicationLogic
                     .UseInMemoryDatabase(databaseName: "BodyFitContext")
                     .Options;
 
-            BodyFitTrackerContext bodyFitTrackerContext = new BodyFitTrackerContext(options) {
-                SeedData = false
-            };
+            BodyFitTrackerContext bodyFitTrackerContext = new BodyFitTrackerContext(options);
 
 
             if (deleteExistingDatabase)
