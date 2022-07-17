@@ -1,5 +1,5 @@
 import React, { FunctionComponent, CSSProperties } from 'react';
-import BarLoader from 'react-spinners/BarLoader';
+import { BeatLoader } from 'react-spinners';
 import styles from './button.module.css';
 
 type Props = {
@@ -14,7 +14,7 @@ const Button: FunctionComponent<Props> = ({ buttonClass, isSubmitting, style, ch
   const styleToHideText: CSSProperties | undefined = isSubmitting ? { color: 'transparent' } : undefined;
   const loader = isSubmitting ? (
     <span data-testid='loader' style={{ position: 'absolute' }}>
-      <BarLoader color={'#fff'} loading={true} height={10} width={120} />
+      <BeatLoader color={'#fff'} />
     </span>
   ) : null;
   const buttonClasses = [styles.button, styles[buttonClass]];
