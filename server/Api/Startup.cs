@@ -66,7 +66,8 @@ namespace Api
                 options.AddPolicy(_corsPolicyName,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "https://bodyfitnesstracker.com", "https://eager-shirley-7d408c.netlify.app")
+                    builder
+                    .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
