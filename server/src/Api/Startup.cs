@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Api.ApplicationLogic.Authentication.Handlers;
 using Api.ApplicationLogic.BodyMeasurements.Handlers;
@@ -53,10 +54,10 @@ namespace Api
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
 
             string databaseConnectionString = DotNetEnv.Env.GetString("DbConnection");
-
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             services.AddDbContext<BodyFitTrackerContext>(options =>
             {
-                options.UseMySql(databaseConnectionString, ServerVersion.AutoDetect(databaseConnectionString));
+                options.UseNpgsql(databaseConnectionString);
             });
 
             services.AddAutoMapper(typeof(Startup));

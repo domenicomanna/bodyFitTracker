@@ -7,21 +7,20 @@ A web application that allows you to track your body measurements and body fat p
 #### Prerequisites
 
 - [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-- [MySql Server](https://dev.mysql.com/downloads/mysql/)
+- [Postgres](https://www.postgresql.org/download/)
 - [Node.js](https://nodejs.org/en/)
 
 ### Running the Server
 
 1. Clone the project: `git clone https://github.com/domenicomanna/bodyFitTracker.git`
 
-2. Configure mysql
+2. Configure Postgres
 
-   1. Login to your mysql server: `mysql -h 127.0.0.1 -u root -p`
-   2. Create a database to store the application data: `CREATE DATABASE bodyFitnessTrackerDB;`
-   3. Create a database user: `CREATE USER 'bodyFitnessTrackerDBUser'@'localhost' IDENTIFIED BY 'yourPassword';`
-   4. Grant the created user the necessary permissions to be able to use the created database: `GRANT ALL PRIVILEGES ON bodyFitnessTrackerDB.* to 'bodyFitnessTrackerDBUser'@'localhost';`
-   5. Reload the grant tables: `FLUSH PRIVILEGES;`
-   6. Finally, exit the database client: `exit;`
+   1. On your Postgres server, switch to the postgres user: `sudo -i -u postgres`
+   2. Switch to the sql client: `psql`
+   3. Create a database user: `CREATE USER "bodyFitnessTrackerDBUser" WITH password 'yourPassword';`
+   4. Create a database to store the application data: `CREATE DATABASE "bodyFitnessTrackerDB" OWNER "bodyFitnessTrackerDBUser";`
+   5. Finally, exit the database client: `exit;`
 
 3. Create a `.env` file in the `server` folder and fill it in with the variable names present in `server/src/Api/.env.keep`
 
