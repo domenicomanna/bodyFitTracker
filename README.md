@@ -23,13 +23,13 @@ A web application that allows you to track your body measurements and body fat p
    5. Reload the grant tables: `FLUSH PRIVILEGES;`
    6. Finally, exit the database client: `exit;`
 
-3. Create a `.env` file in the `server` folder and fill it in with the variable names present in `server/.env.keep`
+3. Create a `.env` file in the `server` folder and fill it in with the variable names present in `server/src/Api/.env.keep`
 
    **Important:** If you are using Gmail for the account to send emails from, then you must [create an app password](https://support.google.com/accounts/answer/185833?hl=en), and use that for the email password value in the `.env` file
 
 4. Run the api
    ```
-   cd server/Api
+   cd server/src/Api
    dotnet watch run
    ```
    The api should be listening on https://localhost:5000/
