@@ -12,6 +12,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
     {
         private readonly BodyFitTrackerContext _bodyFitTrackerContext;
         private readonly IUserAccessor _userAccessor;
+
         public DeleteBodyMeasurementHandler(BodyFitTrackerContext bodyFitTrackerContext, IUserAccessor userAccessor)
         {
             _bodyFitTrackerContext = bodyFitTrackerContext;
@@ -19,7 +20,7 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         }
 
         /// <summary>
-        /// Deletes the measurement with the id <paramref name="bodyMeasurementIdToDelete"/>. If no measurement is found then a RestException will be thrown. If 
+        /// Deletes the measurement with the id <paramref name="bodyMeasurementIdToDelete"/>. If no measurement is found then a RestException will be thrown. If
         /// the measurement being deleted does not belong to the current user, then a RestException will be thrown.
         /// </summary>
         /// <param name="bodyMeasurementIdToDelete"></param>
@@ -28,7 +29,8 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             Dictionary<string, string> errors = new Dictionary<string, string>();
 
             BodyMeasurement bodyMeasurementToRemove = _bodyFitTrackerContext.BodyMeasurements
-                .Where(b => b.BodyMeasurementId == bodyMeasurementIdToDelete).FirstOrDefault();
+                .Where(b => b.BodyMeasurementId == bodyMeasurementIdToDelete)
+                .FirstOrDefault();
 
             if (bodyMeasurementToRemove == null)
             {

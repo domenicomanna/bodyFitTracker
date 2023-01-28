@@ -13,6 +13,7 @@ namespace Api.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
+
         public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
         {
             _next = next;
@@ -45,7 +46,7 @@ namespace Api.Middleware
             else
             {
                 _logger.LogError(exception, "server error");
-                context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }
 
             string errorsAsJson = JsonConvert.SerializeObject(errors);

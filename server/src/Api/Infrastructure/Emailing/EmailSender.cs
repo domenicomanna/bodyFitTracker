@@ -13,7 +13,8 @@ namespace Api.Infrastructure.Emailing
 
         public EmailSender()
         {
-            _emailSettings = new EmailSettings {
+            _emailSettings = new EmailSettings
+            {
                 From = DotNetEnv.Env.GetString("EmailAddress"),
                 UserName = DotNetEnv.Env.GetString("EmailAddress"),
                 Password = DotNetEnv.Env.GetString("EmailPassword"),

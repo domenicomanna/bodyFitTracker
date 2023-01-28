@@ -34,7 +34,6 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId);
 
-
             _getUserHandler = new GetUserHandler(bodyFitTrackerContext, mapper, userAccessorMock.Object);
         }
 

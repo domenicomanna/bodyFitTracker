@@ -26,7 +26,11 @@ namespace Api.ApplicationLogic.Users.Handlers
 
             appUser.Email = changeProfileSettingsRequest.Email;
             // all units must be in imperial in the database
-            appUser.Height = MeasurementConverter.ConvertLength(changeProfileSettingsRequest.Height, changeProfileSettingsRequest.UnitsOfMeasure, MeasurementSystem.Imperial); 
+            appUser.Height = MeasurementConverter.ConvertLength(
+                changeProfileSettingsRequest.Height,
+                changeProfileSettingsRequest.UnitsOfMeasure,
+                MeasurementSystem.Imperial
+            );
             appUser.MeasurementSystemPreference = changeProfileSettingsRequest.UnitsOfMeasure;
 
             _bodyFitTrackerContext.SaveChanges();

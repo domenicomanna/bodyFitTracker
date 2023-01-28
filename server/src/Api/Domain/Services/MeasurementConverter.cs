@@ -9,15 +9,19 @@ namespace Api.Domain.Services
 
         public static double ConvertLength(double value, MeasurementSystem source, MeasurementSystem destination)
         {
-            if (source == destination) return value;
-            if (source == MeasurementSystem.Imperial) return value * _centimetersInOneInch; // convert to metric
+            if (source == destination)
+                return value;
+            if (source == MeasurementSystem.Imperial)
+                return value * _centimetersInOneInch; // convert to metric
             return value / _centimetersInOneInch; // convert to imperial
         }
 
         public static double ConvertWeight(double value, MeasurementSystem source, MeasurementSystem destination)
         {
-            if (source == destination) return value;
-            if (source == MeasurementSystem.Imperial) return value * _kilogramsInOnePound; // convert to metric
+            if (source == destination)
+                return value;
+            if (source == MeasurementSystem.Imperial)
+                return value * _kilogramsInOnePound; // convert to metric
             return value / _kilogramsInOnePound; // convert to imperial
         }
     }

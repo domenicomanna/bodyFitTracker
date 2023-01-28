@@ -16,7 +16,6 @@ namespace Api.Controllers
         public AuthenticationController(LoginHandler loginHandler)
         {
             _loginHandler = loginHandler;
-
         }
 
         [HttpPost("")]

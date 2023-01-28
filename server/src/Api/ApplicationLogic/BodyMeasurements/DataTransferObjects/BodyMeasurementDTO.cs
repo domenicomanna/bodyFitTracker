@@ -29,7 +29,8 @@ namespace Api.ApplicationLogic.BodyMeasurements.DataTransferObjects
         {
             get
             {
-                if (_hipCircumference == null) return null;
+                if (_hipCircumference == null)
+                    return null;
                 return Math.Round((double)_hipCircumference, 2);
             }
             set { _hipCircumference = value; }

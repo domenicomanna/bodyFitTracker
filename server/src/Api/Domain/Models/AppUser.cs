@@ -14,9 +14,16 @@ namespace Api.Domain.Models
         public MeasurementSystem MeasurementSystemPreference { get; set; }
         public virtual ICollection<BodyMeasurement> BodyMeasurements { get; private set; }
 
-        protected AppUser() {}
+        protected AppUser() { }
 
-        public AppUser(string email, string hashedPassword, string salt, double height, GenderType gender, MeasurementSystem measurementSystemPreference)
+        public AppUser(
+            string email,
+            string hashedPassword,
+            string salt,
+            double height,
+            GenderType gender,
+            MeasurementSystem measurementSystemPreference
+        )
         {
             Email = email;
             HashedPassword = hashedPassword;

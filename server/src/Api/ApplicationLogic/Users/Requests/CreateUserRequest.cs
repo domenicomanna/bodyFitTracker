@@ -26,5 +26,4 @@ namespace Api.ApplicationLogic.Users.Requests
             RuleFor(x => x.UnitsOfMeasure).IsInEnum();
         }
     }
-
 }

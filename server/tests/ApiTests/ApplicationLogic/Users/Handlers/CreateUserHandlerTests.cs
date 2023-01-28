@@ -30,16 +30,17 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             jwtGeneratorMock.Setup(x => x.CreateToken(It.IsAny<AppUser>())).Returns("");
             passwordHasherMock.Setup(x => x.GeneratePassword(It.IsAny<string>())).Returns(("", ""));
 
-            _createUserHandler = new CreateUserHandler(bodyFitTrackerContext, passwordHasherMock.Object, jwtGeneratorMock.Object);
+            _createUserHandler = new CreateUserHandler(
+                bodyFitTrackerContext,
+                passwordHasherMock.Object,
+                jwtGeneratorMock.Object
+            );
         }
 
         [TestMethod]
         public void UserCreationShouldFailIfEmailAddressIsAlreadyTaken()
         {
-            CreateUserRequest createUserRequest = new CreateUserRequest
-            {
-                Email = "abc@gmail.com"
-            };
+            CreateUserRequest createUserRequest = new CreateUserRequest { Email = "abc@gmail.com" };
 
             CreateUserResult createUserResult = _createUserHandler.Handle(createUserRequest);
             Assert.IsFalse(createUserResult.Succeeded);

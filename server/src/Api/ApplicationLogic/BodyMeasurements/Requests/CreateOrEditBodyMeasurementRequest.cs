@@ -16,7 +16,6 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
         public DateTime DateAdded { get; set; }
     }
 
-
     public class CreateOrEditBodyMeasurementRequestValidator : AbstractValidator<CreateOrEditBodyMeasurementRequest>
     {
         private readonly IUserAccessor _userAccessor;
@@ -25,10 +24,13 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
         {
             this._userAccessor = userAccessor;
 
-            When(GenderTypeIsFemale, () =>
-            {
-                RuleFor(x => x.HipCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
-            });
+            When(
+                GenderTypeIsFemale,
+                () =>
+                {
+                    RuleFor(x => x.HipCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
+                }
+            );
 
             RuleFor(x => x.NeckCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
             RuleFor(x => x.WaistCircumference).GreaterThan(0).LessThanOrEqualTo(1000).NotEmpty();
@@ -42,6 +44,5 @@ namespace Api.ApplicationLogic.BodyMeasurements.Requests
             GenderType usersGender = _userAccessor.GetCurrentUsersGender();
             return usersGender == GenderType.Female;
         }
-
     }
 }

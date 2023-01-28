@@ -23,7 +23,9 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
             AppUser appUser = new AppUser("abc@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(appUser);
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial));
+            bodyFitTrackerContext.BodyMeasurements.Add(
+                new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
+            );
             bodyFitTrackerContext.SaveChanges();
 
             var userAccessorMock = new Mock<IUserAccessor>();
@@ -35,17 +37,18 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
 
-
-            _getBodyMeasurementHandler = new GetBodyMeasurementHandler(bodyFitTrackerContext, mapper, userAccessorMock.Object);
+            _getBodyMeasurementHandler = new GetBodyMeasurementHandler(
+                bodyFitTrackerContext,
+                mapper,
+                userAccessorMock.Object
+            );
         }
-
 
         [TestMethod]
         public void ARestExceptionShouldBeThrownIfATheBodyMeasurementIsNotFound()
         {
             Assert.ThrowsException<RestException>(() => _getBodyMeasurementHandler.Handle(1123));
         }
-
 
         [TestMethod]
         public void TheBodyMeasurementShouldBeReturnedIfFound()

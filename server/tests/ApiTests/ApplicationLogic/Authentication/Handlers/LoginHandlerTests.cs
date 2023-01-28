@@ -31,7 +31,9 @@ namespace ApiTests.ApplicationLogic.Authentication.Handlers
             var passwordHasherMock = new Mock<IPasswordHasher>();
             var jwtGeneratorMock = new Mock<IJwtGenerator>();
 
-            passwordHasherMock.Setup(x => x.ValidatePlainTextPassword(dom.HashedPassword, dom.HashedPassword, It.IsAny<string>())).Returns(true);
+            passwordHasherMock
+                .Setup(x => x.ValidatePlainTextPassword(dom.HashedPassword, dom.HashedPassword, It.IsAny<string>()))
+                .Returns(true);
             jwtGeneratorMock.Setup(x => x.CreateToken(It.IsAny<AppUser>())).Returns("");
 
             _loginHandler = new LoginHandler(bodyFitTrackerContext, passwordHasherMock.Object, jwtGeneratorMock.Object);
@@ -40,39 +42,25 @@ namespace ApiTests.ApplicationLogic.Authentication.Handlers
         [TestMethod]
         public void IfUserIsNotFoundSignInShouldFail()
         {
-            LoginRequest loginRequest = new LoginRequest
-            {
-                Email = "notFoundEmail@gmail.com",
-                Password = ""
-            };
+            LoginRequest loginRequest = new LoginRequest { Email = "notFoundEmail@gmail.com", Password = "" };
 
             SignInResult signInResult = _loginHandler.Handle(loginRequest);
             Assert.IsFalse(signInResult.SignInWasSuccessful);
-
         }
 
         [TestMethod]
         public void IfUserIsFoundButCredentialsAreNotValidSignInShouldFail()
         {
-            LoginRequest loginRequest = new LoginRequest
-            {
-                Email = _dom.Email,
-                Password = "Invalid password"
-            };
+            LoginRequest loginRequest = new LoginRequest { Email = _dom.Email, Password = "Invalid password" };
 
             SignInResult signInResult = _loginHandler.Handle(loginRequest);
             Assert.IsFalse(signInResult.SignInWasSuccessful);
-
         }
 
         [TestMethod]
         public void IfUserIsFoundButCredentialsAreValidLoginShoudSucceed()
         {
-            LoginRequest loginRequest = new LoginRequest
-            {
-                Email = _dom.Email,
-                Password = _dom.Password
-            };
+            LoginRequest loginRequest = new LoginRequest { Email = _dom.Email, Password = _dom.Password };
 
             SignInResult signInResult = _loginHandler.Handle(loginRequest);
             Assert.IsTrue(signInResult.SignInWasSuccessful);

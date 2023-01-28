@@ -33,16 +33,17 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             emailSender.Setup(x => x.SendEmail(It.IsAny<EmailMessage>()));
             passwordResetTokenGenerator.Setup(x => x.CreateResetToken()).Returns(("reset-token"));
 
-            _resetPasswordStepOneHandler = new ResetPasswordStepOneHandler(bodyFitTrackerContext, emailSender.Object, passwordResetTokenGenerator.Object);
+            _resetPasswordStepOneHandler = new ResetPasswordStepOneHandler(
+                bodyFitTrackerContext,
+                emailSender.Object,
+                passwordResetTokenGenerator.Object
+            );
         }
 
         [TestMethod]
         public void NothingShouldHappenIfEmailIsNotFound()
         {
-            ResetPasswordStepOneRequest request = new ResetPasswordStepOneRequest
-            {
-                Email = "asdf"
-            };
+            ResetPasswordStepOneRequest request = new ResetPasswordStepOneRequest { Email = "asdf" };
 
             _resetPasswordStepOneHandler.Handle(request);
 
@@ -53,10 +54,7 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         [TestMethod]
         public void IfEmailIsFoundAPasswordResetShouldBeCreated()
         {
-            ResetPasswordStepOneRequest request = new ResetPasswordStepOneRequest
-            {
-                Email = _userEmail
-            };
+            ResetPasswordStepOneRequest request = new ResetPasswordStepOneRequest { Email = _userEmail };
 
             _resetPasswordStepOneHandler.Handle(request);
 

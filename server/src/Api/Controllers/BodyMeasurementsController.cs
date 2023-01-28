@@ -8,7 +8,6 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-
     public class BodyMeasurementsController
     {
         private readonly GetAllBodyMeasurementsHandler _getAllBodyMeasurementsHandler;
@@ -16,7 +15,12 @@ namespace Api.Controllers
         private readonly DeleteBodyMeasurementHandler _deleteBodyMeasurementHandler;
         private readonly CreateOrEditBodyMeasurementHandler _createOrEditBodyMeasurementHandler;
 
-        public BodyMeasurementsController(GetAllBodyMeasurementsHandler getAllBodyMeasurementsHandler, GetBodyMeasurementHandler getBodyMeasurementHandler, DeleteBodyMeasurementHandler deleteBodyMeasurementHandler, CreateOrEditBodyMeasurementHandler createOrEditBodyMeasurementHandler)
+        public BodyMeasurementsController(
+            GetAllBodyMeasurementsHandler getAllBodyMeasurementsHandler,
+            GetBodyMeasurementHandler getBodyMeasurementHandler,
+            DeleteBodyMeasurementHandler deleteBodyMeasurementHandler,
+            CreateOrEditBodyMeasurementHandler createOrEditBodyMeasurementHandler
+        )
         {
             _getAllBodyMeasurementsHandler = getAllBodyMeasurementsHandler;
             _getBodyMeasurementHandler = getBodyMeasurementHandler;
@@ -29,7 +33,6 @@ namespace Api.Controllers
         {
             return _getAllBodyMeasurementsHandler.Handle();
         }
-
 
         [HttpGet("{id}")]
         public BodyMeasurementDTO GetBodyMeasurement(int id)
@@ -55,7 +58,5 @@ namespace Api.Controllers
         {
             _deleteBodyMeasurementHandler.Handle(id);
         }
-
-
     }
 }

@@ -6,7 +6,6 @@ namespace ApiTests.Infrastructure.PasswordHashing
     [TestClass]
     public class PasswordHasherTests
     {
-
         PasswordHasher _passwordHasher;
 
         [TestInitialize]
@@ -38,7 +37,11 @@ namespace ApiTests.Infrastructure.PasswordHashing
         {
             string plainTextPassword = "abc";
             (string hashedPassword, string salt) = _passwordHasher.GeneratePassword(plainTextPassword);
-            bool plainTextPasswordIsValid = _passwordHasher.ValidatePlainTextPassword(plainTextPassword, hashedPassword, salt);
+            bool plainTextPasswordIsValid = _passwordHasher.ValidatePlainTextPassword(
+                plainTextPassword,
+                hashedPassword,
+                salt
+            );
             Assert.IsTrue(plainTextPasswordIsValid);
         }
 
@@ -48,7 +51,11 @@ namespace ApiTests.Infrastructure.PasswordHashing
             string plainTextPassword = "abc";
             (string hashedPasswordOne, string originalSalt) = _passwordHasher.GeneratePassword(plainTextPassword);
             (string hashedPasswordTwo, string differentSalt) = _passwordHasher.GeneratePassword(plainTextPassword); // create a new password to get a valid base 64 string to use for the different salt
-            bool plainTextPasswordIsValid = _passwordHasher.ValidatePlainTextPassword(plainTextPassword, hashedPasswordOne, differentSalt);
+            bool plainTextPasswordIsValid = _passwordHasher.ValidatePlainTextPassword(
+                plainTextPassword,
+                hashedPasswordOne,
+                differentSalt
+            );
             Assert.IsFalse(plainTextPasswordIsValid);
         }
 
@@ -57,9 +64,12 @@ namespace ApiTests.Infrastructure.PasswordHashing
         {
             string plainTextPassword = "abc";
             (string hashedPassword, string salt) = _passwordHasher.GeneratePassword("123");
-            bool plainTextPasswordIsValid = _passwordHasher.ValidatePlainTextPassword(plainTextPassword, hashedPassword, salt);
+            bool plainTextPasswordIsValid = _passwordHasher.ValidatePlainTextPassword(
+                plainTextPassword,
+                hashedPassword,
+                salt
+            );
             Assert.IsFalse(plainTextPasswordIsValid);
         }
-
     }
 }

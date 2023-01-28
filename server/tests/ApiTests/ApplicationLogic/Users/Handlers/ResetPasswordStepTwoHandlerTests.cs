@@ -26,16 +26,23 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             _appUserEmail = appUser.Email;
             bodyFitTrackerContext.Add(appUser);
             bodyFitTrackerContext.SaveChanges();
-            
+
             // add the password reset record after the app user has been added, so the appUserId is generated
-            bodyFitTrackerContext.PasswordResets.Add(new PasswordReset(_passwordResetToken, appUser.AppUserId, DateTime.Now.AddHours(10)));
+            bodyFitTrackerContext.PasswordResets.Add(
+                new PasswordReset(_passwordResetToken, appUser.AppUserId, DateTime.Now.AddHours(10))
+            );
             bodyFitTrackerContext.SaveChanges();
 
             var passwordHasherMock = new Mock<IPasswordHasher>();
 
-            passwordHasherMock.Setup(x => x.GeneratePassword(It.IsAny<string>())).Returns((string password) => (password, ""));
+            passwordHasherMock
+                .Setup(x => x.GeneratePassword(It.IsAny<string>()))
+                .Returns((string password) => (password, ""));
 
-            _resetPasswordStepTwoHandler = new ResetPasswordStepTwoHandler(bodyFitTrackerContext, passwordHasherMock.Object);
+            _resetPasswordStepTwoHandler = new ResetPasswordStepTwoHandler(
+                bodyFitTrackerContext,
+                passwordHasherMock.Object
+            );
         }
 
         [TestMethod]

@@ -21,7 +21,14 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            AppUser appUser = new AppUser("abc@gmail.com", _userPassword, "", 60, GenderType.Male, MeasurementSystem.Imperial);
+            AppUser appUser = new AppUser(
+                "abc@gmail.com",
+                _userPassword,
+                "",
+                60,
+                GenderType.Male,
+                MeasurementSystem.Imperial
+            );
             bodyFitTrackerContext.Add(appUser);
             bodyFitTrackerContext.SaveChanges();
 
@@ -29,10 +36,18 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             var userAccessorMock = new Mock<IUserAccessor>();
 
             userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId);
-            passwordHasherMock.Setup(x => x.ValidatePlainTextPassword(_userPassword, It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            passwordHasherMock.Setup(x => x.GeneratePassword(It.IsAny<string>())).Returns((string password) => (password, ""));
+            passwordHasherMock
+                .Setup(x => x.ValidatePlainTextPassword(_userPassword, It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(true);
+            passwordHasherMock
+                .Setup(x => x.GeneratePassword(It.IsAny<string>()))
+                .Returns((string password) => (password, ""));
 
-            _changePasswordHandler = new ChangePasswordHandler(bodyFitTrackerContext, passwordHasherMock.Object, userAccessorMock.Object);
+            _changePasswordHandler = new ChangePasswordHandler(
+                bodyFitTrackerContext,
+                passwordHasherMock.Object,
+                userAccessorMock.Object
+            );
         }
 
         [TestMethod]
@@ -65,8 +80,6 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(false);
             Assert.IsTrue(changePasswordResult.Succeeded);
             Assert.AreEqual("abc", bodyFitTrackerContext.AppUsers.Where(x => x.AppUserId == 1).First().HashedPassword);
-
-
         }
     }
 }

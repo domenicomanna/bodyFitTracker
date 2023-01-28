@@ -20,8 +20,12 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
 
             AppUser appUser = new AppUser("abc@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
-            bodyFitTrackerContext.PasswordResets.Add(new PasswordReset(_unexpiredToken, appUser.AppUserId, DateTime.Now.AddHours(10)));
-            bodyFitTrackerContext.PasswordResets.Add(new PasswordReset(_expiredToken, appUser.AppUserId, DateTime.Now.AddHours(-1)));
+            bodyFitTrackerContext.PasswordResets.Add(
+                new PasswordReset(_unexpiredToken, appUser.AppUserId, DateTime.Now.AddHours(10))
+            );
+            bodyFitTrackerContext.PasswordResets.Add(
+                new PasswordReset(_expiredToken, appUser.AppUserId, DateTime.Now.AddHours(-1))
+            );
             bodyFitTrackerContext.Add(appUser);
             bodyFitTrackerContext.SaveChanges();
 
@@ -34,7 +38,7 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             ResetPasswordValidationResult result = _validateResetPasswordTokenHandler.Handle("random");
             Assert.IsFalse(result.Succeeded);
         }
-        
+
         [TestMethod]
         public void ValidationShouldFailIfTokenIsExipred()
         {

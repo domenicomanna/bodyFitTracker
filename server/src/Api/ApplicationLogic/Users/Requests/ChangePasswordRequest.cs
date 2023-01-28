@@ -10,7 +10,6 @@ namespace Api.ApplicationLogic.Users.Requests
         public string ConfirmedNewPassword { get; set; }
     }
 
-
     public class ChangePasswordRequestValidator : AbstractValidator<ChangePasswordRequest>
     {
         public ChangePasswordRequestValidator()

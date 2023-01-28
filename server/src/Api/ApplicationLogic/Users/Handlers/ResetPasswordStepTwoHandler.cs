@@ -20,14 +20,22 @@ namespace Api.ApplicationLogic.Users.Handlers
 
         public ResetPasswordStepTwoResult Handle(ResetPasswordStepTwoRequest resetPasswordStepTwoRequest)
         {
-            ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler = new ValidateResetPasswordTokenHandler(_bodyFitTrackerContext);
-            ResetPasswordValidationResult validationResult = validateResetPasswordTokenHandler.Handle(resetPasswordStepTwoRequest.ResetPasswordToken);
-            if (!validationResult.Succeeded) return new ResetPasswordStepTwoResult(false, validationResult.ErrorMessage);
+            ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler = new ValidateResetPasswordTokenHandler(
+                _bodyFitTrackerContext
+            );
+            ResetPasswordValidationResult validationResult = validateResetPasswordTokenHandler.Handle(
+                resetPasswordStepTwoRequest.ResetPasswordToken
+            );
+            if (!validationResult.Succeeded)
+                return new ResetPasswordStepTwoResult(false, validationResult.ErrorMessage);
 
             PasswordReset passwordReset = _bodyFitTrackerContext.PasswordResets
-                .Where(x => x.Token == resetPasswordStepTwoRequest.ResetPasswordToken).First();
+                .Where(x => x.Token == resetPasswordStepTwoRequest.ResetPasswordToken)
+                .First();
             AppUser appUser = passwordReset.AppUser;
-            (string hashedPassword, string salt) = _passwordHasher.GeneratePassword(resetPasswordStepTwoRequest.NewPassword);
+            (string hashedPassword, string salt) = _passwordHasher.GeneratePassword(
+                resetPasswordStepTwoRequest.NewPassword
+            );
 
             appUser.HashedPassword = hashedPassword;
             appUser.Salt = salt;
@@ -36,7 +44,6 @@ namespace Api.ApplicationLogic.Users.Handlers
             _bodyFitTrackerContext.SaveChanges();
 
             return new ResetPasswordStepTwoResult(true);
-
         }
     }
 }

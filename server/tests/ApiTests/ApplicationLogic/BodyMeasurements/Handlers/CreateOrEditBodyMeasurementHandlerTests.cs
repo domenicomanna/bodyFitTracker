@@ -19,13 +19,21 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
 
         (int UserId, int IdOfMeasurement) _dom;
 
-
         [TestInitialize]
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
             AppUser dom = new AppUser("dom@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
-            BodyMeasurement bodyMeasurement = new BodyMeasurement(dom, 11, 30, null, 60, 130, DateTime.Today, MeasurementSystem.Imperial);
+            BodyMeasurement bodyMeasurement = new BodyMeasurement(
+                dom,
+                11,
+                30,
+                null,
+                60,
+                130,
+                DateTime.Today,
+                MeasurementSystem.Imperial
+            );
             bodyFitTrackerContext.AppUsers.Add(dom);
 
             bodyFitTrackerContext.BodyMeasurements.Add(bodyMeasurement);
@@ -38,7 +46,10 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
             userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(dom.AppUserId);
 
-            _createOrEditBodyMeasurementHandler = new CreateOrEditBodyMeasurementHandler(bodyFitTrackerContext, userAccessorMock.Object);
+            _createOrEditBodyMeasurementHandler = new CreateOrEditBodyMeasurementHandler(
+                bodyFitTrackerContext,
+                userAccessorMock.Object
+            );
         }
 
         [TestMethod]
@@ -72,7 +83,9 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
                 IdOfBodyMeasurementToEdit = 1023
             };
 
-            Assert.ThrowsException<RestException>(() => _createOrEditBodyMeasurementHandler.Handle(createMeasurementRequest));
+            Assert.ThrowsException<RestException>(
+                () => _createOrEditBodyMeasurementHandler.Handle(createMeasurementRequest)
+            );
         }
 
         [TestMethod]
@@ -93,7 +106,10 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
 
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(false);
 
-            double actualNewWeight = bodyFitTrackerContext.BodyMeasurements.Where(x => x.AppUserId == _dom.UserId).First().Weight;
+            double actualNewWeight = bodyFitTrackerContext.BodyMeasurements
+                .Where(x => x.AppUserId == _dom.UserId)
+                .First()
+                .Weight;
 
             Assert.AreEqual(newWeight, actualNewWeight, .01);
         }

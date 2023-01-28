@@ -16,15 +16,20 @@ namespace Api.Infrastructure.Security
         {
             _httpContextAccessor = httpContextAccessor;
         }
+
         public int GetCurrentUserId()
         {
-            string userId = _httpContextAccessor.HttpContext.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            string userId = _httpContextAccessor.HttpContext.User.Claims
+                .First(c => c.Type == ClaimTypes.NameIdentifier)
+                .Value;
             return Convert.ToInt32(userId);
         }
 
         public GenderType GetCurrentUsersGender()
         {
-            string usersGender = _httpContextAccessor.HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Gender).Value;
+            string usersGender = _httpContextAccessor.HttpContext.User.Claims
+                .First(c => c.Type == ClaimTypes.Gender)
+                .Value;
             Enum.TryParse(usersGender, out GenderType genderType);
             return genderType;
         }

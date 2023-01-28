@@ -30,7 +30,11 @@ namespace Api.ApplicationLogic.Users.Handlers
             AppUser appUser = _bodyFitTrackerContext.AppUsers.Where(x => x.AppUserId == currentUserId).First();
             AppUserDTO appUserDto = _mapper.Map<AppUser, AppUserDTO>(appUser);
             appUserDto.MeasurementPreference = new MeasurementSystemDTO(appUser.MeasurementSystemPreference);
-            appUserDto.Height = MeasurementConverter.ConvertLength(appUser.Height, MeasurementSystem.Imperial, appUser.MeasurementSystemPreference);
+            appUserDto.Height = MeasurementConverter.ConvertLength(
+                appUser.Height,
+                MeasurementSystem.Imperial,
+                appUser.MeasurementSystemPreference
+            );
             return appUserDto;
         }
     }

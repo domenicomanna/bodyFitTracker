@@ -14,7 +14,11 @@ namespace Api.ApplicationLogic.Users.Handlers
         private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtGenerator _jwtGenerator;
 
-        public CreateUserHandler(BodyFitTrackerContext bodyFitTrackerContext, IPasswordHasher passwordHasher, IJwtGenerator jwtGenerator)
+        public CreateUserHandler(
+            BodyFitTrackerContext bodyFitTrackerContext,
+            IPasswordHasher passwordHasher,
+            IJwtGenerator jwtGenerator
+        )
         {
             _bodyFitTrackerContext = bodyFitTrackerContext;
             _passwordHasher = passwordHasher;
@@ -32,19 +36,22 @@ namespace Api.ApplicationLogic.Users.Handlers
                 errors.Add("email", "That email address is already taken");
                 return new CreateUserResult { Errors = errors };
             }
-            
+
             (string hashedPassword, string salt) = _passwordHasher.GeneratePassword(request.Password);
 
-            AppUser appUser = new AppUser(request.Email, hashedPassword, salt, request.Height, request.Gender, request.UnitsOfMeasure);
+            AppUser appUser = new AppUser(
+                request.Email,
+                hashedPassword,
+                salt,
+                request.Height,
+                request.Gender,
+                request.UnitsOfMeasure
+            );
 
             _bodyFitTrackerContext.AppUsers.Add(appUser);
             _bodyFitTrackerContext.SaveChanges();
 
-            return new CreateUserResult
-            {
-                Succeeded = true,
-                Token = _jwtGenerator.CreateToken(appUser)
-            };
+            return new CreateUserResult { Succeeded = true, Token = _jwtGenerator.CreateToken(appUser) };
         }
     }
 }

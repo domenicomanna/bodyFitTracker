@@ -32,13 +32,25 @@ namespace Api.Domain.Models
         /// <summary>
         /// All units are expected to be in the the units parameter
         /// </summary>
-        public BodyMeasurement(AppUser appUser, double neckCircumference, double waistCircumference, double? hipCircumference, double height, double weight, DateTime dateAdded, MeasurementSystem units)
+        public BodyMeasurement(
+            AppUser appUser,
+            double neckCircumference,
+            double waistCircumference,
+            double? hipCircumference,
+            double height,
+            double weight,
+            DateTime dateAdded,
+            MeasurementSystem units
+        )
         {
-            if (appUser == null) throw new ArgumentNullException(nameof(appUser));
+            if (appUser == null)
+                throw new ArgumentNullException(nameof(appUser));
 
             if (appUser.Gender == GenderType.Female && hipCircumference == null)
             {
-                throw new ArgumentNullException($"{nameof(hipCircumference)} can't be null for {nameof(GenderType.Female)}");
+                throw new ArgumentNullException(
+                    $"{nameof(hipCircumference)} can't be null for {nameof(GenderType.Female)}"
+                );
             }
 
             AppUser = appUser;

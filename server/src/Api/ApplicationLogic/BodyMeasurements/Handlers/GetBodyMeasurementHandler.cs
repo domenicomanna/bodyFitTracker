@@ -17,7 +17,11 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         private readonly IMapper _mapper;
         private readonly IUserAccessor _userAccessor;
 
-        public GetBodyMeasurementHandler(BodyFitTrackerContext bodyFitTrackerContext, IMapper mapper, IUserAccessor userAccessor)
+        public GetBodyMeasurementHandler(
+            BodyFitTrackerContext bodyFitTrackerContext,
+            IMapper mapper,
+            IUserAccessor userAccessor
+        )
         {
             _bodyFitTrackerContext = bodyFitTrackerContext;
             _mapper = mapper;
@@ -33,7 +37,9 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             int userId = _userAccessor.GetCurrentUserId();
             Dictionary<string, string> errors = new Dictionary<string, string>();
             AppUser currentUser = _bodyFitTrackerContext.AppUsers.Find(userId);
-            BodyMeasurement bodyMeasurement = currentUser.BodyMeasurements.Where(x => x.BodyMeasurementId == bodyMeasurementId).FirstOrDefault();
+            BodyMeasurement bodyMeasurement = currentUser.BodyMeasurements
+                .Where(x => x.BodyMeasurementId == bodyMeasurementId)
+                .FirstOrDefault();
 
             if (bodyMeasurement == null)
             {
@@ -41,7 +47,11 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
                 throw new RestException(HttpStatusCode.NotFound, errors);
             }
 
-            BodyMeasurement measurementInUsersPreferredUnits = BodyMeasurementConverter.Convert(bodyMeasurement, MeasurementSystem.Imperial, currentUser.MeasurementSystemPreference);
+            BodyMeasurement measurementInUsersPreferredUnits = BodyMeasurementConverter.Convert(
+                bodyMeasurement,
+                MeasurementSystem.Imperial,
+                currentUser.MeasurementSystemPreference
+            );
 
             return _mapper.Map<BodyMeasurement, BodyMeasurementDTO>(measurementInUsersPreferredUnits);
         }

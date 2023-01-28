@@ -14,7 +14,11 @@ namespace Api.ApplicationLogic.Users.Handlers
         private readonly IPasswordHasher _passwordHasher;
         private readonly IUserAccessor _userAccessor;
 
-        public ChangePasswordHandler(BodyFitTrackerContext bodyFitTrackerContext, IPasswordHasher passwordHasher, IUserAccessor userAccessor)
+        public ChangePasswordHandler(
+            BodyFitTrackerContext bodyFitTrackerContext,
+            IPasswordHasher passwordHasher,
+            IUserAccessor userAccessor
+        )
         {
             this._bodyFitTrackerContext = bodyFitTrackerContext;
             this._passwordHasher = passwordHasher;
@@ -27,7 +31,11 @@ namespace Api.ApplicationLogic.Users.Handlers
             int userId = _userAccessor.GetCurrentUserId();
             AppUser appUser = _bodyFitTrackerContext.AppUsers.Where(x => x.AppUserId == userId).First();
 
-            bool oldPasswordIsCorrect = _passwordHasher.ValidatePlainTextPassword(changePasswordRequest.CurrentPassword, appUser.HashedPassword, appUser.Salt);
+            bool oldPasswordIsCorrect = _passwordHasher.ValidatePlainTextPassword(
+                changePasswordRequest.CurrentPassword,
+                appUser.HashedPassword,
+                appUser.Salt
+            );
 
             if (!oldPasswordIsCorrect)
             {
@@ -40,7 +48,7 @@ namespace Api.ApplicationLogic.Users.Handlers
             appUser.HashedPassword = hashedPassword;
             appUser.Salt = salt;
             _bodyFitTrackerContext.SaveChanges();
-            
+
             return new ChangePasswordResult(true);
         }
     }

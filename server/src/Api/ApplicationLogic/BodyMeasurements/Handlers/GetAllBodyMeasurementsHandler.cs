@@ -15,7 +15,11 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
         private readonly IMapper _mapper;
         private readonly IUserAccessor _userAccessor;
 
-        public GetAllBodyMeasurementsHandler(BodyFitTrackerContext bodyFitTrackerContext, IMapper mapper, IUserAccessor userAccessor)
+        public GetAllBodyMeasurementsHandler(
+            BodyFitTrackerContext bodyFitTrackerContext,
+            IMapper mapper,
+            IUserAccessor userAccessor
+        )
         {
             _bodyFitTrackerContext = bodyFitTrackerContext;
             _mapper = mapper;
@@ -31,12 +35,17 @@ namespace Api.ApplicationLogic.BodyMeasurements.Handlers
             AppUser currentUser = _bodyFitTrackerContext.AppUsers.Find(userId);
 
             // all measurements in the database are in imperial units
-            List<BodyMeasurement> bodyMeasurements = BodyMeasurementConverter.Convert(currentUser.
-                BodyMeasurements.ToList(), MeasurementSystem.Imperial, currentUser.MeasurementSystemPreference);
+            List<BodyMeasurement> bodyMeasurements = BodyMeasurementConverter.Convert(
+                currentUser.BodyMeasurements.ToList(),
+                MeasurementSystem.Imperial,
+                currentUser.MeasurementSystemPreference
+            );
 
             bodyMeasurements = bodyMeasurements.OrderByDescending(b => b.DateAdded).ToList();
 
-            List<BodyMeasurementDTO> bodyMeasurementDTOs = _mapper.Map<List<BodyMeasurement>, List<BodyMeasurementDTO>>(bodyMeasurements);
+            List<BodyMeasurementDTO> bodyMeasurementDTOs = _mapper.Map<List<BodyMeasurement>, List<BodyMeasurementDTO>>(
+                bodyMeasurements
+            );
             return bodyMeasurementDTOs;
         }
     }

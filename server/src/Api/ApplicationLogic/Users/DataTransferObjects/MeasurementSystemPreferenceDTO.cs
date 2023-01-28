@@ -10,7 +10,8 @@ namespace Api.ApplicationLogic.Users.DataTransferObjects
 
         public MeasurementSystemDTO(MeasurementSystem measurementSystemPreference)
         {
-            MeasurementSystemName = measurementSystemPreference.ToString();;
+            MeasurementSystemName = measurementSystemPreference.ToString();
+            ;
             if (measurementSystemPreference == MeasurementSystem.Imperial)
             {
                 LengthUnit = "in";

@@ -16,7 +16,11 @@ namespace Api.ApplicationLogic.Users.Handlers
         private readonly IEmailSender _emailSender;
         private readonly IPasswordResetTokenGenerator _passwordResetTokenGenerator;
 
-        public ResetPasswordStepOneHandler(BodyFitTrackerContext bodyFitTrackerContext, IEmailSender emailSender, IPasswordResetTokenGenerator passwordResetTokenGenerator)
+        public ResetPasswordStepOneHandler(
+            BodyFitTrackerContext bodyFitTrackerContext,
+            IEmailSender emailSender,
+            IPasswordResetTokenGenerator passwordResetTokenGenerator
+        )
         {
             this._bodyFitTrackerContext = bodyFitTrackerContext;
             this._emailSender = emailSender;
@@ -25,8 +29,11 @@ namespace Api.ApplicationLogic.Users.Handlers
 
         public void Handle(ResetPasswordStepOneRequest resetPasswordStepOneRequest)
         {
-            AppUser appUser = _bodyFitTrackerContext.AppUsers.Where(x => x.Email == resetPasswordStepOneRequest.Email).FirstOrDefault();
-            if (appUser == null) return;
+            AppUser appUser = _bodyFitTrackerContext.AppUsers
+                .Where(x => x.Email == resetPasswordStepOneRequest.Email)
+                .FirstOrDefault();
+            if (appUser == null)
+                return;
 
             string resetToken = _passwordResetTokenGenerator.CreateResetToken();
             DateTime expiration = DateTime.Now.AddHours(1);
@@ -43,9 +50,11 @@ namespace Api.ApplicationLogic.Users.Handlers
         {
             EmailMessage emailMessage = new EmailMessage(appUser.Email, "Reset Your Password");
             StringBuilder htmlBody = new StringBuilder();
-            string clientAppUrl =  DotNetEnv.Env.GetString("ClientAppUrl");
+            string clientAppUrl = DotNetEnv.Env.GetString("ClientAppUrl");
             htmlBody.Append("<p>Hi, a request was received to reset your password.<p>");
-            htmlBody.Append($"<p>Please follow <a href='{clientAppUrl}/reset-password-step-two/{resetToken}' target='_blank'>this link</a> to reset your password.");
+            htmlBody.Append(
+                $"<p>Please follow <a href='{clientAppUrl}/reset-password-step-two/{resetToken}' target='_blank'>this link</a> to reset your password."
+            );
             emailMessage.HtmlBody = htmlBody.ToString();
 
             return emailMessage;

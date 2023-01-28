@@ -8,30 +8,14 @@ namespace Api.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            builder
-                .HasKey(a => a.AppUserId);
-            builder
-                .HasIndex(a => a.Email).IsUnique();
-            builder
-                .Property(a => a.AppUserId)
-                .ValueGeneratedOnAdd();
-            builder
-                .Property(a => a.Email)
-                .IsRequired();
-            builder
-                .Property(a => a.HashedPassword)
-                .IsRequired();
-            builder
-                .Property(a => a.Salt).
-                IsRequired();
-            builder
-                .Property(a => a.Gender)
-                .IsRequired()
-                .HasConversion<string>();
-            builder
-                .Property(a => a.MeasurementSystemPreference)
-                .IsRequired()
-                .HasConversion<string>();
+            builder.HasKey(a => a.AppUserId);
+            builder.HasIndex(a => a.Email).IsUnique();
+            builder.Property(a => a.AppUserId).ValueGeneratedOnAdd();
+            builder.Property(a => a.Email).IsRequired();
+            builder.Property(a => a.HashedPassword).IsRequired();
+            builder.Property(a => a.Salt).IsRequired();
+            builder.Property(a => a.Gender).IsRequired().HasConversion<string>();
+            builder.Property(a => a.MeasurementSystemPreference).IsRequired().HasConversion<string>();
             builder
                 .HasMany(b => b.BodyMeasurements)
                 .WithOne(a => a.AppUser)

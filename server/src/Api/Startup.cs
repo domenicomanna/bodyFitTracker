@@ -24,7 +24,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Api
 {
-
     public class Startup
     {
         readonly string _corsPolicyName = "CorsPolicy";
@@ -40,18 +39,19 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             DotNetEnv.Env.TraversePath().Load();
-        
-            services.AddControllers(options =>
-            {
-                AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
+
+            services
+                .AddControllers(options =>
+                {
+                    AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                    options.Filters.Add(new AuthorizeFilter(policy));
+                })
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
                 })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
-            
+
             string databaseConnectionString = DotNetEnv.Env.GetString("DbConnection");
 
             services.AddDbContext<BodyFitTrackerContext>(options =>
@@ -63,30 +63,30 @@ namespace Api
 
             services.AddCors(options =>
             {
-                options.AddPolicy(_corsPolicyName,
-                builder =>
-                {
-                    builder
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
+                options.AddPolicy(
+                    _corsPolicyName,
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    }
+                );
             });
 
             string secret = DotNetEnv.Env.GetString("JWTSecret");
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(opt =>
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
                     {
-                        opt.TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidateIssuerSigningKey = true,
-                            IssuerSigningKey = securityKey,
-                            ValidateIssuer = false,
-                            ValidateAudience = false,
-                        };
-                    });
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = securityKey,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
+                });
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
@@ -132,11 +132,10 @@ namespace Api
                 endpoints.MapControllers();
             });
         }
+
         private static void UpdateDatabase(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetService<BodyFitTrackerContext>())
                 {
@@ -145,5 +144,4 @@ namespace Api
             }
         }
     }
-
 }

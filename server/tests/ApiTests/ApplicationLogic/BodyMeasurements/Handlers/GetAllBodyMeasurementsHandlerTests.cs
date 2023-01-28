@@ -13,26 +13,29 @@ using Moq;
 
 namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
 {
-
     [TestClass]
     public class GetAllBodyMeasurementsHandlerTests
     {
-
         GetAllBodyMeasurementsHandler _getAllBodyMeasurementsHandler;
 
         [TestInitialize]
-        public void SetUp(){
+        public void SetUp()
+        {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
             AppUser appUser = new AppUser("abc@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
             bodyFitTrackerContext.AppUsers.Add(appUser);
             bodyFitTrackerContext.SaveChanges();
 
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial));
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(appUser, 11, 20, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial));
+            bodyFitTrackerContext.BodyMeasurements.Add(
+                new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
+            );
+            bodyFitTrackerContext.BodyMeasurements.Add(
+                new BodyMeasurement(appUser, 11, 20, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
+            );
             bodyFitTrackerContext.SaveChanges();
 
-            var userAccessorMock = new Mock<IUserAccessor>(); 
-            userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId); 
+            var userAccessorMock = new Mock<IUserAccessor>();
+            userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId);
 
             MapperConfiguration mapperConfiguration = new MapperConfiguration(opts =>
             {
@@ -40,15 +43,18 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             });
             IMapper mapper = mapperConfiguration.CreateMapper();
 
-
-            _getAllBodyMeasurementsHandler = new GetAllBodyMeasurementsHandler(bodyFitTrackerContext, mapper, userAccessorMock.Object);
+            _getAllBodyMeasurementsHandler = new GetAllBodyMeasurementsHandler(
+                bodyFitTrackerContext,
+                mapper,
+                userAccessorMock.Object
+            );
         }
 
         [TestMethod]
-        public void TwoBodyMeasurementsShouldBeReturned(){
+        public void TwoBodyMeasurementsShouldBeReturned()
+        {
             List<BodyMeasurementDTO> bodyMeasurements = _getAllBodyMeasurementsHandler.Handle();
             Assert.IsTrue(bodyMeasurements.Count() == 2);
         }
-        
     }
 }

@@ -20,18 +20,25 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
         public void SetUp()
         {
             BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            
+
             AppUser dom = new AppUser("dom@gmail.com", "", "", 10, GenderType.Male, MeasurementSystem.Imperial); // will have an id of 1
             AppUser bob = new AppUser("bob@gmail.com", "", "", 10, GenderType.Male, MeasurementSystem.Imperial); // will have an id of 2
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(dom, 11, 12, null, 60, 100, DateTime.Today, MeasurementSystem.Imperial)); // will have id of 1
-            bodyFitTrackerContext.BodyMeasurements.Add(new BodyMeasurement(bob, 11, 20, null, 60, 100, DateTime.Today, MeasurementSystem.Imperial)); // will have an id of 2
+            bodyFitTrackerContext.BodyMeasurements.Add(
+                new BodyMeasurement(dom, 11, 12, null, 60, 100, DateTime.Today, MeasurementSystem.Imperial)
+            ); // will have id of 1
+            bodyFitTrackerContext.BodyMeasurements.Add(
+                new BodyMeasurement(bob, 11, 20, null, 60, 100, DateTime.Today, MeasurementSystem.Imperial)
+            ); // will have an id of 2
 
             bodyFitTrackerContext.SaveChanges();
 
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(dom.AppUserId);
 
-            _deleteBodyMeasurementHandler = new DeleteBodyMeasurementHandler(bodyFitTrackerContext, userAccessorMock.Object);
+            _deleteBodyMeasurementHandler = new DeleteBodyMeasurementHandler(
+                bodyFitTrackerContext,
+                userAccessorMock.Object
+            );
         }
 
         [TestMethod]
@@ -46,7 +53,6 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             Assert.ThrowsException<RestException>(() => _deleteBodyMeasurementHandler.Handle(2));
         }
 
-
         [TestMethod]
         public void TheUsersBodyMeasurementShouldBeDeletedIfFound()
         {
@@ -58,6 +64,5 @@ namespace ApiTests.ApplicationLogic.BodyMeasurements.Handlers
             bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(false);
             Assert.IsNull(bodyFitTrackerContext.BodyMeasurements.Where(b => b.BodyMeasurementId == 1).FirstOrDefault());
         }
-
     }
 }

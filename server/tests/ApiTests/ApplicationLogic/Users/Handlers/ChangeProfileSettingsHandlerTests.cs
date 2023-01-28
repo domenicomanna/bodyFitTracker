@@ -28,7 +28,10 @@ namespace ApiTests.ApplicationLogic.Users.Handlers
             var userAccessorMock = new Mock<IUserAccessor>();
             userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId);
 
-            _changeProfileSettingsHandler = new ChangeProfileSettingsHandler(bodyFitTrackerContext, userAccessorMock.Object);
+            _changeProfileSettingsHandler = new ChangeProfileSettingsHandler(
+                bodyFitTrackerContext,
+                userAccessorMock.Object
+            );
         }
 
         [TestMethod]

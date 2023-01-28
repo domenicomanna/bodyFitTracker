@@ -36,7 +36,7 @@ namespace Api.Infrastructure.Security
         }
 
         /// <summary>
-        /// Returns true if the given <paramref name="plainTextPassword"/>, once hashed with the given <paramref name="salt"/>, is equal to the <paramref name="hashedPassword"/>. 
+        /// Returns true if the given <paramref name="plainTextPassword"/>, once hashed with the given <paramref name="salt"/>, is equal to the <paramref name="hashedPassword"/>.
         /// Note, for this method to return true, the value of the <paramref name="salt"/> must be the same value as
         /// the salt that was used to generate the <paramref name="hashedPassword"/>.
         /// <param name="salt"> This must be a valid base64 string, or else a <see cref="FormatException"/> will be thrown. </param>
@@ -53,10 +53,14 @@ namespace Api.Infrastructure.Security
         /// </summary>
         private string GenerateHashedPassword(string plainTextPassword, byte[] salt)
         {
-            byte[] hashedBytes = KeyDerivation.Pbkdf2(password: plainTextPassword, salt: salt,
-                prf: psuedoRandomFunction, iterationCount: iterationCount, numBytesRequested: keyLength);
+            byte[] hashedBytes = KeyDerivation.Pbkdf2(
+                password: plainTextPassword,
+                salt: salt,
+                prf: psuedoRandomFunction,
+                iterationCount: iterationCount,
+                numBytesRequested: keyLength
+            );
             return Convert.ToBase64String(hashedBytes);
         }
-
     }
 }

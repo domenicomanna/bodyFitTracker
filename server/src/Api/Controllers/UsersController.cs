@@ -19,8 +19,15 @@ namespace Api.Controllers
         private readonly ResetPasswordStepTwoHandler _resetPasswordStepTwoHandler;
         private readonly ChangeProfileSettingsHandler _changeProfileSettingsHandler;
 
-        public UsersController(GetUserHandler getUserHandler, CreateUserHandler createUserHandler, ChangePasswordHandler changePasswordHandler, ResetPasswordStepOneHandler resetPasswordStepOneHandler, ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler, ResetPasswordStepTwoHandler resetPasswordStepTwoHandler,
-        ChangeProfileSettingsHandler changeProfileSettingsHandler)
+        public UsersController(
+            GetUserHandler getUserHandler,
+            CreateUserHandler createUserHandler,
+            ChangePasswordHandler changePasswordHandler,
+            ResetPasswordStepOneHandler resetPasswordStepOneHandler,
+            ValidateResetPasswordTokenHandler validateResetPasswordTokenHandler,
+            ResetPasswordStepTwoHandler resetPasswordStepTwoHandler,
+            ChangeProfileSettingsHandler changeProfileSettingsHandler
+        )
         {
             _getUserHandler = getUserHandler;
             _createUserHandler = createUserHandler;
@@ -68,7 +75,6 @@ namespace Api.Controllers
         {
             return _validateResetPasswordTokenHandler.Handle(token);
         }
-
 
         [AllowAnonymous]
         [HttpPut("reset-password-step-two")]

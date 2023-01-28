@@ -17,10 +17,14 @@ namespace Api.ApplicationLogic.Users.Handlers
 
         public ResetPasswordValidationResult Handle(string token)
         {
-            PasswordReset passwordReset = _bodyFitTrackerContext.PasswordResets.Where(x => x.Token == token).FirstOrDefault();
-            if (passwordReset == null) return new ResetPasswordValidationResult(false, "Token not found");
-            if (passwordReset.Expiration < DateTime.Now) return new ResetPasswordValidationResult(false, "Token is exipred");
-            
+            PasswordReset passwordReset = _bodyFitTrackerContext.PasswordResets
+                .Where(x => x.Token == token)
+                .FirstOrDefault();
+            if (passwordReset == null)
+                return new ResetPasswordValidationResult(false, "Token not found");
+            if (passwordReset.Expiration < DateTime.Now)
+                return new ResetPasswordValidationResult(false, "Token is exipred");
+
             return new ResetPasswordValidationResult(true);
         }
     }
