@@ -1,7 +1,32 @@
-namespace Api.Common.Interfaces
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MimeKit;
+
+namespace Api.Common.Interfaces;
+
+public class EmailMessage
 {
-    public interface IEmailSender
+    public List<MailboxAddress> To { get; private set; }
+    public string Subject { get; private set; }
+    public string HtmlBody { get; set; }
+    public string TextBody { get; set; }
+
+    public EmailMessage(string to, string subject)
+        : this(new string[] { to }, subject) { }
+
+    public EmailMessage(IEnumerable<string> to, string subject)
     {
-        void SendEmail(EmailMessage emailMessage);
+        if (to == null)
+            throw new ArgumentNullException(nameof(to));
+
+        To = new List<MailboxAddress>();
+        To.AddRange(to.Select(x => MailboxAddress.Parse(x)));
+        Subject = subject;
     }
+}
+
+public interface IEmailSender
+{
+    void SendEmail(EmailMessage emailMessage);
 }

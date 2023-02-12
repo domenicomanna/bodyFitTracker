@@ -1,6 +1,4 @@
-using Api.Common;
 using Api.Common.Interfaces;
-using Api.Configurations;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
