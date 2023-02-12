@@ -20,107 +20,106 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Api
+namespace Api;
+
+public class Startup
 {
-    public class Startup
+    public void ConfigureServices(IServiceCollection services)
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services
-                .AddControllers(options =>
-                {
-                    AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                    options.Filters.Add(new AuthorizeFilter(policy));
-                })
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-                })
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
-
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-            services.AddDbContext<BodyFitTrackerContext>(options =>
+        services
+            .AddControllers(options =>
             {
-                options.UseNpgsql(DotNetEnv.Env.GetString("DbConnection"));
+                AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            })
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            })
+            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
+
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        services.AddDbContext<BodyFitTrackerContext>(options =>
+        {
+            options.UseNpgsql(DotNetEnv.Env.GetString("DbConnection"));
+        });
+
+        services.AddAutoMapper(typeof(Startup));
+
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
+        });
+
+        string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
+        SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
+
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = securityKey,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
             });
 
-            services.AddAutoMapper(typeof(Startup));
+        services.AddScoped<GetAllBodyMeasurementsHandler>();
+        services.AddScoped<GetBodyMeasurementHandler>();
+        services.AddScoped<CreateOrEditBodyMeasurementHandler>();
+        services.AddScoped<DeleteBodyMeasurementHandler>();
 
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                });
-            });
+        services.AddScoped<GetUserHandler>();
+        services.AddScoped<CreateUserHandler>();
 
-            string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
+        services.AddScoped<LoginHandler>();
+        services.AddScoped<ChangePasswordHandler>();
+        services.AddScoped<ResetPasswordStepOneHandler>();
+        services.AddScoped<ResetPasswordStepTwoHandler>();
+        services.AddScoped<ValidateResetPasswordTokenHandler>();
+        services.AddScoped<ChangeProfileSettingsHandler>();
 
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(opt =>
-                {
-                    opt.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = securityKey,
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                    };
-                });
+        services.AddScoped<IUserAccessor, UserAccessor>();
+        services.AddScoped<IJwtGenerator, JwtGenerator>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<IPasswordResetTokenGenerator, PasswordResetTokenGenerator>();
+        services.AddScoped<IEmailSender, EmailSender>();
+    }
 
-            services.AddScoped<GetAllBodyMeasurementsHandler>();
-            services.AddScoped<GetBodyMeasurementHandler>();
-            services.AddScoped<CreateOrEditBodyMeasurementHandler>();
-            services.AddScoped<DeleteBodyMeasurementHandler>();
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+    {
+        UpdateDatabase(app);
 
-            services.AddScoped<GetUserHandler>();
-            services.AddScoped<CreateUserHandler>();
+        app.UseMiddleware<ErrorHandlingMiddleware>();
 
-            services.AddScoped<LoginHandler>();
-            services.AddScoped<ChangePasswordHandler>();
-            services.AddScoped<ResetPasswordStepOneHandler>();
-            services.AddScoped<ResetPasswordStepTwoHandler>();
-            services.AddScoped<ValidateResetPasswordTokenHandler>();
-            services.AddScoped<ChangeProfileSettingsHandler>();
+        app.UseRouting();
 
-            services.AddScoped<IUserAccessor, UserAccessor>();
-            services.AddScoped<IJwtGenerator, JwtGenerator>();
-            services.AddScoped<IPasswordHasher, PasswordHasher>();
-            services.AddScoped<IPasswordResetTokenGenerator, PasswordResetTokenGenerator>();
-            services.AddScoped<IEmailSender, EmailSender>();
-        }
+        app.UseCors();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
         {
-            UpdateDatabase(app);
+            endpoints.MapControllers();
+        });
+    }
 
-            app.UseMiddleware<ErrorHandlingMiddleware>();
-
-            app.UseRouting();
-
-            app.UseCors();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
-
-        private static void UpdateDatabase(IApplicationBuilder app)
+    private static void UpdateDatabase(IApplicationBuilder app)
+    {
+        using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var context = serviceScope.ServiceProvider.GetService<BodyFitTrackerContext>())
             {
-                using (var context = serviceScope.ServiceProvider.GetService<BodyFitTrackerContext>())
-                {
-                    context.Database.Migrate();
-                }
+                context.Database.Migrate();
             }
         }
     }

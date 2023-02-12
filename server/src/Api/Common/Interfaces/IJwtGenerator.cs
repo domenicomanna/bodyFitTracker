@@ -1,9 +1,8 @@
 using Api.Domain.Models;
 
-namespace Api.Common.Interfaces
+namespace Api.Common.Interfaces;
+
+public interface IJwtGenerator
 {
-    public interface IJwtGenerator
-    {
-        string CreateToken(AppUser appUser);
-    }
+    string CreateToken(AppUser appUser);
 }

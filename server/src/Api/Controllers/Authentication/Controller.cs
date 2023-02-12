@@ -3,17 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using LoginResult = Api.Controllers.Authentication.Features.LoginResult;
 
-namespace Api.Controllers.Authentication
+namespace Api.Controllers.Authentication;
+
+[AllowAnonymous]
+[ApiController]
+[Route("api/[controller]")]
+public class AuthenticationController
 {
-    [AllowAnonymous]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AuthenticationController
+    [HttpPost("")]
+    public LoginResult Login([FromServices] LoginHandler handler, LoginRequest loginRequest)
     {
-        [HttpPost("")]
-        public LoginResult Login([FromServices] LoginHandler handler, LoginRequest loginRequest)
-        {
-            return handler.Handle(loginRequest);
-        }
+        return handler.Handle(loginRequest);
     }
 }

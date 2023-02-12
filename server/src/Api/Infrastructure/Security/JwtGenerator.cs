@@ -7,41 +7,40 @@ using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Api.Infrastructure.Security
+namespace Api.Infrastructure.Security;
+
+public class JwtGenerator : IJwtGenerator
 {
-    public class JwtGenerator : IJwtGenerator
+    readonly string _key;
+
+    public JwtGenerator()
     {
-        readonly string _key;
+        _key = DotNetEnv.Env.GetString("JWTSecret");
+    }
 
-        public JwtGenerator()
+    public string CreateToken(AppUser appUser)
+    {
+        List<Claim> claims = new List<Claim>
         {
-            _key = DotNetEnv.Env.GetString("JWTSecret");
-        }
+            new Claim(ClaimTypes.NameIdentifier, appUser.AppUserId.ToString()),
+            new Claim(ClaimTypes.Gender, appUser.Gender.ToString())
+        };
 
-        public string CreateToken(AppUser appUser)
+        SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
+        SigningCredentials signingCredentials = new SigningCredentials(
+            securityKey,
+            SecurityAlgorithms.HmacSha512Signature
+        );
+        JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+        SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, appUser.AppUserId.ToString()),
-                new Claim(ClaimTypes.Gender, appUser.Gender.ToString())
-            };
+            Expires = DateTime.UtcNow.AddDays(70),
+            Subject = new ClaimsIdentity(claims),
+            SigningCredentials = signingCredentials
+        };
 
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
-            SigningCredentials signingCredentials = new SigningCredentials(
-                securityKey,
-                SecurityAlgorithms.HmacSha512Signature
-            );
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Expires = DateTime.UtcNow.AddDays(70),
-                Subject = new ClaimsIdentity(claims),
-                SigningCredentials = signingCredentials
-            };
-
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
-        }
+        SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
     }
 }

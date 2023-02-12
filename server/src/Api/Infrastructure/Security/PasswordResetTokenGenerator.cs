@@ -2,19 +2,18 @@ using System;
 using System.Security.Cryptography;
 using Api.Common.Interfaces;
 
-namespace Api.Infrastructure.Security
+namespace Api.Infrastructure.Security;
+
+public class PasswordResetTokenGenerator : IPasswordResetTokenGenerator
 {
-    public class PasswordResetTokenGenerator : IPasswordResetTokenGenerator
+    public string CreateResetToken()
     {
-        public string CreateResetToken()
+        using (RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create())
         {
-            using (RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create())
-            {
-                byte[] bytes = new byte[24];
-                randomNumberGenerator.GetBytes(bytes);
-                string bytesAsbase64String = Convert.ToBase64String(bytes);
-                return bytesAsbase64String.Replace('/', '-');
-            }
+            byte[] bytes = new byte[24];
+            randomNumberGenerator.GetBytes(bytes);
+            string bytesAsbase64String = Convert.ToBase64String(bytes);
+            return bytesAsbase64String.Replace('/', '-');
         }
     }
 }

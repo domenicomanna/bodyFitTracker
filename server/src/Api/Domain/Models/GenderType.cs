@@ -1,8 +1,7 @@
-namespace Api.Domain.Models
+namespace Api.Domain.Models;
+
+public enum GenderType
 {
-    public enum GenderType
-    {
-        Male,
-        Female
-    }
+    Male,
+    Female
 }

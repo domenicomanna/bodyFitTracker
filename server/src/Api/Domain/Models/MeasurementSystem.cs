@@ -1,8 +1,7 @@
-namespace Api.Domain.Models
+namespace Api.Domain.Models;
+
+public enum MeasurementSystem
 {
-    public enum MeasurementSystem
-    {
-        Imperial,
-        Metric
-    }
+    Imperial,
+    Metric
 }

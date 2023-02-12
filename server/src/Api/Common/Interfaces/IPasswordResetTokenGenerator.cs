@@ -1,7 +1,6 @@
-namespace Api.Common.Interfaces
+namespace Api.Common.Interfaces;
+
+public interface IPasswordResetTokenGenerator
 {
-    public interface IPasswordResetTokenGenerator
-    {
-        string CreateResetToken();
-    }
+    string CreateResetToken();
 }

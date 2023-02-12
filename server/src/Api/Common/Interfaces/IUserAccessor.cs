@@ -1,10 +1,9 @@
 using Api.Domain.Models;
 
-namespace Api.Common.Interfaces
+namespace Api.Common.Interfaces;
+
+public interface IUserAccessor
 {
-    public interface IUserAccessor
-    {
-        int GetCurrentUserId();
-        GenderType GetCurrentUsersGender();
-    }
+    int GetCurrentUserId();
+    GenderType GetCurrentUsersGender();
 }

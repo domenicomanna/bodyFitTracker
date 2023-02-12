@@ -1,8 +1,7 @@
-namespace Api.Common.Interfaces
+namespace Api.Common.Interfaces;
+
+public interface IPasswordHasher
 {
-    public interface IPasswordHasher
-    {
-        (string hashedPassword, string salt) GeneratePassword(string plainTextPassword);
-        bool ValidatePlainTextPassword(string plainTextPassword, string hashedPassword, string salt);
-    }
+    (string hashedPassword, string salt) GeneratePassword(string plainTextPassword);
+    bool ValidatePlainTextPassword(string plainTextPassword, string hashedPassword, string salt);
 }

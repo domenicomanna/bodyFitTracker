@@ -11,50 +11,49 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Api.Controllers.BodyMeasurements.Features;
 
-namespace ApiTests.Controllers.BodyMeasurements.Features
+namespace ApiTests.Controllers.BodyMeasurements.Features;
+
+[TestClass]
+public class GetAllBodyMeasurementsHandlerTests
 {
-    [TestClass]
-    public class GetAllBodyMeasurementsHandlerTests
+    GetAllBodyMeasurementsHandler _getAllBodyMeasurementsHandler;
+
+    [TestInitialize]
+    public void SetUp()
     {
-        GetAllBodyMeasurementsHandler _getAllBodyMeasurementsHandler;
+        BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
+        AppUser appUser = new AppUser("abc@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
+        bodyFitTrackerContext.AppUsers.Add(appUser);
+        bodyFitTrackerContext.SaveChanges();
 
-        [TestInitialize]
-        public void SetUp()
+        bodyFitTrackerContext.BodyMeasurements.Add(
+            new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
+        );
+        bodyFitTrackerContext.BodyMeasurements.Add(
+            new BodyMeasurement(appUser, 11, 20, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
+        );
+        bodyFitTrackerContext.SaveChanges();
+
+        var userAccessorMock = new Mock<IUserAccessor>();
+        userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId);
+
+        MapperConfiguration mapperConfiguration = new MapperConfiguration(opts =>
         {
-            BodyFitTrackerContext bodyFitTrackerContext = DatabaseConnectionFactory.GetInMemoryDatabase(true);
-            AppUser appUser = new AppUser("abc@gmail.com", "", "", 60, GenderType.Male, MeasurementSystem.Imperial);
-            bodyFitTrackerContext.AppUsers.Add(appUser);
-            bodyFitTrackerContext.SaveChanges();
+            opts.AddProfile(new MappingProfile());
+        });
+        IMapper mapper = mapperConfiguration.CreateMapper();
 
-            bodyFitTrackerContext.BodyMeasurements.Add(
-                new BodyMeasurement(appUser, 11, 12, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
-            );
-            bodyFitTrackerContext.BodyMeasurements.Add(
-                new BodyMeasurement(appUser, 11, 20, null, 60, 120, DateTime.Today, MeasurementSystem.Imperial)
-            );
-            bodyFitTrackerContext.SaveChanges();
+        _getAllBodyMeasurementsHandler = new GetAllBodyMeasurementsHandler(
+            bodyFitTrackerContext,
+            mapper,
+            userAccessorMock.Object
+        );
+    }
 
-            var userAccessorMock = new Mock<IUserAccessor>();
-            userAccessorMock.Setup(x => x.GetCurrentUserId()).Returns(appUser.AppUserId);
-
-            MapperConfiguration mapperConfiguration = new MapperConfiguration(opts =>
-            {
-                opts.AddProfile(new MappingProfile());
-            });
-            IMapper mapper = mapperConfiguration.CreateMapper();
-
-            _getAllBodyMeasurementsHandler = new GetAllBodyMeasurementsHandler(
-                bodyFitTrackerContext,
-                mapper,
-                userAccessorMock.Object
-            );
-        }
-
-        [TestMethod]
-        public void TwoBodyMeasurementsShouldBeReturned()
-        {
-            List<BodyMeasurementDTO> bodyMeasurements = _getAllBodyMeasurementsHandler.Handle();
-            Assert.IsTrue(bodyMeasurements.Count() == 2);
-        }
+    [TestMethod]
+    public void TwoBodyMeasurementsShouldBeReturned()
+    {
+        List<BodyMeasurementDTO> bodyMeasurements = _getAllBodyMeasurementsHandler.Handle();
+        Assert.IsTrue(bodyMeasurements.Count() == 2);
     }
 }
