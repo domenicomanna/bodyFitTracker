@@ -25,16 +25,6 @@ namespace Api
 {
     public class Startup
     {
-        readonly string _corsPolicyName = "CorsPolicy";
-
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             DotNetEnv.Env.TraversePath().Load();
@@ -51,28 +41,24 @@ namespace Api
                 })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
 
-            string databaseConnectionString = DotNetEnv.Env.GetString("DbConnection");
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             services.AddDbContext<BodyFitTrackerContext>(options =>
             {
-                options.UseNpgsql(databaseConnectionString);
+                options.UseNpgsql(DotNetEnv.Env.GetString("DbConnection"));
             });
 
             services.AddAutoMapper(typeof(Startup));
 
             services.AddCors(options =>
             {
-                options.AddPolicy(
-                    _corsPolicyName,
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                    }
-                );
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
             });
 
-            string secret = DotNetEnv.Env.GetString("JWTSecret");
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+            string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -118,7 +104,7 @@ namespace Api
 
             app.UseRouting();
 
-            app.UseCors(_corsPolicyName);
+            app.UseCors();
 
             app.UseAuthentication();
 
