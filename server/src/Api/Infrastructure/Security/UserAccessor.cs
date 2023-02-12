@@ -3,7 +3,6 @@ using System.Linq;
 using System.Security.Claims;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
 using Microsoft.AspNetCore.Http;
 
 namespace Api.Infrastructure.Security

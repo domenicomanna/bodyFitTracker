@@ -1,9 +1,7 @@
 using System.Linq;
-using Api.Common;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Infrastructure.Database;
-using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Api.Controllers.Users.Features;

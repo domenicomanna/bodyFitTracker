@@ -1,4 +1,3 @@
-using Api.Common.Errors;
 using Api.Controllers.Users;
 using Api.Common.Interfaces;
 using Api.Domain.Models;

@@ -5,7 +5,6 @@ using Api.Common.Errors;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

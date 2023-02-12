@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Infrastructure.Security

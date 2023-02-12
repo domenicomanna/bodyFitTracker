@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Api.Common.Errors;
 using Api.Common.Interfaces;

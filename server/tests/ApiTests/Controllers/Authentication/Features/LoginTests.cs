@@ -1,6 +1,4 @@
 using Api.Controllers.Authentication.Features;
-using Api.Common.Errors;
-using Api.Controllers.Users.Common;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Infrastructure.Database;
