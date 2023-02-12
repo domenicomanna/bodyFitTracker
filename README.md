@@ -22,7 +22,7 @@ A web application that allows you to track your body measurements and body fat p
    4. Create a database to store the application data: `CREATE DATABASE "bodyFitnessTrackerDB" OWNER "bodyFitnessTrackerDBUser";`
    5. Finally, exit the database client: `exit;`
 
-3. Create a `.env` file in the `server` folder and fill it in with the variable names present in `server/src/Api/.env.keep`
+3. Create a `.env` file in the `server` folder and fill it in with the variable names present in `server/.env.keep`
 
    **Important:** If you are using Gmail for the account to send emails from, then you must [create an app password](https://support.google.com/accounts/answer/185833?hl=en), and use that for the email password value in the `.env` file
 
