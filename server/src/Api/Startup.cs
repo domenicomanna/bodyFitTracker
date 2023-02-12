@@ -87,8 +87,6 @@ namespace Api
                     };
                 });
 
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-
             services.AddScoped<GetAllBodyMeasurementsHandler>();
             services.AddScoped<GetBodyMeasurementHandler>();
             services.AddScoped<CreateOrEditBodyMeasurementHandler>();
