@@ -7,6 +7,7 @@ namespace Api
     {
         public static void Main(string[] args)
         {
+            DotNetEnv.Env.TraversePath().Load();
             CreateHostBuilder(args).Build().Run();
         }
 

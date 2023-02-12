@@ -26,8 +26,6 @@ namespace Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            DotNetEnv.Env.TraversePath().Load();
-
             services
                 .AddControllers(options =>
                 {
