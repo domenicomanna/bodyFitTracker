@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Api.Common.Attributes;
 using Api.Domain.Models;
 using Api.Infrastructure.Database;
 
@@ -17,6 +18,7 @@ public class ResetPasswordValidationResult
     }
 }
 
+[Inject]
 public class ValidateResetPasswordTokenHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

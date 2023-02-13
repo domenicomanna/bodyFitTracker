@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Api.Common.Attributes;
 using Api.Common.Errors;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
@@ -8,6 +9,7 @@ using Api.Infrastructure.Database;
 
 namespace Api.Controllers.BodyMeasurements.Features;
 
+[Inject]
 public class DeleteBodyMeasurementHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

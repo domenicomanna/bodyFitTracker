@@ -6,6 +6,7 @@ using Api.Domain.Models;
 using Api.Infrastructure.Database;
 using Microsoft.Extensions.Configuration;
 using FluentValidation;
+using Api.Common.Attributes;
 
 namespace Api.Controllers.Users.Features;
 
@@ -22,6 +23,7 @@ public class ResetPasswordStepOneRequestValidator : AbstractValidator<ResetPassw
     }
 }
 
+[Inject]
 public class ResetPasswordStepOneHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

@@ -8,9 +8,11 @@ using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Infrastructure.Database;
 using AutoMapper;
+using Api.Common.Attributes;
 
 namespace Api.Controllers.BodyMeasurements.Features;
 
+[Inject]
 public class GetBodyMeasurementHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

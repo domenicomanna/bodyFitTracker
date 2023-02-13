@@ -1,4 +1,5 @@
 using System.Linq;
+using Api.Common.Attributes;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Infrastructure.Database;
@@ -28,6 +29,7 @@ public class LoginResult
     public string Token { get; set; } = "";
 }
 
+[Inject]
 public class LoginHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

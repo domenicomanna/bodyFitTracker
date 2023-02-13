@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Api.Common.Attributes;
 using Api.Common.Errors;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
@@ -52,6 +53,7 @@ public class CreateOrEditBodyMeasurementRequestValidator : AbstractValidator<Cre
     }
 }
 
+[Inject]
 public class CreateOrEditBodyMeasurementHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

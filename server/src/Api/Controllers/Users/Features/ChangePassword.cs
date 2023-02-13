@@ -5,6 +5,7 @@ using Api.Domain.Models;
 using Api.Infrastructure.Database;
 using FluentValidation;
 using Api.Common.ValidationRules;
+using Api.Common.Attributes;
 
 namespace Api.Controllers.Users.Features;
 
@@ -15,6 +16,7 @@ public class ChangePasswordRequest
     public string ConfirmedNewPassword { get; set; }
 }
 
+[Inject]
 public class ChangePasswordRequestValidator : AbstractValidator<ChangePasswordRequest>
 {
     public ChangePasswordRequestValidator()

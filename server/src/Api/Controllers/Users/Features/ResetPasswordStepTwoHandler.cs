@@ -1,4 +1,5 @@
 using System.Linq;
+using Api.Common.Attributes;
 using Api.Common.Interfaces;
 using Api.Common.ValidationRules;
 using Api.Domain.Models;
@@ -36,6 +37,7 @@ public class ResetPasswordStepTwoResult
     }
 }
 
+[Inject]
 public class ResetPasswordStepTwoHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

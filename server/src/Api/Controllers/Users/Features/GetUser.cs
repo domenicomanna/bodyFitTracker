@@ -7,9 +7,11 @@ using Api.Domain.Services;
 using Api.Infrastructure.Database;
 using AutoMapper;
 using Api.Controllers.Users.Common;
+using Api.Common.Attributes;
 
 namespace Api.Controllers.Users.Features;
 
+[Inject]
 public class GetUserHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

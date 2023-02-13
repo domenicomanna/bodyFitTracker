@@ -1,11 +1,6 @@
 using System;
 using System.Text;
-using Api.Controllers.Authentication.Features;
-using Api.Controllers.BodyMeasurements.Features;
 using Api.Controllers.Users.Features;
-using Api.Common.Interfaces;
-using Api.Infrastructure.Emailing;
-using Api.Infrastructure.Security;
 using Api.Middleware;
 using Api.Infrastructure.Database;
 using AutoMapper;
@@ -19,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Api.Common.Attributes;
 
 namespace Api;
 
@@ -70,26 +66,16 @@ public class Startup
                 };
             });
 
-        services.AddScoped<GetAllBodyMeasurementsHandler>();
-        services.AddScoped<GetBodyMeasurementHandler>();
-        services.AddScoped<CreateOrEditBodyMeasurementHandler>();
-        services.AddScoped<DeleteBodyMeasurementHandler>();
-
-        services.AddScoped<GetUserHandler>();
-        services.AddScoped<CreateUserHandler>();
-
-        services.AddScoped<LoginHandler>();
-        services.AddScoped<ChangePasswordHandler>();
-        services.AddScoped<ResetPasswordStepOneHandler>();
-        services.AddScoped<ResetPasswordStepTwoHandler>();
-        services.AddScoped<ValidateResetPasswordTokenHandler>();
-        services.AddScoped<ChangeProfileSettingsHandler>();
-
-        services.AddScoped<IUserAccessor, UserAccessor>();
-        services.AddScoped<IJwtGenerator, JwtGenerator>();
-        services.AddScoped<IPasswordHasher, PasswordHasher>();
-        services.AddScoped<IPasswordResetTokenGenerator, PasswordResetTokenGenerator>();
-        services.AddScoped<IEmailSender, EmailSender>();
+        services.Scan(
+            scan =>
+                scan.FromCallingAssembly()
+                    .AddClasses(c => c.WithAttribute<Inject>())
+                    .AsSelf()
+                    .WithScopedLifetime()
+                    .AddClasses()
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+        );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

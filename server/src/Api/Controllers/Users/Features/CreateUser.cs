@@ -5,6 +5,7 @@ using Api.Infrastructure.Database;
 using Api.Common.Interfaces;
 using FluentValidation;
 using Api.Common.ValidationRules;
+using Api.Common.Attributes;
 
 namespace Api.Controllers.Users.Features;
 
@@ -38,6 +39,7 @@ public class CreateUserResult
     public string Token { get; set; } = "";
 }
 
+[Inject]
 public class CreateUserHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;

@@ -1,4 +1,5 @@
 using System.Linq;
+using Api.Common.Attributes;
 using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Domain.Services;
@@ -24,6 +25,7 @@ public class ChangeProfileSettingsRequestValidator : AbstractValidator<ChangePro
     }
 }
 
+[Inject]
 public class ChangeProfileSettingsHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;
