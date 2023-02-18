@@ -30,6 +30,7 @@ jobs:
   deploy-app:
     name: "Deploy App"
     needs: [build-and-test-code, build-docker-image]
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - uses: appleboy/ssh-action@v0.1.7
