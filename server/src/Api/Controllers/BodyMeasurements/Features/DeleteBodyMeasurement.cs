@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Api.Common.Attributes;
-using Api.Common.Errors;
+using Api.Common.Exceptions;
 using Api.Domain.Models;
 using Api.Database;
 using Api.Services;

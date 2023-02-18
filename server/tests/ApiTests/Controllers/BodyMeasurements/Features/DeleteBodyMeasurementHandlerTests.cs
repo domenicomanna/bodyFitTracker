@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Api.Controllers.BodyMeasurements.Features;
-using Api.Common.Errors;
+using Api.Common.Exceptions;
 using Api.Domain.Models;
 using Api.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 
-namespace Api.Common.Errors;
+namespace Api.Common.Exceptions;
 
 public class RestException : Exception
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Api.Common.Errors;
+using Api.Common.Exceptions;
 using Api.Controllers.BodyMeasurements.Features;
 using Api.Domain.Models;
 using Api.Database;

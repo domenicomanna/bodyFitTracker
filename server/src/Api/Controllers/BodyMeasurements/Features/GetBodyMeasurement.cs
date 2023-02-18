@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Api.Controllers.BodyMeasurements.Common;
-using Api.Common.Errors;
+using Api.Common.Exceptions;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Database;

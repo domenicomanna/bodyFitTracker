@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Common.Errors;
+using Api.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

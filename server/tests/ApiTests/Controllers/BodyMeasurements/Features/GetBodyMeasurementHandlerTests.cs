@@ -1,7 +1,7 @@
 using System;
 using Api.Controllers.BodyMeasurements;
 using Api.Controllers.BodyMeasurements.Common;
-using Api.Common.Errors;
+using Api.Common.Exceptions;
 using Api.Domain.Models;
 using Api.Database;
 using AutoMapper;
