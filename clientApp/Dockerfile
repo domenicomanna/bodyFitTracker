@@ -4,7 +4,7 @@
 FROM node:16-alpine AS build-stage
 WORKDIR /app
 COPY . ./
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 FROM scratch AS export-stage
