@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - working-directory: ./server/src/Api
+      - working-directory: ./server
         run: docker build -t server-app .
 
   deploy-app:
