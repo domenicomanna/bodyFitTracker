@@ -6,106 +6,90 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Api.Common.Attributes;
+using System.Reflection;
 
-namespace Api;
+DotNetEnv.Env.TraversePath().Load();
+var builder = WebApplication.CreateBuilder(args);
 
-public class Startup
+builder.Services
+    .AddControllers(options =>
+    {
+        AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        options.Filters.Add(new AuthorizeFilter(policy));
+    })
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+    });
+
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+builder.Services.AddDbContext<BodyFitTrackerContext>(options =>
 {
-    public void ConfigureServices(IServiceCollection services)
+    options.UseNpgsql(DotNetEnv.Env.GetString("DbConnection"));
+});
+
+builder.Services.AddAutoMapper(Assembly.GetCallingAssembly());
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
     {
-        services
-            .AddControllers(options =>
-            {
-                AuthorizationPolicy policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
-            .AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-            });
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
-        services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
+SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
 
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        services.AddDbContext<BodyFitTrackerContext>(options =>
-        {
-            options.UseNpgsql(DotNetEnv.Env.GetString("DbConnection"));
-        });
-
-        services.AddAutoMapper(typeof(Startup));
-
-        services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            });
-        });
-
-        string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
-        SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
-
-        services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(opt =>
-            {
-                opt.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = securityKey,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                };
-            });
-
-        services.Scan(
-            scan =>
-                scan.FromCallingAssembly()
-                    .AddClasses(c => c.WithAttribute<Inject>())
-                    .AsSelf()
-                    .WithScopedLifetime()
-                    .AddClasses()
-                    .AsImplementedInterfaces()
-                    .WithScopedLifetime()
-        );
-    }
-
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>
     {
-        UpdateDatabase(app);
-
-        app.UseMiddleware<ErrorHandlingMiddleware>();
-
-        app.UseRouting();
-
-        app.UseCors();
-
-        app.UseAuthentication();
-
-        app.UseAuthorization();
-
-        app.UseEndpoints(endpoints =>
+        opt.TokenValidationParameters = new TokenValidationParameters
         {
-            endpoints.MapControllers();
-        });
-    }
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = securityKey,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+        };
+    });
 
-    private static void UpdateDatabase(IApplicationBuilder app)
-    {
-        using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-        {
-            using (var context = serviceScope.ServiceProvider.GetService<BodyFitTrackerContext>())
-            {
-                context.Database.Migrate();
-            }
-        }
-    }
+builder.Services.Scan(
+    scan =>
+        scan.FromCallingAssembly()
+            .AddClasses(c => c.WithAttribute<Inject>())
+            .AsSelf()
+            .WithScopedLifetime()
+            .AddClasses()
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+);
+
+var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<BodyFitTrackerContext>();
+    dataContext.Database.Migrate();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseRouting();
+
+app.UseCors();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
