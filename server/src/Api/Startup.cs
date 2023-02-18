@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Api.Common.Attributes;
 using System.Reflection;
+using FluentValidation;
+using Api.Controllers.Authentication.Features;
 
 DotNetEnv.Env.TraversePath().Load();
 var builder = WebApplication.CreateBuilder(args);
@@ -27,7 +29,7 @@ builder.Services
         options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
     });
 
-builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>().AddFluentValidationAutoValidation();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<BodyFitTrackerContext>(options =>
