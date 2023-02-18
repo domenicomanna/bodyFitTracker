@@ -45,13 +45,12 @@ builder.Services.AddCors(options =>
     });
 });
 
-string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
-SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
-
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {
+        string jwtSecret = DotNetEnv.Env.GetString("JWTSecret");
+        SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
         opt.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
