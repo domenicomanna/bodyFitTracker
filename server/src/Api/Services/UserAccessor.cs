@@ -1,11 +1,16 @@
 using System;
 using System.Linq;
 using System.Security.Claims;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace Api.Infrastructure.Security;
+namespace Api.Services;
+
+public interface IUserAccessor
+{
+    int GetCurrentUserId();
+    GenderType GetCurrentUsersGender();
+}
 
 public class UserAccessor : IUserAccessor
 {

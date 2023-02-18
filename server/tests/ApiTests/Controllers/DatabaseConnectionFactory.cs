@@ -1,4 +1,4 @@
-using Api.Infrastructure.Database;
+using Api.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiTests.Controllers

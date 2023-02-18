@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using Api.Controllers.BodyMeasurements.Features;
 using Api.Common.Errors;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Api.Services;
 
 namespace ApiTests.Controllers.BodyMeasurements.Features;
 

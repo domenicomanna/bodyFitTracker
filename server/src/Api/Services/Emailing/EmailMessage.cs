@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MimeKit;
 
-namespace Api.Common.Interfaces;
-
 public class EmailMessage
 {
     public List<MailboxAddress> To { get; private set; }
@@ -24,9 +22,4 @@ public class EmailMessage
         To.AddRange(to.Select(x => MailboxAddress.Parse(x)));
         Subject = subject;
     }
-}
-
-public interface IEmailSender
-{
-    void SendEmail(EmailMessage emailMessage);
 }

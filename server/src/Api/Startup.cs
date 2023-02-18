@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using Api.Controllers.Users.Features;
 using Api.Middleware;
-using Api.Infrastructure.Database;
+using Api.Database;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

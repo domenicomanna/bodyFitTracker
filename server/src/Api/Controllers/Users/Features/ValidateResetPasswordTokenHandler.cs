@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Api.Common.Attributes;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 
 namespace Api.Controllers.Users.Features;
 

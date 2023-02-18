@@ -1,9 +1,9 @@
 using System.Linq;
 using Api.Common.Attributes;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using FluentValidation;
+using Api.Services;
 
 namespace Api.Controllers.Authentication.Features;
 

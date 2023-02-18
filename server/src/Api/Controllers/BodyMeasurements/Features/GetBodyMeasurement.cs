@@ -3,12 +3,12 @@ using System.Linq;
 using System.Net;
 using Api.Controllers.BodyMeasurements.Common;
 using Api.Common.Errors;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
 using Api.Domain.Services;
-using Api.Infrastructure.Database;
+using Api.Database;
 using AutoMapper;
 using Api.Common.Attributes;
+using Api.Services;
 
 namespace Api.Controllers.BodyMeasurements.Features;
 

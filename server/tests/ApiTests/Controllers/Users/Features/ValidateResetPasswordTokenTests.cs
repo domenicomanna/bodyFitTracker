@@ -1,7 +1,7 @@
 using System;
 using Api.Controllers.Users.Features;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApiTests.Controllers.Features.Users

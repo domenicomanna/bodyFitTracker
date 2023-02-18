@@ -1,9 +1,9 @@
 using Api.Controllers.Authentication.Features;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Api.Services;
 
 namespace ApiTests.Controllers.Authentication.Features;
 

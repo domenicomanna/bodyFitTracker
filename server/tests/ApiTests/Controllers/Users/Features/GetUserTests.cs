@@ -1,12 +1,12 @@
 using Api.Controllers.Users;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Api.Controllers.Users.Features;
 using Api.Controllers.Users.Common;
+using Api.Services;
 
 namespace ApiTests.Controllers.Features.Users
 {

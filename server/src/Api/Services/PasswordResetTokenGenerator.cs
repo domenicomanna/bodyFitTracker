@@ -1,8 +1,12 @@
 using System;
 using System.Security.Cryptography;
-using Api.Common.Interfaces;
 
-namespace Api.Infrastructure.Security;
+namespace Api.Services;
+
+public interface IPasswordResetTokenGenerator
+{
+    string CreateResetToken();
+}
 
 public class PasswordResetTokenGenerator : IPasswordResetTokenGenerator
 {

@@ -1,9 +1,13 @@
-using Api.Common.Interfaces;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 
-namespace Api.Infrastructure.Emailing;
+namespace Api.Services.Emailing;
+
+public interface IEmailSender
+{
+    void SendEmail(EmailMessage emailMessage);
+}
 
 public class EmailSender : IEmailSender
 {

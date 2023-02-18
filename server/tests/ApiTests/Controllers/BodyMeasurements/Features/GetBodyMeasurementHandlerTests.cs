@@ -2,13 +2,13 @@ using System;
 using Api.Controllers.BodyMeasurements;
 using Api.Controllers.BodyMeasurements.Common;
 using Api.Common.Errors;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Api.Controllers.BodyMeasurements.Features;
+using Api.Services;
 
 namespace ApiTests.Controllers.BodyMeasurements.Features;
 

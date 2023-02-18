@@ -1,8 +1,8 @@
 using Api.Domain.Models;
-using Api.Infrastructure.Database.Configurations;
+using Api.Database.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Infrastructure.Database;
+namespace Api.Database;
 
 public class BodyFitTrackerContext : DbContext
 {

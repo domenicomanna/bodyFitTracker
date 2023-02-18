@@ -2,7 +2,7 @@ using Api.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Api.Infrastructure.Database.Configurations;
+namespace Api.Database.Configurations;
 
 public class PasswordResetConfiguration : IEntityTypeConfiguration<PasswordReset>
 {

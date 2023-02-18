@@ -1,4 +1,4 @@
-using Api.Infrastructure.Security;
+using Api.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ApiTests.Infrastructure.PasswordHashing;

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
-using Api.Common.Interfaces;
+using Api.Database;
 using FluentValidation;
 using Api.Common.ValidationRules;
 using Api.Common.Attributes;
+using Api.Services;
 
 namespace Api.Controllers.Users.Features;
 

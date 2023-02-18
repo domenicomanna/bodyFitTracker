@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
 using System.Text;
-using Api.Common.Interfaces;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
-using Microsoft.Extensions.Configuration;
+using Api.Database;
 using FluentValidation;
 using Api.Common.Attributes;
+using Api.Services.Emailing;
+using Api.Services;
 
 namespace Api.Controllers.Users.Features;
 

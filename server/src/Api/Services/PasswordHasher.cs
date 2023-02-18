@@ -1,9 +1,14 @@
 using System;
 using System.Security.Cryptography;
-using Api.Common.Interfaces;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-namespace Api.Infrastructure.Security;
+namespace Api.Services;
+
+public interface IPasswordHasher
+{
+    (string hashedPassword, string salt) GeneratePassword(string plainTextPassword);
+    bool ValidatePlainTextPassword(string plainTextPassword, string hashedPassword, string salt);
+}
 
 public class PasswordHasher : IPasswordHasher
 {

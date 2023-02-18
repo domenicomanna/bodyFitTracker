@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using Api.Common.Errors;
-using Api.Common.Interfaces;
 using Api.Controllers.BodyMeasurements.Features;
 using Api.Domain.Models;
-using Api.Infrastructure.Database;
+using Api.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using FluentValidation.Results;
 using FluentValidation.TestHelper;
+using Api.Services;
 
 namespace ApiTests.Controllers.BodyMeasurements.Features;
 
