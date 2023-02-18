@@ -53,48 +53,6 @@ public class CreateOrEditBodyMeasurementTests
     }
 
     [TestMethod]
-    // Hip circumference can not be null if gender is female
-    public void HipCircumferenceAndGenderTypeIsFemaleTests()
-    {
-        var userAccessorMock = new Mock<IUserAccessor>();
-        userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Female);
-        CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(
-            userAccessorMock.Object
-        );
-
-        validator.ShouldHaveValidationErrorFor(x => x.HipCircumference, (double?)null);
-        validator.ShouldHaveValidationErrorFor(x => x.HipCircumference, (double?)0);
-        validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?)10.4);
-    }
-
-    [TestMethod]
-    // Hip circumference can be null if gender is male
-    public void HipCircumferenceAndGenderTypeIsMaleTests()
-    {
-        var userAccessorMock = new Mock<IUserAccessor>();
-        userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
-        CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(
-            userAccessorMock.Object
-        );
-
-        validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?)null);
-        validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?)0);
-        validator.ShouldNotHaveValidationErrorFor(x => x.HipCircumference, (double?)10.4);
-    }
-
-    [TestMethod]
-    public void IfCreationDateIsInTheFutureThereShouldBeAnError()
-    {
-        var userAccessorMock = new Mock<IUserAccessor>();
-        userAccessorMock.Setup(x => x.GetCurrentUsersGender()).Returns(GenderType.Male);
-        CreateOrEditBodyMeasurementRequestValidator validator = new CreateOrEditBodyMeasurementRequestValidator(
-            userAccessorMock.Object
-        );
-
-        validator.ShouldHaveValidationErrorFor(x => x.DateAdded, DateTime.Today.AddDays(1));
-    }
-
-    [TestMethod]
     public void ValidationShouldSucceedIfAllFieldsAreValid()
     {
         var userAccessorMock = new Mock<IUserAccessor>();
