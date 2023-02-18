@@ -1,9 +1,7 @@
 using System;
 using System.Text;
-using Api.Controllers.Users.Features;
 using Api.Middleware;
 using Api.Database;
-using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -31,8 +29,9 @@ public class Startup
             .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-            })
-            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserRequestValidator>());
+            });
+
+        services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddDbContext<BodyFitTrackerContext>(options =>
