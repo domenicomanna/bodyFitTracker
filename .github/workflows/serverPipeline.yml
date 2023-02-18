@@ -40,5 +40,5 @@ jobs:
           script: |
             cd programming/bodyFitTracker
             git pull
-            cd server/src/Api
+            cd server
             docker compose up --detach --build
