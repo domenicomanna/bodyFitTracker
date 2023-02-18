@@ -1,0 +1,45 @@
+name: Client App Pipeline
+on:
+  push:
+    paths:
+      - "clientApp/**"
+      - ".github/workflows/clientAppPipeline.yml"
+jobs:
+  build-and-test-code:
+    name: "Build & Test Code"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./clientApp
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: CI=true npm test
+
+  build-docker-image:
+    name: "Build Docker Image"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - working-directory: ./clientApp
+        run: DOCKER_BUILDKIT=1 docker build --output ./build .
+
+  deploy-app:
+    name: "Deploy App"
+    needs: [build-and-test-code, build-docker-image]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd programming/bodyFitTracker
+            git pull
+            cd clientApp
+            DOCKER_BUILDKIT=1 docker build --output ./build .
+            cp -r build/* /var/www/bodyFitTrackerClient/html
