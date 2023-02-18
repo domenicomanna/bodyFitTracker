@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "server/**"
+      - ".github/workflows/serverPipeline.yml"
 jobs:
   build-and-test-code:
     name: "Build & Test Code"
