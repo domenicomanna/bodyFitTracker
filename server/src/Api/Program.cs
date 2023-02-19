@@ -13,7 +13,6 @@ using Microsoft.IdentityModel.Tokens;
 using Api.Common.Attributes;
 using System.Reflection;
 using FluentValidation;
-using Api.Controllers.Authentication.Features;
 
 DotNetEnv.Env.TraversePath().Load();
 var builder = WebApplication.CreateBuilder(args);
