@@ -29,7 +29,7 @@ builder.Services
         options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
     });
 
-builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>().AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>().AddFluentValidationAutoValidation();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<BodyFitTrackerContext>(options =>
