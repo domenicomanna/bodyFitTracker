@@ -42,4 +42,4 @@ jobs:
             cd programming/bodyFitTracker
             git pull
             cd server
-            docker compose up --detach --build
+            docker compose up --detach --build --remove-orphans
