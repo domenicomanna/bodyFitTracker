@@ -16,7 +16,6 @@ public class ChangePasswordRequest
     public string ConfirmedNewPassword { get; set; }
 }
 
-[Inject]
 public class ChangePasswordRequestValidator : AbstractValidator<ChangePasswordRequest>
 {
     public ChangePasswordRequestValidator()
@@ -42,6 +41,7 @@ public class ChangePasswordResult
     }
 }
 
+[Inject]
 public class ChangePasswordHandler
 {
     private readonly BodyFitTrackerContext _bodyFitTrackerContext;
