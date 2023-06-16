@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . ./
 RUN dotnet restore --disable-parallel
 # Build and publish a release
-RUN dotnet publish src/Api -c Release -o out
+RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
