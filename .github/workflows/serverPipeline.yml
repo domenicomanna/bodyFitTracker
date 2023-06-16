@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - working-directory: ./server
-        run: docker build -t server-app .
+        run: docker build -t server-app ./src/Api
 
   deploy-app:
     name: "Deploy App"
