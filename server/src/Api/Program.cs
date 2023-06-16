@@ -33,7 +33,14 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>().AddFluentValidat
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddDbContext<BodyFitTrackerContext>(options =>
 {
-    options.UseNpgsql(DotNetEnv.Env.GetString("DbConnection"));
+    string[] connectionStringParts =
+    {
+        $"Host={DotNetEnv.Env.GetString("POSTGRES_HOST")}",
+        $"Username={DotNetEnv.Env.GetString("POSTGRES_USER")}",
+        $"Password={DotNetEnv.Env.GetString("POSTGRES_PASSWORD")}",
+        $"Database={DotNetEnv.Env.GetString("POSTGRES_DB")}",
+    };
+    options.UseNpgsql(string.Join(";", connectionStringParts));
 });
 
 builder.Services.AddAutoMapper(Assembly.GetCallingAssembly());
