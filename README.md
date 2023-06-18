@@ -6,7 +6,7 @@ A web application that allows you to track your body measurements and body fat p
 
 #### Prerequisites
 
-- [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [.NET 7 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
 - [Postgres](https://www.postgresql.org/download/)
 - [Node.js](https://nodejs.org/en/)
 
